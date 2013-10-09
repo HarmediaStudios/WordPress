@@ -1,0 +1,4 @@
+#wrapper { background-image: none; }
+#content-bg-bottom { background-image: url(images/subtle/content-bg-bottom.png); }
+body { background: #656c70 url(images/subtle/bg.jpg); }
+#footer, #footer a { color: #3a3f42; text-shadow: 1px 1px #8c979b; }

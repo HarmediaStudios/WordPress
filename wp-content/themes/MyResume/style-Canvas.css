@@ -1,0 +1,4 @@
+#wrapper { background-image: none; }
+#content-bg-bottom { background-image: url(images/canvas/content-bg-bottom.png); }
+body { background: #f0ebce url(images/canvas/bg.jpg); }
+#footer, #footer a { color: #706d64; text-shadow: 1px 1px #fff; }

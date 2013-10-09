@@ -1,0 +1,4 @@
+#wrapper { background-image: none; }
+#content-bg-bottom { background-image: url(images/modest/content-bg-bottom.png); }
+body { background-image: none; background-color: #8b8b8b; }
+#footer, #footer a { color: #535252; text-shadow: 1px 1px #a2a2a2; }

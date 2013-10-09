@@ -1,0 +1,7 @@
+<wpml-config>
+	<admin-texts>
+		<key name="myresume_seo_home_titletext"/>
+		<key name="myresume_seo_home_descriptiontext"/>
+		<key name="myresume_seo_home_keywordstext"/>
+	</admin-texts>
+</wpml-config>
