@@ -1,3 +1,10 @@
+version 3.9 ( updated 09-13-2013 )
+- Fixed Tabs shortcode layout issues with the slide effect
+	* epanel/shortcodes/css/shortcodes.css
+	* epanel/shortcodes/shortcodes.php
+- Bumped version number
+	* style.css
+
 version 3.8 ( updated 08-02-2013 )
 - Fixed separate_comments function notice
 	* epanel/custom_functions.php
