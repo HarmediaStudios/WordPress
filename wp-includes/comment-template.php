@@ -21,11 +21,6 @@
  * @return string The comment author
  */
 function get_comment_author( $comment_ID = 0 ) {
-	// Post Anonymously 
-	if( get_comment_meta( get_comment( $comment_ID )->comment_ID, '_anonymous') ){
-		return 'anonymous';
-	}
-	// /Post Anonymously
 	$comment = get_comment( $comment_ID );
 	if ( empty($comment->comment_author) ) {
 		if (!empty($comment->user_id)){
@@ -64,11 +59,6 @@ function comment_author( $comment_ID = 0 ) {
  * @return string The current comment author's email
  */
 function get_comment_author_email( $comment_ID = 0 ) {
-	// Post Anonymously 
-	if( get_comment_meta( get_comment( $comment_ID )->comment_ID, '_anonymous') ){
-		return '';
-	}
-	// /Post Anonymously
 	$comment = get_comment( $comment_ID );
 	return apply_filters('get_comment_author_email', $comment->comment_author_email);
 }
@@ -155,11 +145,6 @@ function get_comment_author_email_link($linktext='', $before='', $after='') {
  * @return string Comment Author name or HTML link for author's URL
  */
 function get_comment_author_link( $comment_ID = 0 ) {
-	// Post Anonymously 
-	if( get_comment_meta( get_comment( $comment_ID )->comment_ID, '_anonymous') ){
-		return 'anonymous';
-	}
-	// /Post Anonymously
 	/** @todo Only call these functions when they are needed. Include in if... else blocks */
 	$url    = get_comment_author_url( $comment_ID );
 	$author = get_comment_author( $comment_ID );
@@ -194,11 +179,6 @@ function comment_author_link( $comment_ID = 0 ) {
  * @return string The comment author's IP address.
  */
 function get_comment_author_IP( $comment_ID = 0 ) {
-	// Post Anonymously 
-	if( get_comment_meta( get_comment( $comment_ID )->comment_ID, '_anonymous') ){
-		return '';
-	}
-	// /Post Anonymously
 	$comment = get_comment( $comment_ID );
 	return apply_filters('get_comment_author_IP', $comment->comment_author_IP);
 }
@@ -225,11 +205,6 @@ function comment_author_IP( $comment_ID = 0 ) {
  * @return string
  */
 function get_comment_author_url( $comment_ID = 0 ) {
-	// Post Anonymously 
-	if( get_comment_meta( get_comment( $comment_ID )->comment_ID, '_anonymous') ){
-		return '';
-	}
-	// /Post Anonymously
 	$comment = get_comment( $comment_ID );
 	$url = ('http://' == $comment->comment_author_url) ? '' : $comment->comment_author_url;
 	$url = esc_url( $url, array('http', 'https') );
@@ -1631,6 +1606,7 @@ function comment_form( $args = array(), $post_id = null ) {
 	$user = wp_get_current_user();
 	$user_identity = $user->exists() ? $user->display_name : '';
 
+	$args = wp_parse_args( $args );
 	if ( ! isset( $args['format'] ) )
 		$args['format'] = current_theme_supports( 'html5', 'comment-form' ) ? 'html5' : 'xhtml';
 
@@ -1691,12 +1667,6 @@ function comment_form( $args = array(), $post_id = null ) {
 						<?php endif; ?>
 						<?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
 						<?php echo $args['comment_notes_after']; ?>
-						<?php if ( is_user_logged_in() ) : ?>
-						<!-- Post Anonymously -->
-						<p class="comment-form-url"><label for="comment_anonymously">Post Anonymously</label>
-						<input id="comment_anonymously" name="comment_anonymously" type="checkbox" value="1" /></p>
-						<!-- /Post Anonymously -->
-						<?php endif; ?>
 						<p class="form-submit">
 							<input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>" />
 							<?php comment_id_fields( $post_id ); ?>
