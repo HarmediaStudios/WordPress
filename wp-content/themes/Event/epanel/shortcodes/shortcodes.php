@@ -265,7 +265,7 @@ add_shortcode('twitter','et_twitter');
 function et_twitter($atts, $content = null){
 	extract(shortcode_atts(array(
 		"name" => 'name'
-	), $atts));
+	), $atts, 'twitter'));
 	$output = "<script type='text/javascript' src='" . esc_url( "http://twittercounter.com/embed/{$name}/ffffff/111111" ) . "'></script>";
 	return $output;
 }
@@ -274,7 +274,7 @@ add_shortcode('feedburner','et_feedburner');
 function et_feedburner($atts, $content = null){
 	extract(shortcode_atts(array(
 		"name" => 'name'
-	), $atts));
+	), $atts, 'feedburner'));
 	$output = "<a href='" . esc_url( "http://feeds.feedburner.com/{$name}" ) . "'><img src='" . esc_url( "http://feeds.feedburner.com/~fc/{$name}?bg=99CCFF&amp;fg=444444&amp;anim=0" ) . "' height='26' width='88' style='border:0' alt='' />
 </a>";
 	return $output;
@@ -321,7 +321,7 @@ function et_box($atts, $content = null) {
 				"type" => 'shadow',
 				"id" => '',
 				"class" => ''
-			), $atts));
+			), $atts, 'box'));
 	$content = et_content_helper($content);
 
 	$id = ($id <> '') ? " id='" . esc_attr( $id ) . "'" : '';
@@ -343,7 +343,7 @@ function et_tooltip($atts, $content = null) {
 				"text" => esc_html__( 'Add a Tooltip Text', $themename ),
 				"id" => '',
 				"class" => ''
-			), $atts));
+			), $atts, 'tooltip'));
 
 	wp_enqueue_script( 'et-shortcodes-js' );
 
@@ -366,7 +366,7 @@ function et_learnmore($atts, $content = null) {
 				"state" => 'close',
 				"id" => '',
 				"class" => ''
-			), $atts));
+			), $atts, 'learn_more'));
 
 	wp_enqueue_script( 'et-shortcodes-js' );
 
@@ -398,7 +398,7 @@ function et_button($atts, $content = null) {
 				"id" => '',
 				"class" => '',
 				"br" => 'no'
-			), $atts));
+			), $atts, 'button'));
 
 	$output = '';
 	$target = ($newwindow == 'yes') ? ' target="_blank"' : '';
@@ -426,7 +426,7 @@ function et_slide($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, 'slide'));
 
 	$content = et_content_helper($content);
 
@@ -449,7 +449,7 @@ function et_tabs($atts, $content = null) {
 				"id" => '',
 				"slidertype" => 'top tabs',
 				"class" => ''
-			), $atts));
+			), $atts, 'tabs'));
 
 	wp_enqueue_script( 'et-shortcodes-js' );
 
@@ -519,7 +519,7 @@ function et_imagetabcontainer($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, 'imagetabcontainer'));
 
 	$content = et_content_helper($content);
 
@@ -556,7 +556,7 @@ function et_tabtext($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, 'tabtext'));
 
 	$content = et_content_helper($content);
 
@@ -576,7 +576,7 @@ function et_tabcontent($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, 'tabcontent'));
 
 	$content = et_content_helper($content);
 
@@ -585,8 +585,10 @@ function et_tabcontent($atts, $content = null) {
 
 	$output = "
 		<div{$id} class='et-tabs-content{$class}'>
-			<div class='et-tabs-content-wrapper'>
-				{$content}
+			<div class='et-tabs-content-main-wrap'>
+				<div class='et-tabs-content-wrapper'>
+					{$content}
+				</div>
 			</div>
 		</div>";
 
@@ -598,7 +600,7 @@ function et_tab($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, 'tab'));
 
 	$content = et_content_helper($content);
 
@@ -623,7 +625,7 @@ function et_imagetab($atts, $content = null) {
 		"link"		=> '',
 		"newwindow"	=> '',
 		"alt"		=> ''
-	), $atts));
+	), $atts, 'imagetab'));
 
 	$target = '' != $newwindow ? ' target="_blank"' : '';
 	$content = et_content_helper($content);
@@ -644,7 +646,7 @@ function et_author($atts, $content = null) {
 		'class' => '',
 		'name' => '',
 		'description' => ''
-	), $atts));
+	), $atts, 'author'));
 
 	$content = et_content_helper($content);
 
@@ -665,7 +667,7 @@ add_shortcode('author_image', 'et_author_image');
 function et_author_image($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"timthumb" => 'on'
-	), $atts));
+	), $atts, 'author_image'));
 
 	$content = et_content_helper($content);
 
@@ -711,7 +713,7 @@ add_shortcode('custom_list', 'et_custom_list');
 function et_custom_list($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"type" => 'checkmark'
-	), $atts));
+	), $atts, 'custom_list'));
 
 	$content = et_content_helper($content);
 
@@ -736,7 +738,7 @@ function et_pricing($atts, $content = null) {
 		"moretext" => 'Join Now',
 		"type" => "small",
 		"currency" => "$"
-	), $atts));
+	), $atts, 'pricing'));
 
 	$content = et_content_helper($content);
 
@@ -775,12 +777,12 @@ add_shortcode('feature', 'et_pricing_feature');
 function et_pricing_feature($atts, $content = null) {
 	extract(shortcode_atts(array(
 		"checkmark" => 'normal'
-	), $atts));
+	), $atts, 'feature'));
 
 	$content = et_content_helper($content);
 	$class = ( $checkmark == 'x' ) ? ' class="x-mark"' : '';
 
-	$output = "<li{$class}>{$content}<span></span></li>";
+	$output = "<li{$class}>{$content}<span class='pricing-mark'></span></li>";
 
 	return $output;
 }
@@ -791,7 +793,7 @@ function et_dropcap($atts, $content = null) {
 		'style' => '',
 		'id' => '',
 		'class' => ''
-	), $atts));
+	), $atts, 'dropcap'));
 
 	$content = et_content_helper($content);
 	$style = ( $style <> '' ) ? ' style="' . esc_attr( $style ) . '"' : '';
@@ -813,7 +815,7 @@ function et_testimonial($atts, $content = null) {
 		'company' => '',
 		'image' => '',
 		'timthumb' => 'on'
-	), $atts));
+	), $atts, 'testimonial'));
 
 	$content = et_content_helper($content);
 	$style = ( $style <> '' ) ? ' style="' . esc_attr( $style ) . '"' : '';
@@ -860,7 +862,7 @@ function et_quote($atts, $content = null) {
 		'id' => '',
 		'class' => '',
 		'type' => 'normal'
-	), $atts));
+	), $atts, 'quote'));
 
 	$content = et_content_helper($content);
 	$style = ( $style <> '' ) ? ' style="' . esc_attr( $style ) . '"' : '';
@@ -895,7 +897,7 @@ function et_columns($atts, $content = null, $name='') {
 	extract(shortcode_atts(array(
 		"id" => '',
 		"class" => ''
-	), $atts));
+	), $atts, $name));
 
 	$content = et_content_helper($content);
 

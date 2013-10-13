@@ -120,7 +120,7 @@ function et_browser_body_class($classes) {
 
 // Tells wp_trim_words() function to use characters instead of words
 function et_wp_trim_words_to_characters( $default_translated_text, $original_text, $context ) {
-	if ( 'words' == $original_text && 'word count: words or characters?' == $context ) {
+	if ( ! is_admin() && 'words' == $original_text && 'word count: words or characters?' == $context ) {
 		return 'characters';
 	}
 
@@ -650,14 +650,24 @@ if ( ! function_exists( 'elegant_description' ) ){
 		remove_filter('term_description','wpautop');
 		$cat = get_query_var('cat');
 		$exists2 = category_description($cat);
+		$description_added = false;
 
 		$seo_index_description = et_get_option($shortname.'_seo_index_description');
 
 		if ($exists2 !== '' && $seo_index_description == 'on') {
-			if (is_category()) echo '<meta name="description" content="'. esc_attr( $exists2 ) .'" />';
+			if (is_category()) {
+				echo '<meta name="description" content="'. esc_attr( $exists2 ) .'" />';
+				$description_added = true;
+			}
 		}
-		if (is_archive() && $seo_index_description == 'on') echo '<meta name="description" content="Currently viewing archives from'. esc_attr( wp_title('',false,'') ) .'" />';
-		if (is_search() && $seo_index_description == 'on') echo '<meta name="description" content="'. esc_attr( wp_title('',false,'') ) .'" />';
+		if (is_archive() && $seo_index_description == 'on' && ! $description_added) {
+			echo '<meta name="description" content="Currently viewing archives from'. esc_attr( wp_title('',false,'') ) .'" />';
+			$description_added = true;
+		}
+		if (is_search() && $seo_index_description == 'on' && ! $description_added) {
+			echo '<meta name="description" content="'. esc_attr( wp_title('',false,'') ) .'" />';
+			$description_added = true;
+		}
 	}
 }
 
@@ -697,7 +707,8 @@ if ( ! function_exists( 'elegant_canonical' ) ){
 
 		#index page urls
 		if (et_get_option($shortname.'_seo_index_canonical') == 'on') {
-			if (is_archive() || is_category() || is_search()) echo '<link rel="canonical" href="'. esc_url( get_permalink() ).'" />';
+			$current_page_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			if (is_archive() || is_category() || is_search()) echo '<link rel="canonical" href="'. esc_url( $current_page_url ).'" />';
 		}
 	}
 }
@@ -1009,7 +1020,7 @@ function et_comment_count( $count ) {
 	if ( ! is_admin() ) {
 		global $id;
 		$get_comments = get_comments( array('post_id' => $id, 'status' => 'approve') );
-		$comments_by_type = &separate_comments($get_comments);
+		$comments_by_type = separate_comments($get_comments);
 		return count($comments_by_type['comment']);
 	} else {
 		return $count;
@@ -1026,7 +1037,7 @@ if ( ! function_exists( 'et_theme_epanel_reminder' ) ){
 		global $shortname, $themename, $current_screen;
 
 		if ( false === et_get_option( $shortname . '_logo' ) && 'appearance_page_core_functions' != $current_screen->id ){
-			printf( __('<div class="updated"><p>This is a fresh installation of %1$s theme. Don\'t forget to go to <a href="%2$s">ePanel</a> to set it up. This message will disappear once you have clicked the Save button within the <a href="%2$s">theme\'s options page</a>.</p></div>',$themename), get_current_theme(), admin_url( 'themes.php?page=core_functions.php' ) );
+			printf( __('<div class="updated"><p>This is a fresh installation of %1$s theme. Don\'t forget to go to <a href="%2$s">ePanel</a> to set it up. This message will disappear once you have clicked the Save button within the <a href="%2$s">theme\'s options page</a>.</p></div>',$themename), wp_get_theme(), admin_url( 'themes.php?page=core_functions.php' ) );
 		}
 	}
 }
@@ -1100,3 +1111,495 @@ function et_add_custom_css() {
 	echo '<style type="text/css" id="et-custom-css">' . "\n" . $custom_css . "\n" . '</style>';
 }
 add_action( 'wp_head', 'et_add_custom_css', 100 );
+
+if ( ! function_exists( 'et_get_google_fonts' ) ) :
+/**
+ * Returns the list of popular google fonts
+ *
+ */
+function et_get_google_fonts() {
+	$google_fonts = array(
+		'Open Sans' => array(
+			'styles' 		=> '300italic,400italic,600italic,700italic,800italic,400,300,600,700,800',
+			'character_set' => 'latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic',
+			'type'			=> 'sans-serif',
+		),
+		'Oswald' => array(
+			'styles' 		=> '400,300,700',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Droid Sans' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'sans-serif',
+		),
+		'Lato' => array(
+			'styles' 		=> '400,100,100italic,300,300italic,400italic,700,700italic,900,900italic',
+			'character_set' => 'latin',
+			'type'			=> 'sans-serif',
+		),
+		'Open Sans Condensed' => array(
+			'styles' 		=> '300,300italic,700',
+			'character_set' => 'latin,cyrillic-ext,latin-ext,greek-ext,greek,vietnamese,cyrillic',
+			'type'			=> 'sans-serif',
+		),
+		'PT Sans' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin,latin-ext,cyrillic',
+			'type'			=> 'sans-serif',
+		),
+		'Ubuntu' => array(
+			'styles' 		=> '400,300,300italic,400italic,500,500italic,700,700italic',
+			'character_set' => 'latin,cyrillic-ext,cyrillic,greek-ext,greek,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'PT Sans Narrow' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin,latin-ext,cyrillic',
+			'type'			=> 'sans-serif',
+		),
+		'Yanone Kaffeesatz' => array(
+			'styles' 		=> '400,200,300,700',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Roboto Condensed' => array(
+			'styles' 		=> '400,300,300italic,400italic,700,700italic',
+			'character_set' => 'latin,cyrillic-ext,latin-ext,greek-ext,cyrillic,greek,vietnamese',
+			'type'			=> 'sans-serif',
+		),
+		'Source Sans Pro' => array(
+			'styles' 		=> '400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Nunito' => array(
+			'styles' 		=> '400,300,700',
+			'character_set' => 'latin',
+			'type'			=> 'sans-serif',
+		),
+		'Francois One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Roboto' => array(
+			'styles' 		=> '400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic',
+			'character_set' => 'latin,cyrillic-ext,latin-ext,cyrillic,greek-ext,greek,vietnamese',
+			'type'			=> 'sans-serif',
+		),
+		'Raleway' => array(
+			'styles' 		=> '400,100,200,300,600,500,700,800,900',
+			'character_set' => 'latin',
+			'type'			=> 'sans-serif',
+		),
+		'Arimo' => array(
+			'styles' 		=> '400,400italic,700italic,700',
+			'character_set' => 'latin,cyrillic-ext,latin-ext,greek-ext,cyrillic,greek,vietnamese',
+			'type'			=> 'sans-serif',
+		),
+		'Cuprum' => array(
+			'styles' 		=> '400,400italic,700italic,700',
+			'character_set' => 'latin,latin-ext,cyrillic',
+			'type'			=> 'sans-serif',
+		),
+		'Play' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin,cyrillic-ext,cyrillic,greek-ext,greek,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Dosis' => array(
+			'styles' 		=> '400,200,300,500,600,700,800',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'sans-serif',
+		),
+		'Abel' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'sans-serif',
+		),
+		'Droid Serif' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Arvo' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Lora' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Rokkitt' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'PT Serif' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin,cyrillic',
+			'type'			=> 'serif',
+		),
+		'Bitter' => array(
+			'styles' 		=> '400,400italic,700',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Merriweather' => array(
+			'styles' 		=> '400,300,900,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Vollkorn' => array(
+			'styles' 		=> '400,400italic,700italic,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Cantata One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Kreon' => array(
+			'styles' 		=> '400,300,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Josefin Slab' => array(
+			'styles' 		=> '400,100,100italic,300,300italic,400italic,600,700,700italic,600italic',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Playfair Display' => array(
+			'styles' 		=> '400,400italic,700,700italic,900italic,900',
+			'character_set' => 'latin,latin-ext,cyrillic',
+			'type'			=> 'serif',
+		),
+		'Bree Serif' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Crimson Text' => array(
+			'styles' 		=> '400,400italic,600,600italic,700,700italic',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Old Standard TT' => array(
+			'styles' 		=> '400,400italic,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Sanchez' => array(
+			'styles' 		=> '400,400italic',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Crete Round' => array(
+			'styles' 		=> '400,400italic',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Cardo' => array(
+			'styles' 		=> '400,400italic,700',
+			'character_set' => 'latin,greek-ext,greek,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Noticia Text' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin,vietnamese,latin-ext',
+			'type'			=> 'serif',
+		),
+		'Judson' => array(
+			'styles' 		=> '400,400italic,700',
+			'character_set' => 'latin',
+			'type'			=> 'serif',
+		),
+		'Lobster' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,cyrillic-ext,latin-ext,cyrillic',
+			'type'			=> 'cursive',
+		),
+		'Unkempt' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Changa One' => array(
+			'styles' 		=> '400,400italic',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Special Elite' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Chewy' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Comfortaa' => array(
+			'styles' 		=> '400,300,700',
+			'character_set' => 'latin,cyrillic-ext,greek,latin-ext,cyrillic',
+			'type'			=> 'cursive',
+		),
+		'Boogaloo' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Fredoka One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Luckiest Guy' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Cherry Cream Soda' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Lobster Two' => array(
+			'styles' 		=> '400,400italic,700,700italic',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Righteous' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Squada One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Black Ops One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Happy Monkey' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Passion One' => array(
+			'styles' 		=> '400,700,900',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Nova Square' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Metamorphous' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Poiret One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,latin-ext,cyrillic',
+			'type'			=> 'cursive',
+		),
+		'Bevan' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Shadows Into Light' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'The Girl Next Door' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Coming Soon' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Dancing Script' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Pacifico' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Crafty Girls' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Calligraffitti' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Rock Salt' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Amatic SC' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Leckerli One' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Tangerine' => array(
+			'styles' 		=> '400,700',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Reenie Beanie' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Satisfy' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Gloria Hallelujah' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Permanent Marker' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Covered By Your Grace' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Walter Turncoat' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Patrick Hand' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin,vietnamese,latin-ext',
+			'type'			=> 'cursive',
+		),
+		'Schoolbell' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+		'Indie Flower' => array(
+			'styles' 		=> '400',
+			'character_set' => 'latin',
+			'type'			=> 'cursive',
+		),
+	);
+
+	return apply_filters( 'et_google_fonts', $google_fonts );
+}
+endif;
+
+if ( ! function_exists( 'et_get_websafe_font_stack' ) ) :
+/**
+ * Determines a websafe font stack, using font type
+ *
+ */
+function et_get_websafe_font_stack( $type = 'sans-serif' ) {
+	$font_stack = '';
+
+	switch ( $type ) {
+		case 'sans-serif':
+			$font_stack = 'Helvetica, Arial, Lucida, sans-serif';
+			break;
+		case 'serif':
+			$font_stack = 'Georgia, "Times New Roman", serif';
+			break;
+		case 'cursive':
+			$font_stack = 'cursive';
+			break;
+	}
+
+	return $font_stack;
+}
+endif;
+
+if ( ! function_exists( 'et_gf_attach_font' ) ) :
+/**
+ * Attaches Google Font to given css elements
+ *
+ */
+function et_gf_attach_font( $et_gf_font_name, $elements ) {
+	$google_fonts = et_get_google_fonts();
+
+	printf( '%s { font-family: \'%s\', %s; }',
+		esc_html( $elements ),
+		esc_html( $et_gf_font_name ),
+		et_get_websafe_font_stack( $google_fonts[$et_gf_font_name]['type'] )
+	);
+}
+endif;
+
+if ( ! function_exists( 'et_gf_enqueue_fonts' ) ) :
+/**
+ * Enqueues Google Fonts
+ *
+ */
+function et_gf_enqueue_fonts( $et_gf_font_names ) {
+	global $shortname;
+
+	if ( ! is_array( $et_gf_font_names ) || empty( $et_gf_font_names ) ) return;
+
+	$google_fonts = et_get_google_fonts();
+	$protocol = is_ssl() ? 'https' : 'http';
+
+	foreach ( $et_gf_font_names as $et_gf_font_name ) {
+		$google_font_character_set = $google_fonts[$et_gf_font_name]['character_set'];
+
+		// By default, only latin and latin-ext subsets are loaded, all available subsets can be enabled in ePanel
+		if ( 'false' == et_get_option( "{$shortname}_gf_enable_all_character_sets", 'false' ) ) {
+			$latin_ext = '';
+			if ( false !== strpos( $google_fonts[$et_gf_font_name]['character_set'], 'latin-ext' ) )
+				$latin_ext = ',latin-ext';
+
+			$google_font_character_set = "latin{$latin_ext}";
+		}
+
+		$query_args = array(
+			'family' => sprintf( '%s:%s',
+				str_replace( ' ', '+', $et_gf_font_name ),
+				apply_filters( 'et_gf_set_styles', $google_fonts[$et_gf_font_name]['styles'], $et_gf_font_name )
+			),
+			'subset' => apply_filters( 'et_gf_set_character_set', $google_font_character_set, $et_gf_font_name ),
+		);
+
+		$et_gf_font_name_slug = strtolower( str_replace( ' ', '-', $et_gf_font_name ) );
+		wp_enqueue_style( 'et-gf-' . $et_gf_font_name_slug, add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
+	}
+}
+endif;
