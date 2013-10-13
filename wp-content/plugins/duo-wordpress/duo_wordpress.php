@@ -3,7 +3,7 @@
 Plugin Name: Duo Two-Factor Authentication
 Plugin URI: http://wordpress.org/extend/plugins/duo-wordpress/
 Description: This plugin enables Duo two-factor authentication for WordPress logins.
-Version: 1.6
+Version: 1.6.2
 Author: Duo Security
 Author URI: http://www.duosecurity.com
 License: GPL2
@@ -172,7 +172,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 // on error, return said error (and skip the remaining plugin chain)
                 return $user;
             } else {
-                duo_sign_request($user, $_POST['redirect_to']);
+                // Some custom themes do not provide the redirect_to value
+                // Admin page is a good default
+                $admin_url = is_multisite() ? network_admin_url() : admin_url();
+                $redirect_to = isset( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : $admin_url;
+                duo_sign_request($user, $redirect_to);
                 exit();
             }
         }
@@ -204,7 +208,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     function duo_settings_skey() {
         $skey = esc_attr(duo_get_option('duo_skey'));
-        echo "<input id='duo_skey' name='duo_skey' size='40' type='text' value='$skey' />";
+        echo "<input id='duo_skey' name='duo_skey' size='40' type='password' value='$skey' autocomplete='off' />";
     }
 
     function duo_settings_host() {
@@ -226,7 +230,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         foreach ($wp_roles->get_names() as $key=>$role) {
             //create checkbox for each role
 ?>
-            <input id="duo_roles" name='duo_roles[<?php echo $key; ?>]' type='checkbox' value='<?php echo $role; ?>'  <?php if(in_array($role, $selected)) echo 'checked="checked"'; ?> /> <?php echo $role; ?> <br />
+            <input id="duo_roles" name='duo_roles[<?php echo $key; ?>]' type='checkbox' value='<?php echo $role; ?>'  <?php if(in_array($role, $selected)) echo 'checked'; ?> /> <?php echo $role; ?> <br />
 <?php
         }
 
@@ -277,7 +281,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     function duo_settings_xmlrpc() {
         $val = '';
         if(duo_get_option('duo_xmlrpc', 'off') == 'off') {
-            $val = "checked='checked'";
+            $val = "checked";
         }
         echo "<input id='duo_xmlrpc' name='duo_xmlrpc' type='checkbox' value='off' $val /> Yes<br />";
         echo "Using XML-RPC bypasses two-factor authentication and makes your website less secure. We recommend only using the WordPress web interface for managing your WordPress website.";
@@ -359,7 +363,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
         if(isset($_POST['duo_xmlrpc'])) {
             $xmlrpc = $_POST['duo_xmlrpc'];
-            $result = update_site_option('duo_xmlrpc', $roles);
+            $result = update_site_option('duo_xmlrpc', $xmlrpc);
+        }
+        else {
+            $result = update_site_option('duo_xmlrpc', 'on');
         }
     }
 
