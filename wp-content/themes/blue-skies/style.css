@@ -1,0 +1,815 @@
+/*
+
+Theme Name: Blue-Skies
+Description: Premium Blue Wordpress theme with a great look and feel.
+Version: 1.0
+Author: Bingo Web Design
+Author URI: http://www.bingowebdesign.info
+Tags: blue, white, dark, fixed-width, right-sidebar
+
+*/
+
+
+
+/* Resets */
+
+html, body, div, ol, ul, li, h1, h2, h3, h4, h5, h6, p, form, fieldset { margin:0; padding:0; }
+
+images { border:0; }
+
+ol, ul { list-style:none; }
+
+
+
+
+
+/* Body */
+
+
+
+body { background:url(images/bg.png) top center repeat-x #17293B; /* bg */
+
+font-family:Arial, Helvetica, sans-serif; /* font */
+
+font-size:62.5%; color:#ddd; } /* font size and color */
+
+
+
+
+
+/* Links */
+
+
+
+a:link, a:visited { color:#278ecd; text-decoration:none; }
+
+a:hover { color:#fff; text-decoration:underline; }
+
+a:active { color:#224f71; text-decoration:none; }
+
+
+
+
+
+/* Container */
+
+
+
+#container { width:940px; background:url(images/bg-container.jpg) top center no-repeat; margin:0 auto; /* center page */ }
+
+
+
+
+
+/* Header */
+
+
+
+#header { height:40px; margin:0 0 170px 0; padding:2px 0;}
+#b-title {font-size:22px;}
+#logo { float:left; }
+
+
+
+
+
+/* Menu */
+
+
+
+#menu { height:40px; list-style:none; float:right; font-size:1.1em; }
+
+#menu li { float:left; margin-left:5px; padding:0 15px; }
+
+#menu a { float:left; text-transform:uppercase; text-decoration:none; }
+
+#menu a:hover, #menu .current_page_item a, #menu .current-cat a { color:#fff; }
+
+
+
+
+
+/* Content */
+
+
+
+#content { float:left; width:620px; font-size:1.2em; }
+
+
+
+
+
+/* Post */
+
+
+
+.page, .post { margin-bottom:3em; }
+
+
+
+.page h1, .post h1 { font-family:"Trebuchet MS", Arial, Times, serif; padding:0 5px 3px 5px; font-weight:normal; font-size:2em; border-bottom:1px dashed #224f71; color:#278ecd; }
+
+.page h1 a, .post h1 a { text-decoration:none; }
+
+.page h1 a:active, .post h1 a:active {  }
+
+.page h1 .subtitle, .post h1 .subtitle { font-family:Arial, Helvetica, sans-serif; font-size:0.35em; color:#999; font-weight:bold; display:block; text-transform:uppercase; }
+
+
+
+.page h2, .post h2 { font-family:"Trebuchet MS", Arial, Times, serif; font-weight:normal; font-size:1.5em; margin:18px 0 0 0; padding:0 5px; border-bottom:1px dashed #224f71; color:#278ecd; }
+
+
+
+.page p, .post p { line-height:18px; margin-top:18px; padding:0 5px; }
+
+
+
+.page img, .post img { border:3px solid #162434; }
+
+.page a:hover img, .post a:hover img { border:3px solid #278ecd; }
+
+
+
+.page li, .post li { margin:0; padding:0 5px; }
+
+
+
+img.left { margin:0 10px 10px 0; }
+
+
+
+img.right { margin:0 0 10px 10px; }
+
+
+
+
+
+/* Download button */
+
+
+
+.button { padding:5px; text-align:center; background:#ff9; border:ridge #ff6; color:#222; }
+
+a.button { padding:5px; text-align:center; background:#ff9; border:ridge #ff6; text-decoration:none; color:#222; }
+
+
+
+.download-text {  }
+
+.download-size { font-style:italic; font-size:0.9em; }
+
+
+
+.more-link { clear:both; }
+
+.postmetadata { clear:both; }
+
+
+
+
+
+/* Category Page */
+
+
+
+#cat-title {  }
+
+#cat-desc { font-style:italic; margin-bottom:10px; display:block; color:#999; }
+
+
+
+.cat-listing { display:block; padding:0; background:#162434; color:#999; cursor:default; border-bottom:5px solid #17293B; }
+
+.cat-listing:hover { color:#ddd; }
+
+
+
+.cat-listing a { font-family:"Trebuchet MS", Arial, Times, serif; font-weight:normal; font-size:1.4em; cursor:pointer; }
+
+
+
+#cat-end { clear:both; padding:15px 0 5px 0; display:block; color:#999; }
+
+
+
+
+
+/* Navigation links */
+
+
+
+.navigation {  }
+
+.navigation a { display:block; border:1px solid #ddd; padding:5px 10px; }
+
+
+
+
+
+/* Sidebar */
+
+
+
+#sidebar { float:right; width:284px; margin-right:10px; padding:0 8px; font-size:1.2em; }
+
+
+
+#sidebar h2 { text-transform:uppercase; font-size:1.5em; font-weight:normal; clear:both; padding:0 2px; }
+
+
+
+#sidebar li { margin-bottom:2em; }
+
+#sidebar li ul { margin:0 2px; border-top:1px dashed #224f71; }
+
+#sidebar li ul li { margin:0; }
+
+
+
+#sidebar a { display:block; text-decoration:none; padding:7px 2px; border-bottom:1px dashed #224f71; }
+
+#sidebar a:hover { text-decoration:none; background:#162434; }
+
+#sidebar a:active { color:#224f71; text-decoration:none; background:#162434; }
+
+
+
+
+
+/* Search Form */
+
+
+
+#searchform { float:right; width:244px; margin:0 40px 30px 0; padding:5px 0 0 0; display:block; }
+
+
+
+#s { float:left; width:210px; padding:0; border:0; background:none; font-size:1.5em; color:#17293B; }
+
+
+
+#search { float:right; cursor:pointer; height:16px; width:16px; background:url(images/search-button.png) 0 0 no-repeat; border:none; padding:0; }
+
+
+
+#sidebar-clear { clear:both; display:block; background:url(images/bg-sidebar-clear.png) bottom center no-repeat; height:20px; width:284px; }
+
+
+
+
+
+/* Footer */
+
+
+
+#footer { background:url(images/bg-footer-repeat.png) top left repeat-x #162434; padding-top:2px; font-size:1.2em; color:#224f71; }
+
+#footer-inner { width:940px; margin:0 auto; /* center footer */ }
+
+#footer-box { float:right; margin-right:10px; }
+
+
+
+#footer .copyright { float:left; padding:1em 0; text-align:left; }
+
+#footer .footer-links { float:right; padding:1em 0; text-align:right; }
+
+
+
+
+
+/* Alignment */
+
+.left { float:left; } .right { float:right; } .clear { clear:both; display:block; visibility:hidden; height:0; line-height:0; }
+
+
+
+
+
+
+
+/* Contact Form */
+
+
+
+#wpcf { line-height:20px; }
+
+#wpcf label {
+
+	clear: both;
+
+	display: block;
+
+	float: left;
+
+	width: 150px;
+
+}
+
+#wpcf input {
+
+	float: left;
+
+	width: 200px;
+
+	padding: 1px;
+
+	margin: 2px 5px 2px 0;
+
+}
+
+#wpcf textarea {
+
+	width: 350px;
+
+	height: 100px;
+
+	padding: 1px;
+
+	margin: 0 5px 10px 0;
+
+}
+
+#wpcf #contactsubmit {
+
+	margin-left: 250px;
+
+	width: 100px;
+
+	cursor:pointer;
+
+}
+
+
+
+
+
+/* Comments */
+
+
+
+h3 { font-family:"Trebuchet MS", Arial, Times, serif; font-weight:normal; color:#173142; font-size:1.5em; }
+
+.commentlist li ul li {
+
+	font-size:1em;
+
+}
+
+
+
+.commentlist li {
+
+	font-weight:bold;
+
+}
+
+
+
+.commentlist li .avatar { 
+
+	float:right;
+
+	border:1px solid #ddd;
+
+	padding:2px;
+
+	background:#fff;
+
+	}
+
+
+
+.commentlist cite, .commentlist cite a {
+
+	font-weight:bold;
+
+	font-style:normal;
+
+	font-size:1.1em;
+
+	}
+
+
+
+.commentlist p {
+
+	font-weight:normal;
+
+	line-height:1.5em;
+
+	text-transform:none;
+
+	}
+
+
+
+#commentform p {
+
+	
+
+	}
+
+
+
+.commentmetadata {
+
+	font-weight:normal;
+
+	}
+
+
+
+small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
+
+	color:#999;
+
+	}
+
+
+
+code {
+
+	margin:10px 0;
+
+	font:1.1em 'Courier New', Courier, Fixed;
+
+	}
+
+
+
+acronym, abbr, span.caps
+
+{
+
+	font-size:0.9em;
+
+	letter-spacing:.07em;
+
+	}
+
+
+
+/* Begin Form Elements */
+
+
+
+#comment {  }
+
+
+
+.entry form { /* This is mainly for password protected posts, makes them look better. */
+
+	text-align:center;
+
+	}
+
+
+
+select {
+
+	width:130px;
+
+	}
+
+
+
+#commentform input {
+
+	width:170px;
+
+	padding:2px;
+
+	margin:5px 5px 1px 0;
+
+	}
+
+
+
+#commentform {
+
+	margin:5px 10px 0 0;
+
+	}
+
+#commentform textarea {
+
+	width:100%;
+
+	padding:2px;
+
+	}
+
+#respond:after {
+
+	content: "."; 
+
+	display:block; 
+
+	height:0; 
+
+	clear:both; 
+
+	visibility:hidden;
+
+	}
+
+
+
+#commentform #submit {
+
+	margin:0 0 5px auto;
+
+	float:right;
+
+	cursor:pointer;
+
+	}
+
+
+
+/* Begin Comments*/
+
+.alt {
+
+	margin:0;
+
+	padding:10px;
+
+	}
+
+
+
+.commentlist {
+
+	padding:0;
+
+	text-align:justify;
+
+	}
+
+
+
+.commentlist li {
+
+	margin:15px 0 10px;
+
+	padding:5px 5px 10px 10px;
+
+	list-style:none;
+
+
+
+	}
+
+.commentlist li ul li { 
+
+	margin-right -5px;
+
+	margin-left:10px;
+
+}
+
+
+
+.commentlist p {
+
+	margin:10px 5px 10px 0;
+
+}
+
+.children { padding:0; }
+
+
+
+
+
+#commentform p {
+
+	margin:5px 0;
+
+	}
+
+
+
+.nocomments {
+
+	text-align:center;
+
+	margin:0;
+
+	padding:0;
+
+	}
+
+
+
+.commentmetadata {
+
+	margin:0;
+
+	display:block;
+
+	}
+
+
+
+/* Begin Various Tags & Classes */
+
+acronym, abbr, span.caps {
+
+	cursor:help;
+
+	}
+
+
+
+acronym, abbr {
+
+	border-bottom:1px dashed #999;
+
+	}
+
+
+
+blockquote {
+
+	margin:15px 30px 0 10px;
+
+	padding-left:20px;
+
+	border-left:5px solid #ddd;
+
+	}
+
+
+
+blockquote cite {
+
+	margin:5px 0 0;
+
+	display:block;
+
+	}
+
+
+
+.center {
+
+
+
+	text-align:center;
+
+	}
+
+
+
+.hidden {
+
+	display:none;
+
+	}
+
+
+
+hr {
+
+	display:none;
+
+	}
+
+
+
+
+
+
+
+a img {
+
+	border:none;
+
+	}
+
+
+
+.navigation {
+
+	display:block;
+
+	text-align:center;
+
+	margin-top:10px;
+
+	margin-bottom:60px;
+
+	}
+
+
+
+/* Captions */
+
+.aligncenter,
+
+div.aligncenter {
+
+	display:block;
+
+	margin:0 auto;
+
+}
+
+
+
+.wp-caption {
+
+	border:1px solid #ddd;
+
+	text-align:center;
+
+	background-color:#f3f3f3;
+
+	padding-top:4px;
+
+	margin:10px;
+
+	-moz-border-radius:3px;
+
+	-khtml-border-radius:3px;
+
+	-webkit-border-radius:3px;
+
+	border-radius:3px;
+
+}
+
+
+
+.wp-caption img {
+
+	margin:0;
+
+	padding:0;
+
+	border:0 none;
+
+}
+
+
+
+.wp-caption p.wp-caption-text {
+
+	font-size:11px;
+
+	line-height:17px;
+
+	padding:0 4px 5px;
+
+	margin:0;
+
+}
+
+
+
+/* Alignment */
+
+.left { float:left; } .right { float:right; } .clear { clear:both; display:block; visibility:hidden; height:0; line-height:0; }
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.wp-caption {
+	border: 1px solid #ddd;
+	text-align: center;
+	background-color: #f3f3f3;
+	padding-top: 4px;
+	margin: 10px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+
+.wp-caption-dd {
+	font-size: 11px;
+	line-height: 17px;
+	padding: 0 4px 5px;
+	margin: 0;
+}
