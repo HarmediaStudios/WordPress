@@ -1,0 +1,427 @@
+# Byrial Ole Jensen <byrial@vip.cybercity.dk>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: captcha\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-30 13:12+0300\n"
+"PO-Revision-Date: 2013-08-30 13:12+0300\n"
+"Last-Translator: \n"
+"Language-Team: Bőm Tamás <tamas.bem@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: captcha.php:32
+#: captcha.php:213
+#, fuzzy
+msgid "Captcha Settings"
+msgstr "Captcha opciók"
+
+#: captcha.php:32
+msgid "Captcha"
+msgstr "Captcha"
+
+#: captcha.php:41
+msgid "Login form"
+msgstr "Bejelentkezés"
+
+#: captcha.php:42
+#: captcha.php:251
+#, fuzzy
+msgid "Registration form"
+msgstr "Regisztráció"
+
+#: captcha.php:42
+msgid "Register form"
+msgstr "Regisztráció"
+
+#: captcha.php:43
+#, fuzzy
+msgid "Reset Password form"
+msgstr "Elfelejtett jelszó"
+
+#: captcha.php:43
+msgid "Lost password form"
+msgstr "Elfelejtett jelszó"
+
+#: captcha.php:44
+#: captcha.php:252
+msgid "Comments form"
+msgstr "Hozzászólások"
+
+#: captcha.php:45
+msgid "Hide CAPTCHA for registered users"
+msgstr "CAPTCHA regisztrált felhasználóknak"
+
+#: captcha.php:50
+msgid "Plus (&#43;)"
+msgstr "Plus (&#43;)"
+
+#: captcha.php:50
+msgid "Plus"
+msgstr "Plus (&#43;)"
+
+#: captcha.php:51
+msgid "Minus (&minus;)"
+msgstr "Minusz (&minus;)"
+
+#: captcha.php:51
+msgid "Minus"
+msgstr "Minusz"
+
+#: captcha.php:52
+#, fuzzy
+msgid "Multiplication (&times;)"
+msgstr "Szorozzuk meg (&times;)"
+
+#: captcha.php:52
+#, fuzzy
+msgid "Multiply"
+msgstr "Szorozzuk meg (&times;)"
+
+#: captcha.php:57
+msgid "Numbers"
+msgstr "Számok"
+
+#: captcha.php:58
+msgid "Words"
+msgstr "Szavak"
+
+#: captcha.php:148
+#: captcha.php:159
+msgid "Settings"
+msgstr "Beállítások"
+
+#: captcha.php:160
+msgid "FAQ"
+msgstr "GYIK"
+
+#: captcha.php:161
+msgid "Support"
+msgstr "Támogatás"
+
+#: captcha.php:202
+#, fuzzy
+msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
+msgstr "Kérem válasszon egy pontot  a blokkoknak Aritmetikai intézkedéseknek és nehézségi fokát CAPTCHA-nak"
+
+#: captcha.php:206
+msgid "Options saved."
+msgstr "Beállítások elmentve."
+
+#: captcha.php:219
+#: captcha.php:248
+#, fuzzy
+msgid "Enable CAPTCHA for:"
+msgstr "Engedélyezze a CAPTCHA:"
+
+#: captcha.php:233
+#: captcha.php:235
+#: captcha.php:238
+msgid "Contact form"
+msgstr "CONTACT FORM-Plugin"
+
+#: captcha.php:233
+#: captcha.php:235
+#: captcha.php:238
+msgid "(powered by"
+msgstr ""
+
+#: captcha.php:235
+msgid "Activate contact form"
+msgstr "Kapcsolatfelvételi űrlap aktiválása"
+
+#: captcha.php:238
+msgid "Download contact form"
+msgstr "Töltse le a kapcsolatfelvételi űrlapot"
+
+#: captcha.php:240
+#, fuzzy
+msgid "If you would like to customize this plugin for a custom form, please see"
+msgstr "Ha egy egyéni űrlapot szeretne létrehozni ehhez a pluginhoz, kérjük, lépjen kapcsolatba velünk <a href=\"Mailto:plugin@bestwebsoft.com\"> plugin@bestwebsoft.com </ a>, vagy töltse ki az űrlapot a oldal"
+
+#: captcha.php:253
+msgid "\"Create a Group\" form"
+msgstr ""
+
+#: captcha.php:258
+msgid "This functionality is available in the Pro version of the plugin. For more details, please follow the link"
+msgstr ""
+
+#: captcha.php:265
+#, fuzzy
+msgid "Title for CAPTCHA in the form"
+msgstr "Címke CAPTCHA formájában"
+
+#: captcha.php:269
+msgid "Arithmetic actions for CAPTCHA"
+msgstr "Aritmetikai cselekvések a CAPTCHA-ban"
+
+#: captcha.php:278
+msgid "CAPTCHA complexity level"
+msgstr ""
+
+#: captcha.php:288
+msgid "Save Changes"
+msgstr "Változások mentése"
+
+#: captcha.php:333
+#: captcha.php:339
+#: captcha.php:513
+#: captcha.php:520
+#: captcha.php:532
+#: captcha.php:539
+msgid "ERROR"
+msgstr "Hiba!!"
+
+#: captcha.php:333
+#: captcha.php:356
+#: captcha.php:477
+#: captcha.php:513
+#: captcha.php:532
+#: captcha.php:558
+msgid "Please fill the form."
+msgstr ""
+
+#: captcha.php:339
+#: captcha.php:367
+#: captcha.php:520
+#: captcha.php:539
+#, fuzzy
+msgid "Please enter a valid CAPTCHA value."
+msgstr "Kérjük, töltse ki a CAPTCHA-t"
+
+#: captcha.php:483
+#: captcha.php:565
+#, fuzzy
+msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
+msgstr "Hiba: A megadott CAPTCHA kifejezés rossz. Nyomja meg a böngésző Vissza gombját, és próbálja újra."
+
+#: captcha.php:577
+#: captcha.php:810
+msgid "zero"
+msgstr "nulla"
+
+#: captcha.php:578
+#: captcha.php:811
+#: captcha.php:1023
+msgid "one"
+msgstr "egy"
+
+#: captcha.php:579
+#: captcha.php:812
+msgid "two"
+msgstr "kettő"
+
+#: captcha.php:580
+#: captcha.php:813
+msgid "three"
+msgstr "három"
+
+#: captcha.php:581
+#: captcha.php:814
+msgid "four"
+msgstr "négy"
+
+#: captcha.php:582
+#: captcha.php:815
+msgid "five"
+msgstr "öt"
+
+#: captcha.php:583
+#: captcha.php:816
+#: captcha.php:1023
+msgid "six"
+msgstr "hat"
+
+#: captcha.php:584
+#: captcha.php:817
+#: captcha.php:1011
+#: captcha.php:1017
+msgid "seven"
+msgstr "hét"
+
+#: captcha.php:585
+#: captcha.php:818
+#: captcha.php:1014
+msgid "eight"
+msgstr "nyolc"
+
+#: captcha.php:586
+#: captcha.php:819
+msgid "nine"
+msgstr "kilenc"
+
+#: captcha.php:589
+#: captcha.php:822
+msgid "eleven"
+msgstr "tizenegy"
+
+#: captcha.php:590
+#: captcha.php:823
+msgid "twelve"
+msgstr "tizenkettő"
+
+#: captcha.php:591
+#: captcha.php:824
+msgid "thirteen"
+msgstr "tizenhárom"
+
+#: captcha.php:592
+#: captcha.php:825
+msgid "fourteen"
+msgstr "tizrnnégy"
+
+#: captcha.php:593
+#: captcha.php:826
+msgid "fifteen"
+msgstr "tizenöt"
+
+#: captcha.php:594
+#: captcha.php:827
+msgid "sixteen"
+msgstr "tizenhat"
+
+#: captcha.php:595
+#: captcha.php:828
+msgid "seventeen"
+msgstr "tizenhét"
+
+#: captcha.php:596
+#: captcha.php:829
+msgid "eighteen"
+msgstr "tizennyolc"
+
+#: captcha.php:597
+#: captcha.php:830
+msgid "nineteen"
+msgstr "tizenkilenc"
+
+#: captcha.php:600
+#: captcha.php:833
+msgid "ten"
+msgstr "tíz"
+
+#: captcha.php:601
+#: captcha.php:834
+msgid "twenty"
+msgstr "húsz(on)"
+
+#: captcha.php:602
+#: captcha.php:835
+msgid "thirty"
+msgstr "harminc"
+
+#: captcha.php:603
+#: captcha.php:836
+msgid "forty"
+msgstr "negyven"
+
+#: captcha.php:604
+#: captcha.php:837
+msgid "fifty"
+msgstr "ötven"
+
+#: captcha.php:605
+#: captcha.php:838
+msgid "sixty"
+msgstr "hatvan"
+
+#: captcha.php:606
+#: captcha.php:839
+msgid "seventy"
+msgstr "hetven"
+
+#: captcha.php:607
+#: captcha.php:840
+msgid "eighty"
+msgstr "nyolcvan"
+
+#: captcha.php:608
+#: captcha.php:841
+msgid "ninety"
+msgstr "kilencven"
+
+#: captcha.php:695
+#: captcha.php:928
+msgid "and"
+msgstr "és"
+
+#: captcha.php:715
+#, fuzzy
+msgid "Encryption password is not set"
+msgstr "A jelszó dekódoló nincs beállítva"
+
+#: captcha.php:735
+#, fuzzy
+msgid "Decryption password is not set"
+msgstr "A jelszó dekódoló nincs beállítva"
+
+#, fuzzy
+#~ msgid "Please enter a valid email address."
+#~ msgstr "Kérjük, töltse ki a CAPTCHA-t"
+
+#, fuzzy
+#~ msgid "Pro plugins"
+#~ msgstr "BWS Plugins"
+#~ msgid "Activated plugins"
+#~ msgstr "Aktivált plugin"
+#~ msgid "Read more"
+#~ msgstr "Bővebben"
+#~ msgid "Installed plugins"
+#~ msgstr "Telepített pluginek"
+#~ msgid "Recommended plugins"
+#~ msgstr "Ajánlott pluginek"
+
+#, fuzzy
+#~ msgid "Free plugins"
+#~ msgstr "Ajánlott pluginek"
+#~ msgid "Download"
+#~ msgstr "Letöltés"
+#~ msgid "Install %s"
+#~ msgstr "Telepítés %s"
+#~ msgid "Install now from wordpress.org"
+#~ msgstr "Telepítse most wordpress.org"
+
+#, fuzzy
+#~ msgid "Active Plugins"
+#~ msgstr "Aktivált plugin"
+
+#, fuzzy
+#~ msgid "Inactive Plugins"
+#~ msgstr "Aktivált plugin"
+
+#, fuzzy
+#~ msgid "Send to support"
+#~ msgstr "Támogatás"
+
+#, fuzzy
+#~ msgid "(powered by bestwebsoft.com)"
+#~ msgstr "(powered by bestwebsoft.com)"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you have any questions, please contact us via plugin@bestwebsoft.com "
+#~ "or fill in the contact form on our website"
+#~ msgstr ""
+#~ "Ha bármilyen kérdése van, kérjük írjon nekünk (plugin@bestwebsoft.com) "
+#~ "vagy  töltse ki az űrlapot a weboldalunkon "
+#~ msgid "Increase"
+#~ msgstr "Növelje"
+#~ msgid "Difficulty for CAPTCHA"
+#~ msgstr "CAPTCHA nehézségi foka "
+#~ msgid "That CAPTCHA was incorrect."
+#~ msgstr "Ez a CAPTCHA helytelen volt."
+#~ msgid "The password of encryption is not set"
+#~ msgstr "A jelszava titkosítása nincs beállítva"
+#~ msgid "null"
+#~ msgstr "null"
+#~ msgid "Install Now"
+#~ msgstr "Installér nu"
+
