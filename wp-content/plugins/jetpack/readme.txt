@@ -1,9 +1,9 @@
 === Jetpack by WordPress.com ===
-Contributors: automattic, alternatekev, andy, apeatling, azaozz, barry, beaulebens, blobaugh, cfinke, chellycat, danielbachhuber, daniloercoli, designsimply, eoigal, ethitter, gibrown, georgestephanis, hew, hugobaeta, iammattthomas, jblz, jeherve, jkudish, Joen, johnjamesjacoby, jshreve, lancewillett, martinremy, matt, matveb, mdawaffe, migueluy, nickmomrik, pento, stephdau, tmoorewp, Viper007Bond, westi, yoavf
+Contributors: automattic, alternatekev, andy, apeatling, azaozz, barry, beaulebens, blobaugh, cfinke, chellycat, danielbachhuber, daniloercoli, designsimply, eoigal, ethitter, gibrown, georgestephanis, hew, hugobaeta, iammattthomas, jblz, jeherve, jkudish, Joen, johnjamesjacoby, jshreve, lancewillett, martinremy, matt, matveb, mcsf, mdawaffe, migueluy, nickmomrik, pento, stephdau, tmoorewp, Viper007Bond, westi, yoavf
 Tags: WordPress.com, statistics, stats, views, tweets, twitter, widget, gravatar, hovercards, profile, equations, latex, math, maths, youtube, shortcode, archives, audio, blip, bliptv, dailymotion, digg, flickr, googlevideo, google, googlemaps, kyte, kytetv, livevideo, redlasso, rockyou, rss, scribd, slide, slideshare, soundcloud, vimeo, shortlinks, wp.me, subscriptions, notifications, notes, json, api, rest, mosaic, gallery, slideshow
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.4
+Stable tag: 2.5
 
 Supercharge your WordPress site with powerful features previously only available to WordPress.com users.
 
@@ -11,7 +11,7 @@ Supercharge your WordPress site with powerful features previously only available
 
 [Jetpack](http://jetpack.me/) is a WordPress plugin that supercharges your self-hosted WordPress site with the awesome cloud power of WordPress.com.
 
-For more information, check out [Jetpack.me](http://jetpack.me/). 
+For more information, check out [Jetpack.me](http://jetpack.me/).
 
 Features include:
 
@@ -82,6 +82,49 @@ Learn more (and get detailed instructions) in our [contribute guide](http://jetp
 8. Mobile Theme
 
 == Changelog ==
+
+= 2.5 =
+* Enhancement: Connect your Google+ profile and WordPress site to prove authorship of posts. 
+* Enhancement: Improved sharing buttons display.
+* Enhancement: Comment on your posts using Google+ to signin.
+* Enhancement: Embed Google+ posts into your posts.
+* Enhancement: Added event logging capabilities for debugging
+* Enhancement: LaTeX is now available in dev mode
+* Enhancement: Introduced gallery widget
+* Enhancement: Added new module: VideoPress
+* Enhancement: Updated identity crisis checker
+* Enhancement: Tiled Gallery widget added
+* Enhancement: Google +1 button changed to Google+ Share button, to avoid confusion
+* Enhancement: Added check to ensure Google+ authorship accounts have disconnected properly
+* Enhancement: Updated identity crisis checker
+* Enhancement: Tiled Gallery widget added
+* Enhancement: Google +1 button changed to Google+ Share button, to avoid confusion
+* Enhancement: Added the ability to embed Facebook posts
+* Bug Fix: Redirect issue with G+ authorship when WordPress is not in the root directory
+* Enhancement: Better security if carousel to prevent self-XSS
+* Enhancement: Better handling of cookies for subsites on multisite installs
+* Bug Fix: Check for post in G+ authorship before accessing it
+
+= 2.4.2 =
+* Enhancement: Converted to module headers to detect Auto-Activating modules.
+* Enhancement: WPCC: Added 'Close' link to deactivate WPCC in the admin nag.
+* Enhancement: JSON API: Add User Nicename to the user data.
+* Bug Fix: Contact Form: Stopped using a short tag.
+* Bug Fix: Changed CSS selector to catch MP6 stylings.
+* Bug Fix: Dropped __FILE__ references in class.jetpack.php in favor of JETPACK__PLUGIN_DIR constant, now code that deactivates the plugin from the connect nag works again.
+* Bug Fix: Random Redirect: Add random-redirect to the plugins overriden list, in case someone is using Matt's Random Redirect plugin.
+* Bug Fix: Tiled Gallery: Revert r757178 relating to tiled gallery defaults.
+* Bug Fix: Return false, not zero, if $GLOBALS['content_width'] isn't defined.
+* Bug Fix: WPCC: Don't call wp_login_url() in the constructor -- if someone is running a custom login page, that can break things if their plugin runs get_permalink as a filter before init.
+* Bug Fix: Tiled Gallery: Add fallback if post_parent == 0 due to infinite_scroll_load_other_plugins_scripts.
+* Bug Fix: Custom CSS: Set the ACE gutter z-index to 1.
+* Bug Fix: Custom Post Types: Switch from wp_redirect() to wp_safe_redirect().
+* Bug Fix: Likes: Set overflow:hidden; on the likes adminbar item.
+* Bug Fix: Mobile Theme: Migrate where/when the custom header stuff is included.
+* Bug Fix: Slideshow Shortcode: Add a height of 410px.
+
+= 2.4.1 =
+* Enhancement: Don't auto-activate WPCC.
 
 = 2.4 =
 * Enhancement: WordPress.com Connect (WPCC): New Module.

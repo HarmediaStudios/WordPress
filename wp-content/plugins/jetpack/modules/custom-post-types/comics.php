@@ -45,7 +45,12 @@ class Jetpack_Comic {
 
 		add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 
-		add_action( 'publish_jetpack-comic', 'queue_publish_post', 10, 2 );
+		if ( function_exists( 'queue_publish_post' ) ) {
+			add_action( 'publish_jetpack-comic', 'queue_publish_post', 10, 2 );
+		} else {
+			add_action( 'publish_jetpack-comic', 'publish_post', 10, 2 );
+		}
+
 		add_action( 'pre_get_posts', array( $this, 'include_in_feeds' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -142,7 +147,7 @@ class Jetpack_Comic {
 			$pagenum = $wp_list_table->get_pagenum();
 			$sendback = add_query_arg( array( 'paged' => $pagenum, 'post_type_changed' => $modified_count ), $sendback );
 
-			wp_redirect( $sendback );
+			wp_safe_redirect( $sendback );
 			exit();
 		}
 	}
