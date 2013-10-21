@@ -73,7 +73,7 @@ class FSCF_Display {
            if ( !empty($redirect) || !empty($hidden) || !empty($email_to)) {
             // trying to use shorcode attributes with the required PHP sessions setting turn off
             // Display error message and return
-            echo  __( 'Contact Form Shortcode Error: Using shorcode attributes requires the PHP sessions setting to be enabled in form settings.', 'si-contact-form' );
+            echo  __( 'Contact Form Shortcode Error: Using shorcode attributes requires the PHP sessions setting to be enabled on the Advanced tab in form settings.', 'si-contact-form' );
             return;
            }
         }
@@ -117,7 +117,6 @@ class FSCF_Display {
             $string = "\n\n<!-- Fast Secure Contact Form plugin " . FSCF_VERSION . " - begin - FastSecureContactForm.com -->
 <div ".self::get_this_css('clear_style')."></div>\n" . self::$form_options['welcome'];
 			$string = self::display_form($string);
-			$string = self::display_vcita_active_engage($string, self::$form_options, self::$global_options);
 		}
 
 		return($string);
@@ -318,7 +317,7 @@ $('head').append(fscf_styles);
         if( !empty(self::$form_options['form_attributes']) )
                 $form_attributes = self::$form_options['form_attributes'].' ';
 
-        if (self::$form_options['vcita_enabled'] == 'true' && self::$form_options['vcita_scheduling_button'] == 'true')
+        if (self::$form_options['vcita_scheduling_button'] == 'true' && self::is_vcita_activated() )
 	         $string .= "\n<div ".'id="fscf_div_left_box' . self::$form_id_num . '" '.self::get_this_css('left_box_style').">";
 
 $string .= '
@@ -489,7 +488,7 @@ $string .= '
                     $string .= '<div id="fscf_div_field' . self::$form_id_num.'_'.$key.'" ';
                     // find out if this field preceeds a follow field or vcita enabled (narrow), else it needs to be (wide)
                     if ( ( isset(self::$form_options['fields'][$key+1] ) && self::$form_options['fields'][$key+1]['follow'] == 'true' )
-                      || ( self::$form_options['vcita_enabled'] == 'true' && self::$form_options['vcita_scheduling_button'] == 'true' )
+                      || ( self::$form_options['vcita_scheduling_button'] == 'true' && self::is_vcita_activated() )
                        )
                       $string .= self::get_this_css('field_prefollow_style').'>'; // narrow
                     else
@@ -557,9 +556,6 @@ $string .= '
 						. '" '.self::$aria_required.' ';
 					if($field['max_len'] != '')
 						$string .=  ' maxlength="'.$field['max_len'].'"';
-                    // XXX disabling text field size, textarea cols rows settings, to use CSS instead
-					//if( strpos($field['attributes'],'size')===false && strpos(self::$style['field'],'width') === false )
-					//	$string .= 'size="'.self::$ctf_field_size.'"';
 					if($field['attributes'] != '')
 					  $string .= ' '.$field['attributes'];
 					$string .= " />\n    </div>\n";
@@ -678,9 +674,9 @@ $string .= '
 				. "</a></p>\n";
 		}
 
-        if (self::$form_options['vcita_enabled'] == 'true' && self::$form_options['vcita_scheduling_button'] == 'true') {
+        if ( self::$form_options['vcita_scheduling_button'] == 'true' && self::is_vcita_activated() ) {
            $string .= "</div>\n<div ".'id="fscf_div_right_box' . self::$form_id_num . '" '.self::get_this_css('right_box_style').">\n";
-		   $string = self::display_vcita_scheduler_button($string, self::$form_options, self::$global_options);
+		   $string = self::display_vcita_scheduler_button( $string );
 		   $string .= "\n</div>\n";
         }
 
@@ -778,23 +774,17 @@ $f_name_string .= '      <label ';
 					$f_name_string .= self::$req_field_ind;
                 $f_name_string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$f_name_string .= self::$req_field_ind."\n";
-              }*/
 $f_name_string .= '    </div>
     <div ' . self::get_this_css('field_div_style') . '>' . self::echo_if_error( 'f_name' ) . '
 	  <input ';
 		$f_name_string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$f_name_string .= ' type="text" id="fscf_f_name' . self::$form_id_num .
 		'" name="f_name" value="' . esc_attr( self::$form_content['f_name'] ) . '" ' . self::$aria_required;
-        // XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$f_name_string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '')
+			  $f_name_string .= ' '.$field['attributes'];
 if ( 'true' == $field['placeholder'] && $f_default != '') {
          $f_name_string .= ' placeholder="'.esc_attr($f_default).'"';
-  //$f_name_string .= ' onfocus="if(this.value==\''.esc_js($f_default).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($f_default).'\';"';
- self::$placeholder = 1;
+   self::$placeholder = 1;
 }
         $f_name_string .= ' />
     </div>';
@@ -810,22 +800,16 @@ $l_name_string .= '      <label ';
 					$l_name_string .= self::$req_field_ind;
                 $l_name_string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$l_name_string .= self::$req_field_ind."\n";
-              }*/
 $l_name_string .= '    </div>
     <div ' . self::get_this_css('field_div_style') . '>' . self::echo_if_error( 'l_name' ) . '
 	  <input ';
 		$l_name_string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$l_name_string .= ' type="text" id="fscf_l_name' . self::$form_id_num . '" name="l_name" value="' . esc_attr( self::$form_content['l_name'] ) . '" ' . self::$aria_required;
-        // XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$l_name_string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '')
+			  $l_name_string .= ' '.$field['attributes'];
  if ( 'true' == $field['placeholder'] && $l_default != '') {
             $l_name_string .= ' placeholder="'.esc_attr($l_default).'"';
-  //$l_name_string .= ' onfocus="if(this.value==\''.esc_js($l_default).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($l_default).'\';"';
-  self::$placeholder = 1;
+    self::$placeholder = 1;
 }
         $l_name_string .= ' />
     </div>
@@ -844,23 +828,17 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
 $string .= '    </div>
     <div ' . self::get_this_css('field_div_style') . '>' . self::echo_if_error( 'full_name' ) . '
       <input ';
 		$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$string .= ' type="text" id="fscf_name' . self::$form_id_num . '" name="full_name" value="' . esc_attr( self::$form_content[$field['slug']] ) . '" ' . self::$aria_required;
-        //XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '')
+			  $string .= ' '.$field['attributes'];
 if ( 'true' == $field['placeholder'] && $field['default'] != '') {
    $string .= ' placeholder="'.esc_attr($field['default']).'"';
  self::$placeholder = 1;
 }
-   //$string .= ' onfocus="if(this.value==\''.esc_js($field['default']).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($field['default']).'\';"';
         $string .= ' />
     </div>
 ';
@@ -885,12 +863,12 @@ $string .= '    </div>
        <input ';
 		$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$string .= ' type="text" id="fscf_mi_name' . self::$form_id_num . '" name="mi_name" value="' . esc_attr( self::$form_content['mi_name'] ) . '" ';
+        if($field['attributes'] != '')
+		     $string .= ' '.$field['attributes'];
         if ( 'true' == $field['placeholder'] && $mi_default != '') {
           $string .= ' placeholder="'.esc_attr($mi_default).'"';
           self::$placeholder = 1;
         }
-//$string .= ' onfocus="if(this.value==\''.esc_js($mi_default).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($mi_default).'\';"';
-
         $string .= ' />
     </div>
 ';
@@ -912,15 +890,12 @@ $string .= '    </div>
       <input ';
 		$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$string .= ' type="text" id="fscf_m_name' . self::$form_id_num . '" name="m_name" value="' . esc_attr( self::$form_content['m_name'] ) . '" ' . self::$aria_required;
-        //XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '')
+			  $string .= ' '.$field['attributes'];
  if ( 'true' == $field['placeholder'] && $m_default != '') {
       $string .= ' placeholder="'.esc_attr($m_default).'"';
       self::$placeholder = 1;
  }
-  //$string .= ' onfocus="if(this.value==\''.esc_js($m_default).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($m_default).'\';"';
-
         $string .= ' />
     </div>';
 				$string .= $l_name_string;
@@ -973,10 +948,6 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
         $string .= "    </div>\n";
         $string .= '    <div ' . self::get_this_css('field_div_style') . '>' . self::echo_if_error( 'email' )
 			. "\n      <input ";
@@ -984,14 +955,12 @@ $string .= '      <label ';
 		$string .= ' type="'.$email_input_type.'" id="fscf_email' . self::$form_id_num . '" name="email" value="';
 			$string .= esc_attr( self::$form_content[$field['slug']] );
 		$string .= '" ' . self::$aria_required;
-        //XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '')
+				  $string .= ' '.$field['attributes'];
          if ( 'true' == $field['placeholder'] && $email_default != '') {
             $string .= ' placeholder="'.esc_attr($email_default).'"';
             self::$placeholder = 1;
          }
-//$string .= ' onfocus="if(this.value==\''.esc_js($email_default).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($email_default).'\';"';
         $string .= ' />'
         . "\n    </div>\n";
 
@@ -1007,17 +976,12 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
         $string .= "    </div>\n    <div " . self::get_this_css('field_div_style') . '>' . self::echo_if_error( 'email2' )
                 . "\n      <input ";
 		$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('field_style');
 		$string .= ' type="'.$email_input_type.'" id="fscf_email' . self::$form_id_num. '_2" name="email2" value="' . esc_attr( self::$form_content['email2'] ) . '" ' . self::$aria_required;
-        //XXX disabling text field size, textarea cols rows settings, to use CSS instead
-        //if( strpos(self::$style['field'],'width') === false )
-		//				$string .= ' size="'.self::$ctf_field_size.'"';
+        if($field['attributes'] != '') // XXX same as email 1 though
+					  $string .= ' '.$field['attributes'];
          if ( 'true' == $field['placeholder'] && $email2_default != '') {
               $string .= ' placeholder="'.esc_attr($email2_default).'"';
               self::$placeholder = 1;
@@ -1048,10 +1012,6 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
 $string .= "    </div>";
 		}
         $type = $field['type'];
@@ -1067,13 +1027,9 @@ $string .= "    </div>";
 		} else {
 			$string .= esc_attr( self::$form_content[$field['slug']] );
 		}
-	
 		$string .= '" '. self::$aria_required;
 		if ( $field['max_len'] != '' )
 			$string .= ' maxlength="' . $field['max_len'] . '"';
-        //XXX disabling text field size, textarea cols rows settings, to use CSS instead
-		//if ( strpos( $field['attributes'], 'size' ) === false && strpos(self::$style['field'],'width') === false )
-		// $string .= ' size="' . self::$ctf_field_size . '"';
 		if ( $field['attributes'] != '' )
 			$string .= ' ' . $field['attributes'];
 
@@ -1081,8 +1037,6 @@ $string .= "    </div>";
            $string .= ' placeholder="'.esc_attr($field['default']).'"';
            self::$placeholder = 1;
         }
-//$string .= ' onfocus="if(this.value==\''.esc_js($field['default']).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($field['default']).'\';"';
-
 		$string .= " />\n    </div>\n";
 
 		return($string);
@@ -1103,42 +1057,27 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
 $string .= "    </div>\n    <div " . self::get_this_css('field_div_style') . '>'
 				. self::echo_if_error( 'message' ) . "\n      <textarea ";
 			$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('textarea_style');
 			$string .= ' id="fscf_field'.self::$form_id_num.'_'.$key . '" name="message" ' . self::$aria_required;
-            // XXX disabling textarea cols rows settings, use CSS instead
-			//	. ' cols="' . absint( self::$form_options['text_cols'] ) . '" rows="' . absint( self::$form_options['text_rows'] ). '"'
-
+	        if($field['attributes'] != '')
+					  $string .= ' '.$field['attributes'];
              if ( 'true' == $field['placeholder'] && $field['default'] != '') {
                 $string .= ' placeholder="'.esc_attr($field['default']).'"';
                 self::$placeholder = 1;
              }
-//$string .= ' onfocus="if(this.value==\''.esc_js($field['default']).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($field['default']).'\';"';
-
 				$string .= '>' . esc_textarea( self::$form_content[$field['slug']] ) . "</textarea>\n    </div>\n";
 		} else {
 			$string	.= "\n    <div " . self::get_this_css('field_div_style') . '>' . self::echo_if_error( $field['slug'] ) . "\n"
 				.'      <textarea ';
 			$string .= ($field['input_css'] != '') ? self::convert_css( $field['input_css'] ) : self::get_this_css('textarea_style');
 			$string .= ' id="fscf_field' . self::$form_id_num . '_' . $key . '" name="' . $field['slug'] . '" ' . self::$aria_required;
-            // XXX disabling textarea cols rows settings, use CSS instead
-			//if ( strpos( $field['attributes'], 'cols' ) === false )
-			//	$string .= ' cols="' . absint( self::$form_options['text_cols'] ) . '"';
-			//if ( strpos( $field['attributes'], 'rows' ) === false )
-			//	$string .= ' rows="' . absint( self::$form_options['text_rows'] ) . '"';
-
 			if ( $field['attributes'] != '' )
 				$string .= ' ' . $field['attributes'];
               if ( 'true' == $field['placeholder'] && $field['default'] != '') {
                  $string .= ' placeholder="'.esc_attr($field['default']).'"';
               }
-  //$string .= ' onfocus="if(this.value==\''.esc_js($field['default']).'\')this.value=\'\';" onblur="if(this.value==\'\')this.value=\''.esc_js($field['default']).'\';"';
-
 			$string .= '>';
 			$string .= (self::$form_options['textarea_html_allow'] == 'true') ? stripslashes( self::$form_content[$field['slug']] ) : esc_textarea( self::$form_content[$field['slug']] );
 			$string .= "</textarea>\n    </div>\n";
@@ -1172,10 +1111,6 @@ $string .= '      <label ';
 					$string .= self::$req_field_ind;
                 $string .= "</label>\n";
               }
-/*              else {
-                if ( 'true' == $field['req'] )
-					$string .= self::$req_field_ind."\n";
-              }*/
 $string .= "    </div>";
 			// Check for subject_id parm for backward compatibility
 			if ( 0 == count(self::$form_content[$field['slug']]) && '' != self::$form_content['subject_id'])
@@ -2047,7 +1982,9 @@ $string .= "    </div>";
 function fscfPrintContent(id){
 str=document.getElementById(id).innerHTML
 newwin=window.open(\'\',\'printwin\',\'width=1000\')
-newwin.document.write(\'<HTML>\n<HEAD>\n\')
+newwin.document.write(\'<HT\')
+newwin.document.write(\'ML>\n<HE\n\')
+newwin.document.write(\'AD>\n\')
 newwin.document.write(\'<TITLE>Print Window</TITLE>\n\')
 newwin.document.write(\'<script>\n\')
 newwin.document.write(\'function chkstate(){\n\')
@@ -2063,11 +2000,15 @@ newwin.document.write(\'window.print();\n\')
 newwin.document.write(\'chkstate();\n\')
 newwin.document.write(\'}\n\')
 newwin.document.write(\'<\/script>\n\')
-newwin.document.write(\'</HEAD>\n\')
-newwin.document.write(\'<BODY onload="print_win()">\n\')
+newwin.document.write(\'</HE\')
+newwin.document.write(\'AD>\n\')
+newwin.document.write(\'<BO\')
+newwin.document.write(\'DY onload="print_win()">\n\')
 newwin.document.write(str)
-newwin.document.write(\'</BODY>\n\')
-newwin.document.write(\'</HTML>\n\')
+newwin.document.write(\'</BO\')
+ newwin.document.write(\'DY>\n\')
+newwin.document.write(\'</HT\')
+newwin.document.write(\'ML>\n\')
 newwin.document.close()
 }
 </script>
@@ -2130,52 +2071,31 @@ newwin.document.close()
         //filter hook for form action URL
 		return apply_filters( 'si_contact_form_action_url', $form_action_url,  self::$form_id_num);
 
-	}  // end function form_action_url	
+	}  // end function form_action_url
 
-	static function display_vcita_scheduler_button($string, $form_options, $global_options) {
-	  if ($form_options['vcita_enabled'] == 'true' && $form_options['vcita_scheduling_button'] == 'true'){
+   	static function is_vcita_activated() {
+         if ( self::$form_options['vcita_approved'] == 'true' && !empty( self::$form_options['vcita_uid'] ) )
+              return true;
+         else
+              return false;
+    }
+
+	static function display_vcita_scheduler_button( $string ) {
+      // vcita_scheduling_button enabled and is_vcita_activated has already been checked
+	  if (self::$form_options['vcita_scheduling_button'] == 'true'){
         $string .= '<div id="fscf_button_div_vcita' . self::$form_id_num . '" '.self::get_this_css('vcita_div_button_style'). ">\n<a ".'id="fscf_button_vcita' . self::$form_id_num . '" ' . self::get_this_css('vcita_button_style');
-	    if($form_options['vcita_approved'] == 'true' && !empty($form_options['vcita_uid'])){
-		     $string .=  " target='_blank' class='vcita-set-meeting' href=\"http://".$global_options['vcita_site']."/meeting_scheduler?v=" . self::$form_options['vcita_uid'] . "\"";
-		} else {
-		  	 $string .=  " onclick=\"alert('You need to configure your Fast Secure Contact Form / Scheduling settings tab');\"";
-		}
-		$string .= '>' . $form_options['vcita_scheduling_button_label'].'</a>';
-        if ($form_options['vcita_link'] == 'true')
-           $scheduling_link = $form_options['vcita_scheduling_link_text'];
+		$string .=  " target='_blank' class='vcita-set-meeting' href=\"http://".self::$global_options['vcita_site']."/meeting_scheduler?v=" . self::$form_options['vcita_uid'] . "\"";
+		$string .= '>' . self::$form_options['vcita_scheduling_button_label'].'</a>';
+        if (self::$form_options['vcita_link'] == 'true')
+           $scheduling_link = self::$form_options['vcita_scheduling_link_text'];
            $scheduling_link = str_replace("Online Scheduling","<a target=\"_blank\" href=\"http://www.vcita.com/software/online_scheduling\">Online Scheduling</a>", $scheduling_link);
            $string .= "\n<div ". self::get_this_css('powered_by_style') . ">" . $scheduling_link . "</div>\n";
            $string .= "</div>";
-		}
+	 }
 
 	  return($string);
   }	// end function display_vcita_scheduler_button
 
-  static function display_vcita_active_engage($string, $form_options, $global_options) {
-	  if ($form_options['vcita_enabled'] == 'true'){
-	    if($global_options['vcita_site'] == 'www.vcita.com'){
-	      $uid = '360c3394'; // demo vcita user;
-	    } else if($global_options['vcita_site'] == 'www.meet2know.com') {
-	      $uid = 'd06ad557';
-	    } else {
-        $uid = 'a743a56d';
-	    }
-	    if($form_options['vcita_approved'] == 'true')
-	    	$uid = self::$form_options['vcita_uid'];
-		  $string .= "<script type='text/javascript' charset='utf-8'>";
-		  if ($form_options['vcita_active_engage'] == 'false'){
-        $string .= "\nwindow.vcita_options = {};\n";
-        $string .= "\nwindow.vcita_options.active_engage = false;\n";
-      }
-      $string .= "var vcHost = document.location.protocol == \"https:\" ? \"https:\" : \"http:\";\n";
-      $string .= "document.write(unescape(\"%3Cscript src='\" + vcHost + \"//".$global_options['vcita_site']."/widgets/active_engage/";
-      $string .= $uid;
-      $string .= "/loader.js' type='text/javascript'%3E%3C/script%3E\"));";
-      $string .= "</script>";
-		}
-	  
-	  return($string);
-  }	// end function display_vcita_active_engage
 	
 }  // end class FSCF_Display
 

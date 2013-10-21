@@ -333,7 +333,7 @@ class FSCF_Util {
 		self::$global_defaults = array(
 			'fscf_version'		  => FSCF_VERSION,
 			'donated'			  => 'false',
-            'vcita_auto_install'  => 'true',  // vCita Global Settings
+            'vcita_auto_install'  => 'false',  // vCita Global Settings
             'vcita_dismiss'       => 'false', // vCita Global Settings
             'vcita_initialized'   => 'false', // vCita Global Settings
             'vcita_show_disable_msg'   => 'false', // vCita Global Settings
@@ -471,21 +471,16 @@ class FSCF_Util {
 			 'error_correct'        => '',
              'error_spambot'        => '',
 			 'fields'				=> array(),
-		     'vcita_enabled'        => 'true',
-		     'vcita_scheduling_button' => 'true',
-		     'vcita_scheduling_button_css' => '',
+		     'vcita_scheduling_button' => 'false',
 		     'vcita_scheduling_button_label' => '',
-		     'vcita_active_engage'  => 'false',
 		     'vcita_approved'       => 'false',
 		     'vcita_uid'            => '',
 		     'vcita_email'          => '',
-                                                // disabled because was causing signups on click "save changes" on any tab
-		     //'vcita_email_new'      => ((get_option('admin_email') == 'user@example.com') ? '' : get_option('admin_email')),
-             'vcita_email_new'      => '',
+		     'vcita_email_new'      => ((get_option('admin_email') == 'user@example.com') ? '' : get_option('admin_email')),
 		     'vcita_confirm_token'	=> '',
 		     'vcita_confirm_tokens'	=> '',
 	    	 'vcita_initialized'	=> 'false',
-             'vcita_link'	        => 'true',
+             'vcita_link'	        => 'false',
 		     'vcita_first_name'	    => '',
 		     'vcita_last_name'	    => '',
 		     'vcita_scheduling_button_label' => 'Schedule an Appointment',
@@ -584,7 +579,7 @@ class FSCF_Util {
 
 			'button_style'         => 'cursor:pointer; margin:0;', // Submit button
 			'reset_style'          => 'cursor:pointer; margin:0;', // Reset button
-			'vcita_button_style'   => 'text-decoration:none; display:block; text-align:center; background:linear-gradient(to bottom, #ed6a31 0%, #e55627 100%); color:#fff !important; padding:10px;',
+			'vcita_button_style'   => 'text-decoration:none; display:block; text-align:center; background:linear-gradient(to bottom, #ed6a31 0%, #e55627 100%); color:#fff !important; padding:8px;',
             'vcita_div_button_style' => 'border-left:1px dashed #ccc; margin-top:25px; padding:8px 20px;', // vCita button div box
  			'powered_by_style'     => 'font-size:x-small; font-weight:normal; padding-top:5px; text-align:center;', // the "powered by" link
 
