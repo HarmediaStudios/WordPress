@@ -215,7 +215,7 @@ function wpfc_em_ajax() {
 		$color = "#a8d144";
 		$textColor = '#fff';
 		$borderColor = '#a8d144';
-		$post_image  = wp_get_attachment_image_src( get_post_thumbnail_id( $EM_Event->post_id ), 'homepage-thumb-retina' );
+		$post_image  = wp_get_attachment_image_src( get_post_thumbnail_id( $EM_Event->post_id ), 'thumbnail' );
 		if ( !empty ( $EM_Event->get_categories()->categories )) {
 			foreach($EM_Event->get_categories()->categories as $EM_Category){
 				/* @var $EM_Category EM_Category */
