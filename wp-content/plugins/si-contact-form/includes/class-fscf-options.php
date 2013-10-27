@@ -276,7 +276,7 @@ class FSCF_Options {
 		<script type="text/javascript">
 		// Set up tabs for options page (selected supports jQuery ui pre-1.9)
 		jQuery(function() { 
-			jQuery( "#tabs" ).tabs({ active: <?php echo esc_js(self::$current_tab)-1; ?>, selected: <?php echo esc_js(self::$current_tab)-1; ?> });
+			jQuery( "#fscf-tabs" ).tabs({ active: <?php echo esc_js(self::$current_tab)-1; ?>, selected: <?php echo esc_js(self::$current_tab)-1; ?> });
 
 			}); 
 		</script>
@@ -408,8 +408,8 @@ class FSCF_Options {
 				&nbsp;<input id="preview" class="button-primary" type="submit" value="<?php
 				// When submit button is pressed, this will override the value of the hidden field
 				// named ctf_action
-				if ( $preview ) _e('Edit Form', 'si-contact-form'); 
-				else _e('Preview Form', 'si-contact-form'); 
+				if ( $preview ) _e('Edit Form', 'si-contact-form');
+				else _e('Preview Form', 'si-contact-form');
 				?>" name="ctf_action" />
 			</span>
 
@@ -429,22 +429,21 @@ class FSCF_Options {
 		else {
 		?>
 
-		<form id="optionsform" name="optionsform" class="fscf_clear" onsubmit="return onsubmitform();"
-			  action="options.php" method="post" enctype="multipart/form-data">
+		<form id="fscf-optionsform" name="fscf-optionsform" class="fscf_clear" action="options.php" method="post" enctype="multipart/form-data">
               <?php wp_nonce_field( 'fs_contact_options-options', 'fs_options' ); ?>
 			<div>
 			<input type="hidden" name="form-changed" id="form-changed" value="0"/>
 			<input type="hidden" id="cur_tab" name="current_tab" value="<?php echo self::$current_tab; ?>"/>
 			<input type="hidden" id="admin_url" value="<?php echo admin_url(); ?>"/>
-			</div><div id="tabs">
-			<ul id="tab-list">
+			</div><div id="fscf-tabs">
+			<ul id="fscf-tab-list">
 			<?php
 			// Display the tab labels
 			$i = 1;
 			for ( $i = 1; $i <= $num_tabs; $i++ ) {
-				echo '<li id="tab'.$i.'"';
+				echo '<li id="fscf-tab'.$i.'"';
 				// select the current tab
-				echo '><a href="#tabs-' . $i . '">' . esc_html($tab_names[$i - 1]) . '</a></li> ';
+				echo '><a href="#fscf-tabs-' . $i . '">' . esc_html($tab_names[$i - 1]) . '</a></li> ';
 			}
 			?>
 			</ul>
@@ -452,11 +451,11 @@ class FSCF_Options {
 			<?php
 			// Display the tab contents
 			for ( $i = 1; $i <= $num_tabs; $i++ ) {
-				echo '<div id="tabs-' . $i . '">';
+				echo '<div id="fscf-tabs-' . $i . '">';
 
 				settings_fields( 'fs_contact_options' );
 				do_settings_sections( 'tab_page' . $i );
-				if ( $i < $num_tabs ) { 
+				if ( $i < $num_tabs ) {
 //					submit_button();
                   // XXX if moving tabs around, you have may have to change 8 to a diff number, also make a change in  fscf-scripts-admin.js  if (tabId < 8) {
                   if ($i != 8) { // skip tab 8 for the tools tab
@@ -539,7 +538,7 @@ class FSCF_Options {
 		<img src="<?php echo plugins_url( 'si-contact-form/includes/si-contact-form.jpg' ); ?>" class="fscf_left fscf_img" width="250" height="185" alt="Mike Challis" /><br />
 		<?php _e('Mike Challis says: "Hello, I have spent hundreds of hours coding this plugin just for you. If you are satisfied with my programs and support please consider making a small donation. If you are not able to, that is OK.', 'si-contact-form'); ?>
 		<?php echo ' '; _e('Suggested donation: $25, $20, $15, $10, $5, $3. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also review my plugin."', 'si-contact-form'); ?>
-		 <br /><a href="http://wordpress.org/support/view/plugin-reviews/si-contact-form" target="_blank"><?php _e('Review this plugin now', 'si-contact-form'); ?></a>.
+		 <br /><a href="http://wordpress.org/support/view/plugin-reviews/si-contact-form?rate=5#postform" target="_blank"><?php _e('Review this plugin now', 'si-contact-form'); ?></a>.
 		<br /><br />
 		<a style="cursor:pointer;" title="Close" onclick="toggleVisibility('si_contact_mike_challis_tip');"><?php _e('Close this message', 'si-contact-form'); ?></a>
 
@@ -2225,7 +2224,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		  <a style="cursor:pointer;" title="<?php esc_attr_e( 'Click for Help!', 'si-contact-form' ); ?>" onclick="toggleVisibility('si_contact_redirect_ignore_tip');"><?php echo __( 'help', 'si-contact-form' ); ?></a><br />
 		  <div class="fscf_tip" id="si_contact_redirect_ignore_tip">
 		<?php _e( 'Optional list of field tags for fields you do not want included in the query string.', 'si-contact-form' ) ?><br />
-		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br />
+		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -2249,7 +2248,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		<?php _e( 'Examples:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		from_name=name<br />
-		from_email=email</span><br />
+		from_email=email</span><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -2292,9 +2291,9 @@ if( self::$form_options['external_style'] == 'true' ) {
 
 		<?php
 		if ( self::$form_options['redirect_email_off'] == 'true' && self::$form_options['redirect_enable'] == 'true' && self::$form_options['redirect_query'] == 'true' ) {
-			?><div id="message" class="updated"><strong><?php echo __( 'Warning: You have turned off email sending in the redirect settings below. This is just a reminder in case that was a mistake. If that is what you intended, then ignore this message.', 'si-contact-form' ); ?></strong></div><?php
+			?><div id="message" class="updated"><strong><?php echo __( 'Just a reminder: You have turned off email sending in the redirect settings below. If that is what you intended, then ignore this message.', 'si-contact-form' ); ?></strong></div><?php
 			echo '<div class="fsc-notice">';
-			echo __( 'Warning: You have turned off email sending in the setting below. This is just a reminder in case that was a mistake. If that is what you intended, then ignore this message.', 'si-contact-form' );
+			echo __( 'Just a reminder: You have turned off email sending in the setting below. If that is what you intended, then ignore this message.', 'si-contact-form' );
 			echo "</div>\n";
 		}
 		?>
@@ -2357,6 +2356,13 @@ if( self::$form_options['external_style'] == 'true' ) {
         </div>
         <br />
 
+		<input name="<?php echo self::$form_option_name; ?>[anchor_enable]" id="fs_contact_anchor_enable" type="checkbox" <?php if ( self::$form_options['anchor_enable'] == 'true' ) echo 'checked="checked"'; ?> value="true" />
+		<label for="fs_contact_anchor_enable"><?php _e( 'Enable an HTML anchor tag on the form POST URL.', 'si-contact-form' ); ?></label>
+		<a style="cursor:pointer;" title="<?php esc_attr_e( 'Click for Help!', 'si-contact-form' ); ?>" onclick="toggleVisibility('si_contact_anchor_enable_tip');"><?php _e( 'help', 'si-contact-form' ); ?></a>
+		<div class="fscf_tip" id="si_contact_anchor_enable_tip">
+		<?php _e( 'Enable if you want the form POST URL to include an HTML Anchor tag #FSContact1 that makes the page scroll to where your form is when you click submit. This is useful for long page content or when you have multiple forms on one page.', 'si-contact-form' ) ?>
+		</div>
+		<br />
 
 		<input name="<?php echo self::$form_option_name; ?>[email_html]" id="fs_contact_email_html" type="checkbox" <?php if ( self::$form_options['email_html'] == 'true' ) echo 'checked="checked"'; ?> value="true" />
 		<label for="fs_contact_email_html"><?php _e( 'Enable to receive email as HTML instead of plain text.', 'si-contact-form' ); ?></label>
@@ -2563,7 +2569,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		  <a style="cursor:pointer;" title="<?php esc_attr_e( 'Click for Help!', 'si-contact-form' ); ?>" onclick="toggleVisibility('si_contact_silent_ignore_tip');"><?php echo __( 'help', 'si-contact-form' ); ?></a><br />
 		  <div class="fscf_tip" id="si_contact_silent_ignore_tip">
 		<?php _e( 'Optional list of field tags for fields you do not want included.', 'si-contact-form' ) ?><br />
-		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br />
+		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -2587,7 +2593,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		<?php _e( 'Examples:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		from_name=name<br />
-		from_email=email</span><br />
+		from_email=email</span><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -2667,7 +2673,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		<a style="cursor:pointer;" title="<?php esc_attr_e( 'Click for Help!', 'si-contact-form' ); ?>" onclick="toggleVisibility('si_contact_export_ignore_tip');"><?php echo __( 'help', 'si-contact-form' ); ?></a><br />
 		<div class="fscf_tip" id="si_contact_export_ignore_tip">
 		<?php _e( 'Optional list of field tag for fields you do not want included in the data export.', 'si-contact-form' ) ?><br />
-		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br />
+		<?php _e( 'Start each entry on a new line.', 'si-contact-form' ); ?><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -2691,7 +2697,7 @@ if( self::$form_options['external_style'] == 'true' ) {
 		<?php _e( 'Examples:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		from_name=name<br />
-		from_email=email</span><br />
+		from_email=email</span><br /><br />
 		<?php _e( 'Available fields on this form:', 'si-contact-form' ); ?>
 		<span style="margin: 2px 0" dir="ltr"><br />
 		<?php
@@ -3261,7 +3267,7 @@ if (!function_exists('sicf_ctct_admin_form')) { // skip if the plugin is already
 			if ( !empty(self::$new_field_added)  ) {
             ?>
                 <script type="text/javascript" language="JavaScript">
-                  document.forms['optionsform'].elements['fs_contact_field<?php echo self::$new_field_key; ?>_label'].focus();
+                  document.forms['fscf-optionsform'].elements['fs_contact_field<?php echo self::$new_field_key; ?>_label'].focus();
                 </script>
             <?php
 			}
@@ -3502,7 +3508,7 @@ if (!function_exists('sicf_ctct_admin_form')) { // skip if the plugin is already
 			 'captcha_perm', 'honeypot_enable', 'redirect_enable', 'redirect_query', 'redirect_email_off',
 			 'silent_email_off', 'export_email_off', 'ex_fields_after_msg', 'email_inline_label',
 			 'textarea_html_allow', 'enable_areyousure', 'auto_respond_enable', 'auto_respond_html',
-			 'req_field_indicator_enable', 'req_field_label_enable', 'border_enable',
+			 'req_field_indicator_enable', 'req_field_label_enable', 'border_enable', 'anchor_enable',
 			 'aria_required', 'auto_fill_enable', 'enable_reset', 'enable_credit_link'
 		);
 
@@ -3774,6 +3780,7 @@ if (!function_exists('sicf_ctct_admin_form')) { // skip if the plugin is already
 		   self::$av_fld_arr[] = 'akismet';
 
 		self::$av_fld_arr[] = 'date_time';
+        self::$av_fld_arr[] = 'ip_address';
 		self::$av_fld_subj_arr[] = 'form_label';
 
 	}	// function set_fld_array()
