@@ -9,7 +9,7 @@
  */
 
 /** WordPress Administration Bootstrap */
-require_once('./admin.php');
+require_once( dirname( __FILE__ ) . '/admin.php' );
 
 $parent_file = 'edit.php';
 $submenu_file = 'edit.php';
@@ -94,12 +94,6 @@ if ( ! $sendback ||
 } else {
 	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), $sendback );
 }
-
-// Post Anonymously
-if( isset($_POST['anonymous_post']) && $_POST['anonymous_post'] ){
-	add_post_meta( $post_id, '_anonymous', 1 );
-}
-// /Post Anonymously
 
 switch($action) {
 case 'postajaxpost':
@@ -201,7 +195,7 @@ case 'edit':
 		enqueue_comment_hotkeys_js();
 	}
 
-	include('./edit-form-advanced.php');
+	include( ABSPATH . 'wp-admin/edit-form-advanced.php' );
 
 	break;
 
@@ -315,4 +309,4 @@ default:
 	exit();
 	break;
 } // end switch
-include('./admin-footer.php');
+include( ABSPATH . 'wp-admin/admin-footer.php' );
