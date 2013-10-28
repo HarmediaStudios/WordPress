@@ -160,8 +160,7 @@
 				if ( cls == 'aligncenter' )
 					div_cls += ' mceIEcenter';
 
-				w = parseInt( w, 10 ) + 10;
-				return '<div class="'+div_cls+'"><dl id="'+id+'" class="wp-caption '+cls+'" style="width: '+w+
+				return '<div class="'+div_cls+'"><dl id="'+id+'" class="wp-caption '+cls+'" style="width: '+( 10 + parseInt(w) )+
 				'px"><dt class="wp-caption-dt">'+img+'</dt><dd class="wp-caption-dd">'+cap+'</dd></dl></div>';
 			});
 		},
