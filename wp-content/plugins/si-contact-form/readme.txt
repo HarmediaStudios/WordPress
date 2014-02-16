@@ -4,7 +4,7 @@ Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: http://www.FastSecureContactForm.com/donate
 Tags: Akismet, captcha, contact, contact form, form, mail, email, spam, multilingual, wpmu
 Requires at least: 3.4.2
-Tested up to: 3.7
+Tested up to: 3.8
 Stable tag: trunk
 
 An easy and powerful form builder that lets your visitors send you email. Blocks all automated spammers. No templates to mess with.
@@ -245,6 +245,19 @@ You can enable or disable this option in the "Scheduling" tab of your contact fo
 If you have additional questions visit [vCita Support Page](http://support.vcita.com)
 
 == Changelog ==
+
+
+= 4.0.18 =
+- (07 Dec 2013) - Bug fix: query into hidden field type was not working.
+- Bug fix: Standard field labels did not translate in email message.
+- Bug fix: Standard field labels changed on the Labels tab did not change in email message.
+- Bug fix: fixed HTML validation errors for datepicker css and for textarea.
+- Update German, French, and Turkish Languages.
+
+= 4.0.17 =
+- (17 Nov 2013) - Bug fix: calendar js conflict when two forms are on same page with date fields.
+- Bug fix: "Notice: Undefined index: subject" error if subject field is disabled.
+- added filter hook for modifying redirect URL.
 
 = 4.0.16 =
 - (25 Oct 2013) - Bug fix: some fields would not validate if value was zero.

@@ -88,7 +88,7 @@ class FSCF_Process {
 			   self::email_sent_cleanup_attachments();
             self::email_sent_redirect();
 		}
-		
+
 		if ( ! empty(self::$uploaded_files) ) {
 			// unlink (delete) attachment temp files
 			foreach ( (array) self::$uploaded_files as $path ) {
@@ -225,7 +225,7 @@ class FSCF_Process {
 				if ( 'full_name' == $field['slug'] )
 					self::validate_name( $field, $inline_or_newline );
 				else if ( 'email' == $field['slug'] )
-					self::validate_email( $field['req'], $field['label'], $inline_or_newline );
+					self::validate_email( $field['req'], $inline_or_newline );
                 else if ( 'email' == $field['type'] ) // extra field email type
 					self::validate_email_type($field['slug'], $field['req'] );
                 else if ( 'url' == $field['type'] ) // extra field email type
@@ -262,13 +262,19 @@ class FSCF_Process {
 				case 'textarea' :
 				case 'password' :
 				case 'url' :
-                    if ( 'hidden' == $field['type'] )
-                            self::$form_data[$field['slug']] = FSCF_Util::clean_input($field['default']); // use the default, not the form input
 					if ( 'full_name' != $field['slug'] && 'email' != $field['slug']  ) {
                         if ( self::$form_data[$field['slug']] == '' && self::$form_options['email_hide_empty'] == 'true' ) {
 
                         } else {
-                                self::$email_msg .= self::make_bold( $field['label'] ) . $inline_or_newline;
+                                if ( 'subject' == $field['slug'] ) {
+                                        $this_label = (self::$form_options['title_subj'] != '') ? self::$form_options['title_subj'] : __( 'Subject:', 'si-contact-form' );
+                                        self::$email_msg .= self::make_bold( $this_label ) . $inline_or_newline;
+                                } elseif ( 'message' == $field['slug'] ) {
+                                        $this_label = (self::$form_options['title_mess'] != '') ? self::$form_options['title_mess'] : __( 'Message:', 'si-contact-form' );
+                                        self::$email_msg .= self::make_bold( $this_label ) . $inline_or_newline;
+                                } else {
+                                        self::$email_msg .= self::make_bold( $field['label'] ) . $inline_or_newline;
+                                }
                                 self::$email_fields[$field['slug']] = self::$form_data[$field['slug']];
 						        self::$email_msg .=  self::$form_data[$field['slug']] . self::$php_eol . self::$php_eol;
                         }
@@ -336,7 +342,12 @@ class FSCF_Process {
                     if ( $chosen == '' && self::$form_options['email_hide_empty'] == 'true' ) {
 
                     } else {
-                            self::$email_msg .= self::make_bold( $field['label'] ) . $inline_or_newline;
+                         if ( 'subject' == $field['slug'] && 'select' == $field['type']) {
+                                 $this_label = (self::$form_options['title_subj'] != '') ? self::$form_options['title_subj'] : __( 'Subject:', 'si-contact-form' );
+                                 self::$email_msg .= self::make_bold( $this_label ) . $inline_or_newline;
+                         } else {
+                                 self::$email_msg .= self::make_bold( $field['label'] ) . $inline_or_newline;
+                         }
 					        self::$email_fields[$field['slug']] = $chosen;
 					        self::$email_msg .=  $chosen . self::$php_eol . self::$php_eol;
                     }
@@ -585,57 +596,6 @@ class FSCF_Process {
 
         $placeh_name_fail = $placeh_fname_fail = $placeh_lname_fail = $placeh_mname_fail = $placeh_miname_fail = 0;
 
-/*         if ( 'true' == $field['placeholder'] && $field['default'] != '' ) {
-                   // strip out the placeholder they might have posted with
-                   $placeholder_input = '';
-                   if (self::$form_options['name_format'] == 'name' ) {
-                      $placeholder_input = stripslashes(self::$form_data['full_name']);
-                      if ($field['default'] == $placeholder_input )
-                         $placeh_name_fail = 1;
-                   }
-                   if ( self::$form_options['name_format'] =! 'name' ) {
-                      $f_default = $l_default = $m_default = $mi_default = '';
-                      if ( self::$form_options['name_format'] == 'first_last' ) {
-                            if ( !preg_match('/^(.*)(==)(.*)$/', $field['default'], $matches) )
-                                 $field['default'] = 'First Name==Last Name'; // default to something that works
-                            if ( preg_match('/^(.*)(==)(.*)$/', $field['default'], $matches) ) {
-                               $f_default = $matches[1];
-                               $l_default = $matches[3];
-                            }
-                      } else if( self::$form_options['name_format'] == 'first_middle_last' ) {
-                            if ( !preg_match('/^(.*)(==)(.*)(==)(.*)$/', $field['default'], $matches) )
-                                  $field['default'] = 'First Name==Middle Name==Last Name'; // default to something that works
-                            if ( preg_match('/^(.*)(==)(.*)(==)(.*)$/', $field['default'], $matches) ) {
-                               $f_default = $matches[1];
-                               $m_default = $matches[3];
-                               $l_default = $matches[5];
-                            }
-                            $placeholder_input = stripslashes(self::$form_data['m_name']);
-                            if ($m_default == $placeholder_input )
-                                  $placeh_mname_fail = 1;
-                      } else if ( self::$form_options['name_format'] == 'first_middle_i_last' ) {
-                            if ( !preg_match('/^(.*)(==)(.*)(==)(.*)$/', $field['default'], $matches) )
-                                 $field['default'] = 'First Name==Middle Initial==Last Name'; // default to something that works
-                            if ( preg_match('/^(.*)(==)(.*)(==)(.*)$/', $field['default'], $matches) ) {
-                               $f_default = $matches[1];
-                               $mi_default = $matches[3];
-                               $l_default = $matches[5];
-                            }
-                            $placeholder_input = stripslashes(self::$form_data['mi_name']);
-                            if ($mi_default == $placeholder_input )
-                                  $placeh_miname_fail = 1;
-                      }
-                      $placeholder_input = stripslashes(self::$form_data['f_name']);
-                      if ($f_default == $placeholder_input ) {
-                         $placeh_fname_fail = 1;
-                      }
-                      $placeholder_input = stripslashes(self::$form_data['l_name']);
-                      if ($l_default == $placeholder_input ) {
-                         $placeh_lname_fail = 1;
-                      }
-                  }
-		 }*/
-
 		// If the name is required, make sure it is there
 		if ( 'true' == $field['req'] ) {
 			switch ( self::$form_options['name_format'] ) {
@@ -681,7 +641,8 @@ class FSCF_Process {
                 if ( self::$form_data['full_name'] == '' && self::$form_options['email_hide_empty'] == 'true' ) {
 
                 } else {
-                        self::$email_msg .= self::make_bold( $field['label'] ) . $inline_or_newline;
+                        $this_label = (self::$form_options['title_name'] != '') ? self::$form_options['title_name'] : __( 'Name:', 'si-contact-form' );
+                        self::$email_msg .= self::make_bold( $this_label ) . $inline_or_newline;
 					    self::$email_msg .= self::$form_data['full_name'] . self::$php_eol . self::$php_eol;
                 }
 				break;
@@ -729,7 +690,7 @@ class FSCF_Process {
 
 	}  // end function validate_name()
 
-	static function validate_email($req, $label, $inline_or_newline) {
+	static function validate_email($req, $inline_or_newline) {
        	// validates all the standard email inputs
 		if ( isset( $_POST['email'] ) )
 			$email = strtolower( FSCF_Util::clean_input( $_POST['email'] ) );
@@ -753,7 +714,8 @@ class FSCF_Process {
         if ( empty($email) && self::$form_options['email_hide_empty'] == 'true' ) {
 
         } else {
-                self::$email_msg .= self::make_bold( $label ) . $inline_or_newline;
+                $this_label = (self::$form_options['title_email'] != '') ? self::$form_options['title_email'] : __( 'Email:', 'si-contact-form' );
+                self::$email_msg .= self::make_bold( $this_label ) . $inline_or_newline;
 		        self::$email_fields['from_email'] = self::$form_data['email'];
 	            self::$email_msg .= self::$email_fields['from_email'] . self::$php_eol . self::$php_eol;
         }
@@ -1417,7 +1379,7 @@ class FSCF_Process {
 			// subject can include posted data names feature:
             if (self::$selected_subject != '')
                 $subj = self::$form_options['email_subject'] . ' ' . self::$selected_subject; // came from a select field
-			else if ( self::$form_data['subject'] != '' )
+			else if ( isset(self::$form_data['subject']) && self::$form_data['subject'] != '' )
 				$subj = self::$form_options['email_subject'] . ' ' . self::$form_data['subject']; // came from text field
 			else
 				$subj = self::$form_options['email_subject'];  // was not required, use the options
@@ -1661,6 +1623,8 @@ class FSCF_Process {
 			if ( $ctf_redirect_url == '#' ) {  // if you put # for the redirect URL it will redirect to the same page the form is on regardless of the page.
 				$ctf_redirect_url = self::$form_action_url;
 			}
+            // filter hook for changing the redirect URL. You could make a function that changes it based on fields
+            $ctf_redirect_url = apply_filters( 'si_contact_redirect_url', $ctf_redirect_url, self::$email_fields,  self::$form_data['mailto_id'], self::$form_id_num);
 
 			// redirect query string code
 			if ( self::$form_options['redirect_query'] == 'true' ) {
@@ -1789,7 +1753,7 @@ class FSCF_Process {
 			}
 		}
 		return $count;
-	}  // end function clean_temp_dir	
+	}  // end function clean_temp_dir
 
 	static function make_bold( $label ) {
 		// makes bold html email labels
