@@ -1,3 +1,9 @@
+version 4.0 ( updated 12-23-2013 )
+- Now you can update Elegant Themes in the Dashboard: https://www.elegantthemes.com/members-area/documentation.html#updater
+	* epanel/custom_functions.php
+- Bumped version number
+	* style.css
+
 version 3.9 ( updated 09-13-2013 )
 - Fixed Tabs shortcode layout issues with the slide effect
 	* epanel/shortcodes/css/shortcodes.css

@@ -799,6 +799,13 @@ if ( ! function_exists( 'et_resize_image' ) ){
 			restore_current_blog();
 		}
 
+		/*
+		 * If we're dealing with an external image ( might be the result of Grab the first image function ),
+		 * return original image url
+		 */
+		if ( false === strpos( $thumb, $site_uri ) )
+			return $thumb;
+
 		if ( 'jpeg' == $ext ) {
 			$ext = 'jpg';
 			$name = preg_replace( '#.jpeg$#', '', $name );
@@ -990,7 +997,14 @@ function et_check_themes_updates( $update_transient ){
 add_filter('site_transient_update_themes', 'et_add_themes_to_update_notification');
 function et_add_themes_to_update_notification( $update_transient ){
 	$et_update_themes = get_site_transient( 'et_update_themes' );
+
 	if ( !is_object($et_update_themes) || !isset($et_update_themes->response) ) return $update_transient;
+
+	// Fix for warning messages on Dashboard / Updates page
+	if ( ! is_object( $update_transient ) ) {
+		$update_transient = new stdClass();
+	}
+
 	$update_transient->response = array_merge(!empty($update_transient->response) ? $update_transient->response : array(), $et_update_themes->response);
 
 	return $update_transient;
@@ -1049,11 +1063,11 @@ function et_admin_update_theme_message( $default_translated_text, $original_text
 	$updates_page_message = 'Update package not available.';
 
     if ( is_admin() && $original_text === $theme_page_message ) {
-        return __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox" title="%1$s">View version %3$s details</a>. <em>Auto-updates are not available for this theme. If this is an Elegant Themes theme, then you must re-download the theme from the member\'s area and <a href="http://www.elegantthemes.com/members-area/documentation.html#update" target="_blank">re-install it</a> in order to update it to the latest version.</em>', $themename );
+        return __( 'There is a new version of %1$s available. <a href="%2$s" class="thickbox" title="%1$s">View version %3$s details</a>. <em>Before you can update your Elegant Themes, you must first install the <a href="https://www.elegantthemes.com/members-area/documentation.html#updater" target="_blank">Elegant Updater Plugin</a> to authenticate your subscription.</em>', $themename );
     }
 
 	if ( is_admin() && $original_text === $updates_page_message ){
-		return __( 'Auto-updates are not available for this theme. If this is an Elegant Themes theme, then you must re-download the theme from the member\'s area and <a href="http://www.elegantthemes.com/members-area/documentation.html#update" target="_blank">re-install it</a> in order to update it to the latest version.', $themename );
+		return __( 'Before you can update your Elegant Themes, you must first install the <a href="https://www.elegantthemes.com/members-area/documentation.html#updater" target="_blank">Elegant Updater Plugin</a> to authenticate your subscription.', $themename );
 	}
 
     return $default_translated_text;
