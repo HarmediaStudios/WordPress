@@ -3,8 +3,8 @@ Contributors: marodok
 Donate link: http://www.marodok.com/nk-google-analytics/
 Tags: javascript, google, tracking, analytics, tracking code, display advertising, remarketing analytics, universal analytics, google analytics
 Requires at least: 2.7
-Tested up to: 3.6
-Stable tag: 1.2.7
+Tested up to: 3.8.1
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,8 @@ NK Google Analytics enables Google Analytics on all pages.
 
 
 == Installation ==
+
+If you don't have an Google Analytics ID, you need to go to [Google Analytics](http://www.google.com/analytics), create an account and get the code (Similar to UA-0000000-0)
 
 1. Upload `nk-google-analytics` directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
@@ -86,11 +88,22 @@ You can enter to real time panel into google/analytics and navigate into your we
 
 == Changelog ==
 
+= 1.3 = 
+* Added option to select tracking code location (head or end of page)
+* Minor fixes
+
+= 1.2.9 = 
+* Removed an error_log call, so the log file will not grow more
+* Added an index.html file in plugin's directory to avoid to crawlers to index it
+
+= 1.2.8 = 
+* Upgraded some validations and fixed some minor bugs
+
 = 1.2.7 = 
 * Tracking issue fix with remarketing tracking code
 
 = 1.2.6 = 
-* New enable/disable option.
+* New on/off option.
 * Retyped and reordered some option for improve reading and comprehension of options.
 
 = 1.2.5 = 
@@ -99,7 +112,6 @@ You can enter to real time panel into google/analytics and navigate into your we
 = 1.2.4 = 
 * Update documentation and FAQ.
 * Added Universal Analytics domain verification.
-
 
 = 1.2.3 = 
 * Fix some minor bugs.

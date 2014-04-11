@@ -6,7 +6,11 @@
 <?php settings_fields('NKgoogleanalytics'); ?>
 
 <?php 
+
+	$nkweb_Error = get_option('nkweb_Error');
 	$error = "";
+	if($nkweb_Error!="")	
+		$error = $nkweb_Error;		
 
 	if(get_option('nkweb_Enable_GA')!="true" && get_option('nkweb_Enable_GA')!="false"){
 		update_option( "nkweb_Enable_GA", "true" );
@@ -16,13 +20,14 @@
 	}
 	if(get_option('nkweb_Display_Advertising') == "true"){
 		if(get_option('nkweb_Universal_Analytics')== "true"){
-			$error = "Universal Analytics was set to 'No' because Remarketing is Yes.";
+			$error = "Google Analytics Type was set to 'Clasic Analytics' because Remarketing is Yes.";
 			update_option( "nkweb_Universal_Analytics", "false" );	
 		}		
 	}
 	if(get_option('nkweb_Universal_Analytics')== "true"){
+
 		if(get_option('nkweb_Display_Advertising') == "true"){
-			$error = "Remarketing was set to 'No' because Universal Analytics is Yes.";
+			$error = "Remarketing was set to 'No' because Google Analytics Type is 'Universal Analytics'.";
 			update_option( "nkweb_Display_Advertising", "false" );	
 		}		
 		
@@ -66,6 +71,10 @@
 		if(preg_match($pattern, trim(get_option('nkweb_Custom_Code')))){
 			$error="Seems that you wrote only your Google Analytics ID in custom code, you can write it in \"Google Analytics ID\" field and turn off custom tracking code.";
 		}
+	}
+	
+	if(!get_option('nkweb_code_in_head')){
+		update_option( "nkweb_code_in_head", "true" );
 	}
 
 if($error != ""){
@@ -123,10 +132,18 @@ if($error != ""){
 </tr>
 
 <tr valign="top">
+<th scope="row">Tracking code location</th>
+<td>
+	<input type="radio" name="nkweb_code_in_head" value="true" <?php if (get_option('nkweb_code_in_head') == "true"){ echo "checked "; } ?>> Head<br>
+	<input type="radio" name="nkweb_code_in_head" value="false"<?php if (get_option('nkweb_code_in_head') == "false"){ echo "checked "; } ?>>  End of the page<br>	
+</td>	
+</tr>
+
+<tr valign="top">
 <th scope="row">NK Google Analytics Status</th>
 <td>
-	<input type="radio" name="nkweb_Enable_GA" value="true" <?php if (get_option('nkweb_Enable_GA') == "true"){ echo "checked "; } ?>> Enable<br>
-	<input type="radio" name="nkweb_Enable_GA" value="false"<?php if (get_option('nkweb_Enable_GA') == "false"){ echo "checked "; } ?>>  Disable <br>	
+	<input type="radio" name="nkweb_Enable_GA" value="true" <?php if (get_option('nkweb_Enable_GA') == "true"){ echo "checked "; } ?>> On<br>
+	<input type="radio" name="nkweb_Enable_GA" value="false"<?php if (get_option('nkweb_Enable_GA') == "false"){ echo "checked "; } ?>>  Off <br>	
 </td>	
 </tr>
 
@@ -141,3 +158,6 @@ if($error != ""){
 
 </form>
 </div> 
+<br>
+<br>
+<br>
