@@ -3,7 +3,7 @@
 Plugin Name: Duo Two-Factor Authentication
 Plugin URI: http://wordpress.org/extend/plugins/duo-wordpress/
 Description: This plugin enables Duo two-factor authentication for WordPress logins.
-Version: 2.2
+Version: 2.3.1
 Author: Duo Security
 Author URI: http://www.duosecurity.com
 License: GPL2
@@ -13,7 +13,7 @@ License: GPL2
 Copyright 2014 Duo Security <duo_web@duosecurity.com>
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     $DuoAuthCookieName = 'duo_wordpress_auth_cookie';
     $DuoSecAuthCookieName = 'duo_secure_wordpress_auth_cookie';
     $DuoDebug = false;
+    $DuoPing = '/auth/v2/ping';
 
     function duo_sign_request($user, $redirect) {
         $ikey = duo_get_option('duo_ikey');
@@ -57,10 +58,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                     echo '<link rel="stylesheet" type="text/css" href="' . admin_url('css/wp-admin.css') . '" />';
                     echo '<link rel="stylesheet" type="text/css" href="' . admin_url('css/colors-fresh.css') . '" />';
                 }
-                else {
+                else if(version_compare($wp_version, "3.8", "<=")){
                     echo '<link rel="stylesheet" type="text/css" href="' . admin_url('css/wp-admin.css') . '" />';
                     echo '<link rel="stylesheet" type="text/css" href="' . admin_url('css/colors.css') . '" />';
                 }
+                else {
+                    echo '<link rel="stylesheet" type="text/css" href="' . admin_url('css/login.min.css') . '" />';
+                }
+
             ?>
 
             <style>
@@ -139,6 +144,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     function duo_role_require_mfa($user){
         $wp_roles = duo_get_roles();
+        $all_roles = array();
         foreach ($wp_roles->get_names() as $k=>$r) {
             $all_roles[$k] = $r;
         }
@@ -460,7 +466,27 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         return $links;
     }
 
-    /* Get Duo's system time.
+    /*
+    * Returns current plugin version.
+    *
+    * @return string Plugin version
+    */
+    function duo_get_plugin_version() {
+        if (!function_exists('get_plugin_data'))
+            require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+        $plugin_data = get_plugin_data( __FILE__ );
+        return $plugin_data['Version'];
+    }
+
+    function duo_get_user_agent() {
+        global $wp_version;
+        $duo_wordpress_version = duo_get_plugin_version();
+        return $_SERVER['SERVER_SOFTWARE'] . " WordPress/$wp_version duo_wordpress/$duo_wordpress_version";
+    }
+
+    /*
+     * Get Duo's system time.
      * If that fails then use server system time
      */
     function duo_get_time() {
@@ -470,16 +496,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             error_log('SSL is disabled. Can\'t fetch Duo server time.');
         }
         else {
-            $duo_url = 'https://' . duo_get_option('duo_host') . '/auth/v2/ping';
+            global $DuoPing;
+            $duo_host = duo_get_option('duo_host');
+            $headers = duo_sign_ping($duo_host);
+            $duo_url = 'https://' . $duo_host . $DuoPing;
             $cert_file = dirname(__FILE__) . '/duo_web/ca_certs.pem';
             if( ini_get('allow_url_fopen') ) {
-                $time =  duo_get_time_fopen($duo_url, $cert_file);
+                $time =  duo_get_time_fopen($duo_url, $cert_file, $headers);
             } 
             else if(in_array('curl', get_loaded_extensions())){
-                $time = duo_get_time_curl($duo_url, $cert_file);
+                $time = duo_get_time_curl($duo_url, $cert_file, $headers);
             }
             else{
-                $time = duo_get_time_WP_HTTP($duo_url);
+                $time = duo_get_time_WP_HTTP($duo_url, $headers);
             }
         }
 
@@ -488,15 +517,17 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         return $time;
     }
 
-    function duo_get_time_fopen($duo_url, $cert_file){
+    function duo_get_time_fopen($duo_url, $cert_file, $headers) {
         $settings = array(
                         'http'=>array(
-                            'method' => 'GET'
+                            'method' => 'GET',
+                            'header' => $headers,
+                            'user_agent'=> duo_get_user_agent(),
                         ),
                         'ssl'=>array(
                             'allow_self_signed'=>false,
                             'verify_peer'=>true,
-                            'cafile'=>$cert_file
+                            'cafile'=>$cert_file,
                         )
         );
 
@@ -514,7 +545,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         return $time;
     }
 
-    function duo_get_time_curl($duo_url, $cert_file) {
+    function duo_get_time_curl($duo_url, $cert_file, $headers) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $duo_url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
@@ -522,6 +553,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         curl_setopt($ch, CURLOPT_CAINFO, $cert_file);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_USERAGENT, duo_get_user_agent());
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         if ( defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT')) {
             curl_setopt( $ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP );
@@ -538,9 +571,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         return $time;
     }
 
-    // Uses Worpress HTTP, problem is that we can't specify our SSL cert here.
+    // Uses Wordpress HTTP. We can't specify our SSL cert here.
     // Servers with out of date root certs may fail.
-    function duo_get_time_WP_HTTP($duo_url){
+    function duo_get_time_WP_HTTP($duo_url, $headers) {
         if(!class_exists('WP_Http')){
             include_once(ABSPATH . WPINC . '/class-http.php');
         }
@@ -549,6 +582,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             'method'      =>    'GET',
             'blocking'    =>    true,
             'sslverify'   =>    true,
+            'user-agent'  =>    duo_get_user_agent(),
+            'headers'     =>    $headers,
         );
         $response = wp_remote_get($duo_url, $args);
         if(is_wp_error($response)){
@@ -684,7 +719,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         Verify the user is authenticated with Duo. Start 2FA otherwise
     */
         if (! duo_auth_enabled()){
-            duo_debug_log('Duo not enabled, skip cookie check.');
+            if (is_multisite()) {
+                $site_info = get_current_site();
+                duo_debug_log("Duo not enabled on " . $site_info->site_name . ', skip cookie check.');
+            }
+            else {
+                duo_debug_log('Duo not enabled, skip cookie check.');
+            }
             return;
         }
 
@@ -722,6 +763,21 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     function duo_hash_hmac($data){
         return hash_hmac('sha1', $data, duo_get_akey());
+    }
+
+    function duo_sign_ping($host, $date=NULL) {
+        global $DuoPing;
+        if (! $date) {
+            $date = date('r');
+        }
+        $canon = array($date, 'GET', $host, $DuoPing, '');
+        $canon = implode("\n", $canon);
+        $sig = hash_hmac('sha1', $canon, duo_get_option('duo_skey'));
+        return array(
+                'Authorization: Basic ' . base64_encode(duo_get_option('duo_ikey') . ':' . $sig),
+                'Date: ' . $date,
+                'Host: ' . $host,
+        );
     }
 
     /*-------------XML-RPC Features-----------------*/
