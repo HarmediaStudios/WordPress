@@ -106,7 +106,9 @@ class EM_Gateway_Authorize_AIM extends EM_Gateway {
 							$EM_Notices->notices['confirms'] = array();
 						}
 					}
+					$EM_Booking->manage_override = true;
 					$EM_Booking->delete();
+					$EM_Booking->manage_override = false;
 					return false;
 				}
 			}

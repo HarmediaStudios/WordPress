@@ -275,7 +275,7 @@ class EM_Gateways {
 	 * ----------------------------------------------------------
 	 */
 	
-	function em_bookings_table_rows_col($value, $col, $EM_Booking, $EM_Bookings_Table, $csv){
+	public static function em_bookings_table_rows_col($value, $col, $EM_Booking, $EM_Bookings_Table, $csv){
 		global $EM_Event;
 		if( $col == 'gateway' ){
 			//get latest transaction with an ID
@@ -289,7 +289,7 @@ class EM_Gateways {
 		return $value;
 	}
 	
-	function em_bookings_table_cols_template($template, $EM_Bookings_Table){
+	public static function em_bookings_table_cols_template($template, $EM_Bookings_Table){
 		$template['gateway'] = __('Gateway Used','em-pro');
 		return $template;
 	}
@@ -315,6 +315,7 @@ class EM_Gateways {
 			$associated_fields = get_option('emp_gateway_customer_fields');
 			$form_field_id = $associated_fields[$field_name];
 		}
+		if( empty($form_field_id) ) return '';
 		//if no-user mode, discard the $user_id, we only deal with the booking object
 		if( get_option('dbem_bookings_registration_disable') && $user_id == get_option('dbem_bookings_registration_user') ) $user_id = false;
 		//determine field value

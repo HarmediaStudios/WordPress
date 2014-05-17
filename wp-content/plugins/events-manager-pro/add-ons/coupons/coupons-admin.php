@@ -33,8 +33,7 @@ class EM_Coupons_Admin {
 		//get event owner to search for
 		$owner = empty($EM_Event->event_owner) ? get_current_user_id() : $EM_Event->event_owner;
 		?>
-		<br style="clear" />
-		<p><strong><?php _e('Coupons','em-pro'); ?></strong> [<a href="#" id="em-event-bookings-coupons-trigger"><?php _e('show coupons', 'em-pro'); ?></a>]</p>
+		<h4><?php _e('Coupons','em-pro'); ?> <span>[<a href="#" id="em-event-bookings-coupons-trigger"><?php _e('show coupons', 'em-pro'); ?></a>]</span></h4>
 		<script type="text/javascript">
 		   jQuery(document).ready(function($){ 
 			   $('#em-event-bookings-coupons-trigger').click( function(e){
@@ -64,7 +63,8 @@ class EM_Coupons_Admin {
     		if(count($coupons) > 0): foreach($coupons as $EM_Coupon): /* @var $EM_Coupon EM_Coupon */ ?>  
     			<label>
     				<input type="checkbox" name="em_coupons[]" value="<?php echo $EM_Coupon->coupon_id; ?>" <?php if(in_array($EM_Coupon->coupon_id, EM_Coupons::event_get_coupon_ids($EM_Event))) echo 'checked="checked"'; ?>/>
-    				<strong><?php echo $EM_Coupon->coupon_code; ?></strong> (<em><?php echo esc_html($EM_Coupon->coupon_name .' - '. $EM_Coupon->coupon_description); ?></em>) - <?php echo $EM_Coupon->get_discount_text(); ?>
+    				<strong><?php echo $EM_Coupon->coupon_code; ?></strong> 
+    				(<em><?php echo esc_html($EM_Coupon->coupon_name); ?></em>) - <?php echo $EM_Coupon->get_discount_text(); ?>
     			</label><br />
     		<?php endforeach; else: ?>
     			<?php _e('No coupons created yet.','em-pro'); ?>
@@ -78,7 +78,7 @@ class EM_Coupons_Admin {
 			<?php foreach($coupons as $EM_Coupon): /* @var $EM_Coupon EM_Coupon */ ?>
 				<p style="margin:0px 0px 5px 0px">
 					<?php echo '<strong>'.esc_html($EM_Coupon->coupon_code).'</strong> - '. esc_html($EM_Coupon->get_discount_text()); ?><br />
-					<em><?php echo esc_html($EM_Coupon->coupon_name .' - '. $EM_Coupon->coupon_description); ?></em>
+					<em><?php echo esc_html($EM_Coupon->coupon_name); if(!empty($EM_Coupon->coupon_description)) echo esc_html(' - '. $EM_Coupon->coupon_description); ?></em>
 				</p>
 			<?php endforeach; ?>
 		<?php endif; ?>

@@ -178,6 +178,17 @@ class EM_Gateway_Paypal extends EM_Gateway {
 		if( get_option('em_'. $this->gateway . "_lc" ) ){
 		    $paypal_vars['lc'] = get_option('em_'. $this->gateway . "_lc" );
 		}
+		//address fields`and name/email fields to prefill on checkout page (if available)
+		$paypal_vars['email'] = $EM_Booking->get_person()->user_email;
+		$paypal_vars['first_name'] = $EM_Booking->get_person()->first_name;
+		$paypal_vars['last_name'] = $EM_Booking->get_person()->last_name;
+        if( EM_Gateways::get_customer_field('address', $EM_Booking) != '' ) $paypal_vars['address1'] = EM_Gateways::get_customer_field('address', $EM_Booking);
+        if( EM_Gateways::get_customer_field('address_2', $EM_Booking) != '' ) $paypal_vars['address2'] = EM_Gateways::get_customer_field('address_2', $EM_Booking);
+        if( EM_Gateways::get_customer_field('city', $EM_Booking) != '' ) $paypal_vars['city'] = EM_Gateways::get_customer_field('city', $EM_Booking);
+        if( EM_Gateways::get_customer_field('state', $EM_Booking) != '' ) $paypal_vars['state'] = EM_Gateways::get_customer_field('state', $EM_Booking);
+        if( EM_Gateways::get_customer_field('zip', $EM_Booking) != '' ) $paypal_vars['zip'] = EM_Gateways::get_customer_field('zip', $EM_Booking);
+        if( EM_Gateways::get_customer_field('country', $EM_Booking) != '' ) $paypal_vars['country'] = EM_Gateways::get_customer_field('country', $EM_Booking);
+        
 		//tax is added regardless of whether included in ticket price, otherwise we can't calculate post/pre tax discounts
 		if( $EM_Booking->get_price_taxes() > 0 ){ 
 			$paypal_vars['tax_cart'] = round($EM_Booking->get_price_taxes(), 2);
@@ -245,8 +256,7 @@ class EM_Gateway_Paypal extends EM_Gateway {
 			$req = 'cmd=_notify-validate';
 			if (!isset($_POST)) $_POST = $HTTP_POST_VARS;
 			foreach ($_POST as $k => $v) {
-				if (get_magic_quotes_gpc()) $v = stripslashes($v);
-				$req .= '&' . $k . '=' . urlencode($v);
+				$req .= '&' . $k . '=' . urlencode(stripslashes($v));
 			}
 			
 			@set_time_limit(60);
@@ -254,7 +264,7 @@ class EM_Gateway_Paypal extends EM_Gateway {
 			//add a CA certificate so that SSL requests always go through
 			add_action('http_api_curl','EM_Gateway_Paypal::payment_return_local_ca_curl',10,1);
 			//using WP's HTTP class
-			$ipn_verification_result = wp_remote_get($domain.'?'.$req);	
+			$ipn_verification_result = wp_remote_get($domain.'?'.$req, array('httpversion', '1.1'));
 			remove_action('http_api_curl','EM_Gateway_Paypal::payment_return_local_ca_curl',10,1);
 			
 			if ( !is_wp_error($ipn_verification_result) && $ipn_verification_result['body'] == 'VERIFIED' ) {
@@ -262,7 +272,7 @@ class EM_Gateway_Paypal extends EM_Gateway {
 				EM_Pro::log( $_POST['payment_status']." successfully received for {$_POST['mc_gross']} {$_POST['mc_currency']} (TXN ID {$_POST['txn_id']}) - Custom Info: {$_POST['custom']}", 'paypal');
 			}else{
 			    //log error if needed, send error header and exit
-				EM_Pro::log( array('IPN Verification Error', 'WP_Error'=> $ipn_verification_result, '$_POST'=> $_POST), 'paypal' );
+				EM_Pro::log( array('IPN Verification Error', 'WP_Error'=> $ipn_verification_result, '$_POST'=> $_POST, '$req'=>$domain.'?'.$req), 'paypal' );
 			    header('HTTP/1.0 502 Bad Gateway');
 			    exit;
 			}
@@ -361,13 +371,17 @@ class EM_Gateway_Paypal extends EM_Gateway {
 						// case: various error cases		
 				}
 			}else{
-				if( $_POST['payment_status'] == 'Completed' || $_POST['payment_status'] == 'Processed' ){
+				if( is_numeric($event_id) && is_numeric($booking_id) && ($_POST['payment_status'] == 'Completed' || $_POST['payment_status'] == 'Processed') ){
 					$message = apply_filters('em_gateway_paypal_bad_booking_email',"
 A Payment has been received by PayPal for a non-existent booking. 
 
 Event Details : %event%
 
-It may be that this user's booking has timed out yet they proceeded with payment at a later stage.
+It may be that this user's booking has timed out yet they proceeded with payment at a later stage. 
+							
+In some cases, it could be that other payments not related to Events Manager are triggering this error. If that's the case, you can prevent this from happening by changing the URL in your IPN settings to:
+
+". get_home_url() ." 
 
 To refund this transaction, you must go to your PayPal account and search for this transaction:
 
@@ -381,10 +395,8 @@ If there is still space available, the user must book again.
 Sincerely,
 Events Manager
 					", $booking_id, $event_id);
-					if( !empty($event_id) ){
-						$EM_Event = new EM_Event($event_id);
-						$event_details = $EM_Event->name . " - " . date_i18n(get_option('date_format'), $EM_Event->start);
-					}else{ $event_details = __('Unknown','em-pro'); }
+					$EM_Event = new EM_Event($event_id);
+					$event_details = $EM_Event->name . " - " . date_i18n(get_option('date_format'), $EM_Event->start);
 					$message  = str_replace(array('%transaction_id%','%payer_email%', '%event%'), array($_POST['txn_id'], $_POST['payer_email'], $event_details), $message);
 					wp_mail(get_option('em_'. $this->gateway . "_email" ), __('Unprocessed payment needs refund'), $message);
 				}else{
@@ -462,7 +474,7 @@ Events Manager
 		  </tr>
 		  <tr valign="top">
 			  <th scope="row"><?php _e('Paypal Currency', 'em-pro') ?></th>
-			  <td><?php echo esc_html(get_option('dbem_bookings_currency','USD')); ?><br /><i><?php echo sprintf(__('Set your currency in the <a href="%s">settings</a> page.','dbem'),EM_ADMIN_URL.'&amp;page=events-manager-options#bookings'); ?></i></td>
+			  <td><?php echo esc_html(get_option('dbem_bookings_currency','USD')); ?><br /><i><?php echo sprintf(__('Set your currency in the <a href="%s">settings</a> page.','em-pro'),EM_ADMIN_URL.'&amp;page=events-manager-options#bookings'); ?></i></td>
 		  </tr>
 		  
 		  <tr valign="top">
@@ -587,7 +599,8 @@ function em_gateway_paypal_booking_timeout(){
 	$minutes_to_subtract = absint(get_option('em_paypal_booking_timeout'));
 	if( $minutes_to_subtract > 0 ){
 		//get booking IDs without pending transactions
-		$booking_ids = $wpdb->get_col('SELECT b.booking_id FROM '.EM_BOOKINGS_TABLE.' b LEFT JOIN '.EM_TRANSACTIONS_TABLE." t ON t.booking_id=b.booking_id  WHERE booking_date < TIMESTAMPADD(MINUTE, -{$minutes_to_subtract}, NOW()) AND booking_status=4 AND transaction_id IS NULL" );
+		$cut_off_time = date('Y-m-d H:i:s', current_time('timestamp') - ($minutes_to_subtract * 60));
+		$booking_ids = $wpdb->get_col('SELECT b.booking_id FROM '.EM_BOOKINGS_TABLE.' b LEFT JOIN '.EM_TRANSACTIONS_TABLE." t ON t.booking_id=b.booking_id  WHERE booking_date < '{$cut_off_time}' AND booking_status=4 AND transaction_id IS NULL" );
 		if( count($booking_ids) > 0 ){
 			//first delete ticket_bookings with expired bookings
 			$sql = "DELETE FROM ".EM_TICKETS_BOOKINGS_TABLE." WHERE booking_id IN (".implode(',',$booking_ids).");";

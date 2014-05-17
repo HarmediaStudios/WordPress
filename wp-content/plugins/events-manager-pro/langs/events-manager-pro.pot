@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Events Manager Pro v2.3.5.5\n"
+"Project-Id-Version: Events Manager Pro v2.3.7.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-06-24 19:53:51+0000\n"
+"PO-Revision-Date: 2013-11-05 18:56:32+0000\n"
 "Last-Translator: translate@netweblogic.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Textdomain-Support: yes"
 
 #: add-ons/bookings-form/attendee-forms.php:39
-#: add-ons/emails/custom-emails-admin.php:86
+#: add-ons/emails/custom-emails-admin.php:84
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:52
 #@ dbem
 #@ em-pro
@@ -29,9 +29,11 @@ msgid "Title"
 msgstr ""
 
 #: add-ons/bookings-form/attendee-forms.php:39
-#: add-ons/bookings-form/attendee-forms.php:182
-#: add-ons/bookings-form/attendee-forms.php:321
-#: add-ons/bookings-form/attendee-forms.php:495
+#: add-ons/bookings-form/attendee-forms.php:169
+#: add-ons/bookings-form/attendee-forms.php:194
+#: add-ons/bookings-form/attendee-forms.php:207
+#: add-ons/bookings-form/attendee-forms.php:344
+#: add-ons/bookings-form/attendee-forms.php:519
 #, php-format
 #@ em-pro
 msgid "Attendee %s"
@@ -40,41 +42,43 @@ msgstr ""
 #: add-ons/bookings-form/attendee-forms.php:40
 #: add-ons/bookings-form/bookings-form.php:47
 #: add-ons/coupons/coupon.php:55
-#: add-ons/coupons/coupons-admin.php:173
-#: add-ons/coupons/coupons-admin.php:183
-#: add-ons/coupons/coupons-admin.php:407
+#: add-ons/coupons/coupons-admin.php:174
+#: add-ons/coupons/coupons-admin.php:184
+#: add-ons/coupons/coupons-admin.php:404
 #: add-ons/user-fields.php:143
 #: add-ons/user-fields.php:206
 #: add-ons/user-fields.php:208
-#: emp-install.php:146
-#@ dbem
+#: emp-install.php:147
+#@ emp-pro
 #@ em-pro
+#@ dbem
 msgid "Name"
 msgstr ""
 
 #: add-ons/bookings-form/attendee-forms.php:67
-#: add-ons/bookings-form/attendee-forms.php:594
+#: add-ons/bookings-form/attendee-forms.php:612
 #: add-ons/bookings-form/bookings-form.php:78
-#: add-ons/bookings-form/bookings-form.php:388
-#: add-ons/emails/custom-emails-admin.php:75
-#: add-ons/gateways/gateway.paypal.php:472
-#: emp-install.php:145
-#: emp-install.php:259
+#: add-ons/bookings-form/bookings-form.php:391
+#: add-ons/emails/custom-emails-admin.php:73
+#: add-ons/gateways/gateway.paypal.php:471
+#: emp-install.php:146
+#: emp-install.php:261
 #@ em-pro
 msgid "Default"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:364
-#: add-ons/coupons/coupons-admin.php:294
-#: add-ons/coupons/coupons-admin.php:305
-#: add-ons/gateways/gateways.transactions.php:93
+#: add-ons/bookings-form/attendee-forms.php:387
+#: add-ons/coupons/coupons-admin.php:295
+#: add-ons/coupons/coupons-admin.php:306
+#: add-ons/gateways/gateways.transactions.php:92
+#: templates/multiple-bookings/cart-table.php:21
 #: templates/placeholders/bookingattendees-multiple.php:8
 #@ dbem
 #@ em-pro
 msgid "Event"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:365
+#: add-ons/bookings-form/attendee-forms.php:388
 #: templates/multiple-bookings/admin-cart-table.php:26
 #: templates/multiple-bookings/cart-table.php:31
 #@ dbem
@@ -82,7 +86,7 @@ msgstr ""
 msgid "Where"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:366
+#: add-ons/bookings-form/attendee-forms.php:389
 #: templates/multiple-bookings/admin-cart-table.php:25
 #: templates/multiple-bookings/cart-table.php:30
 #@ dbem
@@ -90,89 +94,106 @@ msgstr ""
 msgid "When"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:368
+#: add-ons/bookings-form/attendee-forms.php:391
 #, php-format
 #@ dbem
 msgid "Exported bookings on %s"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:410
-#@ dbem
+#: add-ons/bookings-form/attendee-forms.php:433
+#@ em-pro
 msgid "Split bookings by attendee"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:411
+#: add-ons/bookings-form/attendee-forms.php:434
 #@ default
 msgid "A row will be created for each space booked and will automatically include any attendee information associated with that booked ticket."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:592
-#: add-ons/bookings-form/attendee-forms.php:738
-#@ dbem
+#: add-ons/bookings-form/attendee-forms.php:610
+#: add-ons/bookings-form/attendee-forms.php:756
+#@ em-pro
 msgid "Selected Attendee Form"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:666
-#: add-ons/bookings-form/bookings-form.php:437
-#: add-ons/gateways/gateways.php:326
+#: add-ons/bookings-form/attendee-forms.php:684
+#: add-ons/bookings-form/bookings-form.php:440
+#: add-ons/gateways/gateways.php:351
 #: add-ons/user-fields.php:311
 #@ em-pro
 msgid "Changes Saved"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:675
-#: add-ons/bookings-form/bookings-form.php:446
+#: add-ons/bookings-form/attendee-forms.php:693
+#: add-ons/bookings-form/bookings-form.php:449
 #, php-format
 #@ em-pro
 msgid "The form <em>%s</em> is now the default booking form. All events without a pre-defined booking form will start using this form from now on."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:681
-#: add-ons/bookings-form/bookings-form.php:452
+#: add-ons/bookings-form/attendee-forms.php:699
+#: add-ons/bookings-form/bookings-form.php:455
 #, php-format
 #@ dbem
 msgid "%s Deleted"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:681
-#: add-ons/bookings-form/bookings-form.php:383
-#: add-ons/bookings-form/bookings-form.php:452
-#: add-ons/gateways/gateway.php:417
+#: add-ons/bookings-form/attendee-forms.php:699
+#: add-ons/bookings-form/bookings-form.php:386
+#: add-ons/bookings-form/bookings-form.php:455
+#: add-ons/gateways/gateway.php:434
 #@ em-pro
 #@ dbem
 msgid "Booking Form"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:689
-#: add-ons/bookings-form/bookings-form.php:460
+#: add-ons/bookings-form/attendee-forms.php:707
+#: add-ons/bookings-form/bookings-form.php:463
 #, php-format
 #@ em-pro
 msgid "Form renamed to <em>%s</em>."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:701
-#: add-ons/bookings-form/bookings-form.php:469
+#: add-ons/bookings-form/attendee-forms.php:719
+#: add-ons/bookings-form/bookings-form.php:472
 #@ em-pro
 msgid "New form created. You are now editing your new form."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:722
+#: add-ons/bookings-form/attendee-forms.php:740
 #@ em-pro
 msgid "Attendee Form"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:725
+#: add-ons/bookings-form/attendee-forms.php:743
 #@ em-pro
 msgid "If enabled, this form will be shown and required for every space booked."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:728
-#@ dbem
+#: add-ons/bookings-form/attendee-forms.php:746
+#@ em-pro
 msgid "Enable Attendee Forms"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:740
-#: add-ons/gateways/gateways.transactions.php:262
+#: add-ons/bookings-form/attendee-forms.php:747
+#: add-ons/gateways/gateway.authorize.aim.php:420
+#: emp-forms.php:147
+#@ dbem
+#@ emp-pro
+msgid "Yes"
+msgstr ""
+
+#: add-ons/bookings-form/attendee-forms.php:748
+#: add-ons/gateways/gateway.authorize.aim.php:421
+#: emp-forms.php:147
+#@ dbem
+#@ emp-pro
+msgid "No"
+msgstr ""
+
+#: add-ons/bookings-form/attendee-forms.php:758
+#: add-ons/gateways/gateways.php:286
+#: add-ons/gateways/gateways.transactions.php:261
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:59
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:76
 #@ em-pro
@@ -180,14 +201,13 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:753
-#: add-ons/bookings-form/bookings-form.php:508
+#: add-ons/bookings-form/attendee-forms.php:771
+#: add-ons/bookings-form/bookings-form.php:511
 #@ em-pro
 msgid "Make Default"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:753
-#: add-ons/bookings-form/bookings-form.php:508
+#: add-ons/bookings-form/attendee-forms.php:771
 #@ default
 msgid ""
 "You are about to make this your default booking form. All events without an existing specifically chosen booking form will use this new default form from now on.\n"
@@ -195,49 +215,48 @@ msgid ""
 " Are you sure you want to do this?"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:762
-#: add-ons/bookings-form/bookings-form.php:517
-#: add-ons/coupons/coupons-admin.php:147
+#: add-ons/bookings-form/attendee-forms.php:780
+#: add-ons/bookings-form/bookings-form.php:522
+#: add-ons/coupons/coupons-admin.php:148
 #@ em-pro
 #@ dbem
 msgid "Add New"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:766
+#: add-ons/bookings-form/attendee-forms.php:784
 #@ em-pro
-msgid "This is the default attendee form and will be used for any event where you have not chosen a speficic form to use."
+msgid "This is the default attendee form and will be used for any event where you have not chosen a specific form to use."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:768
+#: add-ons/bookings-form/attendee-forms.php:786
 #@ em-pro
 msgid "If you don't want to ask for attendee information by default, select None as your booking form and make it the default form."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:772
-#: add-ons/bookings-form/bookings-form.php:525
+#: add-ons/bookings-form/attendee-forms.php:790
+#: add-ons/bookings-form/bookings-form.php:530
 #@ em-pro
 msgid "You are now editing "
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:777
-#: add-ons/bookings-form/bookings-form.php:530
+#: add-ons/bookings-form/attendee-forms.php:795
+#: add-ons/bookings-form/bookings-form.php:535
 #@ em-pro
 msgid "Rename"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:784
-#: add-ons/bookings-form/bookings-form.php:537
-#: add-ons/coupons/coupons-admin.php:197
+#: add-ons/bookings-form/attendee-forms.php:802
+#: add-ons/bookings-form/bookings-form.php:542
+#: add-ons/coupons/coupons-admin.php:198
 #: add-ons/gateways/gateway.offline.php:152
 #: add-ons/gateways/gateway.paypal.php:151
-#: add-ons/gateways/gateways.transactions.php:268
+#: add-ons/gateways/gateways.transactions.php:267
 #@ em-pro
 #@ dbem
 msgid "Delete"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:784
-#: add-ons/bookings-form/bookings-form.php:537
+#: add-ons/bookings-form/attendee-forms.php:802
 #@ default
 msgid ""
 "Are you sure you want to delete this form?\n"
@@ -245,141 +264,162 @@ msgid ""
 " All events using this form will start using the default form automatically."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:789
-#: add-ons/bookings-form/bookings-form.php:542
+#: add-ons/bookings-form/attendee-forms.php:807
+#: add-ons/bookings-form/bookings-form.php:549
 #@ em-pro
 msgid "<strong>Important:</strong> When editing this form, to make sure your old booking information is displayed, make sure new field ids correspond with the old ones."
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:793
+#: add-ons/bookings-form/attendee-forms.php:811
 #@ em-pro
 msgid "Default Value"
 msgstr ""
 
-#: add-ons/bookings-form/attendee-forms.php:793
+#: add-ons/bookings-form/attendee-forms.php:811
 #@ em-pro
 msgid "No attendee form selected. Choose a form, or create a new one above."
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:48
-#: add-ons/gateways/gateways.php:352
+#: add-ons/gateways/gateways.php:377
 #: add-ons/user-fields.php:144
 #: add-ons/user-fields.php:210
-#: emp-install.php:147
+#: emp-install.php:148
 #@ dbem
 #@ em-pro
 msgid "Email"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:49
-#: add-ons/gateways/gateways.php:45
-#: emp-install.php:148
-#: emp-install.php:159
-#@ dbem
+#: add-ons/gateways/gateways.php:48
+#: emp-install.php:149
+#: emp-install.php:160
 #@ em-pro
+#@ dbem
 msgid "Address"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:50
-#: add-ons/gateways/gateways.php:47
-#: emp-install.php:149
-#: emp-install.php:161
-#@ dbem
+#: add-ons/gateways/gateways.php:50
+#: emp-install.php:150
+#: emp-install.php:162
 #@ em-pro
+#@ dbem
 msgid "City"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:51
-#: add-ons/gateways/gateways.php:48
-#: emp-install.php:150
-#: emp-install.php:162
-#@ dbem
+#: add-ons/gateways/gateways.php:51
+#: emp-install.php:151
+#: emp-install.php:163
 #@ em-pro
+#@ dbem
 msgid "State/County"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:52
-#: add-ons/gateways/gateways.php:49
-#: emp-install.php:151
-#: emp-install.php:163
-#@ dbem
+#: add-ons/gateways/gateways.php:52
+#: emp-install.php:152
+#: emp-install.php:164
 #@ em-pro
+#@ dbem
 msgid "Zip/Post Code"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:53
-#: add-ons/gateways/gateways.php:50
-#: emp-install.php:152
-#: emp-install.php:164
-#@ dbem
+#: add-ons/gateways/gateways.php:53
+#: emp-install.php:153
+#: emp-install.php:165
 #@ em-pro
+#@ dbem
 msgid "Country"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:54
-#: add-ons/gateways/gateways.php:51
-#: emp-install.php:153
-#: emp-install.php:165
-#@ dbem
+#: add-ons/gateways/gateways.php:54
+#: emp-install.php:154
+#: emp-install.php:166
 #@ em-pro
+#@ dbem
 msgid "Phone"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:55
-#: add-ons/gateways/gateways.php:52
-#: emp-install.php:154
-#: emp-install.php:166
-#@ dbem
+#: add-ons/gateways/gateways.php:55
+#: emp-install.php:155
+#: emp-install.php:167
 #@ em-pro
+#@ dbem
 msgid "Fax"
 msgstr ""
 
 #: add-ons/bookings-form/bookings-form.php:56
-#: emp-install.php:155
+#: emp-install.php:156
+#@ em-pro
 #@ dbem
 msgid "Comment"
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:384
+#: add-ons/bookings-form/bookings-form.php:387
 #@ em-pro
 msgid "You can choose to use a custom booking form, or leave as is to use the default booking form."
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:386
-#: add-ons/bookings-form/bookings-form.php:494
+#: add-ons/bookings-form/bookings-form.php:389
+#: add-ons/bookings-form/bookings-form.php:497
 #@ em-pro
 msgid "Selected Booking Form"
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:431
+#: add-ons/bookings-form/bookings-form.php:434
 #@ em-pro
 msgid "You must include an E-mail field type for booking forms to work. These are used to create the user account and aren't shown to logged in users."
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:487
+#: add-ons/bookings-form/bookings-form.php:490
 #@ em-pro
 msgid "Booking Form - General Information"
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:490
+#: add-ons/bookings-form/bookings-form.php:493
 #@ em-pro
 msgid "You can customize the fields shown in your booking forms below. "
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:490
+#: add-ons/bookings-form/bookings-form.php:493
 #@ em-pro
 msgid "It is required that you have at least an email and name field so guest users can register."
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:491
+#: add-ons/bookings-form/bookings-form.php:494
 #, php-format
 #@ em-pro
 msgid "Registration fields are only shown to guest visitors by default. You can choose to show these fields and make them editable by logged in user in your <a href=\"%s\">PRO Booking Form Options</a>."
 msgstr ""
 
-#: add-ons/bookings-form/bookings-form.php:520
+#: add-ons/bookings-form/bookings-form.php:512
 #@ em-pro
-msgid "This is the default bookings form and will be used for any event where you have not chosen a speficic form to use."
+msgid "You are about to make this your default booking form. All events without an existing specifically chosen booking form will use this new default form from now on."
+msgstr ""
+
+#: add-ons/bookings-form/bookings-form.php:514
+#@ em-pro
+msgid "Are you sure you want to do this?"
+msgstr ""
+
+#: add-ons/bookings-form/bookings-form.php:525
+#@ em-pro
+msgid "This is the default bookings form and will be used for any event where you have not chosen a specific form to use."
+msgstr ""
+
+#: add-ons/bookings-form/bookings-form.php:543
+#@ em-pro
+msgid "Are you sure you want to delete this form?"
+msgstr ""
+
+#: add-ons/bookings-form/bookings-form.php:545
+#@ em-pro
+msgid "All events using this form will start using the default form automatically."
 msgstr ""
 
 #: add-ons/coupons/coupon-admin.php:40
@@ -423,15 +463,15 @@ msgid "Successfully deleted %s"
 msgstr ""
 
 #: add-ons/coupons/coupon.php:55
-#: add-ons/coupons/coupons-admin.php:177
-#: add-ons/coupons/coupons-admin.php:187
+#: add-ons/coupons/coupons-admin.php:178
+#: add-ons/coupons/coupons-admin.php:188
 #@ em-pro
 msgid "Discount"
 msgstr ""
 
 #: add-ons/coupons/coupon.php:55
-#: add-ons/coupons/coupons-admin.php:174
-#: add-ons/coupons/coupons-admin.php:184
+#: add-ons/coupons/coupons-admin.php:175
+#: add-ons/coupons/coupons-admin.php:185
 #@ em-pro
 msgid "Code"
 msgstr ""
@@ -444,9 +484,9 @@ msgid "%s Off"
 msgstr ""
 
 #: add-ons/coupons/coupons-admin.php:36
-#: add-ons/coupons/coupons-admin.php:89
-#: add-ons/coupons/coupons-admin.php:155
-#: add-ons/coupons/coupons-admin.php:158
+#: add-ons/coupons/coupons-admin.php:90
+#: add-ons/coupons/coupons-admin.php:156
+#: add-ons/coupons/coupons-admin.php:159
 #@ em-pro
 msgid "Coupons"
 msgstr ""
@@ -468,391 +508,399 @@ msgstr ""
 msgid "Coupons selected here will be applied to bookings made for this event."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:69
+#: add-ons/coupons/coupons-admin.php:70
 #@ em-pro
 msgid "No coupons created yet."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:76
+#: add-ons/coupons/coupons-admin.php:77
 #@ em-pro
 msgid "The following codes will be automatically available to this event."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:89
+#: add-ons/coupons/coupons-admin.php:90
 #@ em-pro
 msgid "Coupons Manager"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:146
+#: add-ons/coupons/coupons-admin.php:147
 #@ em-pro
 msgid "Edit Coupons"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:155
+#: add-ons/coupons/coupons-admin.php:156
 #, php-format
 #@ dbem
 msgid "My %s"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:158
+#: add-ons/coupons/coupons-admin.php:159
 #, php-format
 #@ dbem
 msgid "All %s"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:175
-#: add-ons/coupons/coupons-admin.php:185
+#: add-ons/coupons/coupons-admin.php:176
+#: add-ons/coupons/coupons-admin.php:186
 #@ em-pro
 msgid "Created By"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:176
-#: add-ons/coupons/coupons-admin.php:186
-#: add-ons/coupons/coupons-admin.php:413
+#: add-ons/coupons/coupons-admin.php:177
+#: add-ons/coupons/coupons-admin.php:187
+#: add-ons/coupons/coupons-admin.php:410
 #@ em-pro
 msgid "Description"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:178
-#: add-ons/coupons/coupons-admin.php:188
-#: add-ons/coupons/coupons-admin.php:270
+#: add-ons/coupons/coupons-admin.php:179
+#: add-ons/coupons/coupons-admin.php:189
+#: add-ons/coupons/coupons-admin.php:271
 #@ em-pro
 msgid "Uses"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:210
-#: add-ons/coupons/coupons-admin.php:275
+#: add-ons/coupons/coupons-admin.php:211
+#: add-ons/coupons/coupons-admin.php:276
 #@ em-pro
 msgid "Unlimited"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:221
+#: add-ons/coupons/coupons-admin.php:222
 #@ dbem
 msgid "No coupons have been inserted yet!"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:236
-#: add-ons/coupons/coupons-admin.php:352
+#: add-ons/coupons/coupons-admin.php:237
+#: add-ons/coupons/coupons-admin.php:353
 #: templates/multiple-bookings/admin.php:10
 #@ dbem
 msgid "Unauthorized Access"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:236
-#: add-ons/coupons/coupons-admin.php:352
+#: add-ons/coupons/coupons-admin.php:237
+#: add-ons/coupons/coupons-admin.php:353
 #, php-format
 #@ dbem
 msgid "You do not have the rights to manage this %s."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:236
-#: add-ons/coupons/coupons-admin.php:352
+#: add-ons/coupons/coupons-admin.php:237
+#: add-ons/coupons/coupons-admin.php:353
 #@ em-pro
 msgid "coupon"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:266
+#: add-ons/coupons/coupons-admin.php:267
 #@ em-pro
 msgid "Coupon Usage History"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:268
+#: add-ons/coupons/coupons-admin.php:269
 #, php-format
 #@ em-pro
 msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:295
-#: add-ons/coupons/coupons-admin.php:306
+#: add-ons/coupons/coupons-admin.php:296
+#: add-ons/coupons/coupons-admin.php:307
 #@ dbem
 msgid "Booker"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:296
-#: add-ons/coupons/coupons-admin.php:307
-#@ dbem
-msgid "Spaces"
-msgstr ""
-
 #: add-ons/coupons/coupons-admin.php:297
 #: add-ons/coupons/coupons-admin.php:308
+#: templates/multiple-bookings/cart-table.php:22
+#@ dbem
 #@ em-pro
-msgid "Original Total Price"
+msgid "Spaces"
 msgstr ""
 
 #: add-ons/coupons/coupons-admin.php:298
 #: add-ons/coupons/coupons-admin.php:309
 #@ em-pro
-msgid "Coupon Discount"
+msgid "Original Total Price"
 msgstr ""
 
 #: add-ons/coupons/coupons-admin.php:299
 #: add-ons/coupons/coupons-admin.php:310
 #@ em-pro
+msgid "Coupon Discount"
+msgstr ""
+
+#: add-ons/coupons/coupons-admin.php:300
+#: add-ons/coupons/coupons-admin.php:311
+#@ em-pro
 msgid "Final Price"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:330
+#: add-ons/coupons/coupons-admin.php:331
 #: add-ons/gateways/gateway.offline.php:153
 #: add-ons/gateways/gateway.paypal.php:152
 #@ dbem
 msgid "Edit/View"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:341
+#: add-ons/coupons/coupons-admin.php:342
 #@ em-pro
 msgid "Your coupon hasn't been used yet!"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:358
+#: add-ons/coupons/coupons-admin.php:359
 #@ dbem
 msgid "required"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:362
+#: add-ons/coupons/coupons-admin.php:363
 #@ em-pro
 msgid "Edit Coupon"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:372
+#: add-ons/coupons/coupons-admin.php:373
 #@ em-pro
-msgid "Event-Wide Coupon?"
+msgid "Coupon Availability"
 msgstr ""
 
 #: add-ons/coupons/coupons-admin.php:376
 #@ em-pro
-msgid "If checked, all events belonging to you will accept this coupon."
+msgid "Only on specific events that I own"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:381
+#: add-ons/coupons/coupons-admin.php:377
 #@ em-pro
-msgid "Site-Wide Coupon?"
+msgid "All my events"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:385
+#: add-ons/coupons/coupons-admin.php:379
 #@ em-pro
-msgid "All events on this site will accept this coupon."
+msgid "All events on this site"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:390
+#: add-ons/coupons/coupons-admin.php:383
+#@ em-pro
+msgid "Choose whether to allow this coupon to be used only on events you choose, all your events or all events on this site."
+msgstr ""
+
+#: add-ons/coupons/coupons-admin.php:387
 #@ em-pro
 msgid "This coupon will be available for all bookings made and discount is applied to the total price before checking out."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:393
+#: add-ons/coupons/coupons-admin.php:390
 #@ em-pro
 msgid "Registered Users Only?"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:396
+#: add-ons/coupons/coupons-admin.php:393
 #@ em-pro
 msgid "If checked, only logged in users will be able to use this coupon."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:400
-#: add-ons/coupons/coupons.php:351
-#: add-ons/coupons/coupons.php:507
+#: add-ons/coupons/coupons-admin.php:397
+#: add-ons/coupons/coupons.php:369
+#: add-ons/coupons/coupons.php:526
+#: add-ons/coupons/coupons.php:528
 #@ em-pro
 msgid "Coupon Code"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:403
+#: add-ons/coupons/coupons-admin.php:400
 #@ em-pro
 msgid "This is the code you give to users for them to use when booking."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:419
+#: add-ons/coupons/coupons-admin.php:416
 #@ em-pro
 msgid "Total Coupons"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:422
+#: add-ons/coupons/coupons-admin.php:419
 #@ em-pro
 msgid "If set, this coupon will only be valid that many times."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:427
+#: add-ons/coupons/coupons-admin.php:424
 #@ em-pro
 msgid "Start Date"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:432
+#: add-ons/coupons/coupons-admin.php:429
 #@ em-pro
 msgid "Coupons will only be valid from this date onwards."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:436
+#: add-ons/coupons/coupons-admin.php:433
 #@ em-pro
 msgid "End Date"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:441
+#: add-ons/coupons/coupons-admin.php:438
 #@ em-pro
 msgid "Coupons will not be valid after this date."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:446
+#: add-ons/coupons/coupons-admin.php:443
 #@ em-pro
 msgid "Discount Type"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:449
+#: add-ons/coupons/coupons-admin.php:446
 #@ em-pro
 msgid "Percentage"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:450
+#: add-ons/coupons/coupons-admin.php:447
 #@ em-pro
 msgid "Fixed Amount"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:456
+#: add-ons/coupons/coupons-admin.php:453
 #@ em-pro
 msgid "Apply Before/After Tax"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:459
+#: add-ons/coupons/coupons-admin.php:456
 #@ em-pro
 msgid "Before"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:460
+#: add-ons/coupons/coupons-admin.php:457
 #@ em-pro
 msgid "After"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:463
+#: add-ons/coupons/coupons-admin.php:460
 #@ em-pro
 msgid "Choose whether to apply this discount before or after tax has been added, if applicable."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:467
+#: add-ons/coupons/coupons-admin.php:464
 #@ em-pro
 msgid "Discount Amount"
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:470
+#: add-ons/coupons/coupons-admin.php:467
 #@ em-pro
 msgid "Enter a number here only, decimals accepted."
 msgstr ""
 
-#: add-ons/coupons/coupons-admin.php:476
-#: add-ons/gateways/gateway.php:460
+#: add-ons/coupons/coupons-admin.php:473
+#: add-ons/gateways/gateway.php:477
 #@ default
 msgid "Save Changes"
 msgstr ""
 
-#: add-ons/coupons/coupons.php:159
-#: add-ons/coupons/coupons.php:402
+#: add-ons/coupons/coupons.php:173
+#: add-ons/coupons/coupons.php:420
 #@ em-pro
 msgid "Coupon Not Found"
 msgstr ""
 
-#: add-ons/coupons/coupons.php:170
-#: add-ons/coupons/coupons.php:411
+#: add-ons/coupons/coupons.php:184
+#: add-ons/coupons/coupons.php:429
 #@ em-pro
 msgid "Coupon Invalid"
 msgstr ""
 
-#: add-ons/coupons/coupons.php:211
+#: add-ons/coupons/coupons.php:229
 #@ em-pro
 msgid "Invalid coupon code provided"
 msgstr ""
 
-#: add-ons/coupons/coupons.php:369
+#: add-ons/coupons/coupons.php:387
 #@ em-pro
 msgid "Apply Discount"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:58
+#: add-ons/emails/custom-emails-admin.php:56
 #@ em-pro
 msgid "Also Send Event Owner Emails To:"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:60
+#: add-ons/emails/custom-emails-admin.php:58
 #@ dbem
 msgid "For multiple emails, seperate by commas (e.g. email1@test.com,email2@test.com,etc.)"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:76
+#: add-ons/emails/custom-emails-admin.php:74
 #@ em-pro
 msgid "Enabled"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:77
+#: add-ons/emails/custom-emails-admin.php:75
 #@ em-pro
 msgid "Disabled"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:82
+#: add-ons/emails/custom-emails-admin.php:80
 #@ em-pro
 msgid "Subject"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:154
+#: add-ons/emails/custom-emails-admin.php:152
 #@ em-pro
 msgid "Default or Free Booking Emails"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:157
-#: add-ons/emails/custom-emails-admin.php:324
+#: add-ons/emails/custom-emails-admin.php:155
+#: add-ons/emails/custom-emails-admin.php:323
 #@ em-pro
 msgid "Event Owner Emails"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:158
+#: add-ons/emails/custom-emails-admin.php:156
 #@ em-pro
 msgid "These emails get sent to the event owners when a person has made a booking."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:160
-#: add-ons/emails/custom-emails-admin.php:169
-#: add-ons/emails/custom-emails-admin.php:327
-#: add-ons/emails/custom-emails-admin.php:336
+#: add-ons/emails/custom-emails-admin.php:158
+#: add-ons/emails/custom-emails-admin.php:167
+#: add-ons/emails/custom-emails-admin.php:326
+#: add-ons/emails/custom-emails-admin.php:335
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:153
 #@ dbem
 msgid "Pending booking email"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:161
-#: add-ons/emails/custom-emails-admin.php:170
-#: add-ons/emails/custom-emails-admin.php:328
-#: add-ons/emails/custom-emails-admin.php:337
+#: add-ons/emails/custom-emails-admin.php:159
+#: add-ons/emails/custom-emails-admin.php:168
+#: add-ons/emails/custom-emails-admin.php:327
+#: add-ons/emails/custom-emails-admin.php:336
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:145
 #@ dbem
 msgid "Confirmed booking email"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:162
-#: add-ons/emails/custom-emails-admin.php:172
-#: add-ons/emails/custom-emails-admin.php:329
-#: add-ons/emails/custom-emails-admin.php:339
+#: add-ons/emails/custom-emails-admin.php:160
+#: add-ons/emails/custom-emails-admin.php:170
+#: add-ons/emails/custom-emails-admin.php:328
+#: add-ons/emails/custom-emails-admin.php:338
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:169
 #@ dbem
 msgid "Booking cancelled"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:166
-#: add-ons/emails/custom-emails-admin.php:333
+#: add-ons/emails/custom-emails-admin.php:164
+#: add-ons/emails/custom-emails-admin.php:332
 #@ em-pro
 msgid "Attendee Emails"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:167
+#: add-ons/emails/custom-emails-admin.php:165
 #@ em-pro
 msgid "These emails will be sent to the person who booked a place at your event."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:171
-#: add-ons/emails/custom-emails-admin.php:338
+#: add-ons/emails/custom-emails-admin.php:169
+#: add-ons/emails/custom-emails-admin.php:337
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:161
 #@ dbem
 msgid "Rejected booking email"
 msgstr ""
 
+#: add-ons/emails/custom-emails-admin.php:249
 #: add-ons/emails/custom-emails-admin.php:250
-#: add-ons/emails/custom-emails-admin.php:251
-#: add-ons/emails/custom-emails-admin.php:451
+#: add-ons/emails/custom-emails-admin.php:456
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:119
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:124
 #@ em-pro
@@ -860,81 +908,81 @@ msgstr ""
 msgid "Booking Email Templates"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:251
-#: add-ons/emails/custom-emails-admin.php:261
-#: add-ons/emails/custom-emails-admin.php:451
+#: add-ons/emails/custom-emails-admin.php:250
+#: add-ons/emails/custom-emails-admin.php:260
+#: add-ons/emails/custom-emails-admin.php:456
 #, php-format
 #@ em-pro
 msgid "Below you can modify the emails that are sent when bookings are made. This will override the default emails located in your %s settings page."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:252
+#: add-ons/emails/custom-emails-admin.php:251
 #@ em-pro
 msgid "Additionally, you can also override these emails at an event level when editing an event. Should you choose not to, any overriden emails on this page will be considered the default email for this gateway."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:253
-#: add-ons/emails/custom-emails-admin.php:262
+#: add-ons/emails/custom-emails-admin.php:252
+#: add-ons/emails/custom-emails-admin.php:261
 #@ em-pro
 msgid "Note that some gateways do not automatically send pending or confirmed emails, in these cases they may only apply to when event admins manually change the status of a booking resulting in an automated email getting sent."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:254
-#: add-ons/emails/custom-emails-admin.php:263
-#: add-ons/emails/custom-emails-admin.php:455
+#: add-ons/emails/custom-emails-admin.php:253
+#: add-ons/emails/custom-emails-admin.php:262
+#: add-ons/emails/custom-emails-admin.php:460
 #@ em-pro
 msgid "Click on the title texts with a plus (+) next to them to reveal further options, and the minus (-) sign to hide them."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:256
-#: add-ons/gateways/gateway.paypal.php:453
+#: add-ons/emails/custom-emails-admin.php:255
+#: add-ons/gateways/gateway.paypal.php:452
 #@ em-pro
 msgid "Important:"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:256
+#: add-ons/emails/custom-emails-admin.php:255
 #@ em-pro
 msgid "You are in Multiple Booking Mode. These emails will only be used when individually modifying bookings which trigger these individual event booking emails."
 msgstr ""
 
+#: add-ons/emails/custom-emails-admin.php:259
 #: add-ons/emails/custom-emails-admin.php:260
-#: add-ons/emails/custom-emails-admin.php:261
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:30
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:117
 #@ em-pro
 msgid "Multiple Booking Email Templates"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:308
-#: add-ons/emails/custom-emails-admin.php:487
+#: add-ons/emails/custom-emails-admin.php:307
+#: add-ons/emails/custom-emails-admin.php:492
 #@ em-pro
 msgid "An invalid admin email was supplied for your custom emails and was not saved in your settings."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:321
+#: add-ons/emails/custom-emails-admin.php:320
 #, php-format
 #@ em-pro
 msgid "%s Gateway Emails"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:325
+#: add-ons/emails/custom-emails-admin.php:324
 #@ em-pro
 msgid "These emails get sent to the event owners when a person has made a booking using this specific gateway."
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:334
+#: add-ons/emails/custom-emails-admin.php:333
 #@ em-pro
 msgid "These emails will be sent to the person who booked a place at your event and selected this specific gateway."
 msgstr ""
 
+#: add-ons/emails/custom-emails-admin.php:345
 #: add-ons/emails/custom-emails-admin.php:346
-#: add-ons/emails/custom-emails-admin.php:347
-#: add-ons/gateways/gateways.php:67
+#: add-ons/gateways/gateways.php:70
 #@ em-pro
 msgid "Awaiting Offline Payment"
 msgstr ""
 
-#: add-ons/emails/custom-emails-admin.php:439
+#: add-ons/emails/custom-emails-admin.php:438
 #@ em-pro
 msgid "Custom Automated Emails"
 msgstr ""
@@ -942,10 +990,23 @@ msgstr ""
 #: add-ons/emails/custom-emails-admin.php:453
 #, php-format
 #@ em-pro
-msgid "You can also create default emails for specific gateways in your individual %s settings page."
+msgid "Since %s is enabled, these emails will only be sent when individual bookings are modified afterwards, such as changing the status of the booking individually or resending an email."
 msgstr ""
 
 #: add-ons/emails/custom-emails-admin.php:453
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
+#@ em-pro
+msgid "Multiple Bookings Mode"
+msgstr ""
+
+#: add-ons/emails/custom-emails-admin.php:458
+#, php-format
+#@ em-pro
+msgid "You can also create default emails for specific gateways in your individual %s settings page."
+msgstr ""
+
+#: add-ons/emails/custom-emails-admin.php:458
 #@ dbem
 msgid "Gateway Settings"
 msgstr ""
@@ -992,22 +1053,22 @@ msgid "Enable %s?"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:33
-#@ dbem
+#@ em-pro
 msgid "Days before reminder"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:33
-#@ default
+#@ em-pro
 msgid "You can choose to send people attending your event x days before the event starts. Minimum is one day."
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:34
-#@ dbem
+#@ em-pro
 msgid "Attach ical invite?"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:34
-#@ default
+#@ em-pro
 msgid "If using SMTP in your email settings. You can automatically attach an ical file which some email clients (e.g. gmail) will render as an invitation they can add to their calendar."
 msgstr ""
 
@@ -1022,12 +1083,12 @@ msgid "Every day Events Manager automatically checks upcoming events in order to
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:45
-#@ dbem
+#@ em-pro
 msgid "Reminder subject"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:46
-#@ dbem
+#@ em-pro
 msgid "Approved email"
 msgstr ""
 
@@ -1048,7 +1109,7 @@ msgid "Event Emails"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:80
-#@ dbem
+#@ em-pro
 msgid "Allow custom emails for events?"
 msgstr ""
 
@@ -1065,7 +1126,7 @@ msgid "Users with the %s user capability will be able to do this when adding/edi
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:81
-#@ dbem
+#@ em-pro
 msgid "Allow custom admin email addresses for events?"
 msgstr ""
 
@@ -1080,7 +1141,7 @@ msgid "Gateway Emails"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:85
-#@ dbem
+#@ em-pro
 msgid "Allow custom emails for gateways?"
 msgstr ""
 
@@ -1098,7 +1159,7 @@ msgid "Payment Gateways"
 msgstr ""
 
 #: add-ons/emails/emails-admin.php:86
-#@ dbem
+#@ em-pro
 msgid "Allow custom admin email addresses for gateways?"
 msgstr ""
 
@@ -1108,190 +1169,176 @@ msgstr ""
 msgid "Allow administrators of this blog to add additional admin email addresses for gateways inside each %s settings page."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:165
+#: add-ons/gateways/gateway.authorize.aim.php:167
 #@ em-pro
 msgid "Refunded"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:176
+#: add-ons/gateways/gateway.authorize.aim.php:178
 #@ em-pro
 msgid "Voided"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:205
+#: add-ons/gateways/gateway.authorize.aim.php:207
 #@ em-pro
 msgid "Credit Card Number"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:209
+#: add-ons/gateways/gateway.authorize.aim.php:211
 #@ em-pro
 msgid "Expiry Date"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:228
+#: add-ons/gateways/gateway.authorize.aim.php:230
 #@ em-pro
 msgid "CCV"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:354
+#: add-ons/gateways/gateway.authorize.aim.php:356
 #: add-ons/gateways/gateway.offline.php:396
-#: add-ons/gateways/gateway.paypal.php:429
+#: add-ons/gateways/gateway.paypal.php:428
 #@ em-pro
 msgid "Success Message"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:357
+#: add-ons/gateways/gateway.authorize.aim.php:359
 #@ em-pro
 msgid "The message that is shown to a user when a booking is successful and payment has been taken."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:361
-#: add-ons/gateways/gateway.paypal.php:436
+#: add-ons/gateways/gateway.authorize.aim.php:363
+#: add-ons/gateways/gateway.paypal.php:435
 #@ em-pro
 msgid "Success Free Message"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:364
+#: add-ons/gateways/gateway.authorize.aim.php:366
 #@ em-pro
 msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be charged."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:369
-#: add-ons/gateways/gateway.authorize.aim.php:412
-#: add-ons/gateways/gateway.paypal.php:452
-#: add-ons/gateways/gateway.php:417
+#: add-ons/gateways/gateway.authorize.aim.php:371
+#: add-ons/gateways/gateway.authorize.aim.php:414
+#: add-ons/gateways/gateway.paypal.php:451
+#: add-ons/gateways/gateway.php:434
 #, php-format
 #@ dbem
 #@ em-pro
 msgid "%s Options"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:370
+#: add-ons/gateways/gateway.authorize.aim.php:372
 #, php-format
 #@ em-pro
 msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions on setting up Authorize.net with Events Manager."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:374
+#: add-ons/gateways/gateway.authorize.aim.php:376
 #@ em-pro
 msgid "Mode"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:378
+#: add-ons/gateways/gateway.authorize.aim.php:380
 #@ emp-pro
 msgid "Sandbox"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:379
+#: add-ons/gateways/gateway.authorize.aim.php:381
 #@ emp-pro
 msgid "Live"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:382
+#: add-ons/gateways/gateway.authorize.aim.php:384
 #, php-format
 #@ em-pro
 msgid "Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if you would like to test this gateway out. Alternatively, you can use your real account in test mode, which you can set on your Authorize.net control panel."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:386
+#: add-ons/gateways/gateway.authorize.aim.php:388
 #@ emp-pro
 msgid "API Login ID"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:390
+#: add-ons/gateways/gateway.authorize.aim.php:392
 #@ emp-pro
 msgid "Transaction key"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:394
+#: add-ons/gateways/gateway.authorize.aim.php:396
 #@ em-pro
 msgid "Payment Notifications"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:395
+#: add-ons/gateways/gateway.authorize.aim.php:397
 #@ em-pro
 msgid "If you would like to receive notifications from Authorize.net and handle refunds or voided transactions automatically, you need to enable Silent Post URL and provide an MD5 Hash in your merchant interface."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:396
+#: add-ons/gateways/gateway.authorize.aim.php:398
 #, php-format
 #@ em-pro
 msgid "Your return url is %s."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:396
+#: add-ons/gateways/gateway.authorize.aim.php:398
 #@ em-pro
 msgid "You can use this as your Silent Post URL."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:399
+#: add-ons/gateways/gateway.authorize.aim.php:401
 #@ emp-pro
 msgid "Security: MD5 Hash"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:402
+#: add-ons/gateways/gateway.authorize.aim.php:404
 #@ em-pro
 msgid "This string of text needs to match that in your merchant interface settings."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:406
+#: add-ons/gateways/gateway.authorize.aim.php:408
 #@ emp-pro
 msgid "User Login ID"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:409
+#: add-ons/gateways/gateway.authorize.aim.php:411
 #@ em-pro
 msgid "This is the username you use to log into your merchant interface."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:412
+#: add-ons/gateways/gateway.authorize.aim.php:414
 #@ em-pro
 msgid "Advanced"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:414
+#: add-ons/gateways/gateway.authorize.aim.php:416
 #@ emp-pro
 msgid "Email Customer (on success)"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:418
-#: emp-forms.php:147
-#@ emp-pro
-#@ dbem
-msgid "Yes"
-msgstr ""
-
-#: add-ons/gateways/gateway.authorize.aim.php:419
-#: emp-forms.php:147
-#@ emp-pro
-#@ dbem
-msgid "No"
-msgstr ""
-
-#: add-ons/gateways/gateway.authorize.aim.php:424
+#: add-ons/gateways/gateway.authorize.aim.php:426
 #@ emp-pro
 msgid "Customer Receipt Email Header"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:428
+#: add-ons/gateways/gateway.authorize.aim.php:430
 #@ emp-pro
 msgid "Customer Receipt Email Footer"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:432
-#: add-ons/gateways/gateway.paypal.php:536
+#: add-ons/gateways/gateway.authorize.aim.php:434
+#: add-ons/gateways/gateway.paypal.php:535
 #@ em-pro
 msgid "Manually approve completed transactions?"
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:435
-#: add-ons/gateways/gateway.paypal.php:539
+#: add-ons/gateways/gateway.authorize.aim.php:437
+#: add-ons/gateways/gateway.paypal.php:538
 #@ em-pro
 msgid "By default, when someone pays for a booking, it gets automatically approved once the payment is confirmed. If you would like to manually verify and approve bookings, tick this box."
 msgstr ""
 
-#: add-ons/gateways/gateway.authorize.aim.php:436
-#: add-ons/gateways/gateway.paypal.php:540
+#: add-ons/gateways/gateway.authorize.aim.php:438
+#: add-ons/gateways/gateway.paypal.php:539
 #, php-format
 #@ em-pro
 msgid "Approvals must also be required for all bookings in your <a href=\"%s\">settings</a> for this to work properly."
@@ -1345,7 +1392,7 @@ msgid "Add Offline Payment"
 msgstr ""
 
 #: add-ons/gateways/gateway.offline.php:188
-#: add-ons/gateways/gateways.transactions.php:96
+#: add-ons/gateways/gateways.transactions.php:95
 #@ em-pro
 msgid "Amount"
 msgstr ""
@@ -1423,199 +1470,214 @@ msgstr ""
 msgid "Resume Payment"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:387
+#: add-ons/gateways/gateway.paypal.php:386
 #@ em-pro
 msgid "Unknown"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:389
+#: add-ons/gateways/gateway.paypal.php:388
 #@ default
 msgid "Unprocessed payment needs refund"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:432
+#: add-ons/gateways/gateway.paypal.php:431
 #@ em-pro
 msgid "The message that is shown to a user when a booking is successful whilst being redirected to PayPal for payment."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:439
+#: add-ons/gateways/gateway.paypal.php:438
 #@ em-pro
 msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be redirected to PayPal."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:443
+#: add-ons/gateways/gateway.paypal.php:442
 #@ em-pro
 msgid "Thank You Message"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:446
+#: add-ons/gateways/gateway.paypal.php:445
 #@ em-pro
 msgid "If you choose to return users to the default Events Manager thank you page after a user has paid on PayPal, you can customize the thank you message here."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:453
+#: add-ons/gateways/gateway.paypal.php:452
 #@ default
 msgid "In order to connect PayPal with your site, you need to enable IPN on your account."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:453
+#: add-ons/gateways/gateway.paypal.php:452
 #, php-format
 #@ em-pro
 msgid "Your return url is %s"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:454
+#: add-ons/gateways/gateway.paypal.php:453
 #, php-format
 #@ em-pro
 msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:458
+#: add-ons/gateways/gateway.paypal.php:457
 #@ em-pro
 msgid "PayPal Email"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:464
+#: add-ons/gateways/gateway.paypal.php:463
 #@ em-pro
 msgid "Paypal Currency"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:465
+#: add-ons/gateways/gateway.paypal.php:464
 #, php-format
-#@ dbem
+#@ em-pro
 msgid "Set your currency in the <a href=\"%s\">settings</a> page."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:469
+#: add-ons/gateways/gateway.paypal.php:468
 #@ em-pro
 msgid "PayPal Language"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:487
+#: add-ons/gateways/gateway.paypal.php:486
 #@ em-pro
 msgid "PayPal allows you to select a default language users will see. This is also determined by PayPal which detects the locale of the users browser. The default would be US."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:491
+#: add-ons/gateways/gateway.paypal.php:490
 #@ em-pro
 msgid "PayPal Mode"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:494
+#: add-ons/gateways/gateway.paypal.php:493
 #@ em-pro
 msgid "Live Site"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:495
+#: add-ons/gateways/gateway.paypal.php:494
 #@ em-pro
 msgid "Test Mode (Sandbox)"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:501
+#: add-ons/gateways/gateway.paypal.php:500
 #@ em-pro
 msgid "Return URL"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:504
+#: add-ons/gateways/gateway.paypal.php:503
 #@ em-pro
 msgid "Once a payment is completed, users will be offered a link to this URL which confirms to the user that a payment is made. If you would to customize the thank you page, create a new page and add the link here. For automatic redirect, you need to turn auto-return on in your PayPal settings."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:508
+#: add-ons/gateways/gateway.paypal.php:507
 #@ em-pro
 msgid "Cancel URL"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:511
+#: add-ons/gateways/gateway.paypal.php:510
 #@ em-pro
 msgid "Whilst paying on PayPal, if a user cancels, they will be redirected to this page."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:515
+#: add-ons/gateways/gateway.paypal.php:514
 #@ em-pro
 msgid "PayPal Page Logo"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:518
+#: add-ons/gateways/gateway.paypal.php:517
 #@ em-pro
 msgid "Add your logo to the PayPal payment page. It's highly recommended you link to a https:// address."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:522
+#: add-ons/gateways/gateway.paypal.php:521
 #@ em-pro
 msgid "Border Color"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:525
+#: add-ons/gateways/gateway.paypal.php:524
 #@ em-pro
 msgid "Provide a hex value color to change the color from the default blue to another color (e.g. #CCAAAA)."
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:529
+#: add-ons/gateways/gateway.paypal.php:528
 #@ em-pro
 msgid "Delete Bookings Pending Payment"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:531
+#: add-ons/gateways/gateway.paypal.php:530
 #@ em-pro
 msgid "minutes"
 msgstr ""
 
-#: add-ons/gateways/gateway.paypal.php:532
+#: add-ons/gateways/gateway.paypal.php:531
 #@ em-pro
 msgid "Once a booking is started and the user is taken to PayPal, Events Manager stores a booking record in the database to identify the incoming payment. These spaces may be considered reserved if you enable <em>Reserved unconfirmed spaces?</em> in your Events &gt; Settings page. If you would like these bookings to expire after x minutes, please enter a value above (note that bookings will be deleted, and any late payments will need to be refunded manually via PayPal)."
 msgstr ""
 
-#: add-ons/gateways/gateway.php:412
+#: add-ons/gateways/gateway.php:417
+#@ em-pro
+msgid "Gateway updated."
+msgstr ""
+
+#: add-ons/gateways/gateway.php:418
+#@ em-pro
+msgid "Gateway not updated."
+msgstr ""
+
+#: add-ons/gateways/gateway.php:422
 #, php-format
 #@ em-pro
 msgid "Edit &quot;%s&quot; settings"
 msgstr ""
 
-#: add-ons/gateways/gateway.php:421
+#: add-ons/gateways/gateway.php:426
+#@ em-pro
+msgid "Back to gateways"
+msgstr ""
+
+#: add-ons/gateways/gateway.php:438
 #@ em-pro
 msgid "Gateway Title"
 msgstr ""
 
-#: add-ons/gateways/gateway.php:425
-#: add-ons/gateways/gateway.php:435
+#: add-ons/gateways/gateway.php:442
+#: add-ons/gateways/gateway.php:452
 #, php-format
 #@ em-pro
 msgid "Only if you have not enabled quick pay buttons in your <a href=\"%s\">gateway settings</a>."
 msgstr ""
 
-#: add-ons/gateways/gateway.php:426
+#: add-ons/gateways/gateway.php:443
 #@ em-pro
 msgid "The user will see this as the text option when choosing a payment method."
 msgstr ""
 
-#: add-ons/gateways/gateway.php:431
+#: add-ons/gateways/gateway.php:448
 #@ em-pro
 msgid "Booking Form Information"
 msgstr ""
 
-#: add-ons/gateways/gateway.php:436
+#: add-ons/gateways/gateway.php:453
 #@ em-pro
 msgid "If a user chooses to pay with this gateway, or it is selected by default, this message will be shown just below the selection."
 msgstr ""
 
-#: add-ons/gateways/gateway.php:444
+#: add-ons/gateways/gateway.php:461
 #@ em-pro
 msgid "Quick Pay Buttons"
 msgstr ""
 
-#: add-ons/gateways/gateway.php:445
+#: add-ons/gateways/gateway.php:462
 #, php-format
 #@ em-pro
 msgid "If you have chosen to only use quick pay buttons in your <a href=\"%s\">gateway settings</a>, these settings below will be used."
 msgstr ""
 
-#: add-ons/gateways/gateway.php:449
+#: add-ons/gateways/gateway.php:466
 #@ em-pro
 msgid "Payment Button"
 msgstr ""
 
-#: add-ons/gateways/gateway.php:452
+#: add-ons/gateways/gateway.php:469
 #, php-format
 #@ em-pro
 msgid "Choose the button text. To use an image instead, enter the full url starting with %s or %s."
@@ -1648,212 +1710,207 @@ msgid "If you are not using quick pay buttons a drop-down menu will be used, wit
 msgstr ""
 
 #: add-ons/gateways/gateways-admin.php:55
-#@ default
-msgid "Gateway updated."
-msgstr ""
-
-#: add-ons/gateways/gateways-admin.php:56
-#@ default
-msgid "Gateway not updated."
-msgstr ""
-
-#: add-ons/gateways/gateways-admin.php:57
-#@ default
+#@ em-pro
 msgid "Gateway activated."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:58
-#@ default
+#: add-ons/gateways/gateways-admin.php:56
+#@ em-pro
 msgid "Gateway not activated."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:59
-#@ default
+#: add-ons/gateways/gateways-admin.php:57
+#@ em-pro
 msgid "Gateway deactivated."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:60
-#@ default
+#: add-ons/gateways/gateways-admin.php:58
+#@ em-pro
 msgid "Gateway not deactivated."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:61
-#@ default
+#: add-ons/gateways/gateways-admin.php:59
+#@ em-pro
 msgid "Gateway activation toggled."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:65
+#: add-ons/gateways/gateways-admin.php:63
 #@ em-pro
 msgid "Edit Gateways"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:76
+#: add-ons/gateways/gateways-admin.php:71
 #@ default
 msgid "Bulk Actions"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:77
+#: add-ons/gateways/gateways-admin.php:72
 #@ default
 msgid "Toggle activation"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:79
+#: add-ons/gateways/gateways-admin.php:74
 #@ em-pro
 msgid "Apply"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:88
+#: add-ons/gateways/gateways-admin.php:83
 #@ em-pro
 msgid "Gateway Name"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:89
-#: add-ons/gateways/gateways-admin.php:156
+#: add-ons/gateways/gateways-admin.php:84
+#: add-ons/gateways/gateways-admin.php:151
 #@ em-pro
 msgid "Active"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:90
-#: add-ons/gateways/gateways.transactions.php:52
+#: add-ons/gateways/gateways-admin.php:85
+#: add-ons/gateways/gateways.transactions.php:51
 #@ em-pro
 #@ dbem
 msgid "Transactions"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:138
+#: add-ons/gateways/gateways-admin.php:133
 #@ em-pro
 msgid "This gateway cannot be activated because it does not support multiple bookings mode."
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:141
+#: add-ons/gateways/gateways-admin.php:136
 #@ default
 msgid "Settings"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:144
+#: add-ons/gateways/gateways-admin.php:139
 #@ default
 msgid "Deactivate"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:147
+#: add-ons/gateways/gateways-admin.php:142
 #@ default
 msgid "Activate"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:158
+#: add-ons/gateways/gateways-admin.php:153
 #@ em-pro
 msgid "Inactive"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:163
+#: add-ons/gateways/gateways-admin.php:158
 #@ em-pro
 msgid "View transactions"
 msgstr ""
 
-#: add-ons/gateways/gateways-admin.php:172
+#: add-ons/gateways/gateways-admin.php:167
 #@ em-pro
 msgid "No Payment gateways were found for this install."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:46
-#: emp-install.php:160
+#: add-ons/gateways/gateways.php:49
+#: emp-install.php:161
 #@ em-pro
 #@ dbem
 msgid "Address Line 2"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:53
-#: emp-install.php:167
+#: add-ons/gateways/gateways.php:56
+#: emp-install.php:168
 #@ em-pro
 #@ dbem
 msgid "Company"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:59
+#: add-ons/gateways/gateways.php:62
 #@ em-pro
 msgid "All transactional history associated with this booking will also be deleted."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:60
+#: add-ons/gateways/gateways.php:63
 #@ em-pro
 msgid "Are you sure you want to delete? This may make your transaction history out of sync with your payment gateway provider."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:66
+#: add-ons/gateways/gateways.php:69
 #@ em-pro
 msgid "Awaiting Online Payment"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:146
+#: add-ons/gateways/gateways.php:149
 #@ em-pro
 msgid "Choice of payment method not recognized. If you are seeing this error and selecting a method of payment, we apologize for the inconvenience. Please contact us and we'll help you make a booking as soon as possible."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:344
+#: add-ons/gateways/gateways.php:293
+#@ em-pro
+msgid "Gateway Used"
+msgstr ""
+
+#: add-ons/gateways/gateways.php:369
 #@ em-pro
 msgid "Common User Fields for Gateways"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:347
+#: add-ons/gateways/gateways.php:372
 #@ em-pro
 msgid "In many cases, customer address information is required by gateways for verification. This section connects your custom fields to commonly used customer information fields."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:348
+#: add-ons/gateways/gateways.php:373
 #@ em-pro
 msgid "After creating user fields above, you should link them up in here so some gateways can make use of them when processing payments."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:351
+#: add-ons/gateways/gateways.php:376
 #@ em-pro
 msgid "Name (first/last)"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:351
+#: add-ons/gateways/gateways.php:376
 #@ em-pro
 msgid "Generated accordingly from user first/last name or full name field. If a name field isn't provided in your booking form, the username will be used instead."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:352
+#: add-ons/gateways/gateways.php:377
 #@ em-pro
 msgid "Uses the WordPress account email associated with the user."
 msgstr ""
 
-#: add-ons/gateways/gateways.php:358
-#: emp-forms.php:425
-#: emp-forms.php:601
+#: add-ons/gateways/gateways.php:383
+#: emp-forms.php:423
+#: emp-forms.php:599
 #@ em-pro
 #@ dbem
 msgid "none selected"
 msgstr ""
 
-#: add-ons/gateways/gateways.php:371
-#: emp-forms.php:1230
+#: add-ons/gateways/gateways.php:396
+#: emp-forms.php:1234
 #@ em-pro
 msgid "Save Form"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:94
+#: add-ons/gateways/gateways.transactions.php:93
 #@ em-pro
 msgid "User"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:95
+#: add-ons/gateways/gateways.transactions.php:94
 #@ em-pro
 msgid "Date"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:97
+#: add-ons/gateways/gateways.transactions.php:96
 #@ em-pro
 msgid "Transaction id"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:98
+#: add-ons/gateways/gateways.transactions.php:97
 #@ em-pro
 msgid "Gateway"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:99
+#: add-ons/gateways/gateways.transactions.php:98
 #: templates/multiple-bookings/admin.php:46
 #: templates/multiple-bookings/admin.php:56
 #@ em-pro
@@ -1861,67 +1918,73 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:100
+#: add-ons/gateways/gateways.transactions.php:99
 #@ em-pro
 msgid "Notes"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:126
+#: add-ons/gateways/gateways.transactions.php:125
 #, php-format
 #@ dbem
 msgid "%s Rows"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:142
+#: add-ons/gateways/gateways.transactions.php:141
 #@ default
 msgid "Filter"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:144
+#: add-ons/gateways/gateways.transactions.php:143
 #@ dbem
 msgid "Displaying Event"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:146
+#: add-ons/gateways/gateways.transactions.php:145
 #@ dbem
 msgid "Displaying User"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:235
-#: add-ons/gateways/gateways.transactions.php:244
-#: add-ons/gateways/gateways.transactions.php:253
+#: add-ons/gateways/gateways.transactions.php:234
+#: add-ons/gateways/gateways.transactions.php:243
+#: add-ons/gateways/gateways.transactions.php:252
 #@ em-pro
 msgid "None yet"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:278
+#: add-ons/gateways/gateways.transactions.php:277
 #@ em-pro
 msgid "No Transactions"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:359
-#@ default
+#: add-ons/gateways/gateways.transactions.php:379
+#: add-ons/gateways/gateways.transactions.php:381
+#@ em-pro
 msgid "Transaction ID"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:381
+#: add-ons/gateways/gateways.transactions.php:404
 #@ em-pro
 msgid "Transaction deleted"
 msgstr ""
 
-#: add-ons/gateways/gateways.transactions.php:385
+#: add-ons/gateways/gateways.transactions.php:408
 #@ em-pro
 msgid "Transaction could not be deleted"
 msgstr ""
 
-#: add-ons/multiple-bookings/multiple-booking.php:101
+#: add-ons/multiple-bookings/multiple-booking.php:89
+#@ dbem
+msgid "There was an error validating your bookings, please see the errors below:"
+msgstr ""
+
+#: add-ons/multiple-bookings/multiple-booking.php:108
 #, php-format
 #@ default
 msgid "Unfortunately, your booking for %s was removed from your cart as there are not enough spaces anymore."
 msgstr ""
 
-#: add-ons/multiple-bookings/multiple-booking.php:238
-#: add-ons/multiple-bookings/multiple-booking.php:242
+#: add-ons/multiple-bookings/multiple-booking.php:245
+#: add-ons/multiple-bookings/multiple-booking.php:249
 #@ em-pro
 msgid "Multiple Events"
 msgstr ""
@@ -1958,12 +2021,6 @@ msgstr ""
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:31
 #@ em-pro
 msgid "When modifications are made to individual bookings which would normally trigger an email to be sent to the attendee."
-msgstr ""
-
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
-#@ em-pro
-msgid "Multiple Bookings Mode"
 msgstr ""
 
 #: add-ons/multiple-bookings/multiple-bookings-admin.php:48
@@ -2386,531 +2443,536 @@ msgstr ""
 msgid "If profile fields are set to show to logged in users, you can also choose whether or not to make these fields editable or just for viewing reference."
 msgstr ""
 
-#: emp-forms.php:617
+#: emp-forms.php:615
 #@ em-pro
 msgid "You must also add an end date."
 msgstr ""
 
-#: emp-forms.php:621
-#: emp-forms.php:634
+#: emp-forms.php:619
+#: emp-forms.php:632
 #@ dbem
 msgid "Dates must have correct formatting. Please use the date picker provided."
 msgstr ""
 
-#: emp-forms.php:627
+#: emp-forms.php:625
 #@ dbem
 msgid "Please provide a later end date."
 msgstr ""
 
-#: emp-forms.php:640
-#: emp-forms.php:1000
+#: emp-forms.php:638
+#: emp-forms.php:1004
 #@ em-pro
 msgid "You must provide a start date."
 msgstr ""
 
-#: emp-forms.php:658
-#: emp-forms.php:1056
+#: emp-forms.php:656
+#: emp-forms.php:1060
 #@ em-pro
 msgid "You must provide an end time."
 msgstr ""
 
-#: emp-forms.php:662
-#: emp-forms.php:668
-#: emp-forms.php:1046
+#: emp-forms.php:660
+#: emp-forms.php:666
+#: emp-forms.php:1050
 #@ em-pro
 msgid "Please use the time picker provided to select the appropriate time format."
 msgstr ""
 
-#: emp-forms.php:674
-#: emp-forms.php:1066
+#: emp-forms.php:672
+#: emp-forms.php:1070
 #@ em-pro
 msgid "You must provide a start time."
 msgstr ""
 
-#: emp-forms.php:706
+#: emp-forms.php:710
 #@ dbem
 msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
 msgstr ""
 
-#: emp-forms.php:805
+#: emp-forms.php:809
 #@ em-pro
 msgid "Label"
 msgstr ""
 
-#: emp-forms.php:806
+#: emp-forms.php:810
 #@ em-pro
 msgid "Field ID"
 msgstr ""
 
-#: emp-forms.php:806
+#: emp-forms.php:810
 #@ em-pro
 msgid "DO NOT change these values if you want to keep your field settings associated with previous booking fields."
 msgstr ""
 
-#: emp-forms.php:807
+#: emp-forms.php:811
 #@ em-pro
 msgid "Type"
 msgstr ""
 
-#: emp-forms.php:808
+#: emp-forms.php:812
 #@ em-pro
 msgid "Required"
 msgstr ""
 
-#: emp-forms.php:818
+#: emp-forms.php:822
 #@ em-pro
 msgid "Select Type"
 msgstr ""
 
-#: emp-forms.php:820
+#: emp-forms.php:824
 #@ em-pro
 msgid "Customizable Fields"
 msgstr ""
 
-#: emp-forms.php:838
+#: emp-forms.php:842
 #@ em-pro
 msgid "Registration Fields"
 msgstr ""
 
-#: emp-forms.php:846
+#: emp-forms.php:850
 #@ em-pro
 msgid "Custom Registration Fields"
 msgstr ""
 
-#: emp-forms.php:861
+#: emp-forms.php:865
 #: templates/multiple-bookings/cart-table.php:38
 #@ em-pro
 msgid "remove"
 msgstr ""
 
-#: emp-forms.php:861
-#: emp-forms.php:1249
-#: emp-forms.php:1252
-#: emp-forms.php:1316
+#: emp-forms.php:865
+#: emp-forms.php:1253
+#: emp-forms.php:1256
+#: emp-forms.php:1320
 #@ em-pro
 msgid "options"
 msgstr ""
 
-#: emp-forms.php:867
-#: emp-forms.php:1075
+#: emp-forms.php:871
+#: emp-forms.php:1079
 #@ em-pro
 msgid "Options"
 msgstr ""
 
-#: emp-forms.php:870
-#: emp-forms.php:1078
+#: emp-forms.php:874
+#: emp-forms.php:1082
 #@ em-pro
 msgid "Available options, one per line."
 msgstr ""
 
-#: emp-forms.php:874
+#: emp-forms.php:878
 #@ em-pro
 msgid "Use Default?"
 msgstr ""
 
-#: emp-forms.php:878
+#: emp-forms.php:882
 #@ em-pro
 msgid "If checked, the first value above will be used."
 msgstr ""
 
-#: emp-forms.php:882
+#: emp-forms.php:886
 #@ em-pro
 msgid "Default Text"
 msgstr ""
 
-#: emp-forms.php:884
+#: emp-forms.php:888
 #@ em-pro
 msgid "Select ..."
 msgstr ""
 
-#: emp-forms.php:885
+#: emp-forms.php:889
 #@ em-pro
 msgid "Shown when a default value isn't selected, selected by default."
 msgstr ""
 
-#: emp-forms.php:889
-#: emp-forms.php:931
-#: emp-forms.php:957
-#: emp-forms.php:1023
-#: emp-forms.php:1082
-#: emp-forms.php:1110
-#: emp-forms.php:1131
-#: emp-forms.php:1161
+#: emp-forms.php:893
+#: emp-forms.php:935
+#: emp-forms.php:961
+#: emp-forms.php:1027
+#: emp-forms.php:1086
+#: emp-forms.php:1114
+#: emp-forms.php:1135
+#: emp-forms.php:1165
 #@ em-pro
 msgid "Tip Text"
 msgstr ""
 
-#: emp-forms.php:892
-#: emp-forms.php:934
-#: emp-forms.php:960
-#: emp-forms.php:1026
-#: emp-forms.php:1085
-#: emp-forms.php:1113
-#: emp-forms.php:1134
-#: emp-forms.php:1164
-#@ em-pro
-msgid "Will appear next to your field label as a question mark with a popup tip bubble."
-msgstr ""
-
 #: emp-forms.php:896
-#: emp-forms.php:921
+#: emp-forms.php:938
+#: emp-forms.php:964
+#: emp-forms.php:1030
 #: emp-forms.php:1089
 #: emp-forms.php:1117
-#: emp-forms.php:1145
-#: emp-forms.php:1175
-#: emp-forms.php:1208
+#: emp-forms.php:1138
+#: emp-forms.php:1168
 #@ em-pro
-msgid "Error Message"
+msgid "Will appear next to your field label as a question mark with a popup tip bubble."
 msgstr ""
 
 #: emp-forms.php:900
 #: emp-forms.php:925
 #: emp-forms.php:1093
+#: emp-forms.php:1121
+#: emp-forms.php:1149
+#: emp-forms.php:1179
+#: emp-forms.php:1212
+#@ em-pro
+msgid "Error Message"
+msgstr ""
+
+#: emp-forms.php:904
+#: emp-forms.php:929
+#: emp-forms.php:1097
 #@ em-pro
 msgid "This error will show if a value isn't chosen."
 msgstr ""
 
-#: emp-forms.php:901
-#: emp-forms.php:926
-#: emp-forms.php:970
-#: emp-forms.php:980
-#: emp-forms.php:990
-#: emp-forms.php:1000
-#: emp-forms.php:1036
-#: emp-forms.php:1046
-#: emp-forms.php:1056
-#: emp-forms.php:1066
-#: emp-forms.php:1094
-#: emp-forms.php:1122
-#: emp-forms.php:1150
-#: emp-forms.php:1180
-#: emp-forms.php:1213
+#: emp-forms.php:905
+#: emp-forms.php:930
+#: emp-forms.php:974
+#: emp-forms.php:984
+#: emp-forms.php:994
+#: emp-forms.php:1004
+#: emp-forms.php:1040
+#: emp-forms.php:1050
+#: emp-forms.php:1060
+#: emp-forms.php:1070
+#: emp-forms.php:1098
+#: emp-forms.php:1126
+#: emp-forms.php:1154
+#: emp-forms.php:1184
+#: emp-forms.php:1217
 #@ em-pro
 msgid "Default:"
 msgstr ""
 
-#: emp-forms.php:910
+#: emp-forms.php:914
 #@ em-pro
 msgid "Content"
 msgstr ""
 
-#: emp-forms.php:912
+#: emp-forms.php:916
 #@ em-pro
 msgid "This html will be displayed on your form, the label for this field is used only for reference purposes."
 msgstr ""
 
-#: emp-forms.php:942
+#: emp-forms.php:946
 #@ em-pro
 msgid "Date Range?"
 msgstr ""
 
-#: emp-forms.php:946
+#: emp-forms.php:950
 #@ em-pro
 msgid "If selected, this field will also have an end-date."
 msgstr ""
 
-#: emp-forms.php:950
-#: emp-forms.php:1016
+#: emp-forms.php:954
+#: emp-forms.php:1020
 #@ em-pro
 msgid "Separator"
 msgstr ""
 
-#: emp-forms.php:953
-#: emp-forms.php:1019
+#: emp-forms.php:957
+#: emp-forms.php:1023
 #@ em-pro
 msgid "This text will appear between the two date fields if this is a date range."
 msgstr ""
 
-#: emp-forms.php:964
-#: emp-forms.php:1029
+#: emp-forms.php:968
+#: emp-forms.php:1033
 #@ em-pro
 msgid "Error Messages"
-msgstr ""
-
-#: emp-forms.php:965
-#: emp-forms.php:1031
-#@ em-pro
-msgid "Field Required"
 msgstr ""
 
 #: emp-forms.php:969
 #: emp-forms.php:1035
 #@ em-pro
+msgid "Field Required"
+msgstr ""
+
+#: emp-forms.php:973
+#: emp-forms.php:1039
+#@ em-pro
 msgid "This error will show this field is required and no value is entered."
 msgstr ""
 
-#: emp-forms.php:975
-#: emp-forms.php:1041
+#: emp-forms.php:979
+#: emp-forms.php:1045
 #@ em-pro
 msgid "Incorrect Formatting"
 msgstr ""
 
-#: emp-forms.php:979
+#: emp-forms.php:983
 #@ em-pro
 msgid "This error will show if an incorrect date format is used."
 msgstr ""
 
-#: emp-forms.php:980
+#: emp-forms.php:984
 #@ em-pro
 msgid "Please use the date picker provided to select the appropriate date format."
 msgstr ""
 
-#: emp-forms.php:985
+#: emp-forms.php:989
 #@ em-pro
 msgid "End date required"
 msgstr ""
 
-#: emp-forms.php:989
+#: emp-forms.php:993
 #@ em-pro
 msgid "This error will show if the field is a date-range and no end date is selected."
 msgstr ""
 
-#: emp-forms.php:990
+#: emp-forms.php:994
 #@ em-pro
 msgid "You must provide an end date."
 msgstr ""
 
-#: emp-forms.php:995
+#: emp-forms.php:999
 #@ em-pro
 msgid "Start date required"
 msgstr ""
 
-#: emp-forms.php:999
+#: emp-forms.php:1003
 #@ em-pro
 msgid "This error will show if the field is a date-range and no start date is selected."
 msgstr ""
 
-#: emp-forms.php:1008
+#: emp-forms.php:1012
 #@ em-pro
 msgid "Time Range?"
 msgstr ""
 
-#: emp-forms.php:1012
+#: emp-forms.php:1016
 #@ em-pro
 msgid "If selected, this field will also have an end-time."
 msgstr ""
 
-#: emp-forms.php:1045
+#: emp-forms.php:1049
 #@ em-pro
 msgid "This error will show if an incorrect time format is used."
 msgstr ""
 
-#: emp-forms.php:1051
+#: emp-forms.php:1055
 #@ em-pro
 msgid "End time required"
 msgstr ""
 
-#: emp-forms.php:1055
+#: emp-forms.php:1059
 #@ em-pro
 msgid "This error will show if the field is a time-range and no end time is selected."
 msgstr ""
 
-#: emp-forms.php:1061
+#: emp-forms.php:1065
 #@ em-pro
 msgid "Start time required"
 msgstr ""
 
-#: emp-forms.php:1065
+#: emp-forms.php:1069
 #@ em-pro
 msgid "This error will show if the field is a time-range and no start time is selected."
 msgstr ""
 
-#: emp-forms.php:1103
+#: emp-forms.php:1107
 #@ em-pro
 msgid "Checked by default?"
 msgstr ""
 
-#: emp-forms.php:1121
+#: emp-forms.php:1125
 #@ em-pro
 msgid "This error will show if this box is not checked."
 msgstr ""
 
-#: emp-forms.php:1138
-#: emp-forms.php:1168
+#: emp-forms.php:1142
+#: emp-forms.php:1172
 #@ em-pro
 msgid "Regex"
 msgstr ""
 
-#: emp-forms.php:1141
-#: emp-forms.php:1171
+#: emp-forms.php:1145
+#: emp-forms.php:1175
 #@ em-pro
 msgid "By adding a regex expression, you can limit the possible values a user can input, for example the following only allows numbers: "
 msgstr ""
 
-#: emp-forms.php:1149
-#: emp-forms.php:1179
+#: emp-forms.php:1153
+#: emp-forms.php:1183
 #@ em-pro
 msgid "If the regex above does not match this error will be displayed."
 msgstr ""
 
-#: emp-forms.php:1194
+#: emp-forms.php:1198
 #@ em-pro
 msgid "Public Key"
 msgstr ""
 
-#: emp-forms.php:1197
-#: emp-forms.php:1204
+#: emp-forms.php:1201
+#: emp-forms.php:1208
 #, php-format
 #@ em-pro
 msgid "Required, get your keys <a href=\"%s\">here</a>"
 msgstr ""
 
-#: emp-forms.php:1201
+#: emp-forms.php:1205
 #@ em-pro
 msgid "Private Key"
 msgstr ""
 
-#: emp-forms.php:1212
+#: emp-forms.php:1216
 #@ em-pro
 msgid "This error will show if the captcha is not correct."
 msgstr ""
 
-#: emp-forms.php:1229
+#: emp-forms.php:1233
 #@ em-pro
 msgid "Add booking field"
 msgstr ""
 
-#: emp-forms.php:1296
+#: emp-forms.php:1300
 #@ em-pro
 msgid "hide options"
 msgstr ""
 
-#: emp-install.php:157
+#: emp-install.php:158
 #, php-format
 #@ em-pro
 msgid "Please fill in the field: %s"
 msgstr ""
 
-#: emp-install.php:177
+#: emp-install.php:178
 #@ em-pro
 msgid "Pay With"
 msgstr ""
 
-#: emp-install.php:179
+#: emp-install.php:180
 #@ em-pro
 msgid "PayPal"
 msgstr ""
 
-#: emp-install.php:181
+#: emp-install.php:182
 #@ em-pro
 msgid "Please wait whilst you are redirected to PayPal to proceed with payment."
 msgstr ""
 
-#: emp-install.php:182
-#: emp-install.php:187
-#: emp-install.php:191
+#: emp-install.php:183
+#: emp-install.php:188
+#: emp-install.php:192
 #@ dbem
 msgid "Booking successful."
 msgstr ""
 
-#: emp-install.php:184
+#: emp-install.php:185
 #@ em-pro
-msgid "Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a seperate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction."
+msgid "Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a separate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction."
 msgstr ""
 
-#: emp-install.php:186
-#: emp-install.php:188
+#: emp-install.php:187
+#: emp-install.php:189
 #@ em-pro
 msgid "Pay Offline"
 msgstr ""
 
-#: emp-install.php:190
+#: emp-install.php:191
 #@ em-pro
 msgid "Credit Card"
 msgstr ""
 
-#: emp-install.php:192
+#: emp-install.php:193
 #@ em-pro
 msgid "Booking successful. You have not been charged for this booking."
 msgstr ""
 
 #: emp-install.php:197
+#@ em-pro
+msgid "Reminder"
+msgstr ""
+
+#: emp-install.php:199
 #@ dbem
 msgid "Dear #_BOOKINGNAME, <br />This is a reminder about your #_BOOKINGSPACES space/spaces reserved for #_EVENTNAME.<br />When : #_EVENTDATES @ #_EVENTTIMES<br />Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br />We look forward to seeing you there!<br />Yours faithfully,<br />#_CONTACTNAME"
 msgstr ""
 
-#: emp-install.php:209
+#: emp-install.php:211
 #@ em-pro
 msgid "Your booking was added to your shopping cart."
 msgstr ""
 
-#: emp-install.php:210
+#: emp-install.php:212
 #@ em-pro
 msgid "You have already booked a spot at this eventin your cart, please modify or delete your current booking."
 msgstr ""
 
-#: emp-install.php:211
+#: emp-install.php:213
 #@ em-pro
 msgid "You have not booked any events yet. Your cart is empty."
 msgstr ""
 
-#: emp-install.php:212
+#: emp-install.php:214
 #@ em-pro
 msgid "Loading Cart Contents..."
 msgstr ""
 
-#: emp-install.php:213
+#: emp-install.php:215
 #@ em-pro
 msgid "Are you sure you want to empty your cart?"
 msgstr ""
 
-#: emp-install.php:214
+#: emp-install.php:216
 #@ em_pro
 msgid "Place Order"
 msgstr ""
 
-#: emp-install.php:216
+#: emp-install.php:218
 #@ em-pro
 msgid "New Booking"
 msgstr ""
 
-#: emp-install.php:217
+#: emp-install.php:219
 #@ dbem
 msgid "#_BOOKINGNAME (#_BOOKINGEMAIL) has made a booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
 
-#: emp-install.php:220
-#: emp-install.php:236
+#: emp-install.php:222
+#: emp-install.php:238
 #@ em-pro
 msgid "Booking Cancelled"
 msgstr ""
 
-#: emp-install.php:221
+#: emp-install.php:223
 #@ dbem
 msgid "#_BOOKINGNAME (#_BOOKINGEMAIL) has cancelled a booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
 
-#: emp-install.php:224
+#: emp-install.php:226
 #@ em-pro
 msgid "Booking Confirmed"
 msgstr ""
 
-#: emp-install.php:225
+#: emp-install.php:227
 #@ dbem
 msgid "Dear #_BOOKINGNAME, <br />Your booking has been confirmed. <br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY <br />We look forward to seeing you there!"
 msgstr ""
 
-#: emp-install.php:228
+#: emp-install.php:230
 #@ em-pro
 msgid "Booking Pending"
 msgstr ""
 
-#: emp-install.php:229
+#: emp-install.php:231
 #@ dbem
 msgid "Dear #_BOOKINGNAME, <br />Your booking is currently pending approval by our administrators. Once approved you will receive another confirmation email. <br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
 
-#: emp-install.php:232
+#: emp-install.php:234
 #@ em-pro
 msgid "Booking Rejected"
 msgstr ""
 
-#: emp-install.php:233
+#: emp-install.php:235
 #@ dbem
 msgid "Dear #_BOOKINGNAME, <br />Your requested booking has been rejected. <br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
 
-#: emp-install.php:237
+#: emp-install.php:239
 #@ dbem
 msgid "Dear #_BOOKINGNAME, <br />Your requested booking has been cancelled. <br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
@@ -2949,18 +3011,18 @@ msgstr ""
 msgid "Insert your Pro Member Key to access automatic updates you can get your membership key from <a href=\"%s\">here</a>."
 msgstr ""
 
-#: events-manager-pro.php:242
+#: events-manager-pro.php:243
 #@ em-pro
 msgid "Please make sure you install Events Manager as well. You can search and install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
 msgstr ""
 
-#: events-manager-pro.php:242
-#: events-manager-pro.php:248
+#: events-manager-pro.php:243
+#: events-manager-pro.php:249
 #@ em-pro
 msgid "Only admins see this message."
 msgstr ""
 
-#: events-manager-pro.php:248
+#: events-manager-pro.php:249
 #@ em-pro
 msgid "Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/events-manager/\">latest version</a> of Events Manager installed, as this may prevent Pro from functioning properly."
 msgstr ""
@@ -3002,6 +3064,7 @@ msgstr ""
 #: templates/multiple-bookings/cart-table.php:133
 #: templates/placeholders/bookingsummary-multiple.php:68
 #@ dbem
+#@ em-pro
 msgid "Total Price"
 msgstr ""
 
@@ -3085,6 +3148,11 @@ msgstr ""
 #: templates/multiple-bookings/admin.php:132
 #@ dbem
 msgid "wrote"
+msgstr ""
+
+#: templates/multiple-bookings/cart-table.php:23
+#@ dbem
+msgid "Price"
 msgstr ""
 
 #: templates/multiple-bookings/cart-table.php:35

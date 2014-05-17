@@ -2,30 +2,418 @@
 # This file is distributed under the same license as the Events Manager Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-05-07 21:30+0100\n"
+"PO-Revision-Date: 2013-08-05 21:27+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 "Project-Id-Version: Events Manager Pro\n"
 "POT-Creation-Date: \n"
 "Last-Translator: Marcus Sykes <wp.plugins@netweblogic.com>\n"
 "Language-Team: \n"
 
-#: add-ons/coupons/coupons-admin.php:429
+#: add-ons/bookings-form/bookings-form.php:510
+msgid ""
+"You are about to make this your default booking form. All events without an "
+"existing specifically chosen booking form will use this new default form "
+"from now on."
+msgstr ""
+"Du machst gerade dieses Formular zu Deinem Standard Buchungsformular. Alle "
+"Veranstaltungen ohne spezifisch ausgewähltes Buchungsformular werden von "
+"jetzt an dieses Formular verwenden."
+
+#: add-ons/bookings-form/bookings-form.php:512
+msgid "Are you sure you want to do this?"
+msgstr "Bist Du sicher?"
+
+#: add-ons/bookings-form/bookings-form.php:541
+msgid "Are you sure you want to delete this form?"
+msgstr "Bist Du sicher, dass Du dieses Formular löschen willst?"
+
+#: add-ons/bookings-form/bookings-form.php:543
+msgid ""
+"All events using this form will start using the default form automatically."
+msgstr ""
+"Alle Veranstaltungen werden ab jetzt automatisch das Standard-Formular "
+"verwenden."
+
+#: add-ons/coupons/coupons-admin.php:373
+msgid "Coupon Availability"
+msgstr "Gutschein-Verfügbarkeit"
+
+#: add-ons/coupons/coupons-admin.php:376
+msgid "Only on specific events that I own"
+msgstr "Nur bei bestimmten Veranstaltungen, die ich verwalte."
+
+#: add-ons/coupons/coupons-admin.php:377
+msgid "All my events"
+msgstr "Alle meine Veranstaltungen"
+
+#: add-ons/coupons/coupons-admin.php:379
+msgid "All events on this site"
+msgstr "Alle Veranstaltungen auf dieser Site"
+
+#: add-ons/coupons/coupons-admin.php:383
+msgid ""
+"Choose whether to allow this coupon to be used only on events you choose, "
+"all your events or all events on this site."
+msgstr ""
+"Wähle, ob dieser Gutschein nur für ausgewählte Veranstaltungen gültig sein "
+"soll, oder für alle Veranstaltungen auf dieser Site."
+
+#: add-ons/gateways/gateway.php:418
+msgid "Back to gateways"
+msgstr "Zurück zu Gateways"
+
+#: add-ons/gateways/gateways.php:293
+msgid "Gateway Used"
+msgstr "Benutztes Gateway"
+
+#: emp-install.php:195
+msgid "Reminder"
+msgstr "Erinnerung"
+
+#: templates/placeholders/bookingsummary-multiple.php:46
+msgid "Discounts Before Taxes"
+msgstr "Nachlässe vor Steuern"
+
+#: add-ons/emails/custom-emails-admin.php:254
+#: add-ons/emails/custom-emails-admin.php:263
+msgid ""
+"Note that some gateways do not automatically send pending or confirmed "
+"emails, in these cases they may only apply to when event admins manually "
+"change the status of a booking resulting in an automated email getting sent."
+msgstr ""
+"Beachte, dass manche Gateways nicht automatisch Emails für offene Vorgänge "
+"oder Bestätigungen verschicken. In diesen Fällen werden automatisierte "
+"Emails nur versadnt, wenn ein Administrator manuell den Status einer Buchung "
+"ändert."
+
+#: add-ons/emails/custom-emails-admin.php:255
+#: add-ons/emails/custom-emails-admin.php:264
+#: add-ons/emails/custom-emails-admin.php:456
+msgid ""
+"Click on the title texts with a plus (+) next to them to reveal further "
+"options, and the minus (-) sign to hide them."
+msgstr ""
+"Klicke auf die Titeltexte mit einem Plus (+) daneben, um weitere Optionen zu "
+"zeigen, oder auf das Minus (-), um sie zu verbergen."
+
+#: add-ons/emails/custom-emails-admin.php:257
+#: add-ons/gateways/gateway.paypal.php:453
+msgid "Important:"
+msgstr "Wichtig:"
+
+#: add-ons/emails/custom-emails-admin.php:257
+msgid ""
+"You are in Multiple Booking Mode. These emails will only be used when "
+"individually modifying bookings which trigger these individual event booking "
+"emails."
+msgstr ""
+"Du bist im Mehrfachbuchungsmodus. Diese Emails werden nur verwendet, wenn "
+"Buchungen einzeln modifiziert werden. Diese Modifizierungen lösen den "
+"Versand der einzelnen Buchungsemails aus."
+
+#: add-ons/emails/custom-emails-admin.php:309
+#: add-ons/emails/custom-emails-admin.php:488
+msgid ""
+"An invalid admin email was supplied for your custom emails and was not saved "
+"in your settings."
+msgstr ""
+"Eine ungültige Email Admin-Emailadresse wurde für Deine individuellen Emails "
+"verwendet und daher nicht gespeichert."
+
+#: add-ons/emails/custom-emails-admin.php:322
+msgid "%s Gateway Emails"
+msgstr "%s Gateway Emails"
+
+#: add-ons/emails/custom-emails-admin.php:326
+msgid ""
+"These emails get sent to the event owners when a person has made a booking "
+"using this specific gateway."
+msgstr ""
+"Diese Emails werden an den Veranstalter versandt, wenn eine Person dieses "
+"spezielle Gateway verwendet hat."
+
+#: add-ons/emails/custom-emails-admin.php:335
+msgid ""
+"These emails will be sent to the person who booked a place at your event and "
+"selected this specific gateway."
+msgstr ""
+"Diese Email wird an eine Person versandt, die einen Platz in Deiner "
+"Veranstaltung gebucht und dieses spezielle Gateway ausgewählt hat."
+
+#: add-ons/emails/custom-emails-admin.php:440
+msgid "Custom Automated Emails"
+msgstr "Eigene automatisierte Emails"
+
+#: add-ons/emails/custom-emails-admin.php:454
+msgid ""
+"You can also create default emails for specific gateways in your individual "
+"%s settings page."
+msgstr ""
+"Du kannst auch Standard-Emails für bestimmte Gateways in Deiner eigenen %s "
+"Einstellungen Seite festlegen."
+
+#: add-ons/emails/custom-emails-admin.php:454
+msgid "Gateway Settings"
+msgstr "Gateway Einstellungen"
+
+#: add-ons/emails/emails-admin.php:32 add-ons/emails/emails-admin.php:75
+msgctxt "Enable a feature in settings page"
+msgid "Enable %s?"
+msgstr "%s aktivieren?"
+
+#: add-ons/emails/emails-admin.php:68 add-ons/emails/emails-admin.php:75
+msgid "Custom Booking Email Templates"
+msgstr "Eigene Buchungs Email-Vorlagen"
+
+#: add-ons/emails/emails-admin.php:72
+msgid ""
+"You can customize the email templates sent when users make a booking for one "
+"of your events."
+msgstr ""
+"Du kannst die Email-Vorlagen verändern, die ein Benutzer bei Buchung für "
+"eine Veranstaltung erhält."
+
+#: add-ons/emails/emails-admin.php:78
+msgid "Event Emails"
+msgstr "Veranstaltungsemails"
+
+#: add-ons/emails/emails-admin.php:80
+msgid "Allow custom emails for events?"
+msgstr "Erlaube eigene Emails für Veranstaltungen?"
+
+#: add-ons/emails/emails-admin.php:80
+msgid ""
+"Allow custom booking email templates to be configured for individual events."
+msgstr ""
+"Erlaube, dass eigene Buchungsemail Vorlagen für individuelle Veranstaltungen "
+"konfiguriert werden können."
+
+#: add-ons/emails/emails-admin.php:80 add-ons/emails/emails-admin.php:81
+msgid ""
+"Users with the %s user capability will be able to do this when adding/"
+"editing events."
+msgstr ""
+"Dies können Anwender mit %s Berechtigung durchführen, wenn sie "
+"Veranstaltungen hinzufügen/ändern."
+
+#: add-ons/emails/emails-admin.php:81
+msgid "Allow custom admin email addresses for events?"
+msgstr "Erlaube eigene Administrator-Emailadressen für Veranstaltungen?"
+
+#: add-ons/emails/emails-admin.php:81
+msgid "Allow adding custom email addresses to be addded to individual events."
+msgstr ""
+"Erlaube, dass eigene Email-Adressen zu individuellen Veranstaltungen "
+"hinzugefügt werden."
+
+#: add-ons/emails/emails-admin.php:83
+msgid "Gateway Emails"
+msgstr "Gateway Emails"
+
+#: add-ons/emails/emails-admin.php:85
+msgid "Allow custom emails for gateways?"
+msgstr "Erlaube eigene Emails für Gateways?"
+
+#: add-ons/emails/emails-admin.php:85
+msgid ""
+"Allow administrators of this blog to configure custom booking email "
+"templates inside each %s settings page."
+msgstr ""
+"Erlaube Administratoren des Blogs, eigene Buchungsemail-Vorlagen innerhalb "
+"jeder %s Einstellungen Seite zu verwenden."
+
+#: add-ons/emails/emails-admin.php:86
+msgid "Allow custom admin email addresses for gateways?"
+msgstr "Erlaube eigene Administrator Emailadressen für Gateways?"
+
+#: add-ons/emails/emails-admin.php:86
+msgid ""
+"Allow administrators of this blog to add additional admin email addresses "
+"for gateways inside each %s settings page."
+msgstr ""
+"Erlaube Administratoren dieses Blogs, weitere Administrator Emailadressen "
+"für Gateways innerhalb jeder %s Einstellungen Seite zu verwenden."
+
+#: add-ons/gateways/gateway.paypal.php:453
+msgid ""
+"In order to connect PayPal with your site, you need to enable IPN on your "
+"account."
+msgstr ""
+"Um die Seite mit PayPal zu verbinden, musst Du auf Deinem Konto IPN "
+"aktivieren."
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:28
+msgid ""
+"Since you are in Multiple Booking Mode, these emails will only be sent in "
+"these specific circumstances :"
+msgstr ""
+"Da Du Dich im Mehrfachbuchungsmodus befindest, werden diese Emails nur unter "
+"bestimmten Umständen versandt:"
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
+msgid ""
+"You have enabled the option to email event owners in the %s section below."
+msgstr ""
+"Du hast in der %s Sektion unten die Option aktiviert, dass die Veranstalter "
+"angemailt werden."
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:31
+msgid ""
+"When modifications are made to individual bookings which would normally "
+"trigger an email to be sent to the attendee."
+msgstr ""
+"Wenn einzelne Modifizierungen von Buchungen stattfinden, die normalerweise "
+"eine Email an den Teilnehmer auslösen."
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:113
+msgid "Booking Related Placeholders"
+msgstr "Relevante Platzhalter für Buchung"
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:114
+msgid "This accepts %s placeholders."
+msgstr "Hier werden %s Platzhalter akzeptiert."
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:119
+msgid ""
+"When users make a booking in Multiple Bookings Mode or cancels their "
+"booking, these emails get sent to the attendee and administrator emails you "
+"assign in the %s section above."
+msgstr ""
+"Wenn Anwender Mehrfachbuchungen oder -stornos durchführen, werden diese "
+"Emails gemäß %s Sektion an den Teilnehmer und Administrator versandt."
+
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:120
+msgid ""
+"When administrators modify a set of multiple bookings rather than individual "
+"events, these templates will be used to notify the attendee."
+msgstr ""
+"Wenn Administratoren statt einzelne Veranstaltungen einen Satz von "
+"Mehrfachbuchungen modifizieren, werden diese Vorlagen verwendet, um den "
+"Teilnehmer zu informieren."
+
+#: templates/multiple-bookings/widget.php:22
+msgid "Total"
+msgstr "Gesamt"
+
+#: templates/multiple-bookings/widget.php:22
+msgid "%d Spaces"
+msgstr "%d Plätze"
+
+#: templates/placeholders/bookingsummary-multiple.php:60
+msgid "Discounts (After Taxes)"
+msgstr "Nachlässe (nach Steuern)"
+
+#: add-ons/coupons/coupons-admin.php:36 add-ons/coupons/coupons-admin.php:42
+#: add-ons/coupons/coupons-admin.php:46
+msgid "show coupons"
+msgstr "Gutscheine zeigen"
+
+#: add-ons/coupons/coupons-admin.php:43
+msgid "hide coupons"
+msgstr "Gutscheine verbergen"
+
+#: add-ons/coupons/coupons-admin.php:77
+msgid "The following codes will be automatically available to this event."
+msgstr ""
+"Die folgenden Codes stehen dieser Veranstaltung automatisch zur Verfügung."
+
+#: add-ons/coupons/coupons-admin.php:387
+msgid ""
+"This coupon will be available for all bookings made and discount is applied "
+"to the total price before checking out."
+msgstr ""
+"Dieser Gutschein wird für alle Buchungen verfügbar sein und der Nachlass "
+"wird vor der Kasse auf den Gesamtpreis angewandt."
+
+#: add-ons/emails/custom-emails-admin.php:58
+msgid "Also Send Event Owner Emails To:"
+msgstr "Sende Veranstalter Emails auch an:"
+
+#: add-ons/emails/custom-emails-admin.php:60
+msgid ""
+"For multiple emails, seperate by commas (e.g. email1@test.com,email2@test."
+"com,etc.)"
+msgstr ""
+"Gib mehrere Empfänger durch Komma getrennt ein (z.B. email1@test.com,"
+"email2@text.com...)"
+
+#: add-ons/emails/custom-emails-admin.php:76
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: add-ons/emails/custom-emails-admin.php:77
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: add-ons/emails/custom-emails-admin.php:82
+msgid "Subject"
+msgstr "Betreff"
+
+#: add-ons/emails/custom-emails-admin.php:154
+msgid "Default or Free Booking Emails"
+msgstr "Standard oder freie Buchungsemails"
+
+#: add-ons/emails/custom-emails-admin.php:157
+#: add-ons/emails/custom-emails-admin.php:325
+msgid "Event Owner Emails"
+msgstr "Veranstalter-Emails"
+
+#: add-ons/emails/custom-emails-admin.php:158
+msgid ""
+"These emails get sent to the event owners when a person has made a booking."
+msgstr ""
+"Diese Emails werden an den Veranstalter gesendet, wenn jemand eine Buchung "
+"tätigt."
+
+#: add-ons/emails/custom-emails-admin.php:166
+#: add-ons/emails/custom-emails-admin.php:334
+msgid "Attendee Emails"
+msgstr "Teilnehmer-Emails"
+
+#: add-ons/emails/custom-emails-admin.php:167
+msgid ""
+"These emails will be sent to the person who booked a place at your event."
+msgstr ""
+"Diese Emails werden an Teilnehmer versandt, die einen Platz gebucht haben."
+
+#: add-ons/emails/custom-emails-admin.php:252
+#: add-ons/emails/custom-emails-admin.php:262
+#: add-ons/emails/custom-emails-admin.php:452
+msgid ""
+"Below you can modify the emails that are sent when bookings are made. This "
+"will override the default emails located in your %s settings page."
+msgstr ""
+"Unten kannst Du Emails modifizieren, die versandt werden, wenn Buchungen "
+"durchgeführt werden. Dies überstimmt die Standardemail in Deiner %s "
+"Einstellungen Seite."
+
+#: add-ons/emails/custom-emails-admin.php:253
+msgid ""
+"Additionally, you can also override these emails at an event level when "
+"editing an event. Should you choose not to, any overriden emails on this "
+"page will be considered the default email for this gateway."
+msgstr ""
+"Zusätzlich kannst Du diese Emails auf Veranstaltungsebene überstimmen. "
+"Solltest Du dies nicht tun, gelten alle hier überstimmenden Emails als "
+"Standardemail für dieses Gateway."
+
+#: add-ons/coupons/coupons-admin.php:453
 msgid "Apply Before/After Tax"
 msgstr "Verwenden vor/nach Steuer"
 
-#: add-ons/coupons/coupons-admin.php:432
+#: add-ons/coupons/coupons-admin.php:456
 msgid "Before"
 msgstr "Vor"
 
-#: add-ons/coupons/coupons-admin.php:433
+#: add-ons/coupons/coupons-admin.php:457
 msgid "After"
 msgstr "Nach"
 
-#: add-ons/coupons/coupons-admin.php:436
+#: add-ons/coupons/coupons-admin.php:460
 msgid ""
 "Choose whether to apply this discount before or after tax has been added, if "
 "applicable."
@@ -33,41 +421,42 @@ msgstr ""
 "Wenn zutreffend, Auswahl, ob dieser Nachlass vor oder nach Steuern abgezogen "
 "wird."
 
-#: add-ons/coupons.php:335
+#: add-ons/coupons/coupons.php:383
 msgid "Apply Discount"
 msgstr "Nachlass anwenden"
 
-#: add-ons/gateways/gateways.transactions.php:207
+#: add-ons/multiple-bookings/multiple-booking.php:238
+#: add-ons/multiple-bookings/multiple-booking.php:242
 msgid "Multiple Events"
 msgstr "Mehrere Veranstaltungen"
 
-#: add-ons/gateways.php:387
+#: add-ons/gateways/gateways-admin.php:133
 msgid ""
 "This gateway cannot be activated because it does not support multiple "
 "bookings mode."
 msgstr ""
-"Dieses Gateway kann nicht aktiviert werden, weil es keine "
-"Merhfachreservierungen erlaubt."
+"Dieses Gateway kann nicht aktiviert werden, weil es keine Merhfachbuchungen "
+"erlaubt."
 
-#: add-ons/multiple-bookings/multiple-booking.php:99
+#: add-ons/multiple-bookings/multiple-booking.php:101
 msgid ""
 "Unfortunately, your booking for %s was removed from your cart as there are "
 "not enough spaces anymore."
 msgstr ""
-"Leider wurde Deine Reservierung für %s aus dem Warenkorb entfernt, da nicht "
-"mehr genügend Plätze verfügbar sind."
+"Leider wurde Deine Buchung für %s aus dem Warenkorb entfernt, da nicht mehr "
+"genügend Plätze verfügbar sind."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:15
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:18
 msgid "Cart"
 msgstr "Warenkorb"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:15
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:18
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:16
-#: add-ons/multiple-bookings/multiple-bookings.php:335
+#: add-ons/multiple-bookings/multiple-bookings.php:357
 msgid "Checkout"
 msgstr "zur Kasse"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:16
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:19
 msgid ""
 "This page corresponds to the <strong>Events Manager</strong> %s page. Its "
 "content will be overriden by Events Manager, although if you include the "
@@ -79,12 +468,12 @@ msgstr ""
 "CONTENTS (in Großbuchstaben) irgendwo in umgebendem Text verwendest, wird "
 "nur CONTENTS überschrieben."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:36
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
 msgid "Multiple Bookings Mode"
 msgstr "Mehrfachbuchungsmodus"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:35
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:48
 msgid ""
 "Multiple Bookings Mode enables your visitors to make bookings follow a flow "
 "similar to that of a shopping cart, meaning users can book multiple events "
@@ -92,43 +481,43 @@ msgid ""
 msgstr ""
 "Mehrfachbuchungsmodus erlaubt Deinen Besuchern, einen Warenkorb von Tickets "
 "für verschiedene Veranstaltungen zu benutzen, um in einem Schritts für "
-"mehrere Veranstaltungen zu reservieren und bezahlen."
+"mehrere Veranstaltungen zu buchen und bezahlen."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:36
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
 msgid "More about %s."
 msgstr "Mehr über %s."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:40
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:53
 msgid "Enable Muliple Bookings Mode?"
 msgstr "Mehrfachbuchungsmodus aktivieren?"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:44
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:57
 msgid "Checkout Page"
 msgstr "\"zur Kasse\" Seite"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:50
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:63
 msgid ""
 "This page will be where the user reviews their bookings, enters additional "
 "information (such as user registration info) and proceeds with payment."
 msgstr ""
-"Diese Seite wird verwendet, damit die Benutzer ihre Reservierungen ansehen "
-"und weitere Informationen (wie Benutzer-Registrierungsinfos) eingeben und "
-"zur Zahlung fortfahren können."
+"Diese Seite wird verwendet, damit die Benutzer ihre Buchungen ansehen und "
+"weitere Informationen (wie Benutzer-Registrierungsinfos) eingeben und zur "
+"Zahlung fortfahren können."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:51
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:67
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:64
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:80
 msgid ""
 "Please <a href=\"%s\">add a new page</a> and assign it here. This is "
 "required for Multiple Bookings Mode to work."
 msgstr ""
 "Bitte <a href=\"%s\">kreiere eine neue Seite</a> und ordne sie hier zu. Dies "
-"wird für den Mehrfachreservierungsmodus benötigt."
+"wird für den Mehrfachbuchungsmodus benötigt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:57
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:70
 msgid "Redirect To Checkout on Booking?"
-msgstr "Umleitung \"zur Kasse\" für Reservierung?"
+msgstr "Umleitung \"zur Kasse\" für Buchung?"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:57
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:70
 msgid ""
 "It set to yes, when a booking has been added to the cart, the user will be "
 "redirected to the checkout page. Whilst redirecting the confirmation message "
@@ -139,11 +528,11 @@ msgstr ""
 "umgeleitet. Während des Umleitungsvorganges wird die unten stehende "
 "Nachricht angezeigt. Du kannst diese Nachricht personalisieren."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:58
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:71
 msgid "Checkout Page Booking Form"
-msgstr "\"zur Kasse\" Seite Reservierungsformular"
+msgstr "\"zur Kasse\" Seite Buchungsformular"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:58
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:71
 msgid ""
 "This form will be shown on the checkout page, which should include user "
 "fields you may want when registering new users. Any non-user fields will be "
@@ -151,38 +540,38 @@ msgid ""
 "Field IDs on the individual event booking form, that field value will be "
 "saved to the individual booking instead."
 msgstr ""
-"Dieses Formular wird als \"zur Kasse\" Seite verwendet. Es sollt "
+"Dieses Formular wird als \"zur Kasse\" Seite verwendet. Es sollte "
 "Benutzerfelder enthalten, die Du zur Registrierung neuer Benutzer verwenden "
 "willst. Alle Nicht-Benutzer Felder werden automatisch als Zusatzinformation "
-"zu jeder Reservierung gespeichert. Wenn Du identische Feld IDs auf "
-"individuellen Reservierungsformularen verwendest, werden diese Werte "
-"stattdessen zu den individuellen reservierungen gespeichert."
+"zu jeder Buchung gespeichert. Wenn Du identische Feld IDs auf individuellen "
+"Buchungsformularen verwendest, werden diese Werte stattdessen zu den "
+"individuellen Buchungen gespeichert."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:61
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:74
 msgid "Cart Page"
 msgstr "Warenkorb Seite"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:66
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:79
 msgid ""
 "This page will display the events the user has chosen to book and allow them "
 "to edit their bookings before checkout."
 msgstr ""
-"Diese Seite zeigt dem Benutzer, für welche Veranstaltungen er reserviert hat "
-"und ermöglicht ihm, die Reservierungen vor der Bezahlung zu ändern."
+"Diese Seite zeigt dem Benutzer, für welche Veranstaltungen er gebucht hat "
+"und ermöglicht ihm, die Buchungen vor der Bezahlung zu ändern."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:72
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:85
 msgid "Successfully Added Message"
 msgstr "Nachricht erfolgreich hinzugefügt"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:72
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:85
 msgid "A booking was successfull added to the bookings cart."
-msgstr "Eine Reservierung wurde erfolgreich dem Warenkorb hinzugefügt."
+msgstr "Eine Buchung wurde erfolgreich dem Warenkorb hinzugefügt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:73
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:86
 msgid "Loading Cart Contents"
 msgstr "Lade Warenkorb-Inhalte"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:73
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:86
 msgid ""
 "If caching plugins are used, cart contents are loaded after a page load and "
 "this text is shown whilst loading."
@@ -190,216 +579,235 @@ msgstr ""
 "Wenn Caching Plugins verwendet werden, werden die Warenkorb-Inhalte nach der "
 "Seite geladen und dieser Text wird während des Ladens angezeigt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:74
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:87
 msgid "Event Already Booked"
-msgstr "Veranstaltung schon reserviert"
+msgstr "Veranstaltung schon gebucht"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:74
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:87
 msgid ""
 "This event has already been added to the cart and cannot be added twice."
 msgstr ""
 "Diese Veranstaltung wurde schon dem Warenkorb hinzugefügt und kann nicht "
-"zweimal reserviert werden."
+"zweimal gebucht werden."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:75
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:88
 msgid "No Bookings"
-msgstr "Keine Reservierungen"
+msgstr "Keine Buchungen"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:75
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:88
 msgid "User has not booked any events yet, cart is empty."
-msgstr ""
-"Benutzer hat noch für keine Veranstaltung reserviert. Warenkorb ist leer."
+msgstr "Benutzer hat noch für keine Buchung gebucht. Warenkorb ist leer."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:76
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:89
 msgid "Empty Cart Warning"
 msgstr "Warnung leerer Warenkorb"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:76
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:89
 msgid "Warning after the \"empty cart\" button is clicked."
 msgstr "Warnung, nachdem \"leerer Warenkorb\" Knopf gedrückt wurde."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:77
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:90
 msgid "Checkout Form Button"
 msgstr "\"zur Kasse\" Formular Knopf"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:77
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:90
 msgid "The text shown in the checkout page form."
 msgstr "Text, der im \"zur Kasse\" Formular gezeigt wird."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:102
+#: add-ons/emails/custom-emails-admin.php:261
+#: add-ons/emails/custom-emails-admin.php:262
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:117
 msgid "Multiple Booking Email Templates"
-msgstr "Mehrfachreservierung Email-Vorlagen"
+msgstr "Emailvorlagen für Merfachbuchungen"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:106
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:123
 msgid "You can disable this email by leaving the subject blank."
 msgstr "Betreff leer lassen, um dies zu deaktiveren."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:107
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
 msgid "Email event owners?"
 msgstr "Email an Veranstalter?"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:107
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
 msgid ""
 "If enabled, additional emails will be sent to administrators and event "
 "owners for EVERY event booked based on the above %s settings."
 msgstr ""
-"Wenn aktiviert, werden für JEDE reservierte Veranstaltung zusätzliche Emails "
-"an Administratoren und Veranstalter basierend auf den obigen %s "
-"Einstellungen."
+"Wenn aktiviert, werden für JEDE gebuchte Veranstaltung zusätzliche Emails an "
+"Administratoren und Veranstalter basierend auf den obigen %s Einstellungen."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:107
+#: add-ons/emails/custom-emails-admin.php:251
+#: add-ons/emails/custom-emails-admin.php:252
+#: add-ons/emails/custom-emails-admin.php:452
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:119
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
 msgid "Booking Email Templates"
-msgstr "Reservierungs-Email Vorlagen"
+msgstr "Vorlagen für Buchungsemail"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:109
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:126
 msgid "Event Admin/Owner Emails"
 msgstr "Veranstalter Emails"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:111
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:128
 msgid "Contact person booking confirmed"
-msgstr "Kontaktperson Reservierungsbestätigung"
+msgstr "Kontaktperson für Buchungsbestätigung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:112
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:129
 msgid ""
 "An email will be sent to the event contact when a booking is first made."
 msgstr ""
 "Wenn eine Erstbuchung durchgeführt wird, wird diese Email an die "
 "Kontaktperson der Veranstaltung gesandt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:115
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:132
 msgid "Contact person email subject"
 msgstr "Kontaktperson Email Betreff"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:116
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:133
 msgid "Contact person email"
 msgstr "Kontaktperson Email"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:119
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:136
 msgid "Contact person booking cancelled"
-msgstr "Kontaktperson Reservierung storniert"
+msgstr "Kontaktperson für stornierte Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:120
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:137
 msgid ""
 "An email will be sent to the event contact if someone cancels their booking."
 msgstr ""
-"Wenn jemand seine Reservierung storniert, wird eine Email an die "
-"Kontaktperson der Veranstaltung versandt."
+"Wenn jemand seine Buchung storniert, wird eine Email an die Kontaktperson "
+"der Veranstaltung versandt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:123
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:140
 msgid "Contact person cancellation subject"
 msgstr "Kontaktperson Storno Betreff"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:141
 msgid "Contact person cancellation email"
 msgstr "Kontaktperson Storno Email"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:126
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:143
 msgid "Booked User Emails"
-msgstr "Reservierte Benutzer Emails"
+msgstr "Emails für Veranstaltungsteilnehmer"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:128
+#: add-ons/emails/custom-emails-admin.php:161
+#: add-ons/emails/custom-emails-admin.php:170
+#: add-ons/emails/custom-emails-admin.php:329
+#: add-ons/emails/custom-emails-admin.php:338
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:145
 msgid "Confirmed booking email"
-msgstr "Reservierungsbestätigung Email"
+msgstr "Buchungsbestätigung Email"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:129
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:146
 msgid ""
 "This is sent when a person's booking is confirmed. This will be sent "
 "automatically if approvals are required and the booking is approved. If "
 "approvals are disabled, this is sent out when a user first submits their "
 "booking."
 msgstr ""
-"Dies wird versandt, wenn eine Reservierung bestätigt wird. Bei Notwendigkeit "
+"Dies wird versandt, wenn eine Buchung bestätigt wird. Bei Notwendigkeit "
 "einer Genehmigung wird die Nachricht nach Genehmigung automatisch versandt. "
 "Wenn Genehmigungen deaktiviert sind, wird die Nachricht sofort versandt."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:132
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:149
 msgid "Booking confirmed email subject"
-msgstr "Reservierungsbestätigung Email Betreff"
+msgstr "Emailbetreff für Buchungsbestätigung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:133
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:150
 msgid "Booking confirmed email"
-msgstr "Reservierungsbestätigung Email"
+msgstr "Email für Buchungsbestätigung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:136
+#: add-ons/emails/custom-emails-admin.php:160
+#: add-ons/emails/custom-emails-admin.php:169
+#: add-ons/emails/custom-emails-admin.php:328
+#: add-ons/emails/custom-emails-admin.php:337
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:153
 msgid "Pending booking email"
-msgstr "Wartende Reservierung Email"
+msgstr "Email für offene Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:137
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:154
 msgid ""
 "This will be sent to the person when they first submit their booking. Not "
 "relevant if bookings don't require approval."
 msgstr ""
-"Diese Nachricht wird versandt, wenn eine Genehmigung für eine Reservierung "
+"Diese Nachricht wird versandt, wenn eine Genehmigung für eine Buchung "
 "notwendig ist."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:140
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:157
 msgid "Booking pending email subject"
-msgstr "Wartende Reservierung Email Betreff"
+msgstr "Emailbetreff für offene Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:141
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:158
 msgid "Booking pending email"
-msgstr "Wartende Reservierung Email"
+msgstr "Email für offene Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:144
+#: add-ons/emails/custom-emails-admin.php:171
+#: add-ons/emails/custom-emails-admin.php:339
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:161
 msgid "Rejected booking email"
-msgstr "Abgelehnte Reservierung Email"
+msgstr "Email für abgelehnte Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:145
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:162
 msgid ""
 "This will be sent automatically when a booking is rejected. Not relevant if "
 "bookings don't require approval."
 msgstr ""
-"Diese Nachricht wird versandt, wenn eine Reservierung abgelehnt wurde. Nicht "
-"relevant, wenn Reservierungen nicht genehmigt werden müssen."
+"Diese Nachricht wird versandt, wenn eine Buchung abgelehnt wurde. Nicht "
+"relevant, wenn Buchungen nicht genehmigt werden müssen."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:148
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:165
 msgid "Booking rejected email subject"
-msgstr "Reservierung abgelehnt Email Betreff"
+msgstr "Email Betreff für abgelehnte Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:149
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:166
 msgid "Booking rejected email"
-msgstr "Reservierung abgelehnt Email"
+msgstr "Email für abgelehnte Buchung"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:152
+#: add-ons/emails/custom-emails-admin.php:162
+#: add-ons/emails/custom-emails-admin.php:172
+#: add-ons/emails/custom-emails-admin.php:330
+#: add-ons/emails/custom-emails-admin.php:340
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:169
 msgid "Booking cancelled"
-msgstr "Reservierung storniert"
+msgstr "Buchung storniert"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:153
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:170
 msgid "This will be sent when a user cancels their booking."
 msgstr "Diese Email wird versandt, wenn Benutzer ihre Resevierung stornieren."
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:156
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:173
 msgid "Booking cancelled email subject"
-msgstr "Reservierung storniert Email Betreff"
+msgstr "Email Betreff für Buchungsstorno"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:157
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:174
 msgid "Booking cancelled email"
-msgstr "Reservierung storniert Email"
+msgstr "Email für Buchungsstorno"
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:13
-#: add-ons/multiple-bookings/multiple-bookings.php:332
+#: add-ons/multiple-bookings/multiple-bookings.php:354
 msgid "Event Bookings Cart"
 msgstr "Veranstaltungs-Warenkorb"
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:15
-#: add-ons/multiple-bookings/multiple-bookings.php:334
+#: add-ons/multiple-bookings/multiple-bookings.php:356
 msgid "Loading..."
 msgstr "Lade..."
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:17
-#: add-ons/multiple-bookings/multiple-bookings.php:336
+#: add-ons/multiple-bookings/multiple-bookings.php:358
 msgid "View Cart"
 msgstr "Warenkorb anzeigen"
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:18
-#: add-ons/multiple-bookings/multiple-bookings.php:337
+#: add-ons/multiple-bookings/multiple-bookings.php:359
 msgid "No events booked yet"
-msgstr "Noch keine Veranstaltungen reserviert"
+msgstr "Noch keine Veranstaltungen gebucht"
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:20
 msgid ""
 "Display a shopping cart widget for currently booked events to check out."
-msgstr "Warenkorb Widget für aktuell reservierte Veranstaltungen anzeigen."
+msgstr "Warenkorb Widget für aktuell gebuchte Veranstaltungen anzeigen."
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:56
 msgid "List item format"
@@ -411,47 +819,46 @@ msgstr "Lade Text"
 
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:64
 msgid "No bookings text"
-msgstr "Kein Reservierungstext"
+msgstr "Kein Buchungstext"
 
-#: add-ons/multiple-bookings/multiple-bookings.php:133
+#: add-ons/multiple-bookings/multiple-bookings.php:137
 msgid ""
 "Sorry for the inconvenience, but we are having technical issues adding your "
 "bookings, please contact an administrator about this issue."
 msgstr ""
-"Verzeihung, aber wir haben technische Probleme, Deine Reservierung zu "
-"speichern. Bitte informiere einen Administrator über dieses Problem."
+"Verzeihung, aber wir haben technische Probleme, Deine Buchung zu speichern. "
+"Bitte informiere einen Administrator über dieses Problem."
 
-#: add-ons/multiple-bookings/multiple-bookings.php:153
+#: add-ons/multiple-bookings/multiple-bookings.php:175
 msgid "Could not remove booking due to an unexpected error."
 msgstr ""
-"Reservierung konnte aufgrund eines unerwarteten Fehlers nicht entfernt "
-"werden."
+"Buchung konnte aufgrund eines unerwarteten Fehlers nicht entfernt werden."
 
-#: add-ons/multiple-bookings/multiple-bookings.php:378
+#: add-ons/multiple-bookings/multiple-bookings.php:441
 msgid ""
 "This single booking is part of a larger booking made by this person at once. "
 "<a href=\"%s\">View Main Booking</a>."
 msgstr ""
-"Diese Einzelreservierung ist Teil einer größeren Gesamt-Reservierung dieser "
-"Person. <a href=\"%s\">Gesamt-Reservierung anzeigen</a>."
+"Diese Einzelbuchung ist Teil einer größeren Gesamt-Buchung dieser Person. <a "
+"href=\"%s\">Gesamt-Buchung anzeigen</a>."
 
-#: add-ons/multiple-bookings/multiple-bookings.php:382
+#: add-ons/multiple-bookings/multiple-bookings.php:445
 msgid ""
 "This booking contains a set of bookings made by this person. To edit "
 "particular bookings click on the relevant links below."
 msgstr ""
-"Diese Reservierung enthält einen Satz von Reservierungen dieser Person. Um "
-"bestimmte Reservierungen zu bearbeiten, klicke auf den relevanten Link unten."
+"Diese Buchung enthält einen Satz von Buchungen dieser Person. Um bestimmte "
+"Buchungen zu bearbeiten, klicke auf den relevanten Link unten."
 
-#: emp-admin.php:26
+#: emp-admin.php:18
 msgid "Logging"
 msgstr "Logging"
 
-#: emp-admin.php:28
+#: emp-admin.php:20
 msgid "Enable Logging?"
 msgstr "Logging aktivieren?"
 
-#: emp-admin.php:28
+#: emp-admin.php:20
 msgid ""
 "If enabled, a folder called %s will be created. Please ensure that your wp-"
 "contents folder is writable by the server."
@@ -459,7 +866,7 @@ msgstr ""
 "Wenn aktiviert, wird ein Ordner namens %s angelegt. Bitte sorge dafür, dass "
 "das wp-contents Ordner auf Deinem Server beschreibbar ist."
 
-#: emp-admin.php:37
+#: emp-admin.php:29
 msgid ""
 "Could not create a log directory, please make sure your wp-content is "
 "writeable.em-pro"
@@ -467,7 +874,7 @@ msgstr ""
 "Konnte Log-Verzeichnis nicht anlegen. Bitte stelle sicher, dass das wp-"
 "content Verzeichnis beschreibbar ist."
 
-#: emp-forms.php:684
+#: emp-forms.php:706
 msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
 msgstr "<strong>FEHLER</strong>: Die Email Adresse ist falsch."
 
@@ -478,114 +885,112 @@ msgid ""
 "#_EVENTTIMES<br />Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br />We look "
 "forward to seeing you there!<br />Yours faithfully,<br />#_CONTACTNAME"
 msgstr ""
-"Hallo #_BOOKINGNAME, <br />Dies ist eine Erinnerungs-Email an Deine "
-"Reservierung für #_EVENTNAME.<br />Reservierte Plätze: #_BOOKINGSPACES<br /"
-">Wann: #EVENTDATES @ _#EVENTTIMES<br />Wo: #_LOCATIONNAME - "
-"#LOCATIONFULLLINE<br />Wir freuen uns auf Deinen Besuch!<br />Viele Grüße,"
-"<br />#_CONTACTNAME"
+"Hallo #_BOOKINGNAME, <br />Dies ist eine Erinnerungs-Email an Deine Buchung "
+"für #_EVENTNAME.<br />Gebuchte Plätze: #_BOOKINGSPACES<br />Wann: "
+"#EVENTDATES @ _#EVENTTIMES<br />Wo: #_LOCATIONNAME - #LOCATIONFULLLINE<br /"
+">Wir freuen uns auf Deinen Besuch!<br />Viele Grüße,<br />#_CONTACTNAME"
 
-#: emp-install.php:203
+#: emp-install.php:209
 msgid "Your booking was added to your shopping cart."
-msgstr "Deine Reservierung wurde zum Warenkorb hinzugefügt."
+msgstr "Deine Buchung wurde zum Warenkorb hinzugefügt."
 
-#: emp-install.php:204
+#: emp-install.php:210
 msgid ""
 "You have already booked a spot at this eventin your cart, please modify or "
 "delete your current booking."
 msgstr ""
-"Du hast schon eine Reservierung für diese Veranstaltung in Deinem Warenkorb. "
-"Bitte modifiziere oder lösche Deine aktuelle Reservierung."
+"Du hast schon eine Buchung für diese Veranstaltung in Deinem Warenkorb. "
+"Bitte modifiziere oder lösche Deine aktuelle Buchung."
 
-#: emp-install.php:205
+#: emp-install.php:211
 msgid "You have not booked any events yet. Your cart is empty."
-msgstr "Du hast noch nichts reserviert. Dein Warenkorb ist leer."
+msgstr "Du hast noch nichts gebucht. Dein Warenkorb ist leer."
 
-#: emp-install.php:206
+#: emp-install.php:212
 msgid "Loading Cart Contents..."
 msgstr "Lade Warenkorb Inhalte...."
 
-#: emp-install.php:207
+#: emp-install.php:213
 msgid "Are you sure you want to empty your cart?"
 msgstr "Bist Du sicher, dass Du den Warenkorb leeren möchtest?"
 
-#: emp-install.php:208
+#: emp-install.php:214
 msgid "Place Order"
 msgstr "Auftrag erteilen"
 
-#: emp-install.php:210
+#: emp-install.php:216
 msgid "New Booking"
-msgstr "Neue Reservierung"
+msgstr "Neue Buchung"
 
-#: emp-install.php:211
+#: emp-install.php:217
 msgid ""
 "#_BOOKINGNAME (#_BOOKINGEMAIL) has made a booking: <br />#_BOOKINGSUMMARY"
-msgstr ""
-"#_BOOKINGNAME (#_BOOKINGEMAIL) hat reserviert für:<br />#_BOOKINGSUMMARY"
+msgstr "#_BOOKINGNAME (#_BOOKINGEMAIL) hat gebucht für:<br />#_BOOKINGSUMMARY"
 
-#: emp-install.php:214 emp-install.php:230
+#: emp-install.php:220 emp-install.php:236
 msgid "Booking Cancelled"
-msgstr "Reservierung storniert"
+msgstr "Buchung storniert"
 
-#: emp-install.php:215
+#: emp-install.php:221
 msgid ""
 "#_BOOKINGNAME (#_BOOKINGEMAIL) has cancelled a booking: <br /"
 ">#_BOOKINGSUMMARY"
 msgstr ""
-"#_BOOKINGNAME (#_BOOKINGEMAIL) hat seine Reservierung storniert:<br /"
+"#_BOOKINGNAME (#_BOOKINGEMAIL) hat seine Buchung storniert:<br /"
 ">#_BOOKINGSUMMARY"
 
-#: emp-install.php:218
+#: emp-install.php:224
 msgid "Booking Confirmed"
-msgstr "Reservierung bestätigt"
+msgstr "Buchung bestätigt"
 
-#: emp-install.php:219
+#: emp-install.php:225
 msgid ""
 "Dear #_BOOKINGNAME, <br />Your booking has been confirmed. <br />Below is a "
 "summary of your booking: <br />#_BOOKINGSUMMARY <br />We look forward to "
 "seeing you there!"
 msgstr ""
-"Hallo #_BOOKINGNAME,<br />Deine Reservierung ist bestätigt.<br />Hier eine "
-"Zusammenfassung Deiner Reservierung:<br />#_BOOKINGSUMMARY <br />Wir freuen "
-"uns auf Dich!"
+"Hallo #_BOOKINGNAME,<br />Deine Buchung ist bestätigt.<br />Hier eine "
+"Zusammenfassung Deiner Buchung:<br />#_BOOKINGSUMMARY <br />Wir freuen uns "
+"auf Dich!"
 
-#: emp-install.php:222
+#: emp-install.php:228
 msgid "Booking Pending"
 msgstr "Wartende Buchung"
 
-#: emp-install.php:223
+#: emp-install.php:229
 msgid ""
 "Dear #_BOOKINGNAME, <br />Your booking is currently pending approval by our "
 "administrators. Once approved you will receive another confirmation email. "
 "<br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
-"Hallo #_BOOKINGNAME, <br />Deine Reservierung wartet derzeit auf Genehmigung "
+"Hallo #_BOOKINGNAME, <br />Deine Buchung wartet derzeit auf Genehmigung "
 "durch einen Administrator. Sobald die Genehmigung erteilt ist, erhältst Du "
-"eine Reservierungsbestätigung per Email.<br />Hier eine Zusammenfassung "
-"Deiner Reservierung:<br />#_BOOKINGSUMMARY"
+"eine Buchungsbestätigung per Email.<br />Hier eine Zusammenfassung Deiner "
+"Buchung:<br />#_BOOKINGSUMMARY"
 
-#: emp-install.php:226
+#: emp-install.php:232
 msgid "Booking Rejected"
-msgstr "Reservierung abgelehnt"
+msgstr "Buchung abgelehnt"
 
-#: emp-install.php:227
+#: emp-install.php:233
 msgid ""
 "Dear #_BOOKINGNAME, <br />Your requested booking has been rejected. <br /"
 ">Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
-"Hallo #_BOOKINGNAME, <br />Deine Reservierung wurde abgelehnt.<br />Hier "
-"eine Zusammenfassung Deiner Reservierung:<br />#_BOOKINGSUMMARY"
+"Hallo #_BOOKINGNAME, <br />Deine Buchung wurde abgelehnt.<br />Hier eine "
+"Zusammenfassung Deiner Buchung:<br />#_BOOKINGSUMMARY"
 
-#: emp-install.php:231
+#: emp-install.php:237
 msgid ""
 "Dear #_BOOKINGNAME, <br />Your requested booking has been cancelled. <br /"
 ">Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
 msgstr ""
-"Hallo #_BOOKINGNAME,<br />Deine Reservierung wurde storniert.<br />Hier eine "
-"Zusammenfassung Deiner Reservierung:<br />#_BOOKINGSUMMARY"
+"Hallo #_BOOKINGNAME,<br />Deine Buchung wurde storniert.<br />Hier eine "
+"Zusammenfassung Deiner Buchung:<br />#_BOOKINGSUMMARY"
 
 #: templates/multiple-bookings/admin-cart-table.php:30
 msgid "edit booking"
-msgstr "Reservierung bearbeiten"
+msgstr "Buchung bearbeiten"
 
 #: templates/multiple-bookings/admin-cart-table.php:35
 #: templates/multiple-bookings/admin-cart-table.php:38
@@ -597,20 +1002,23 @@ msgstr "Details"
 #: templates/multiple-bookings/admin-cart-table.php:47
 #: templates/multiple-bookings/cart-table.php:55
 msgid "Booking Information"
-msgstr "Reservierungsinformation"
+msgstr "Buchungsinformation"
 
 #: templates/multiple-bookings/admin-cart-table.php:99
 #: templates/multiple-bookings/cart-table.php:107
+#: templates/placeholders/bookingsummary-multiple.php:42
 msgid "Sub Total"
 msgstr "Zwischensumme"
 
 #: templates/multiple-bookings/admin-cart-table.php:112
 #: templates/multiple-bookings/cart-table.php:120
+#: templates/placeholders/bookingsummary-multiple.php:55
 msgid "Taxes"
 msgstr "Steuern"
 
 #: templates/multiple-bookings/admin-cart-table.php:125
 #: templates/multiple-bookings/cart-table.php:133
+#: templates/placeholders/bookingsummary-multiple.php:68
 msgid "Total Price"
 msgstr "Gesamtpreis"
 
@@ -620,7 +1028,7 @@ msgstr "Du hast nicht die Rechte, diese Veranstaltung zu bearbeiten."
 
 #: templates/multiple-bookings/admin.php:18
 msgid "Edit Booking"
-msgstr "Reservierung bearbeiten"
+msgstr "Buchung bearbeiten"
 
 #: templates/multiple-bookings/admin.php:26
 msgid "Personal Details"
@@ -628,7 +1036,7 @@ msgstr "Persönliche Details"
 
 #: templates/multiple-bookings/admin.php:35
 msgid "Booking Details"
-msgstr "Reservierungsdetails"
+msgstr "Buchungsdetails"
 
 #: templates/multiple-bookings/admin.php:48
 msgid "Change"
@@ -666,7 +1074,7 @@ msgid ""
 "approving new bookings (i.e. you can overbook)."
 msgstr ""
 "<strong>Hinweis:</strong> Ticketverfügbarkeit wird bei Genehmigung von neuen "
-"Reservierungen nicht geprüft (d.h., Du kannst überbuchen)"
+"Buchungen nicht geprüft (d.h., Du kannst überbuchen)"
 
 #: templates/multiple-bookings/admin.php:79
 msgid ""
@@ -675,16 +1083,16 @@ msgid ""
 "booking form, click the edit link on your bookings above."
 msgstr ""
 "Du bearbeitest Informationen, die von einem \"zur Kasse\" Formular kommen. "
-"Um Informationen einer spezifischen Reservierung zu - inklusive der "
-"Formulardaten - bearbeiten, klicke auf den Link Deiner Reservierungen oben."
+"Um Informationen einer spezifischen Buchung zu - inklusive der Formulardaten "
+"- bearbeiten, klicke auf den Link Deiner Buchungen oben."
 
 #: templates/multiple-bookings/admin.php:84
 msgid "Modify Booking Information"
-msgstr "Reservierungsinformationen bearbeiten"
+msgstr "Buchungsinformationen bearbeiten"
 
 #: templates/multiple-bookings/admin.php:124
 msgid "Booking Notes"
-msgstr "Reservierungsnotizen"
+msgstr "Buchungsnotizen"
 
 #: templates/multiple-bookings/admin.php:127
 msgid ""
@@ -708,109 +1116,119 @@ msgstr "Leerer Warenkorb"
 msgid "Proceed to Checkout"
 msgstr "Weiter zur Kasse"
 
-#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form/attendee-forms.php:39
+#: add-ons/emails/custom-emails-admin.php:86
 #: add-ons/multiple-bookings/multiple-bookings-widget.php:52
 msgid "Title"
 msgstr "Titel"
 
-#: add-ons/bookings-form/attendee-forms.php:40
-#: add-ons/bookings-form/attendee-forms.php:176
-#: add-ons/bookings-form/attendee-forms.php:315
-#: add-ons/bookings-form/attendee-forms.php:488
-#: templates/placeholders/bookingattendees-ticket.php:22
+#: add-ons/bookings-form/attendee-forms.php:39
+#: add-ons/bookings-form/attendee-forms.php:169
+#: add-ons/bookings-form/attendee-forms.php:192
+#: add-ons/bookings-form/attendee-forms.php:331
+#: add-ons/bookings-form/attendee-forms.php:505
 msgid "Attendee %s"
 msgstr "Teilnehmer %s"
 
-#: add-ons/bookings-form/attendee-forms.php:61
-#: add-ons/bookings-form/attendee-forms.php:587 add-ons/bookings-form.php:80
-#: add-ons/bookings-form.php:427 add-ons/gateways/gateway.paypal.php:472
-#: emp-install.php:145 emp-install.php:253
+#: add-ons/bookings-form/attendee-forms.php:67
+#: add-ons/bookings-form/attendee-forms.php:599
+#: add-ons/bookings-form/bookings-form.php:78
+#: add-ons/bookings-form/bookings-form.php:389
+#: add-ons/emails/custom-emails-admin.php:75
+#: add-ons/gateways/gateway.paypal.php:472 emp-install.php:145
+#: emp-install.php:259
 msgid "Default"
 msgstr "Standard"
 
-#: add-ons/bookings-form/attendee-forms.php:358
+#: add-ons/bookings-form/attendee-forms.php:375
 #: templates/multiple-bookings/admin-cart-table.php:26
 #: templates/multiple-bookings/cart-table.php:31
 msgid "Where"
 msgstr "Wo"
 
-#: add-ons/bookings-form/attendee-forms.php:359
+#: add-ons/bookings-form/attendee-forms.php:376
 #: templates/multiple-bookings/admin-cart-table.php:25
 #: templates/multiple-bookings/cart-table.php:30
 msgid "When"
 msgstr "Wann"
 
-#: add-ons/bookings-form/attendee-forms.php:361
+#: add-ons/bookings-form/attendee-forms.php:378
 msgid "Exported bookings on %s"
-msgstr "Export der Reservierungen vom %s"
+msgstr "Export der Buchungen vom %s"
 
-#: add-ons/bookings-form/attendee-forms.php:403
+#: add-ons/bookings-form/attendee-forms.php:420
 msgid "Split bookings by attendee"
-msgstr "Reservierungen nach Teilnehmern aufteilen"
+msgstr "Buchungen nach Teilnehmern aufteilen"
 
-#: add-ons/bookings-form/attendee-forms.php:404
+#: add-ons/bookings-form/attendee-forms.php:421
 msgid ""
 "A row will be created for each space booked and will automatically include "
 "any attendee information associated with that booked ticket."
 msgstr ""
-"Für jeden reservierten Platz wird eine Zeile erstellt, die "
-"Teilnehmerinformationen des reservierten Tickets beinhaltet."
+"Für jeden gebuchten Platz wird eine Zeile erstellt, die "
+"Teilnehmerinformationen des gebuchten Tickets beinhaltet."
 
-#: add-ons/bookings-form/attendee-forms.php:585
-#: add-ons/bookings-form/attendee-forms.php:731
+#: add-ons/bookings-form/attendee-forms.php:597
+#: add-ons/bookings-form/attendee-forms.php:743
 msgid "Selected Attendee Form"
 msgstr "Formular für ausgewählte Teilnehmer"
 
-#: templates/placeholders/bookingattendees-ticket.php:12
 #: templates/placeholders/bookingattendees.php:12
 msgid "Ticket"
 msgstr "Ticket"
 
-#: add-ons/bookings-form/attendee-forms.php:668 add-ons/bookings-form.php:485
+#: add-ons/bookings-form/attendee-forms.php:680
+#: add-ons/bookings-form/bookings-form.php:447
 msgid ""
 "The form <em>%s</em> is now the default booking form. All events without a "
 "pre-defined booking form will start using this form from now on."
 msgstr ""
-"Das Formular <em>%s</em> ist jetzt das Standard-Reservierungsformular. Alle "
+"Das Formular <em>%s</em> ist jetzt das Standard-Buchungsformular. Alle "
 "Veranstaltungen ohne eigenes Formular werden ab sofort dieses verwenden."
 
-#: add-ons/bookings-form/attendee-forms.php:674 add-ons/bookings-form.php:491
+#: add-ons/bookings-form/attendee-forms.php:686
+#: add-ons/bookings-form/bookings-form.php:453
 msgid "%s Deleted"
 msgstr "%s gelöscht"
 
-#: add-ons/bookings-form/attendee-forms.php:674 add-ons/bookings-form.php:422
-#: add-ons/bookings-form.php:491 add-ons/gateways/gateway.php:394
+#: add-ons/bookings-form/attendee-forms.php:686
+#: add-ons/bookings-form/bookings-form.php:384
+#: add-ons/bookings-form/bookings-form.php:453
+#: add-ons/gateways/gateway.php:426
 msgid "Booking Form"
-msgstr "Reservierungsformular"
+msgstr "Buchungsformular"
 
-#: add-ons/bookings-form/attendee-forms.php:682 add-ons/bookings-form.php:499
+#: add-ons/bookings-form/attendee-forms.php:694
+#: add-ons/bookings-form/bookings-form.php:461
 msgid "Form renamed to <em>%s</em>."
 msgstr "Formular umbenannt nach <em>%s</em>"
 
-#: add-ons/bookings-form/attendee-forms.php:694 add-ons/bookings-form.php:508
+#: add-ons/bookings-form/attendee-forms.php:706
+#: add-ons/bookings-form/bookings-form.php:470
 msgid "New form created. You are now editing your new form."
 msgstr "Neues Formular erzeugt. Du bearbeitest jetzt Dein neues Formular."
 
-#: add-ons/bookings-form/attendee-forms.php:715
+#: add-ons/bookings-form/attendee-forms.php:727
 msgid "Attendee Form"
 msgstr "Teilnehmerformular"
 
-#: add-ons/bookings-form/attendee-forms.php:718
+#: add-ons/bookings-form/attendee-forms.php:730
 msgid ""
 "If enabled, this form will be shown and required for every space booked."
 msgstr ""
-"Wenn aktiviert, wird dieses Formular angezeigt und ist für jeden "
-"reservierten Platz verpflichtend."
+"Wenn aktiviert, wird dieses Formular angezeigt und ist für jeden gebuchten "
+"Platz verpflichtend."
 
-#: add-ons/bookings-form/attendee-forms.php:721
+#: add-ons/bookings-form/attendee-forms.php:733
 msgid "Enable Attendee Forms"
 msgstr "Teilnehmerformulare aktivieren"
 
-#: add-ons/bookings-form/attendee-forms.php:746 add-ons/bookings-form.php:547
+#: add-ons/bookings-form/attendee-forms.php:758
+#: add-ons/bookings-form/bookings-form.php:509
 msgid "Make Default"
 msgstr "Zum Standard machen"
 
-#: add-ons/bookings-form/attendee-forms.php:746 add-ons/bookings-form.php:547
+#: add-ons/bookings-form/attendee-forms.php:758
 msgid ""
 "You are about to make this your default booking form. All events without an "
 "existing specifically chosen booking form will use this new default form "
@@ -819,17 +1237,18 @@ msgid ""
 " Are you sure you want to do this?"
 msgstr ""
 "Du bist dabei, diese Formular zu Deinem Standardformular zu machen. Alle "
-"Veranstaltungen, bei denen kein spezifisches Reservierungsformular angegeben "
+"Veranstaltungen, bei denen kein spezifisches Buchungsformular angegeben "
 "wird, werden ab sofort dieses verwenden\n"
 "\n"
 "Bist Du sicher?"
 
-#: add-ons/bookings-form/attendee-forms.php:755 add-ons/bookings-form.php:556
-#: add-ons/coupons/coupons-admin.php:126
+#: add-ons/bookings-form/attendee-forms.php:767
+#: add-ons/bookings-form/bookings-form.php:520
+#: add-ons/coupons/coupons-admin.php:148
 msgid "Add New"
 msgstr "Hinzufügen"
 
-#: add-ons/bookings-form/attendee-forms.php:759
+#: add-ons/bookings-form/attendee-forms.php:771
 msgid ""
 "This is the default attendee form and will be used for any event where you "
 "have not chosen a speficic form to use."
@@ -837,24 +1256,25 @@ msgstr ""
 "Dies ist das Standard Teilnehmerformular, das für alle Veranstaltungen "
 "verwendet wird, für die Du nicht ein spezifisches Formular ausgewählt hast."
 
-#: add-ons/bookings-form/attendee-forms.php:761
+#: add-ons/bookings-form/attendee-forms.php:773
 msgid ""
 "If you don't want to ask for attendee information by default, select None as "
 "your booking form and make it the default form."
 msgstr ""
 "Wenn Du nicht standardmäßig nach Teilnehmerinformationen fragen willst, "
-"wähle \"Keines\" als Dein Reservierungsformular und mache es zum "
-"Standardformular"
+"wähle \"Keines\" als Dein Buchungsformular und mache es zum Standardformular"
 
-#: add-ons/bookings-form/attendee-forms.php:765 add-ons/bookings-form.php:564
+#: add-ons/bookings-form/attendee-forms.php:777
+#: add-ons/bookings-form/bookings-form.php:528
 msgid "You are now editing "
 msgstr "Du bearbeitest jetzt"
 
-#: add-ons/bookings-form/attendee-forms.php:770 add-ons/bookings-form.php:569
+#: add-ons/bookings-form/attendee-forms.php:782
+#: add-ons/bookings-form/bookings-form.php:533
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: add-ons/bookings-form/attendee-forms.php:777 add-ons/bookings-form.php:576
+#: add-ons/bookings-form/attendee-forms.php:789
 msgid ""
 "Are you sure you want to delete this form?\n"
 "\n"
@@ -865,68 +1285,69 @@ msgstr ""
 "Alle Veranstaltungen, die dieses Formular verwenden, werden dann automatisch "
 "das Standardformular verwenden."
 
-#: add-ons/bookings-form/attendee-forms.php:786
+#: add-ons/bookings-form/attendee-forms.php:798
 msgid "Default Value"
 msgstr "Standardwert"
 
-#: add-ons/bookings-form/attendee-forms.php:786
+#: add-ons/bookings-form/attendee-forms.php:798
 msgid "No attendee form selected. Choose a form, or create a new one above."
 msgstr ""
 "Kein Teilnehmerformular ausgewählt. Wähle ein Formular oder erstelle oben "
 "ein neues."
 
-#: add-ons/bookings-form.php:51 add-ons/gateways.php:49 emp-install.php:148
-#: emp-install.php:159
+#: add-ons/bookings-form/bookings-form.php:49 add-ons/gateways/gateways.php:48
+#: emp-install.php:148 emp-install.php:159
 msgid "Address"
 msgstr "Anschrift"
 
-#: add-ons/bookings-form.php:52 add-ons/gateways.php:51 emp-install.php:149
-#: emp-install.php:161
+#: add-ons/bookings-form/bookings-form.php:50 add-ons/gateways/gateways.php:50
+#: emp-install.php:149 emp-install.php:161
 msgid "City"
 msgstr "Stadt"
 
-#: add-ons/bookings-form.php:53 add-ons/gateways.php:52 emp-install.php:150
-#: emp-install.php:162
+#: add-ons/bookings-form/bookings-form.php:51 add-ons/gateways/gateways.php:51
+#: emp-install.php:150 emp-install.php:162
 msgid "State/County"
 msgstr "Bundesland"
 
-#: add-ons/bookings-form.php:54 add-ons/gateways.php:53 emp-install.php:151
-#: emp-install.php:163
+#: add-ons/bookings-form/bookings-form.php:52 add-ons/gateways/gateways.php:52
+#: emp-install.php:151 emp-install.php:163
 msgid "Zip/Post Code"
 msgstr "Postleitzahl"
 
-#: add-ons/bookings-form.php:55 add-ons/gateways.php:54 emp-install.php:152
-#: emp-install.php:164
+#: add-ons/bookings-form/bookings-form.php:53 add-ons/gateways/gateways.php:53
+#: emp-install.php:152 emp-install.php:164
 msgid "Country"
 msgstr "Land"
 
-#: add-ons/bookings-form.php:57 add-ons/gateways.php:56 emp-install.php:154
-#: emp-install.php:166
+#: add-ons/bookings-form/bookings-form.php:55 add-ons/gateways/gateways.php:55
+#: emp-install.php:154 emp-install.php:166
 msgid "Fax"
 msgstr "Fax"
 
-#: add-ons/bookings-form.php:423
+#: add-ons/bookings-form/bookings-form.php:385
 msgid ""
 "You can choose to use a custom booking form, or leave as is to use the "
 "default booking form."
 msgstr ""
-"Du kannst ein eigenes Reservierungsformular wählen, oder das "
-"Standardformular verwenden."
+"Du kannst ein eigenes Buchungsformular wählen, oder das Standardformular "
+"verwenden."
 
-#: add-ons/bookings-form.php:425 add-ons/bookings-form.php:533
+#: add-ons/bookings-form/bookings-form.php:387
+#: add-ons/bookings-form/bookings-form.php:495
 msgid "Selected Booking Form"
-msgstr "Wähle Reservierungsformular"
+msgstr "Wähle Buchungsformular"
 
-#: add-ons/bookings-form.php:470
+#: add-ons/bookings-form/bookings-form.php:432
 msgid ""
 "You must include an E-mail field type for booking forms to work. These are "
 "used to create the user account and aren't shown to logged in users."
 msgstr ""
-"Du musst ein Email Feld mit angeben, damit Reservierungsformulare "
-"funktionieren. Diese werden verwendet, um Benutzerkonten anzulegen und "
-"werden den angemeldeten Benutzern nicht gezeigt."
+"Du musst ein Email Feld mit angeben, damit Buchungsformulare funktionieren. "
+"Diese werden verwendet, um Benutzerkonten anzulegen und werden den "
+"angemeldeten Benutzern nicht gezeigt."
 
-#: add-ons/bookings-form.php:529
+#: add-ons/bookings-form/bookings-form.php:491
 msgid ""
 "It is required that you have at least an email and name field so guest users "
 "can register."
@@ -934,32 +1355,32 @@ msgstr ""
 "Ein Email- und Namensfeld wird benötigt, dass sich Gast-Benutzer "
 "registrieren können."
 
-#: add-ons/bookings-form.php:530
+#: add-ons/bookings-form/bookings-form.php:492
 msgid ""
 "Registration fields are only shown to guest visitors by default. You can "
 "choose to show these fields and make them editable by logged in user in your "
 "<a href=\"%s\">PRO Booking Form Options</a>."
 msgstr ""
 "Registrierungsfelder werden nur Gastbenutzern standardmäßig angezeigt. Du "
-"kannst in Deinen <a href=\"%s\">PRO Reservierungsformular Optionen</a> "
+"kannst in Deinen <a href=\"%s\">PRO Buchungsformular Optionen</a> "
 "einstellen, ob diese Felder nur angezeigt werden, oder vom angemeldeten "
 "Benutzer geändert werden können."
 
-#: add-ons/bookings-form.php:559
+#: add-ons/bookings-form/bookings-form.php:523
 msgid ""
 "This is the default bookings form and will be used for any event where you "
 "have not chosen a speficic form to use."
 msgstr ""
-"Das ist das Standard-Reservierungsformular, das für jede Veranstaltung "
-"verwendet wird, für die Du kein spezifisches Formular ausgewählt hast."
+"Das ist das Standard-Buchungsformular, das für jede Veranstaltung verwendet "
+"wird, für die Du kein spezifisches Formular ausgewählt hast."
 
-#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:156
-#: add-ons/coupons/coupons-admin.php:166
+#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:178
+#: add-ons/coupons/coupons-admin.php:188
 msgid "Discount"
 msgstr "Rabatt"
 
-#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:153
-#: add-ons/coupons/coupons-admin.php:163
+#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:175
+#: add-ons/coupons/coupons-admin.php:185
 msgid "Code"
 msgstr "Code"
 
@@ -967,25 +1388,25 @@ msgstr "Code"
 msgid "%s is required."
 msgstr "%s wird benötigt."
 
-#: add-ons/coupons/coupon-admin.php:66
+#: add-ons/coupons/coupon-admin.php:70
 msgid "Something went wrong saving your %s."
 msgstr "Etwas ging schief beim Speichern von %s."
 
-#: add-ons/coupons/coupon-admin.php:66 add-ons/coupons/coupon-admin.php:70
-#: add-ons/coupons/coupon-admin.php:75 add-ons/coupons/coupon-admin.php:77
-#: add-ons/coupons/coupon-admin.php:97
+#: add-ons/coupons/coupon-admin.php:70 add-ons/coupons/coupon-admin.php:74
+#: add-ons/coupons/coupon-admin.php:79 add-ons/coupons/coupon-admin.php:81
+#: add-ons/coupons/coupon-admin.php:101
 msgid "Coupon"
 msgstr "Gutschein"
 
-#: add-ons/coupons/coupon-admin.php:70 add-ons/coupons/coupon-admin.php:77
+#: add-ons/coupons/coupon-admin.php:74 add-ons/coupons/coupon-admin.php:81
 msgid "Successfully saved %s"
 msgstr "%s erfolgreich gesichert"
 
-#: add-ons/coupons/coupon-admin.php:75
+#: add-ons/coupons/coupon-admin.php:79
 msgid "Something went wrong updating your %s."
 msgstr "Etwas ging schief beim Aktualisieren von %s."
 
-#: add-ons/coupons/coupon-admin.php:97
+#: add-ons/coupons/coupon-admin.php:101
 msgid "Successfully deleted %s"
 msgstr "%s erfolgreich gelöscht"
 
@@ -993,211 +1414,187 @@ msgstr "%s erfolgreich gelöscht"
 msgid "%s Off"
 msgstr "%s Nachlass"
 
-#: add-ons/coupons/coupons-admin.php:276 add-ons/coupons/coupons-admin.php:287
+#: add-ons/coupons/coupons-admin.php:298 add-ons/coupons/coupons-admin.php:309
 msgid "Original Total Price"
 msgstr "Originaler Gesamtpreis"
 
-#: add-ons/coupons/coupons-admin.php:277 add-ons/coupons/coupons-admin.php:288
+#: add-ons/coupons/coupons-admin.php:299 add-ons/coupons/coupons-admin.php:310
 msgid "Coupon Discount"
 msgstr "Rabattgutschein"
 
-#: add-ons/coupons.php:203
+#: add-ons/coupons/coupons.php:225
 msgid "Invalid coupon code provided"
 msgstr "Ungültiges Gutscheincode eingegeben"
 
-#: add-ons/coupons/coupons-admin.php:41 add-ons/coupons/coupons-admin.php:68
-#: add-ons/coupons/coupons-admin.php:134 add-ons/coupons/coupons-admin.php:137
+#: add-ons/coupons/coupons-admin.php:36 add-ons/coupons/coupons-admin.php:90
+#: add-ons/coupons/coupons-admin.php:156 add-ons/coupons/coupons-admin.php:159
 msgid "Coupons"
 msgstr "Gutscheine"
 
-#: add-ons/coupons/coupons-admin.php:68
+#: add-ons/coupons/coupons-admin.php:90
 msgid "Coupons Manager"
 msgstr "Gutscheinverwaltung"
 
-#: add-ons/coupons/coupons-admin.php:373 add-ons/coupons.php:317
-#: add-ons/coupons.php:473
+#: add-ons/coupons/coupons-admin.php:397 add-ons/coupons/coupons.php:365
+#: add-ons/coupons/coupons.php:521
 msgid "Coupon Code"
 msgstr "Gutscheincode"
 
-#: add-ons/coupons.php:151 add-ons/coupons.php:368
+#: add-ons/coupons/coupons.php:173 add-ons/coupons/coupons.php:416
 msgid "Coupon Not Found"
 msgstr "Gutschein nicht gefunden"
 
-#: add-ons/coupons.php:162 add-ons/coupons.php:377
+#: add-ons/coupons/coupons.php:184 add-ons/coupons/coupons.php:425
 msgid "Coupon Invalid"
 msgstr "Ungültiger Gutschein"
 
-#: add-ons/coupons/coupons-admin.php:42
+#: add-ons/coupons/coupons-admin.php:58
 msgid "Coupons selected here will be applied to bookings made for this event."
 msgstr ""
-"Hier ausgewählte Gutscheine werden für Reservierungen für diese "
-"Veranstaltung verwendet."
+"Hier ausgewählte Gutscheine werden für Buchungen für diese Veranstaltung "
+"verwendet."
 
-#: add-ons/coupons/coupons-admin.php:52
+#: add-ons/coupons/coupons-admin.php:70
 msgid "No coupons created yet."
 msgstr "Noch keine Gutscheine erstellt."
 
-#: add-ons/coupons/coupons-admin.php:55
-msgid ""
-"The following codes will be automatically available to this event as well"
-msgstr ""
-"Die folgenden Codes werden auch automatisch für diese Veranstaltungen "
-"verfügbar sein"
-
-#: add-ons/coupons/coupons-admin.php:125
+#: add-ons/coupons/coupons-admin.php:147
 msgid "Edit Coupons"
 msgstr "Gutschein bearbeiten"
 
-#: add-ons/coupons/coupons-admin.php:134
+#: add-ons/coupons/coupons-admin.php:156
 msgid "My %s"
 msgstr "Mein %s"
 
-#: add-ons/coupons/coupons-admin.php:137
+#: add-ons/coupons/coupons-admin.php:159
 msgid "All %s"
 msgstr "Alle %s"
 
-#: add-ons/coupons/coupons-admin.php:154 add-ons/coupons/coupons-admin.php:164
+#: add-ons/coupons/coupons-admin.php:176 add-ons/coupons/coupons-admin.php:186
 msgid "Created By"
 msgstr "Erstellt von"
 
-#: add-ons/coupons/coupons-admin.php:155 add-ons/coupons/coupons-admin.php:165
-#: add-ons/coupons/coupons-admin.php:386
+#: add-ons/coupons/coupons-admin.php:177 add-ons/coupons/coupons-admin.php:187
+#: add-ons/coupons/coupons-admin.php:410
 msgid "Description"
 msgstr "Beschreibung"
 
-#: add-ons/coupons/coupons-admin.php:157 add-ons/coupons/coupons-admin.php:167
-#: add-ons/coupons/coupons-admin.php:249
+#: add-ons/coupons/coupons-admin.php:179 add-ons/coupons/coupons-admin.php:189
+#: add-ons/coupons/coupons-admin.php:271
 msgid "Uses"
 msgstr "Verwendung"
 
-#: add-ons/coupons/coupons-admin.php:189 add-ons/coupons/coupons-admin.php:254
+#: add-ons/coupons/coupons-admin.php:211 add-ons/coupons/coupons-admin.php:276
 msgid "Unlimited"
 msgstr "Unbegrenzt"
 
-#: add-ons/coupons/coupons-admin.php:200
+#: add-ons/coupons/coupons-admin.php:222
 msgid "No coupons have been inserted yet!"
 msgstr "Derzeit wurden keine Gutscheine eingestellt!"
 
-#: add-ons/coupons/coupons-admin.php:215 add-ons/coupons/coupons-admin.php:331
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
 #: templates/multiple-bookings/admin.php:10
 msgid "Unauthorized Access"
 msgstr "Unauthorisierter Zugriff"
 
-#: add-ons/coupons/coupons-admin.php:215 add-ons/coupons/coupons-admin.php:331
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
 msgid "You do not have the rights to manage this %s."
 msgstr "Du hast nicht die nötigen Zugriffsrechte, um %s zu verwalten."
 
-#: add-ons/coupons/coupons-admin.php:215 add-ons/coupons/coupons-admin.php:331
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
 msgid "coupon"
 msgstr "Gutschein"
 
-#: add-ons/coupons/coupons-admin.php:245
+#: add-ons/coupons/coupons-admin.php:267
 msgid "Coupon Usage History"
 msgstr "Gutschein Verwendungsverlauf"
 
-#: add-ons/coupons/coupons-admin.php:247
+#: add-ons/coupons/coupons-admin.php:269
 msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
 msgstr ""
 "Du siehst die Details des Gutscheins %s - <a href=\"%s\">bearbeiten</a>"
 
-#: add-ons/coupons/coupons-admin.php:274 add-ons/coupons/coupons-admin.php:285
+#: add-ons/coupons/coupons-admin.php:296 add-ons/coupons/coupons-admin.php:307
 msgid "Booker"
 msgstr "Bucher"
 
-#: add-ons/coupons/coupons-admin.php:278 add-ons/coupons/coupons-admin.php:289
+#: add-ons/coupons/coupons-admin.php:300 add-ons/coupons/coupons-admin.php:311
 msgid "Final Price"
 msgstr "Endgültiger Preis"
 
-#: add-ons/coupons/coupons-admin.php:320
+#: add-ons/coupons/coupons-admin.php:342
 msgid "Your coupon hasn't been used yet!"
 msgstr "Dein Gutschein wurde bisher nicht verwendet!"
 
-#: add-ons/coupons/coupons-admin.php:337
+#: add-ons/coupons/coupons-admin.php:359
 msgid "required"
 msgstr "benötigt"
 
-#: add-ons/coupons/coupons-admin.php:341
+#: add-ons/coupons/coupons-admin.php:363
 msgid "Edit Coupon"
 msgstr "Gutschein bearbeiten"
 
-#: add-ons/coupons/coupons-admin.php:350
-msgid "Event-Wide Coupon?"
-msgstr "Veranstaltungs-weiter Gutschein?"
-
-#: add-ons/coupons/coupons-admin.php:353
-msgid "If checked, all events belonging to you will accept this coupon."
-msgstr "Gutschein für alle Deine Events zulassen."
-
-#: add-ons/coupons/coupons-admin.php:358
-msgid "Site-Wide Coupon?"
-msgstr "Site-weiter Gutschein?"
-
-#: add-ons/coupons/coupons-admin.php:361
-msgid "All events on this site will accept this coupon."
-msgstr ""
-"Alle Veranstaltungen auf dieser Website werden diesen Gutschein akzeptieren."
-
-#: add-ons/coupons/coupons-admin.php:366
+#: add-ons/coupons/coupons-admin.php:390
 msgid "Registered Users Only?"
 msgstr "Nur registrierte Benutzer?"
 
-#: add-ons/coupons/coupons-admin.php:369
+#: add-ons/coupons/coupons-admin.php:393
 msgid "If checked, only logged in users will be able to use this coupon."
 msgstr "Gutschein nur für angemeldete Benutzer zulassen."
 
-#: add-ons/coupons/coupons-admin.php:376
+#: add-ons/coupons/coupons-admin.php:400
 msgid "This is the code you give to users for them to use when booking."
 msgstr "Gutscheincode für die Buchung."
 
-#: add-ons/coupons/coupons-admin.php:392
+#: add-ons/coupons/coupons-admin.php:416
 msgid "Total Coupons"
 msgstr "Gesamtzahl Gutscheine"
 
-#: add-ons/coupons/coupons-admin.php:395
+#: add-ons/coupons/coupons-admin.php:419
 msgid "If set, this coupon will only be valid that many times."
 msgstr "Wenn gesetzt, ist dieser Gutschein nur sooft gültig."
 
-#: add-ons/coupons/coupons-admin.php:400
+#: add-ons/coupons/coupons-admin.php:424
 msgid "Start Date"
 msgstr "Startdatum"
 
-#: add-ons/coupons/coupons-admin.php:405
+#: add-ons/coupons/coupons-admin.php:429
 msgid "Coupons will only be valid from this date onwards."
 msgstr "Gutscheine sind erst ab diesem Zeitpunkt gültig."
 
-#: add-ons/coupons/coupons-admin.php:409
+#: add-ons/coupons/coupons-admin.php:433
 msgid "End Date"
 msgstr "Enddatum"
 
-#: add-ons/coupons/coupons-admin.php:414
+#: add-ons/coupons/coupons-admin.php:438
 msgid "Coupons will not be valid after this date."
 msgstr "Gutscheine werden nach diesem Datum ungültig."
 
-#: add-ons/coupons/coupons-admin.php:419
+#: add-ons/coupons/coupons-admin.php:443
 msgid "Discount Type"
 msgstr "Nachlasstyp"
 
-#: add-ons/coupons/coupons-admin.php:422
+#: add-ons/coupons/coupons-admin.php:446
 msgid "Percentage"
 msgstr "Prozentsatz"
 
-#: add-ons/coupons/coupons-admin.php:423
+#: add-ons/coupons/coupons-admin.php:447
 msgid "Fixed Amount"
 msgstr "Fester Betrag"
 
-#: add-ons/coupons/coupons-admin.php:440
+#: add-ons/coupons/coupons-admin.php:464
 msgid "Discount Amount"
 msgstr "Rabattbetrag"
 
-#: add-ons/coupons/coupons-admin.php:443
+#: add-ons/coupons/coupons-admin.php:467
 msgid "Enter a number here only, decimals accepted."
 msgstr "Gebe hier nur eine Nummer ein, Dezimalzahlen sind erlaubt."
 
-#: add-ons/emails.php:173
+#: add-ons/emails/emails-admin.php:21 add-ons/emails/emails-admin.php:32
 msgid "Event Email Reminders"
 msgstr "Email Erinnerungen für Veranstaltungen"
 
-#: add-ons/emails.php:178
+#: add-ons/emails/emails-admin.php:26
 msgid ""
 "Events Manager can send people that booked a place at your events a reminder "
 "email before it starts."
@@ -1205,7 +1602,7 @@ msgstr ""
 "Events Manager kann den Veranstaltungsgästen vor Start der Veranstaltung "
 "eine Erinnerungs per Email senden."
 
-#: add-ons/emails.php:179
+#: add-ons/emails/emails-admin.php:27
 msgid ""
 "We use <a href=\"%s\">WP Cron</a> for scheduling checks for future events, "
 "which relies on site visits to trigger these tasks to run. If you have low "
@@ -1221,7 +1618,7 @@ msgstr ""
 "automatisch läuft. Für weitere Informationen, <a href=\"%s\">siehe dieses "
 "Tutorial</a> über die Konfiguration von WP Cron."
 
-#: add-ons/emails.php:181
+#: add-ons/emails/emails-admin.php:29
 msgid ""
 "<strong>Important!</strong>, you should use SMTP as your email setup if you "
 "are sending automated emails in this way for optimal performance. Other "
@@ -1231,15 +1628,11 @@ msgstr ""
 "Leistung, wenn Du auf diesem Weg automatische Emails senden willst. Andere "
 "Methoden sind nicht geeignet für Massen-Emails."
 
-#: add-ons/emails.php:184
-msgid "Enable Email Reminders?"
-msgstr "Email Erinnerungen aktivieren?"
-
-#: add-ons/emails.php:185
+#: add-ons/emails/emails-admin.php:33
 msgid "Days before reminder"
 msgstr "Tage vor der Erinnerung"
 
-#: add-ons/emails.php:185
+#: add-ons/emails/emails-admin.php:33
 msgid ""
 "You can choose to send people attending your event x days before the event "
 "starts. Minimum is one day."
@@ -1247,11 +1640,11 @@ msgstr ""
 "Du kannst eine automatische Erinnerung x Tage vor der Veranstaltung an die "
 "Teilnhemer senden. Minimum ist ein Tag."
 
-#: add-ons/emails.php:186
+#: add-ons/emails/emails-admin.php:34
 msgid "Attach ical invite?"
 msgstr "Hänge ical Einladung an?"
 
-#: add-ons/emails.php:186
+#: add-ons/emails/emails-admin.php:34
 msgid ""
 "If using SMTP in your email settings. You can automatically attach an ical "
 "file which some email clients (e.g. gmail) will render as an invitation they "
@@ -1261,11 +1654,11 @@ msgstr ""
 "eine iCal Datei zur Veranstaltungsbestätigung anhängen lassen, die manche "
 "Email Programme als Kalendereinladung interpretieren."
 
-#: add-ons/emails.php:190
+#: add-ons/emails/emails-admin.php:38
 msgid "WP Cron Time"
 msgstr "WP Cron Zeit"
 
-#: add-ons/emails.php:193
+#: add-ons/emails/emails-admin.php:41
 msgid ""
 "Every day Events Manager automatically checks upcoming events in order to "
 "generate emails. You can choose at what time of day to run this check, if "
@@ -1277,69 +1670,69 @@ msgstr ""
 "laufen. Wenn Deine Site viele Zugriffe hat, kannst Du dies zu Zeiten "
 "niedrigerer Last laufen lassen."
 
-#: add-ons/emails.php:197
+#: add-ons/emails/emails-admin.php:45
 msgid "Reminder subject"
 msgstr "Betreff für Erinnerung"
 
-#: add-ons/emails.php:198
+#: add-ons/emails/emails-admin.php:46
 msgid "Approved email"
 msgstr "Genehmigte Email"
 
-#: add-ons/gateways/gateway.authorize.aim.php:165
+#: add-ons/gateways/gateway.authorize.aim.php:167
 msgid "Refunded"
 msgstr "Zurückerstattet"
 
-#: add-ons/gateways/gateway.authorize.aim.php:176
+#: add-ons/gateways/gateway.authorize.aim.php:178
 msgid "Voided"
 msgstr "Entwertet"
 
-#: add-ons/gateways/gateway.authorize.aim.php:205
+#: add-ons/gateways/gateway.authorize.aim.php:207
 msgid "Credit Card Number"
 msgstr "Kreditkartennummer"
 
-#: add-ons/gateways/gateway.authorize.aim.php:209
+#: add-ons/gateways/gateway.authorize.aim.php:211
 msgid "Expiry Date"
 msgstr "Ablaufdatum"
 
-#: add-ons/gateways/gateway.authorize.aim.php:228
+#: add-ons/gateways/gateway.authorize.aim.php:230
 msgid "CCV"
 msgstr "CCV"
 
-#: add-ons/gateways/gateway.authorize.aim.php:353
+#: add-ons/gateways/gateway.authorize.aim.php:356
 #: add-ons/gateways/gateway.offline.php:396
 #: add-ons/gateways/gateway.paypal.php:429
 msgid "Success Message"
 msgstr "Erfolgsmeldung"
 
-#: add-ons/gateways/gateway.authorize.aim.php:356
+#: add-ons/gateways/gateway.authorize.aim.php:359
 msgid ""
 "The message that is shown to a user when a booking is successful and payment "
 "has been taken."
 msgstr ""
-"Diese Nachricht wird gezeigt, wenn eine erfolgreiche Reservierung und "
-"Bezahlung erfolgt ist."
+"Diese Nachricht wird gezeigt, wenn eine erfolgreiche Buchung und Bezahlung "
+"erfolgt ist."
 
-#: add-ons/gateways/gateway.authorize.aim.php:360
+#: add-ons/gateways/gateway.authorize.aim.php:363
 #: add-ons/gateways/gateway.paypal.php:436
 msgid "Success Free Message"
 msgstr "Erfolg freie Nachricht"
 
-#: add-ons/gateways/gateway.authorize.aim.php:363
+#: add-ons/gateways/gateway.authorize.aim.php:366
 msgid ""
 "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
 "tickets, this message will be shown and the user will not be charged."
 msgstr ""
-"Wenn Du kostenfreie (z.B. Reservierung für Abendkasse) und kostenpflichtige "
+"Wenn Du kostenfreie (z.B. Buchung für Abendkasse) und kostenpflichtige "
 "Tickets anbietes, wird diese Nachricht angezeigt und der Benutzer wird nicht "
 "zur Zahlung aufgefordert."
 
-#: add-ons/gateways/gateway.authorize.aim.php:368
-#: add-ons/gateways/gateway.authorize.aim.php:411
-#: add-ons/gateways/gateway.paypal.php:452 add-ons/gateways/gateway.php:394
+#: add-ons/gateways/gateway.authorize.aim.php:371
+#: add-ons/gateways/gateway.authorize.aim.php:414
+#: add-ons/gateways/gateway.paypal.php:452 add-ons/gateways/gateway.php:426
 msgid "%s Options"
 msgstr "%s Optionen"
 
-#: add-ons/gateways/gateway.authorize.aim.php:369
+#: add-ons/gateways/gateway.authorize.aim.php:372
 msgid ""
 "Please visit the <a href=\"%s\">documentation</a> for further instructions "
 "on setting up Authorize.net with Events Manager."
@@ -1347,19 +1740,19 @@ msgstr ""
 "Lies die <a href=\"%s\">Dokumentation</a> für weitere Instruktionen zur "
 "Konfiguration von Authorize.net für Events Manager."
 
-#: add-ons/gateways/gateway.authorize.aim.php:373
+#: add-ons/gateways/gateway.authorize.aim.php:376
 msgid "Mode"
 msgstr "Modus"
 
-#: add-ons/gateways/gateway.authorize.aim.php:377
+#: add-ons/gateways/gateway.authorize.aim.php:380
 msgid "Sandbox"
 msgstr "Sandbox"
 
-#: add-ons/gateways/gateway.authorize.aim.php:378
+#: add-ons/gateways/gateway.authorize.aim.php:381
 msgid "Live"
 msgstr "Live"
 
-#: add-ons/gateways/gateway.authorize.aim.php:381
+#: add-ons/gateways/gateway.authorize.aim.php:384
 msgid ""
 "Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if "
 "you would like to test this gateway out. Alternatively, you can use your "
@@ -1370,19 +1763,19 @@ msgstr ""
 "wenn Du dieses Gateway testen willst. Alternativ kannst Du auch über Dein "
 "Authorize.net Control Panel ein reales Konto in den Testmodus versetzen."
 
-#: add-ons/gateways/gateway.authorize.aim.php:385
+#: add-ons/gateways/gateway.authorize.aim.php:388
 msgid "API Login ID"
 msgstr "API Login ID"
 
-#: add-ons/gateways/gateway.authorize.aim.php:389
+#: add-ons/gateways/gateway.authorize.aim.php:392
 msgid "Transaction key"
 msgstr "Transaktionsschlüssel"
 
-#: add-ons/gateways/gateway.authorize.aim.php:393
+#: add-ons/gateways/gateway.authorize.aim.php:396
 msgid "Payment Notifications"
 msgstr "Zahlungshinweis"
 
-#: add-ons/gateways/gateway.authorize.aim.php:394
+#: add-ons/gateways/gateway.authorize.aim.php:397
 msgid ""
 "If you would like to receive notifications from Authorize.net and handle "
 "refunds or voided transactions automatically, you need to enable Silent Post "
@@ -1393,57 +1786,57 @@ msgstr ""
 "möchtest, musst Du die Silent Post URL aktivieren und einen MD5 Hash in "
 "Deinem Händler-Interface angeben."
 
-#: add-ons/gateways/gateway.authorize.aim.php:395
+#: add-ons/gateways/gateway.authorize.aim.php:398
 msgid "Your return url is %s."
 msgstr "Deine Adresse zurück lautet %s."
 
-#: add-ons/gateways/gateway.authorize.aim.php:395
+#: add-ons/gateways/gateway.authorize.aim.php:398
 msgid "You can use this as your Silent Post URL."
 msgstr "Du kannst das als deine Stille Post URL verwenden."
 
-#: add-ons/gateways/gateway.authorize.aim.php:398
+#: add-ons/gateways/gateway.authorize.aim.php:401
 msgid "Security: MD5 Hash"
 msgstr "Sicherheit: MD5 Hash"
 
-#: add-ons/gateways/gateway.authorize.aim.php:401
+#: add-ons/gateways/gateway.authorize.aim.php:404
 msgid ""
 "This string of text needs to match that in your merchant interface settings."
 msgstr ""
 "Diese Zeichenfolge muss der Zeichenfolge in Deinen Händler-Interface "
 "Einstellungen entsprechen."
 
-#: add-ons/gateways/gateway.authorize.aim.php:405
+#: add-ons/gateways/gateway.authorize.aim.php:408
 msgid "User Login ID"
 msgstr "Benutzer Login ID"
 
-#: add-ons/gateways/gateway.authorize.aim.php:408
+#: add-ons/gateways/gateway.authorize.aim.php:411
 msgid "This is the username you use to log into your merchant interface."
 msgstr "Dies ist der Benutzername Deines Händler-Interface."
 
-#: add-ons/gateways/gateway.authorize.aim.php:411
+#: add-ons/gateways/gateway.authorize.aim.php:414
 msgid "Advanced"
 msgstr "Erweitert"
 
-#: add-ons/gateways/gateway.authorize.aim.php:413
+#: add-ons/gateways/gateway.authorize.aim.php:416
 msgid "Email Customer (on success)"
 msgstr "Email Empfänger (bei Erfolg)"
 
-#: add-ons/gateways/gateway.authorize.aim.php:423
+#: add-ons/gateways/gateway.authorize.aim.php:426
 msgid "Customer Receipt Email Header"
 msgstr "Empfänger erhält folgenden Email Kopfzeile"
 
-#: add-ons/gateways/gateway.authorize.aim.php:427
+#: add-ons/gateways/gateway.authorize.aim.php:430
 msgid "Customer Receipt Email Footer"
 msgstr "Empfänger erhält folgende Email Fußzeile"
 
-#: add-ons/gateways/gateway.authorize.aim.php:435
+#: add-ons/gateways/gateway.authorize.aim.php:438
 #: add-ons/gateways/gateway.paypal.php:540
 msgid ""
 "Approvals must also be required for all bookings in your <a href=\"%s"
 "\">settings</a> for this to work properly."
 msgstr ""
-"Damit dies funktioniert, müssen Genehmigungen für alle Reservierungen in "
-"Deinen <a href=\"%s\">Einstellungen</a> aktiviert sein."
+"Damit dies funktioniert, müssen Genehmigungen für alle Buchungen in Deinen "
+"<a href=\"%s\">Einstellungen</a> aktiviert sein."
 
 #: add-ons/gateways/gateway.offline.php:59
 msgid ""
@@ -1468,11 +1861,11 @@ msgstr "Gehe zurück zu den &quot;%s&quot; Buchungen"
 #: add-ons/gateways/gateway.offline.php:297
 #: add-ons/gateways/gateway.offline.php:300
 msgid "Manual booking."
-msgstr "Manuelle Reservierung."
+msgstr "Manuelle Buchung."
 
 #: add-ons/gateways/gateway.offline.php:306
 msgid "Add another booking"
-msgstr "Weitere Reservierung hinzufügen"
+msgstr "Weitere Buchung hinzufügen"
 
 #: add-ons/gateways/gateway.offline.php:353
 msgid "Select a user, or enter a new one below."
@@ -1484,7 +1877,7 @@ msgstr "Betrag bezahlt"
 
 #: add-ons/gateways/gateway.offline.php:372
 msgid "Fully Paid"
-msgstr "Vollständig beahlt"
+msgstr "Vollständig bezahlt"
 
 #: add-ons/gateways/gateway.offline.php:373
 msgid ""
@@ -1499,8 +1892,8 @@ msgid ""
 "The message that is shown to a user when a booking with offline payments is "
 "successful."
 msgstr ""
-"Diese Nachricht wird dem Benutzer angezeigt, wenn eine Reservierung mit "
-"Offline-Bezahlung erfolgreich war."
+"Diese Nachricht wird dem Benutzer angezeigt, wenn eine Buchung mit Offline-"
+"Bezahlung erfolgreich war."
 
 #: add-ons/gateways/gateway.paypal.php:23
 msgid "Awaiting PayPal Payment"
@@ -1511,8 +1904,8 @@ msgid ""
 "To finalize your booking, please click the following button to proceed to "
 "PayPal."
 msgstr ""
-"Um Deine Reservierung abzuschließen, klicke bitte den folgenden Knopf für "
-"die Weiterleitung zu PayPal."
+"Um Deine Buchung abzuschließen, klicke bitte den folgenden Knopf für die "
+"Weiterleitung zu PayPal."
 
 #: add-ons/gateways/gateway.paypal.php:387
 msgid "Unknown"
@@ -1527,8 +1920,8 @@ msgid ""
 "The message that is shown to a user when a booking is successful whilst "
 "being redirected to PayPal for payment."
 msgstr ""
-"Diese Nachricht wird einem Benutzer nach erfolgreicher Reservierung "
-"angezeigt, während er nach PayPal zur Bezahlung umgeleitet wird."
+"Diese Nachricht wird einem Benutzer nach erfolgreicher Buchung angezeigt, "
+"während er nach PayPal zur Bezahlung umgeleitet wird."
 
 #: add-ons/gateways/gateway.paypal.php:439
 msgid ""
@@ -1537,8 +1930,8 @@ msgid ""
 "PayPal."
 msgstr ""
 "Diese Nachricht wird in manchen Fällen angezeigt, wenn Du sowohl kostenlose "
-"Tickets (z.B. Reservierung für Abendkasse), als auch kostenpflichtige "
-"Tickets ermöglichst. Eine Umleitung zu PayPal erfolgt nicht."
+"Tickets (z.B. Buchung für Abendkasse), als auch kostenpflichtige Tickets "
+"ermöglichst. Eine Umleitung zu PayPal erfolgt nicht."
 
 #: add-ons/gateways/gateway.paypal.php:443
 msgid "Thank You Message"
@@ -1553,14 +1946,6 @@ msgstr ""
 "Wenn Du nach der erfolgreichen PayPal Zahlung zur Standard Events Manager "
 "Dankeschön-Seite zurück kehren willst, kannst Du die angezeigte Danke-"
 "Nachricht hier angeben."
-
-#: add-ons/gateways/gateway.paypal.php:453
-msgid ""
-"<strong>Important:</strong>In order to connect PayPal with your site, you "
-"need to enable IPN on your account."
-msgstr ""
-"<strong>Wichtig:</strong>Wenn du PayPal mit deiner Seite verbindest, musst "
-"du IPN bei deinem Account erlauben."
 
 #: add-ons/gateways/gateway.paypal.php:453
 msgid "Your return url is %s"
@@ -1632,20 +2017,20 @@ msgid ""
 "(note that bookings will be deleted, and any late payments will need to be "
 "refunded manually via PayPal)."
 msgstr ""
-"Wenn eine Reservierung gestartet und der Benutzer zu PayPal umgeleitet wird, "
-"speichert Events Manager einen Reservierungsdatensatz in der Datenbank, um "
-"die eingehende Zahlung zu identifizieren. Diese Pläte können als reserviert "
-"betrachtet werden, wenn Du <em>Unbestätigte Plätze reservieren</em> bei "
+"Wenn eine Buchung gestartet und der Benutzer zu PayPal umgeleitet wird, "
+"speichert Events Manager einen Buchungsdatensatz in der Datenbank, um die "
+"eingehende Zahlung zu identifizieren. Diese Plätze können als gebucht "
+"betrachtet werden, wenn Du <em>Unbestätigte Plätze buchen</em> bei "
 "Veranstaltungen &gt; Einstellungen aktivierst. Wenn Du willst, dass diese "
-"Reservierungen nach x Minuten ungültig werden, gib bitte oben einen Wert "
-"ein. (Beachte, dass Reservierungen gelöscht werden und spätere "
-"Zahlungsvorgänge manuell via PayPal erstattet werden müssen)."
+"Buchungen nach x Minuten ungültig werden, gib bitte oben einen Wert ein. "
+"(Beachte, dass Buchungen gelöscht werden und spätere Zahlungsvorgänge "
+"manuell via PayPal erstattet werden müssen)."
 
-#: add-ons/gateways/gateway.php:398
+#: add-ons/gateways/gateway.php:430
 msgid "Gateway Title"
 msgstr "Gateway Titel"
 
-#: add-ons/gateways/gateway.php:402 add-ons/gateways/gateway.php:412
+#: add-ons/gateways/gateway.php:434 add-ons/gateways/gateway.php:444
 msgid ""
 "Only if you have not enabled quick pay buttons in your <a href=\"%s"
 "\">gateway settings</a>."
@@ -1653,18 +2038,18 @@ msgstr ""
 "Nur, wenn Du Quick Pay Buttons in Deinen <a href=\"%s\">Gateway "
 "Einstellungen</a> nicht aktiviert hast."
 
-#: add-ons/gateways/gateway.php:403
+#: add-ons/gateways/gateway.php:435
 msgid ""
 "The user will see this as the text option when choosing a payment method."
 msgstr ""
 "Der Benutzer sieht dies als Textoption, wenn er eine Zahlungsmethode "
 "auswählt."
 
-#: add-ons/gateways/gateway.php:408
+#: add-ons/gateways/gateway.php:440
 msgid "Booking Form Information"
-msgstr "Reservierungsformular-Informationen"
+msgstr "Buchungsformular-Informationen"
 
-#: add-ons/gateways/gateway.php:413
+#: add-ons/gateways/gateway.php:445
 msgid ""
 "If a user chooses to pay with this gateway, or it is selected by default, "
 "this message will be shown just below the selection."
@@ -1672,11 +2057,11 @@ msgstr ""
 "Wenn ein Benutzer dieses Zahlungsgateway wählt, oder es standardmäßig "
 "gewählt ist, wird diese Nachricht unter der Auswahl angezeigt."
 
-#: add-ons/gateways/gateway.php:421
+#: add-ons/gateways/gateway.php:453
 msgid "Quick Pay Buttons"
 msgstr "Quick Pay Buttons"
 
-#: add-ons/gateways/gateway.php:422
+#: add-ons/gateways/gateway.php:454
 msgid ""
 "If you have chosen to only use quick pay buttons in your <a href=\"%s"
 "\">gateway settings</a>, these settings below will be used."
@@ -1684,11 +2069,11 @@ msgstr ""
 "Wenn Du  ausschließlich Quick Pay Buttons in Deinen <a href=\"%s\">Gateway "
 "Einstellungen</a> ausgewählt hast, werden die Einstellungen unten verwendet."
 
-#: add-ons/gateways/gateway.php:426
+#: add-ons/gateways/gateway.php:458
 msgid "Payment Button"
 msgstr "Zahlungsknopf"
 
-#: add-ons/gateways/gateway.php:429
+#: add-ons/gateways/gateway.php:461
 msgid ""
 "Choose the button text. To use an image instead, enter the full url starting "
 "with %s or %s."
@@ -1728,20 +2113,20 @@ msgstr "Transaktion gelöscht"
 msgid "Transaction could not be deleted"
 msgstr "Transaktion konnte nicht gelöscht werden"
 
-#: add-ons/gateways.php:50 emp-install.php:160
+#: add-ons/gateways/gateways.php:49 emp-install.php:160
 msgid "Address Line 2"
 msgstr "Anschrift Zeile 2"
 
-#: add-ons/gateways.php:57 emp-install.php:167
+#: add-ons/gateways/gateways.php:56 emp-install.php:167
 msgid "Company"
 msgstr "Firma"
 
-#: add-ons/gateways.php:63
+#: add-ons/gateways/gateways.php:62
 msgid ""
 "All transactional history associated with this booking will also be deleted."
-msgstr "Die Transaktionshistorie dieser Reservierung wird ebenfalls gelöscht."
+msgstr "Die Transaktionshistorie dieser Buchung wird ebenfalls gelöscht."
 
-#: add-ons/gateways.php:64
+#: add-ons/gateways/gateways.php:63
 msgid ""
 "Are you sure you want to delete? This may make your transaction history out "
 "of sync with your payment gateway provider."
@@ -1749,33 +2134,34 @@ msgstr ""
 "Bist Du sicher, dass Du löschen willst? Die Transaktionshistorie mit Deinem "
 "Zahlungsgateway Betreiber gerät dadurch eventuell durcheinander."
 
-#: add-ons/gateways.php:70
+#: add-ons/gateways/gateways.php:69
 msgid "Awaiting Online Payment"
 msgstr "Online Zahlung ausstehend"
 
-#: add-ons/gateways.php:71
+#: add-ons/emails/custom-emails-admin.php:347
+#: add-ons/emails/custom-emails-admin.php:348 add-ons/gateways/gateways.php:70
 msgid "Awaiting Offline Payment"
 msgstr "Offline Zahlung ausstehend"
 
-#: add-ons/gateways.php:137
+#: add-ons/gateways/gateways.php:149
 msgid ""
 "Choice of payment method not recognized. If you are seeing this error and "
 "selecting a method of payment, we apologize for the inconvenience. Please "
 "contact us and we'll help you make a booking as soon as possible."
 msgstr ""
 "Zahlungsmethode nicht erkannt. Wenn Du diese Fehlermeldung siehst, "
-"kontaktiere uns und wir helfen Dir, Deine Reservierung so schnell wie "
-"möglich durchzuführen. Entschuldigung für die Unannehmlichkeiten."
+"kontaktiere uns und wir helfen Dir, Deine Buchung so schnell wie möglich "
+"durchzuführen. Entschuldigung für die Unannehmlichkeiten."
 
-#: add-ons/gateways.php:265
+#: add-ons/gateways/gateways-admin.php:17
 msgid "Payment Gateway Options"
 msgstr "Zahlungs-Gateway Optionen"
 
-#: add-ons/gateways.php:269
+#: add-ons/gateways/gateways-admin.php:21
 msgid "Enable Quick Pay Buttons?"
 msgstr "Quick Pay Button aktivieren?"
 
-#: add-ons/gateways.php:269
+#: add-ons/gateways/gateways-admin.php:21
 msgid ""
 "Only works with gateways that do not require additional payment information "
 "to be submitted (e.g. PayPal and Offline payments). If enabled, the default "
@@ -1789,11 +2175,11 @@ msgstr ""
 "haben (oder ein Bild, siehe <a href=\"%s\">individuelle Gateway "
 "Einstellungen</a>)."
 
-#: add-ons/gateways.php:270
+#: add-ons/gateways/gateways-admin.php:22
 msgid "Gateway Label"
 msgstr "Gateway Bezeichnung"
 
-#: add-ons/gateways.php:270
+#: add-ons/gateways/gateways-admin.php:22
 msgid ""
 "If you are not using quick pay buttons a drop-down menu will be used, with "
 "this label."
@@ -1801,15 +2187,15 @@ msgstr ""
 "Wenn Du keine Quick Pay Buttons verwendest, erscheint eine Auswahlbox mit "
 "dieser Bezeichnung."
 
-#: add-ons/gateways.php:421
+#: add-ons/gateways/gateways-admin.php:167
 msgid "No Payment gateways were found for this install."
 msgstr "Keine Zahlungsgateways für diese Installation gefunden."
 
-#: add-ons/gateways.php:571
+#: add-ons/gateways/gateways.php:369
 msgid "Common User Fields for Gateways"
 msgstr "Allgemeine Benutzerfelder für Gateways"
 
-#: add-ons/gateways.php:574
+#: add-ons/gateways/gateways.php:372
 msgid ""
 "In many cases, customer address information is required by gateways for "
 "verification. This section connects your custom fields to commonly used "
@@ -1819,7 +2205,7 @@ msgstr ""
 "erforderlich.  Dieser Bereich verbindet individuelle Felder mit gewöhnlich "
 "genutzten Benutzerinformationsfeldern."
 
-#: add-ons/gateways.php:575
+#: add-ons/gateways/gateways.php:373
 msgid ""
 "After creating user fields above, you should link them up in here so some "
 "gateways can make use of them when processing payments."
@@ -1827,45 +2213,45 @@ msgstr ""
 "Nach dem Anlegen der Benutzerfelder oben solltest Du sie hier verlinken, so "
 "dass einige Gateways sie für die Zahlungsverarbeitung verwenden können."
 
-#: add-ons/gateways.php:578
+#: add-ons/gateways/gateways.php:376
 msgid "Name (first/last)"
 msgstr "Name (Vorname/Nachname)"
 
-#: add-ons/gateways.php:578
+#: add-ons/gateways/gateways.php:376
 msgid ""
 "Generated accordingly from user first/last name or full name field. If a "
 "name field isn't provided in your booking form, the username will be used "
 "instead."
 msgstr ""
 "Entsprechend generiert aus dem Vor-/Nachnamen oder vollständigem Namensfeld. "
-"Wenn kein Name im Reservierungsformular angegeben wird, wird stattdessen der "
+"Wenn kein Name im Buchungsformular angegeben wird, wird stattdessen der "
 "Benutzername verwendet."
 
-#: add-ons/gateways.php:579
+#: add-ons/gateways/gateways.php:377
 msgid "Uses the WordPress account email associated with the user."
 msgstr "Email Adresse des WordPress Benutzerkontos verwenden."
 
-#: add-ons/gateways.php:585 emp-forms.php:403 emp-forms.php:579
+#: add-ons/gateways/gateways.php:383 emp-forms.php:425 emp-forms.php:601
 msgid "none selected"
 msgstr "nichts ausgewählt"
 
-#: add-ons/gateways.php:598 emp-forms.php:1208
+#: add-ons/gateways/gateways.php:396 emp-forms.php:1230
 msgid "Save Form"
 msgstr "Formular sichern"
 
-#: add-ons/user-fields.php:219 add-ons/user-fields.php:221
+#: add-ons/user-fields.php:217 add-ons/user-fields.php:219
 msgid "n/a"
 msgstr "n/a"
 
-#: add-ons/user-fields.php:251
+#: add-ons/user-fields.php:249
 msgid "Further Information"
 msgstr "Weitere Informationen"
 
-#: add-ons/user-fields.php:336
+#: add-ons/user-fields.php:334
 msgid "User Fields"
 msgstr "Benutzerfelder"
 
-#: add-ons/user-fields.php:339
+#: add-ons/user-fields.php:337
 msgid ""
 "Registration fields are only shown to guest visitors. If you add new fields "
 "here and save, they will then be available as custom registrations in your "
@@ -1874,10 +2260,10 @@ msgid ""
 msgstr ""
 "Registrierungsfelder werden nur Gastbesuchern angezeigt. Wenn Du hier neue "
 "Felder angibst und sicherst, sind sie als individuelle Registrierungen ein "
-"Deinem Reservierungseditor verfügbar. Diese Information ist bearbeitbar auf "
-"der <a href=\"%s\">Profilseite</a> des Benutzers."
+"Deinem Buchungseditor verfügbar. Diese Information ist bearbeitbar auf der "
+"<a href=\"%s\">Profilseite</a> des Benutzers."
 
-#: add-ons/user-fields.php:340
+#: add-ons/user-fields.php:338
 msgid ""
 "<strong>Important:</strong> When editing this form, to make sure your "
 "current user information is displayed, do not change their field names."
@@ -1900,7 +2286,7 @@ msgstr ""
 
 #: emp-forms.php:31
 msgid "PRO Booking Form Options"
-msgstr "PRO Reservierungsformular Optionen"
+msgstr "PRO Buchungsformular Optionen"
 
 #: emp-forms.php:35
 msgid "Show profile fields to logged in users?"
@@ -1915,9 +2301,9 @@ msgid ""
 "must be modified from their user profile page."
 msgstr ""
 "Wenn angemeldet, sehen Benutzer normalerweise ihre Profilfelder nicht. Ist "
-"diese Einstellung aktiviert, können Benutzer gleichzeitig mit der "
-"Reservierung ihre Profilfelder aktualisieren. Das ist besonders hilfreich, "
-"wenn Schlüsselinformationen fehlen. Beachte, dass dies nicht Benutzername, "
+"diese Einstellung aktiviert, können Benutzer gleichzeitig mit der Buchung "
+"ihre Profilfelder aktualisieren. Das ist besonders hilfreich, wenn "
+"Schlüsselinformationen fehlen. Beachte, dass dies nicht Benutzername, "
 "Passwort und Email Adresse einschließt. Diese Informationen müssen auf der "
 "Profilseite des Benutzers bearbeitet werden."
 
@@ -1934,65 +2320,65 @@ msgstr ""
 "kannst Du entscheiden, ob diese Felder nur angezeigt werden oder auch "
 "bearbeitbar sind."
 
-#: emp-forms.php:595
+#: emp-forms.php:617
 msgid "You must also add an end date."
 msgstr "Du musst auch ein Endedatum angeben."
 
-#: emp-forms.php:599 emp-forms.php:612
+#: emp-forms.php:621 emp-forms.php:634
 msgid ""
 "Dates must have correct formatting. Please use the date picker provided."
 msgstr ""
 "Datum muss korrektes Format haben. Bitte den Datums-Selektor verwenden."
 
-#: emp-forms.php:605
+#: emp-forms.php:627
 msgid "Please provide a later end date."
 msgstr "Bitte verwende ein späteres Endedatum."
 
-#: emp-forms.php:618 emp-forms.php:978
+#: emp-forms.php:640 emp-forms.php:1000
 msgid "You must provide a start date."
 msgstr "Du musst ein Startdatum auswählen"
 
-#: emp-forms.php:636 emp-forms.php:1034
+#: emp-forms.php:658 emp-forms.php:1056
 msgid "You must provide an end time."
 msgstr "Du musst eine Endzeit auswählen"
 
-#: emp-forms.php:640 emp-forms.php:646 emp-forms.php:1024
+#: emp-forms.php:662 emp-forms.php:668 emp-forms.php:1046
 msgid ""
 "Please use the time picker provided to select the appropriate time format."
 msgstr ""
 "Bitte verwende den Zeit-Selektor, um das geeignete Zeitformat auszuwählen."
 
-#: emp-forms.php:652 emp-forms.php:1044
+#: emp-forms.php:674 emp-forms.php:1066
 msgid "You must provide a start time."
 msgstr "Du musst eine Anfangszeit auswählen."
 
-#: emp-forms.php:783
+#: emp-forms.php:805
 msgid "Label"
 msgstr "Aufschrift"
 
-#: emp-forms.php:784
+#: emp-forms.php:806
 msgid "Field ID"
 msgstr "Feld ID"
 
-#: emp-forms.php:785
+#: emp-forms.php:807
 msgid "Type"
 msgstr "Typ"
 
-#: emp-forms.php:786
+#: emp-forms.php:808
 msgid "Required"
 msgstr "Benötigt"
 
-#: emp-forms.php:824
+#: emp-forms.php:846
 msgid "Custom Registration Fields"
 msgstr "Eigene Registrierungsfelder"
 
-#: emp-forms.php:867 emp-forms.php:909 emp-forms.php:935 emp-forms.php:1001
-#: emp-forms.php:1060 emp-forms.php:1088 emp-forms.php:1109 emp-forms.php:1139
+#: emp-forms.php:889 emp-forms.php:931 emp-forms.php:957 emp-forms.php:1023
+#: emp-forms.php:1082 emp-forms.php:1110 emp-forms.php:1131 emp-forms.php:1161
 msgid "Tip Text"
 msgstr "Tipp Text"
 
-#: emp-forms.php:870 emp-forms.php:912 emp-forms.php:938 emp-forms.php:1004
-#: emp-forms.php:1063 emp-forms.php:1091 emp-forms.php:1112 emp-forms.php:1142
+#: emp-forms.php:892 emp-forms.php:934 emp-forms.php:960 emp-forms.php:1026
+#: emp-forms.php:1085 emp-forms.php:1113 emp-forms.php:1134 emp-forms.php:1164
 msgid ""
 "Will appear next to your field label as a question mark with a popup tip "
 "bubble."
@@ -2000,18 +2386,18 @@ msgstr ""
 "Steht neben Deiner Feldbezeichnung als Fragezeichen mit einer Popup-Tip "
 "Blase."
 
-#: emp-forms.php:879 emp-forms.php:904 emp-forms.php:948 emp-forms.php:958
-#: emp-forms.php:968 emp-forms.php:978 emp-forms.php:1014 emp-forms.php:1024
-#: emp-forms.php:1034 emp-forms.php:1044 emp-forms.php:1072 emp-forms.php:1100
-#: emp-forms.php:1128 emp-forms.php:1158 emp-forms.php:1191
+#: emp-forms.php:901 emp-forms.php:926 emp-forms.php:970 emp-forms.php:980
+#: emp-forms.php:990 emp-forms.php:1000 emp-forms.php:1036 emp-forms.php:1046
+#: emp-forms.php:1056 emp-forms.php:1066 emp-forms.php:1094 emp-forms.php:1122
+#: emp-forms.php:1150 emp-forms.php:1180 emp-forms.php:1213
 msgid "Default:"
 msgstr "Standard:"
 
-#: emp-forms.php:888
+#: emp-forms.php:910
 msgid "Content"
 msgstr "Inhalt"
 
-#: emp-forms.php:890
+#: emp-forms.php:912
 msgid ""
 "This html will be displayed on your form, the label for this field is used "
 "only for reference purposes."
@@ -2019,102 +2405,102 @@ msgstr ""
 "Dieses HTML wird auf deinem Formular angezeigt. Die Feldbezeichnung ist nur "
 "für Referenzzwecke."
 
-#: emp-forms.php:920
+#: emp-forms.php:942
 msgid "Date Range?"
 msgstr "Datumsbereich?"
 
-#: emp-forms.php:924
+#: emp-forms.php:946
 msgid "If selected, this field will also have an end-date."
 msgstr "Wenn gewählt, wird dieses Feld ebenso ablaufen."
 
-#: emp-forms.php:928 emp-forms.php:994
+#: emp-forms.php:950 emp-forms.php:1016
 msgid "Separator"
 msgstr "Trenner"
 
-#: emp-forms.php:931 emp-forms.php:997
+#: emp-forms.php:953 emp-forms.php:1019
 msgid ""
 "This text will appear between the two date fields if this is a date range."
 msgstr ""
 "Dieser Text erscheint zwischen den zwei Datumsfeldern, wenn es sich um einen "
 "Zeitraum handelt."
 
-#: emp-forms.php:942 emp-forms.php:1007
+#: emp-forms.php:964 emp-forms.php:1029
 msgid "Error Messages"
 msgstr "Fehlermeldungen"
 
-#: emp-forms.php:943 emp-forms.php:1009
+#: emp-forms.php:965 emp-forms.php:1031
 msgid "Field Required"
 msgstr "Pflichtfeld"
 
-#: emp-forms.php:947 emp-forms.php:1013
+#: emp-forms.php:969 emp-forms.php:1035
 msgid "This error will show this field is required and no value is entered."
 msgstr "Fehlermeldung für ein Pflichtfeld, für das kein Wert angegeben wurde."
 
-#: emp-forms.php:953 emp-forms.php:1019
+#: emp-forms.php:975 emp-forms.php:1041
 msgid "Incorrect Formatting"
 msgstr "Falsche Formatierung"
 
-#: emp-forms.php:957
+#: emp-forms.php:979
 msgid "This error will show if an incorrect date format is used."
 msgstr "Fehlermeldung für inkorrektes Datumformat."
 
-#: emp-forms.php:958
+#: emp-forms.php:980
 msgid ""
 "Please use the date picker provided to select the appropriate date format."
 msgstr ""
 "Verwende bitte den Datumsselektor, um das richtige Datumsformat auszuwählen."
 
-#: emp-forms.php:963
+#: emp-forms.php:985
 msgid "End date required"
 msgstr "Endedatum benötigt"
 
-#: emp-forms.php:967
+#: emp-forms.php:989
 msgid ""
 "This error will show if the field is a date-range and no end date is "
 "selected."
 msgstr "Fehlermeldung, wenn für einen Zeitraum kein Endedatum vergeben wurde."
 
-#: emp-forms.php:968
+#: emp-forms.php:990
 msgid "You must provide an end date."
 msgstr "Du musst ein Endedatum eingeben."
 
-#: emp-forms.php:973
+#: emp-forms.php:995
 msgid "Start date required"
 msgstr "Startdatum benötigt"
 
-#: emp-forms.php:977
+#: emp-forms.php:999
 msgid ""
 "This error will show if the field is a date-range and no start date is "
 "selected."
 msgstr "Fehlermeldung, wenn für einen Zeitraum kein Startdatum vergeben wurde."
 
-#: emp-forms.php:986
+#: emp-forms.php:1008
 msgid "Time Range?"
 msgstr "Zeitraum?"
 
-#: emp-forms.php:990
+#: emp-forms.php:1012
 msgid "If selected, this field will also have an end-time."
 msgstr "Wenn ausgewählt, muss dieses Feld auch ein Endedatum enthalten."
 
-#: emp-forms.php:1023
+#: emp-forms.php:1045
 msgid "This error will show if an incorrect time format is used."
 msgstr "Fehlermeldung bei Verwendung eines falschen Zeitformats."
 
-#: emp-forms.php:1029
+#: emp-forms.php:1051
 msgid "End time required"
 msgstr "Ende-Zeit benötigt"
 
-#: emp-forms.php:1033
+#: emp-forms.php:1055
 msgid ""
 "This error will show if the field is a time-range and no end time is "
 "selected."
 msgstr "Fehlermeldung, wenn für einen Zeitraum kein Endedatum vergeben wurde."
 
-#: emp-forms.php:1039
+#: emp-forms.php:1061
 msgid "Start time required"
 msgstr "Start-Zeit benötigt"
 
-#: emp-forms.php:1043
+#: emp-forms.php:1065
 msgid ""
 "This error will show if the field is a time-range and no start time is "
 "selected."
@@ -2130,7 +2516,7 @@ msgstr "PayPal"
 
 #: emp-install.php:182 emp-install.php:187 emp-install.php:191
 msgid "Booking successful."
-msgstr "Reservierung erfolgreich."
+msgstr "Buchung erfolgreich."
 
 #: emp-install.php:190
 msgid "Credit Card"
@@ -2138,8 +2524,7 @@ msgstr "Kreditkarte"
 
 #: emp-install.php:192
 msgid "Booking successful. You have not been charged for this booking."
-msgstr ""
-"Reservierung erfolgreich. Dir wurde für diese Reservierung nichts verrechnet."
+msgstr "Buchung erfolgreich. Dir wurde für diese Buchung nichts verrechnet."
 
 #: emp-updates.php:32
 msgid "Please enter a valid API key in your <a href=\"%s\">settings page</a>."
@@ -2156,13 +2541,7 @@ msgstr ""
 "Bitte aktualiere Deinen <a href=\"%s\">Membership Key</a> für Events "
 "Mananager Pro <a href=\"#pro-api\">here</a>, um diese Nachricht zu entfernen."
 
-#: emp-updates.php:104
-msgid "looking for dev mode options? we moved it into <em>Admin Tools</em>"
-msgstr ""
-"Suchst Du nach den Dev Mode Optionen? Wir haben sie verschoben nach "
-"<em>Admin Werkzeuge</em>."
-
-#: events-manager-pro.php:227
+#: events-manager-pro.php:242
 msgid ""
 "Please make sure you install Events Manager as well. You can search and "
 "install this plugin from your plugin installer or download it <a href="
@@ -2173,11 +2552,11 @@ msgstr ""
 "\"http://wordpress.org/extend/plugins/events-manager/\">hier</"
 "a>herunterladen. "
 
-#: events-manager-pro.php:227 events-manager-pro.php:233
+#: events-manager-pro.php:242 events-manager-pro.php:248
 msgid "Only admins see this message."
 msgstr "Nur Administratoren sehen diese Nachricht."
 
-#: events-manager-pro.php:233
+#: events-manager-pro.php:248
 msgid ""
 "Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/"
 "events-manager/\">latest version</a> of Events Manager installed, as this "
@@ -2187,12 +2566,13 @@ msgstr ""
 "plugins/events-manager/\">neueste Version</a> von Events Manager installiert "
 "hast, da sonst die Pro Funktionen ggf. nicht richtig funktionieren."
 
-#: add-ons/gateways.php:280
+#: add-ons/emails/emails-admin.php:85 add-ons/emails/emails-admin.php:86
+#: add-ons/gateways/gateways-admin.php:32
 msgid "Payment Gateways"
 msgstr "Zahlungs-Gateways"
 
-#: add-ons/bookings-form/attendee-forms.php:357
-#: add-ons/coupons/coupons-admin.php:273 add-ons/coupons/coupons-admin.php:284
+#: add-ons/bookings-form/attendee-forms.php:374
+#: add-ons/coupons/coupons-admin.php:295 add-ons/coupons/coupons-admin.php:306
 #: add-ons/gateways/gateways.transactions.php:93
 #: templates/placeholders/bookingattendees-multiple.php:8
 msgid "Event"
@@ -2231,8 +2611,11 @@ msgstr "Hinweise"
 msgid "None yet"
 msgstr "Noch keine"
 
-#: add-ons/bookings-form/attendee-forms.php:733
+#: add-ons/bookings-form/attendee-forms.php:745
+#: add-ons/gateways/gateways.php:286
 #: add-ons/gateways/gateways.transactions.php:262
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:59
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:76
 msgid "None"
 msgstr "Keiner"
 
@@ -2240,79 +2623,81 @@ msgstr "Keiner"
 msgid "No Transactions"
 msgstr "Keine Transaktionen"
 
-#: add-ons/gateways.php:303
+#: add-ons/gateways/gateway.php:409
 msgid "Gateway updated."
 msgstr "Gateway aktualisiert."
 
-#: add-ons/gateways.php:304
+#: add-ons/gateways/gateway.php:410
 msgid "Gateway not updated."
 msgstr "Gateway nicht aktualisiert."
 
-#: add-ons/gateways.php:305
+#: add-ons/gateways/gateways-admin.php:55
 msgid "Gateway activated."
 msgstr "Gateway aktiviert."
 
-#: add-ons/gateways.php:306
+#: add-ons/gateways/gateways-admin.php:56
 msgid "Gateway not activated."
 msgstr "Gateway nicht aktiviert."
 
-#: add-ons/gateways.php:307
+#: add-ons/gateways/gateways-admin.php:57
 msgid "Gateway deactivated."
 msgstr "Gateway deaktiviert."
 
-#: add-ons/gateways.php:308
+#: add-ons/gateways/gateways-admin.php:58
 msgid "Gateway not deactivated."
 msgstr "Gateway nicht deaktiviert."
 
-#: add-ons/gateways.php:309
+#: add-ons/gateways/gateways-admin.php:59
 msgid "Gateway activation toggled."
 msgstr "Gateway-Aktivierung umgeschaltet."
 
-#: add-ons/gateways.php:313
+#: add-ons/gateways/gateways-admin.php:63
 msgid "Edit Gateways"
 msgstr "Gateways bearbeiten"
 
-#: add-ons/gateways.php:325 add-ons/gateways.php:431
+#: add-ons/gateways/gateways-admin.php:71
 msgid "Bulk Actions"
 msgstr "Sammel-Aktionen"
 
-#: add-ons/gateways.php:326 add-ons/gateways.php:432
+#: add-ons/gateways/gateways-admin.php:72
 msgid "Toggle activation"
 msgstr "Toggle-Aktivierung"
 
-#: add-ons/gateways.php:328
+#: add-ons/gateways/gateways-admin.php:74
 msgid "Apply"
 msgstr "Anwenden"
 
-#: add-ons/gateways.php:337
+#: add-ons/gateways/gateways-admin.php:83
 msgid "Gateway Name"
 msgstr "Gateway-Name"
 
-#: add-ons/gateways.php:338 add-ons/gateways.php:405
+#: add-ons/gateways/gateways-admin.php:84
+#: add-ons/gateways/gateways-admin.php:151
 msgid "Active"
 msgstr "Aktiv"
 
-#: add-ons/gateways/gateways.transactions.php:52 add-ons/gateways.php:339
+#: add-ons/gateways/gateways-admin.php:85
+#: add-ons/gateways/gateways.transactions.php:52
 msgid "Transactions"
 msgstr "Transaktionen"
 
-#: add-ons/gateways.php:390
+#: add-ons/gateways/gateways-admin.php:136
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: add-ons/gateways.php:393
+#: add-ons/gateways/gateways-admin.php:139
 msgid "Deactivate"
 msgstr "Deaktivieren"
 
-#: add-ons/gateways.php:396
+#: add-ons/gateways/gateways-admin.php:142
 msgid "Activate"
 msgstr "Aktivieren"
 
-#: add-ons/gateways.php:407
+#: add-ons/gateways/gateways-admin.php:153
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: add-ons/gateways.php:412
+#: add-ons/gateways/gateways-admin.php:158
 msgid "View transactions"
 msgstr "Transaktionen anzeigen"
 
@@ -2337,12 +2722,11 @@ msgstr "Offline-Payment hinzufügen"
 msgid "Comments"
 msgstr "Kommentare"
 
-#: add-ons/coupons/coupons-admin.php:275 add-ons/coupons/coupons-admin.php:286
-#: templates/multiple-bookings/widget.php:22
+#: add-ons/coupons/coupons-admin.php:297 add-ons/coupons/coupons-admin.php:308
 msgid "Spaces"
 msgstr "Plätze"
 
-#: add-ons/bookings-form.php:58 emp-install.php:155
+#: add-ons/bookings-form/bookings-form.php:56 emp-install.php:155
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -2355,15 +2739,16 @@ msgstr "Genehmigen"
 msgid "Reject"
 msgstr "Ablehnen"
 
-#: add-ons/bookings-form/attendee-forms.php:777 add-ons/bookings-form.php:576
-#: add-ons/coupons/coupons-admin.php:176
+#: add-ons/bookings-form/attendee-forms.php:789
+#: add-ons/bookings-form/bookings-form.php:540
+#: add-ons/coupons/coupons-admin.php:198
 #: add-ons/gateways/gateway.offline.php:152
 #: add-ons/gateways/gateway.paypal.php:151
 #: add-ons/gateways/gateways.transactions.php:268
 msgid "Delete"
 msgstr "Löschen"
 
-#: add-ons/coupons/coupons-admin.php:309
+#: add-ons/coupons/coupons-admin.php:331
 #: add-ons/gateways/gateway.offline.php:153
 #: add-ons/gateways/gateway.paypal.php:152
 msgid "Edit/View"
@@ -2375,9 +2760,9 @@ msgid ""
 "transaction will be registered against this booking, meaning that it will be "
 "considered as paid."
 msgstr ""
-"Beachte, dass durch die Genehmigung noch nicht bezahlten Reservierung, eine "
-"volle Zahlung für diese Reservierung registriert wird, d.h. die Reservierung "
-"wird als gezahlt betrachtet."
+"Beachte, dass durch die Genehmigung noch nicht bezahlten Buchung, eine volle "
+"Zahlung für diese Buchung registriert wird, d.h. die Buchung wird als "
+"gezahlt betrachtet."
 
 #: add-ons/gateways/gateway.offline.php:162
 msgid "Add Booking"
@@ -2449,12 +2834,12 @@ msgstr ""
 "Gib einen Hex-Wert, um die Farbe von der Standardeinstellung blau zu einer "
 "anderen Farbe (zB # CCAAAA) zu ändern."
 
-#: add-ons/gateways/gateway.authorize.aim.php:431
+#: add-ons/gateways/gateway.authorize.aim.php:434
 #: add-ons/gateways/gateway.paypal.php:536
 msgid "Manually approve completed transactions?"
 msgstr "Abgeschlossene Transaktionen manuell genehmigen?"
 
-#: add-ons/gateways/gateway.authorize.aim.php:434
+#: add-ons/gateways/gateway.authorize.aim.php:437
 #: add-ons/gateways/gateway.paypal.php:539
 msgid ""
 "By default, when someone pays for a booking, it gets automatically approved "
@@ -2465,40 +2850,42 @@ msgstr ""
 "dafür bestätigt ist. Wenn Du Buchungen manuell überprüfen und genehmigen "
 "willst, bitte hier auswählen."
 
-#: add-ons/bookings-form.php:370
-#: add-ons/gateways/gateway.authorize.aim.php:417 emp-forms.php:145
+#: add-ons/bookings-form/attendee-forms.php:734
+#: add-ons/gateways/gateway.authorize.aim.php:420 emp-forms.php:147
 msgid "Yes"
 msgstr "Ja"
 
-#: add-ons/bookings-form.php:370
-#: add-ons/gateways/gateway.authorize.aim.php:418 emp-forms.php:145
+#: add-ons/bookings-form/attendee-forms.php:735
+#: add-ons/gateways/gateway.authorize.aim.php:421 emp-forms.php:147
 msgid "No"
 msgstr "Nein"
 
-#: add-ons/bookings-form/attendee-forms.php:659 add-ons/bookings-form.php:476
-#: add-ons/gateways.php:553 add-ons/user-fields.php:313
+#: add-ons/bookings-form/attendee-forms.php:671
+#: add-ons/bookings-form/bookings-form.php:438
+#: add-ons/gateways/gateways.php:351 add-ons/user-fields.php:311
 msgid "Changes Saved"
 msgstr "Änderungen gespeichert"
 
-#: add-ons/bookings-form.php:526
+#: add-ons/bookings-form/bookings-form.php:488
 msgid "Booking Form - General Information"
 msgstr "Buchungsformular - Allgemeine Information"
 
-#: add-ons/bookings-form.php:529
+#: add-ons/bookings-form/bookings-form.php:491
 msgid "You can customize the fields shown in your booking forms below. "
 msgstr "Du kannst die Felder in Deinem Buchungsformular unten anpassen"
 
-#: add-ons/bookings-form/attendee-forms.php:782 add-ons/bookings-form.php:581
+#: add-ons/bookings-form/attendee-forms.php:794
+#: add-ons/bookings-form/bookings-form.php:547
 msgid ""
 "<strong>Important:</strong> When editing this form, to make sure your old "
 "booking information is displayed, make sure new field ids correspond with "
 "the old ones."
 msgstr ""
 "<strong>Wichtig:</strong> Wenn Du dieses Formular editierst, stelle sicher, "
-"dass Deine alte Reservierungsinformation angezeigt wird. Stelle sicher, dass "
-"neue Feld-IDs zu den alten passen."
+"dass Deine alte Buchungsinformation angezeigt wird. Stelle sicher, dass neue "
+"Feld-IDs zu den alten passen."
 
-#: emp-forms.php:784
+#: emp-forms.php:806
 msgid ""
 "DO NOT change these values if you want to keep your field settings "
 "associated with previous booking fields."
@@ -2506,79 +2893,78 @@ msgstr ""
 "Diese Werte NICHT ÄNDERN, wenn Du Deine Feldeinstellungen erhalten willst, "
 "die mit vorigen Buchungsfeldern assoziiert sind."
 
-#: emp-forms.php:796
+#: emp-forms.php:818
 msgid "Select Type"
 msgstr "Typ auswählen"
 
-#: emp-forms.php:798
+#: emp-forms.php:820
 msgid "Customizable Fields"
 msgstr "Custom-Felder"
 
-#: emp-forms.php:816
+#: emp-forms.php:838
 msgid "Registration Fields"
 msgstr "Registierungsfelder"
 
-#: emp-forms.php:839 templates/multiple-bookings/cart-table.php:38
+#: emp-forms.php:861 templates/multiple-bookings/cart-table.php:38
 msgid "remove"
 msgstr "entfernen"
 
-#: emp-forms.php:839 emp-forms.php:1227 emp-forms.php:1230 emp-forms.php:1294
+#: emp-forms.php:861 emp-forms.php:1249 emp-forms.php:1252 emp-forms.php:1316
 msgid "options"
 msgstr "Optionen"
 
-#: emp-forms.php:845 emp-forms.php:1053
+#: emp-forms.php:867 emp-forms.php:1075
 msgid "Options"
 msgstr "Optionen"
 
-#: emp-forms.php:848 emp-forms.php:1056
+#: emp-forms.php:870 emp-forms.php:1078
 msgid "Available options, one per line."
 msgstr "Verfügbare Optionen, eine pro Zeile."
 
-#: emp-forms.php:852
+#: emp-forms.php:874
 msgid "Use Default?"
 msgstr "Standard nutzen?"
 
-#: emp-forms.php:856
+#: emp-forms.php:878
 msgid "If checked, the first value above will be used."
 msgstr "Wenn augewählt, wird der erste Wert oben genutzt."
 
-#: emp-forms.php:860
+#: emp-forms.php:882
 msgid "Default Text"
 msgstr "Standardtext"
 
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:46
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:63 emp-forms.php:862
+#: emp-forms.php:884
 msgid "Select ..."
 msgstr "Auswählen ..."
 
-#: emp-forms.php:863
+#: emp-forms.php:885
 msgid "Shown when a default value isn't selected, selected by default."
 msgstr ""
 "Standardmäßig ausgewählt. Wird gezeigt, wenn kein Standardwert ausgewählt "
 "wird."
 
-#: emp-forms.php:874 emp-forms.php:899 emp-forms.php:1067 emp-forms.php:1095
-#: emp-forms.php:1123 emp-forms.php:1153 emp-forms.php:1186
+#: emp-forms.php:896 emp-forms.php:921 emp-forms.php:1089 emp-forms.php:1117
+#: emp-forms.php:1145 emp-forms.php:1175 emp-forms.php:1208
 msgid "Error Message"
 msgstr "Fehlernachricht"
 
-#: emp-forms.php:878 emp-forms.php:903 emp-forms.php:1071
+#: emp-forms.php:900 emp-forms.php:925 emp-forms.php:1093
 msgid "This error will show if a value isn't chosen."
 msgstr "Dieser Fehler wird angezeigt, wenn kein Wert ausgewählt ist."
 
-#: emp-forms.php:1081
+#: emp-forms.php:1103
 msgid "Checked by default?"
 msgstr "Standardmäßig auswählen?"
 
-#: emp-forms.php:1099
+#: emp-forms.php:1121
 msgid "This error will show if this box is not checked."
 msgstr "Dieser Fehler wird angezeigt, wenn die Box nicht ausgewählt ist."
 
-#: emp-forms.php:1116 emp-forms.php:1146
+#: emp-forms.php:1138 emp-forms.php:1168
 msgid "Regex"
 msgstr "Regex"
 
-#: emp-forms.php:1119 emp-forms.php:1149
+#: emp-forms.php:1141 emp-forms.php:1171
 msgid ""
 "By adding a regex expression, you can limit the possible values a user can "
 "input, for example the following only allows numbers: "
@@ -2586,32 +2972,32 @@ msgstr ""
 "Durch Hinzfügen eines Regex-Ausdrucks kannst Du die zulässigen Werte für "
 "Benutzereingaben einschränken. Z.B. wird das folgende nur Zahlen akzeptieren:"
 
-#: emp-forms.php:1127 emp-forms.php:1157
+#: emp-forms.php:1149 emp-forms.php:1179
 msgid "If the regex above does not match this error will be displayed."
 msgstr ""
 "Wenn die regex oben nicht übereinstimmt, dann wird dieser Fehler angezeigt."
 
-#: emp-forms.php:1179
+#: emp-forms.php:1201
 msgid "Private Key"
 msgstr "Privater Schlüssel"
 
-#: emp-forms.php:1175 emp-forms.php:1182
+#: emp-forms.php:1197 emp-forms.php:1204
 msgid "Required, get your keys <a href=\"%s\">here</a>"
 msgstr "Erforderlich, hole Deine Schlüssel <a href=\"%s\">here</a>"
 
-#: emp-forms.php:1172
+#: emp-forms.php:1194
 msgid "Public Key"
 msgstr "Öffentlicher Schlüssel"
 
-#: emp-forms.php:1190
+#: emp-forms.php:1212
 msgid "This error will show if the captcha is not correct."
 msgstr "Dieser Fehler wird angezeigt, wenn die Captcha nicht korrekt ist."
 
-#: emp-forms.php:1207
+#: emp-forms.php:1229
 msgid "Add booking field"
 msgstr "Buchungsfeld hinzufügen"
 
-#: emp-forms.php:1274
+#: emp-forms.php:1296
 msgid "hide options"
 msgstr "Optionen verbergen"
 
@@ -2619,21 +3005,22 @@ msgstr "Optionen verbergen"
 msgid "Please fill in the field: %s"
 msgstr "Bitte Feld eintragen: %s"
 
-#: add-ons/bookings-form/attendee-forms.php:41 add-ons/bookings-form.php:49
-#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:152
-#: add-ons/coupons/coupons-admin.php:162 add-ons/coupons/coupons-admin.php:380
-#: add-ons/user-fields.php:145 add-ons/user-fields.php:208
-#: add-ons/user-fields.php:210 emp-install.php:146
+#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form/bookings-form.php:47 add-ons/coupons/coupon.php:55
+#: add-ons/coupons/coupons-admin.php:174 add-ons/coupons/coupons-admin.php:184
+#: add-ons/coupons/coupons-admin.php:404 add-ons/user-fields.php:143
+#: add-ons/user-fields.php:206 add-ons/user-fields.php:208 emp-install.php:146
 msgid "Name"
 msgstr "Name"
 
-#: add-ons/bookings-form.php:50 add-ons/gateways.php:579
-#: add-ons/user-fields.php:146 add-ons/user-fields.php:212 emp-install.php:147
+#: add-ons/bookings-form/bookings-form.php:48
+#: add-ons/gateways/gateways.php:377 add-ons/user-fields.php:144
+#: add-ons/user-fields.php:210 emp-install.php:147
 msgid "Email"
 msgstr "E-Mail"
 
-#: add-ons/bookings-form.php:56 add-ons/gateways.php:55 emp-install.php:153
-#: emp-install.php:165
+#: add-ons/bookings-form/bookings-form.php:54 add-ons/gateways/gateways.php:54
+#: emp-install.php:153 emp-install.php:165
 msgid "Phone"
 msgstr "Telefon"
 
@@ -2647,22 +3034,23 @@ msgstr ""
 "config.php Datei hinzugfügt haben. Nur Administratoren sehen diese "
 "Nachricht, und sie wird verschwinden, wenn Du die Zeile entfernst."
 
-#: add-ons/emails.php:173 add-ons/gateways.php:265
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
-#: add-ons/multiple-bookings/multiple-bookings-admin.php:102 emp-forms.php:31
-#: emp-updates.php:82
+#: add-ons/emails/emails-admin.php:21 add-ons/emails/emails-admin.php:68
+#: add-ons/gateways/gateways-admin.php:17
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:117 emp-forms.php:31
+#: emp-updates.php:83
 msgid "Click to toggle"
 msgstr "Klicken zum Umschalten"
 
-#: emp-updates.php:82
+#: emp-updates.php:83
 msgid "Pro Membership Key"
 msgstr "Pro-Mitgliedschaftsschlüssel"
 
-#: emp-updates.php:86
+#: emp-updates.php:87
 msgid "Pro Member Key"
 msgstr "Pro-Mitgliedsschlüssel"
 
-#: emp-updates.php:86
+#: emp-updates.php:87
 msgid ""
 "Insert your Pro Member Key to access automatic updates you can get your "
 "membership key from <a href=\"%s\">here</a>."
@@ -2671,11 +3059,11 @@ msgstr ""
 "zuzugreifen. Du kannst Deinen Mitgliedsschlüssel bekommen bei <a href=\"%s"
 "\">here</a>."
 
-#: add-ons/gateways/gateway.php:389
+#: add-ons/gateways/gateway.php:414
 msgid "Edit &quot;%s&quot; settings"
 msgstr "&quot;%s&quot; Einstellungen speichern"
 
-#: add-ons/coupons/coupons-admin.php:449 add-ons/gateways/gateway.php:436
+#: add-ons/coupons/coupons-admin.php:473 add-ons/gateways/gateway.php:469
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 

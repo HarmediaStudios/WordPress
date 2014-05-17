@@ -141,6 +141,7 @@ function emp_create_bookings_relationships_table(){
 function emp_add_options() {
 	global $wpdb;
 	add_option('em_pro_data', array());
+	add_option('dbem_disable_css',false); //TODO - remove this or create dependency in admin settings
 	//Form Stuff
 	$booking_form_data = array( 'name'=> __('Default','em-pro'), 'form'=> array (
 	  'name' => array ( 'label' => __('Name','dbem'), 'type' => 'name', 'fieldid'=>'user_name', 'required'=>1 ),
@@ -173,6 +174,8 @@ function emp_add_options() {
 	//Gateway Stuff
     add_option('dbem_emp_booking_form_reg_input', 1);
     add_option('dbem_emp_booking_form_reg_show', 1);
+    add_option('dbem_emp_booking_form_reg_show_email', 0);
+    add_option('dbem_emp_booking_form_reg_show_name', !get_option('em_pro_version'));
 	add_option('dbem_gateway_use_buttons', 0);
 	add_option('dbem_gateway_label', __('Pay With','em-pro'));
 	//paypal
@@ -181,7 +184,7 @@ function emp_add_options() {
 	add_option('em_paypal_booking_feedback', __('Please wait whilst you are redirected to PayPal to proceed with payment.','em-pro'));
 	add_option('em_paypal_booking_feedback_free', __('Booking successful.', 'dbem'));
 	add_option('em_paypal_button', 'http://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif');
-	add_option('em_paypal_booking_feedback_thanks', __('Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a seperate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction.', 'em-pro'));
+	add_option('em_paypal_booking_feedback_thanks', __('Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a separate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction.', 'em-pro'));
 	//offline
 	add_option('em_offline_option_name', __('Pay Offline', 'em-pro'));
 	add_option('em_offline_booking_feedback', __('Booking successful.', 'dbem'));
@@ -192,7 +195,8 @@ function emp_add_options() {
 	add_option('em_authorize_aim_booking_feedback_free', __('Booking successful. You have not been charged for this booking.', 'em-pro'));
 	//email reminders
 	add_option('dbem_cron_emails', 0);
-	add_option('dbem_emp_emails_reminder_subject', 'Reminder - #_EVENTNAME');
+	add_option('dbem_cron_emails_limit', get_option('emp_cron_emails_limit', 100));
+	add_option('dbem_emp_emails_reminder_subject', __('Reminder','em-pro').' - #_EVENTNAME');
 	$email_footer = '<br /><br />-------------------------------<br />Powered by Events Manager - http://wp-events-plugin.com';
 	$respondent_email_body_localizable = __("Dear #_BOOKINGNAME, <br />This is a reminder about your #_BOOKINGSPACES space/spaces reserved for #_EVENTNAME.<br />When : #_EVENTDATES @ #_EVENTTIMES<br />Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br />We look forward to seeing you there!<br />Yours faithfully,<br />#_CONTACTNAME",'dbem').$email_footer;
 	add_option('dbem_emp_emails_reminder_body', str_replace("<br />", "\n\r", $respondent_email_body_localizable));

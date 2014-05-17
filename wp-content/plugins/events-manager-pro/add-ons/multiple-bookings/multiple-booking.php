@@ -36,6 +36,10 @@ class EM_Multiple_Booking extends EM_Booking{
 	
     function add_booking( $EM_Booking ){
         if( empty($this->bookings[$EM_Booking->event_id]) ){
+        	//if status is not set, give 1 or 0 depending on general approval settings
+			if( empty($EM_Booking->booking_status) ){
+				$EM_Booking->booking_status = get_option('dbem_bookings_approval') ? 0:1;
+			}
             //add booking to cart session
             $booking = clone($EM_Booking); //clone and strip unecessary objects to avoid large session file buildup
             $booking->tickets = null;
@@ -50,12 +54,36 @@ class EM_Multiple_Booking extends EM_Booking{
 			$this->tickets_bookings = null; //so that this is done again
 			$this->tickets = null; //so that this is done again
 			$this->calculate_price();
-            return true;            
+			//refresh status in case bookings are all approved already
+			if( $EM_Booking->booking_status != 1 ){
+				$needs_approval = true;
+			}
+			if( empty($needs_approval) ){
+				$this->booking_status = 1;
+			}
+            return true;
         }else{
             //error, booking for event already exists
             $EM_Booking->add_error( get_option('dbem_multiple_bookings_feedback_already_added') );
             return false;
         }
+    }
+    
+    function remove_booking($event_id){
+    	if( !empty($this->bookings[$event_id]) ){
+			$EM_Event = em_get_event($event_id);
+			//remove ticket booking records belonging to this event
+			foreach($EM_Event->get_tickets() as $EM_Ticket){ /* @var $EM_Ticket EM_Ticket */
+				if( !empty($this->get_tickets_bookings()->tickets_bookings[$EM_Ticket->ticket_id]) ) unset($this->get_tickets_bookings()->tickets_bookings[$EM_Ticket->ticket_id]);
+			}
+			//remove event from bookings array
+		    unset($this->bookings[$_REQUEST['event_id']]);
+		    //refresh price and spaces
+		    $this->calculate_price();
+		    $this->get_spaces(true);
+		    return true;
+    	}
+    	return false;
     }
     
 	function get_post( $override_availability = false ){
@@ -65,8 +93,8 @@ class EM_Multiple_Booking extends EM_Booking{
 	    //let forms etc. do their thing
 	    return apply_filters('em_multiple_booking_get_post', true, $this); 
 	}
-
-	function validate(){
+	
+	function validate( $override_availability = false ){
 	    //reset errors since this is always using sessions and we're about to revalidate
 	    $this->errors = array(); 
 	    //let forms etc. do their thing
@@ -75,12 +103,19 @@ class EM_Multiple_Booking extends EM_Booking{
 
 	function validate_bookings(){
 	    $result = true;
+	    $errors = array();
 	    foreach( $this->get_bookings() as $EM_Booking ){
 	        $EM_Booking->errors = array();
+	        $EM_Booking->mb_validate_bookings = true;
 	    	if( !$EM_Booking->validate() ){
 	    		$result = false;
-	    		$this->add_error($EM_Booking->get_errors());
+	    		$errors[] = array($EM_Booking->get_event()->event_name => $EM_Booking->get_errors());
 	    	}
+	        unset($EM_Booking->mb_validate_bookings);
+	    }
+	    if( !$result ){
+	    	$this->add_error( __("There was an error validating your bookings, please see the errors below:", 'dbem') );
+	    	foreach( $errors as $error ) $this->add_error($error);
 	    }
 	    return $result;
 	}
@@ -194,7 +229,7 @@ class EM_Multiple_Booking extends EM_Booking{
 	 * @param boolean $format
 	 * @return float
 	 */
-	function get_price( $format=false ){
+	function get_price( $format = false, $format_depricated = null ){
 		if( $this->booking_price === null ){
 			$this->booking_price = 0;
 			foreach($this->get_bookings() as $EM_Booking){
@@ -236,6 +271,7 @@ class EM_Multiple_Booking extends EM_Booking{
 			}else{
 			    $this->event = new EM_Event();
 			    $this->event->event_name = __('Multiple Events','em-pro');
+			    $this->event->event_owner = 0;
 			}
 		}elseif( $this->event->event_id && count($this->get_bookings()) != 1 ){
 		    $this->event = new EM_Event(); //reset event object
@@ -373,7 +409,7 @@ class EM_Multiple_Booking extends EM_Booking{
 	}
 
 	//since we're always dealing with a single email
-	function email( $email_admin = true, $force_resend = false ){
+	function email( $email_admin = true, $force_resend = false, $email_attendee = true ){
 		if( get_option('dbem_multiple_bookings_contact_email') ){ //we also email individual booking emails to the individual event owners
 		    foreach($this->get_bookings() as $EM_Booking){
 		        $EM_Booking->email($email_admin, $force_resend, false);
@@ -423,7 +459,7 @@ class EM_Multiple_Booking extends EM_Booking{
 	/**
 	 * To manage a multiple booking, only event admins can see the whole set of bookings.
 	 */
-	function can_manage(){
+	function can_manage($owner_capability = false, $admin_capability = false, $user_to_check = false){
 		return empty($this->booking_id) || current_user_can('manage_others_bookings');
 	}
 }

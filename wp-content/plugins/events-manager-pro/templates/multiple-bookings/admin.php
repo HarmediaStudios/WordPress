@@ -1,9 +1,15 @@
 <?php
 /**
+ * WARNING - This file is likely to be modified in the future as more features are added and modifications are made revolving Multiple Bookings Mode. 
+ * This template file can be overriden, but we strongly advise you consider other means to make modifications such as using actions or filters to insert or modify information.
+ * We provide this file as an overridable template for extreme cases, but due to the nature of this feature and potential upcoming changes, this file has a high probability of needing changes down the line.
+ * If you feel that there's a missing action/filter that would help make this file more flexible for your needs without requiring to modify it directly, please let us know on our support forums and we'll be happy to add it if it makes sense.
+ * Proceed with caution! You have been warned :)
+ * 
  * Shows a single booking for a single person.
  */
 global $EM_Booking, $EM_Notices;
-$EM_Multiple_Booking = $EM_Booking;
+$EM_Multiple_Booking = $EM_Booking; /* @var $EM_Multiple_Booking EM_Multiple_Booking */
 //check that user can access this page
 if( is_object($EM_Multiple_Booking) && !$EM_Multiple_Booking->can_manage() ){
 	?>
@@ -17,7 +23,6 @@ if( is_object($EM_Multiple_Booking) && !$EM_Multiple_Booking->can_manage() ){
   	<h2>
   		<?php _e('Edit Booking', 'dbem'); ?>
   	</h2>
-  	<?php if( !is_admin() ) echo $EM_Notices; ?>
 	<div id="poststuff" class="metabox-holder">
 	<div id="post-body">
 		<div id="post-body-content">		
@@ -26,8 +31,39 @@ if( is_object($EM_Multiple_Booking) && !$EM_Multiple_Booking->can_manage() ){
 					<?php _e ( 'Personal Details', 'dbem' ); ?>
 				</h3>
 				<div class="inside">
-					<?php echo $EM_Multiple_Booking->get_person()->display_summary(); ?>
-					<?php do_action('em_bookings_admin_booking_person', $EM_Multiple_Booking); ?>
+					<?php $no_user = get_option('dbem_bookings_registration_disable') && $EM_Multiple_Booking->get_person()->ID == get_option('dbem_bookings_registration_user'); ?>
+					<div class="em-booking-person-details">
+						<?php echo $EM_Multiple_Booking->get_person()->display_summary(); ?>
+						<?php if( $no_user ): ?>
+						<input type="button" id="em-booking-person-modify" value="<?php esc_attr_e('Edit Details','dbem'); ?>" />
+						<?php endif; ?>
+					</div>
+					<?php if( $no_user ): ?>
+					<form action="" method="post" class="em-booking-person-form">
+						<div class="em-booking-person-editor" style="display:none;">
+							<?php echo $EM_Multiple_Booking->get_person_editor(); ?>
+						 	<input type='hidden' name='action' value='booking_modify_person'/>
+						 	<input type='hidden' name='booking_id' value='<?php echo $EM_Multiple_Booking->booking_id; ?>'/>
+						 	<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
+						 	<input type='hidden' name='_wpnonce' value='<?php echo wp_create_nonce('booking_modify_person_'.$EM_Multiple_Booking->booking_id); ?>'/>
+							<input type="submit" class="em-booking-person-modify-submit" id="em-booking-person-modify-submit" value="<?php esc_attr_e('Submit Changes', 'dbem'); ?>" />
+							<input type="button" id="em-booking-person-modify-cancel" value="<?php esc_attr_e('Cancel','dbem'); ?>" />
+						</div>
+					</form>	
+					<script type="text/javascript">
+						jQuery(document).ready( function($){
+							$('#em-booking-person-modify').click(function(){
+								$('.em-booking-person-details').hide();
+								$('.em-booking-person-editor').show();
+							});
+							$('#em-booking-person-modify-cancel').click(function(){
+								$('.em-booking-person-details').show();
+								$('.em-booking-person-editor').hide();
+							});
+						});
+					</script>
+					<?php endif; ?>
+					<?php do_action('em_book<?php echo $EM_Multiple_Booking->get_person()->display_summary(); ?>ings_admin_booking_person', $EM_Multiple_Booking); ?>
 				</div>
 			</div> 	
 			<div class="stuffbox">

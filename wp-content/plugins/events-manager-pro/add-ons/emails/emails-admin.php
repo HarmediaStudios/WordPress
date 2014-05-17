@@ -30,8 +30,8 @@ class EM_Emails_Admin {
 				</td></tr>
 				<?php
 				em_options_radio_binary ( sprintf(_x( 'Enable %s?', 'Enable a feature in settings page', 'em-pro' ), __('Event Email Reminders','em-pro')), 'dbem_cron_emails','');
-				em_options_input_text ( __( 'Days before reminder', 'dbem' ), 'dbem_emp_emails_reminder_days',__('You can choose to send people attending your event x days before the event starts. Minimum is one day.'), 1);
-				em_options_radio_binary ( __( 'Attach ical invite?', 'dbem' ), 'dbem_emp_emails_reminder_ical',__('If using SMTP in your email settings. You can automatically attach an ical file which some email clients (e.g. gmail) will render as an invitation they can add to their calendar.'));
+				em_options_input_text ( __( 'Days before reminder', 'em-pro' ), 'dbem_emp_emails_reminder_days',__('You can choose to send people attending your event x days before the event starts. Minimum is one day.', 'em-pro'), 1);
+				em_options_radio_binary ( __( 'Attach ical invite?', 'em-pro' ), 'dbem_emp_emails_reminder_ical',__('If using SMTP in your email settings. You can automatically attach an ical file which some email clients (e.g. gmail) will render as an invitation they can add to their calendar.', 'em-pro'));
 				$days = get_option('dbem_emp_emails_reminder_days',1);
 				?>
 				<tr>
@@ -42,8 +42,8 @@ class EM_Emails_Admin {
 					</td>
 				</tr>
 				<?php
-				em_options_input_text ( __( 'Reminder subject', 'dbem' ), 'dbem_emp_emails_reminder_subject','');
-				em_options_textarea ( __( 'Approved email', 'dbem' ), 'dbem_emp_emails_reminder_body','');
+				em_options_input_text ( __( 'Reminder subject', 'em-pro' ), 'dbem_emp_emails_reminder_subject','');
+				em_options_textarea ( __( 'Approved email', 'em-pro' ), 'dbem_emp_emails_reminder_body','');
 				?>
 				<?php echo $save_button; ?>
 			</table>
@@ -77,13 +77,13 @@ class EM_Emails_Admin {
 				<tbody class="dbem-js-custom-emails">
 					<tr><th colspan="2"><?php __('Event Emails','em-pro'); ?></th></tr>
 					<?php
-					em_options_radio_binary ( __( 'Allow custom emails for events?', 'dbem' ), 'dbem_custom_emails_events',__('Allow custom booking email templates to be configured for individual events.','em-pro').' '.__('Users with the %s user capability will be able to do this when adding/editing events.','em-pro'));
-					em_options_radio_binary ( __( 'Allow custom admin email addresses for events?', 'dbem' ), 'dbem_custom_emails_events_admins',__('Allow adding custom email addresses to be addded to individual events.','em-pro').' '.__('Users with the %s user capability will be able to do this when adding/editing events.','em-pro'));
+					em_options_radio_binary ( __( 'Allow custom emails for events?', 'em-pro' ), 'dbem_custom_emails_events',__('Allow custom booking email templates to be configured for individual events.','em-pro').' '.__('Users with the %s user capability will be able to do this when adding/editing events.','em-pro'));
+					em_options_radio_binary ( __( 'Allow custom admin email addresses for events?', 'em-pro' ), 'dbem_custom_emails_events_admins',__('Allow adding custom email addresses to be addded to individual events.','em-pro').' '.__('Users with the %s user capability will be able to do this when adding/editing events.','em-pro'));
 					?>
 					<tr><th colspan="2"><?php __('Gateway Emails','em-pro'); ?></th></tr>
 					<?php
-					em_options_radio_binary ( __( 'Allow custom emails for gateways?', 'dbem' ), 'dbem_custom_emails_gateways', sprintf(__('Allow administrators of this blog to configure custom booking email templates inside each %s settings page.','em-pro'),'<a href="'.admin_url('edit.php?post_type=event&page=events-manager-gateways').'">'.__('Payment Gateways','em-pro').'</a>') );
-					em_options_radio_binary ( __( 'Allow custom admin email addresses for gateways?', 'dbem' ), 'dbem_custom_emails_gateways_admins', sprintf(__('Allow administrators of this blog to add additional admin email addresses for gateways inside each %s settings page.','em-pro'),'<a href="'.admin_url('edit.php?post_type=event&page=events-manager-gateways').'">'.__('Payment Gateways','em-pro').'</a>') );
+					em_options_radio_binary ( __( 'Allow custom emails for gateways?', 'em-pro' ), 'dbem_custom_emails_gateways', sprintf(__('Allow administrators of this blog to configure custom booking email templates inside each %s settings page.','em-pro'),'<a href="'.admin_url('edit.php?post_type=event&page=events-manager-gateways').'">'.__('Payment Gateways','em-pro').'</a>') );
+					em_options_radio_binary ( __( 'Allow custom admin email addresses for gateways?', 'em-pro' ), 'dbem_custom_emails_gateways_admins', sprintf(__('Allow administrators of this blog to add additional admin email addresses for gateways inside each %s settings page.','em-pro'),'<a href="'.admin_url('edit.php?post_type=event&page=events-manager-gateways').'">'.__('Payment Gateways','em-pro').'</a>') );
 					?>
 				<?php echo $save_button; ?>
 			</table>

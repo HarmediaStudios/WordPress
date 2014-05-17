@@ -65,4 +65,4 @@ $price_summary = $EM_Multiple_Booking->get_price_summary_array();
 <?php endforeach; ?>
 <?php endif; ?>
 
-<?php _e('Total Price','dbem'); ?> : <?php echo $price_summary['total']; ?>
+<?php _e('Total Price','em-pro'); ?> : <?php echo $price_summary['total']; ?>

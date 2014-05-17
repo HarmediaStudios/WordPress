@@ -223,7 +223,9 @@ class EM_Gateway_Offline extends EM_Gateway {
 		/* @var $EM_Event EM_Event */   
 		global $EM_Notices, $EM_Event;
 		if( !is_object($EM_Event) ) { return; }
-		if( !defined('EM_FORCE_REGISTRATION') ) define('EM_FORCE_REGISTRATION', true);
+		//force all user fields to be loaded
+		EM_Bookings::$force_registration = EM_Bookings::$disable_restrictions = true;
+		//remove unecessary footer payment stuff and add our own 
 		remove_action('em_booking_form_footer', array('EM_Gateways','booking_form_footer'),10,2);
 		remove_action('em_booking_form_footer', array('EM_Gateways','event_booking_form_footer'),10,2);
 		add_action('em_booking_form_footer', array($this,'em_booking_form_footer'),10,2);
@@ -279,7 +281,9 @@ class EM_Gateway_Offline extends EM_Gateway {
 			//add em_event_save filter to log transactions etc.
 			add_filter('em_booking_save', array(&$this, 'em_booking_save'), 10, 2);
 			//set flag that we're manually booking here, and set gateway to offline
-			if( !defined('EM_FORCE_REGISTRATION') && (empty($_REQUEST['person_id']) || $_REQUEST['person_id'] < 0) ) define('EM_FORCE_REGISTRATION', true);
+			if( empty($_REQUEST['person_id']) || $_REQUEST['person_id'] < 0 ){
+				EM_Bookings::$force_registration = EM_Bookings::$disable_restrictions = true;
+			}
 		}
 		parent::booking_add($EM_Event, $EM_Booking, $post_validation);
 	}

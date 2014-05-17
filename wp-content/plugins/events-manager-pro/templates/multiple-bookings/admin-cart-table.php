@@ -1,11 +1,11 @@
 <?php
 /*
-* WARNING -This is a recently added template (2013-01-30), and is likly to change as we fine-tune things over the coming weeks/months, if at all possible try to use our hooks or CSS/jQuery to acheive your customizations
+* WARNING -This is a relatively new feature and is likly to change as we fine-tune things over the coming weeks/months, if at all possible try to use our hooks or CSS/jQuery to acheive your customizations
 * This displays the booking cart showing the persons bookings, attendees and a breakdown of pricing.
 * You can override the default display settings pages by copying this file to yourthemefolder/plugins/events-manager-pro/multiple-bookings/ and modifying it however you need.
 * For more information, see http://wp-events-plugin.com/documentation/using-template-files/
 */
-if(empty($EM_Multiple_Booking)) $EM_Multiple_Booking = EM_Multiple_Bookings::get_multiple_booking();
+$EM_Multiple_Booking = empty($EM_Multiple_Booking) ? EM_Multiple_Bookings::get_multiple_booking() : $EM_Multiple_Booking; /* @var $EM_Multiple_Booking EM_Multiple_Booking */
 //TODO add delete booking from cart
 //TODO make bookings editable
 ?>

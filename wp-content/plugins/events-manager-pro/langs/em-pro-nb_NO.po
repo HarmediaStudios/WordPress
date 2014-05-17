@@ -1,0 +1,3756 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Events Manager Pro v2.3.7.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-01-13 19:33+0100\n"
+"Last-Translator: Marcus Sykes <wp.plugins@netweblogic.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"Language: af_ZA\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:39
+#: add-ons/emails/custom-emails-admin.php:84
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:52
+msgid "Title"
+msgstr "Tittel"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:39
+#: add-ons/bookings-form/attendee-forms.php:169
+#: add-ons/bookings-form/attendee-forms.php:194
+#: add-ons/bookings-form/attendee-forms.php:207
+#: add-ons/bookings-form/attendee-forms.php:344
+#: add-ons/bookings-form/attendee-forms.php:519
+#, php-format
+msgid "Attendee %s"
+msgstr "Deltaker %s"
+
+# @ emp-pro
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form/bookings-form.php:47 add-ons/coupons/coupon.php:55
+#: add-ons/coupons/coupons-admin.php:174 add-ons/coupons/coupons-admin.php:184
+#: add-ons/coupons/coupons-admin.php:404 add-ons/user-fields.php:143
+#: add-ons/user-fields.php:206 add-ons/user-fields.php:208 emp-install.php:147
+msgid "Name"
+msgstr "Navn"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:67
+#: add-ons/bookings-form/attendee-forms.php:612
+#: add-ons/bookings-form/bookings-form.php:78
+#: add-ons/bookings-form/bookings-form.php:391
+#: add-ons/emails/custom-emails-admin.php:73
+#: add-ons/gateways/gateway.paypal.php:471 emp-install.php:146
+#: emp-install.php:261
+msgid "Default"
+msgstr "Standard"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:387
+#: add-ons/coupons/coupons-admin.php:295 add-ons/coupons/coupons-admin.php:306
+#: add-ons/gateways/gateways.transactions.php:92
+#: templates/multiple-bookings/cart-table.php:21
+#: templates/placeholders/bookingattendees-multiple.php:8
+msgid "Event"
+msgstr "Event"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:388
+#: templates/multiple-bookings/admin-cart-table.php:26
+#: templates/multiple-bookings/cart-table.php:31
+msgid "Where"
+msgstr "Hvor"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:389
+#: templates/multiple-bookings/admin-cart-table.php:25
+#: templates/multiple-bookings/cart-table.php:30
+msgid "When"
+msgstr "Når"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:391
+#, php-format
+msgid "Exported bookings on %s"
+msgstr "Eksporterte bestillinger på %s"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:433
+msgid "Split bookings by attendee"
+msgstr "Splitte bestillinger av deltaker"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:434
+msgid ""
+"A row will be created for each space booked and will automatically include "
+"any attendee information associated with that booked ticket."
+msgstr ""
+"En rad vil bli opprettet for hver plass bestilt og vil automatisk inkludere "
+"all deltakerinformasjon knyttet til den bestilte billetten."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:610
+#: add-ons/bookings-form/attendee-forms.php:756
+msgid "Selected Attendee Form"
+msgstr "Valgt deltakerskjema"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:684
+#: add-ons/bookings-form/bookings-form.php:440
+#: add-ons/gateways/gateways.php:351 add-ons/user-fields.php:311
+msgid "Changes Saved"
+msgstr "Endringer lagret"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:693
+#: add-ons/bookings-form/bookings-form.php:449
+#, php-format
+msgid ""
+"The form <em>%s</em> is now the default booking form. All events without a "
+"pre-defined booking form will start using this form from now on."
+msgstr ""
+"Skjemaet <em>%s</em> er nå standard bestillingsskjema. Alle hendelser uten "
+"et forhåndsdefinert bestillingsskjema vil begynne å bruke dette skjemaet fra "
+"nå av."
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:699
+#: add-ons/bookings-form/bookings-form.php:455
+#, php-format
+msgid "%s Deleted"
+msgstr "%s slettet"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:699
+#: add-ons/bookings-form/bookings-form.php:386
+#: add-ons/bookings-form/bookings-form.php:455
+#: add-ons/gateways/gateway.php:434
+msgid "Booking Form"
+msgstr "Bestillingsskjema"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:707
+#: add-ons/bookings-form/bookings-form.php:463
+#, php-format
+msgid "Form renamed to <em>%s</em>."
+msgstr "Skjema omdøpt til <em>%s</em>."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:719
+#: add-ons/bookings-form/bookings-form.php:472
+msgid "New form created. You are now editing your new form."
+msgstr "Nytt skjema er opprettet. Du redigerer nå det nye skjemaet."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:740
+msgid "Attendee Form"
+msgstr "Deltakerskjema"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:743
+msgid ""
+"If enabled, this form will be shown and required for every space booked."
+msgstr ""
+"Hvis aktivert, vil dette skjemaet bli vist, og påkrevd for hver plass som "
+"blir bestilt."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:746
+msgid "Enable Attendee Forms"
+msgstr "Aktiver deltagerkjemaer"
+
+# @ dbem
+# @ emp-pro
+#: add-ons/bookings-form/attendee-forms.php:747
+#: add-ons/gateways/gateway.authorize.aim.php:420 emp-forms.php:147
+msgid "Yes"
+msgstr "Ja"
+
+# @ dbem
+# @ emp-pro
+#: add-ons/bookings-form/attendee-forms.php:748
+#: add-ons/gateways/gateway.authorize.aim.php:421 emp-forms.php:147
+msgid "No"
+msgstr "Nei"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:758
+#: add-ons/gateways/gateways.php:286
+#: add-ons/gateways/gateways.transactions.php:261
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:59
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:76
+msgid "None"
+msgstr "Ingen"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:771
+#: add-ons/bookings-form/bookings-form.php:511
+msgid "Make Default"
+msgstr "Bruk som standard"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:771
+msgid ""
+"You are about to make this your default booking form. All events without an "
+"existing specifically chosen booking form will use this new default form "
+"from now on.\n"
+"\n"
+" Are you sure you want to do this?"
+msgstr ""
+"Du er i ferd med å gjøre dette til ditt standard bestillingsskjema. Alle "
+"hendelser der du ikke har valgt et spesielt bestillingsskjema vil bruke "
+"dette nye standardskjemaet fra nå av.\n"
+"\n"
+" Er du sikker på at du vil gjøre dette?"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:780
+#: add-ons/bookings-form/bookings-form.php:522
+#: add-ons/coupons/coupons-admin.php:148
+msgid "Add New"
+msgstr "Legg til ny"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:784
+msgid ""
+"This is the default attendee form and will be used for any event where you "
+"have not chosen a specific form to use."
+msgstr ""
+"Dette er standard deltakerskjema og vil bli brukt for enhver hendelse der du "
+"ikke har valgt et bestemt skjema som skal brukes."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:786
+msgid ""
+"If you don't want to ask for attendee information by default, select None as "
+"your booking form and make it the default form."
+msgstr ""
+"Hvis du ikke ønsker å be om deltakerinformasjon som standard, velger du "
+"Ingen som ditt bestillingsskjema gjør det til standardskjemaet."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:790
+#: add-ons/bookings-form/bookings-form.php:530
+msgid "You are now editing "
+msgstr "Nå redigerer du "
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:795
+#: add-ons/bookings-form/bookings-form.php:535
+msgid "Rename"
+msgstr "Gi nytt navn"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:802
+#: add-ons/bookings-form/bookings-form.php:542
+#: add-ons/coupons/coupons-admin.php:198
+#: add-ons/gateways/gateway.offline.php:152
+#: add-ons/gateways/gateway.paypal.php:151
+#: add-ons/gateways/gateways.transactions.php:267
+msgid "Delete"
+msgstr "Slett"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:802
+msgid ""
+"Are you sure you want to delete this form?\n"
+"\n"
+" All events using this form will start using the default form automatically."
+msgstr ""
+"Er du sikker på at du vil slette dette skjemaet?\n"
+"\n"
+" Alle hendelser som bruker dette skjemaet vil ta i bruk standardskjemaet "
+"automatisk."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:807
+#: add-ons/bookings-form/bookings-form.php:549
+msgid ""
+"<strong>Important:</strong> When editing this form, to make sure your old "
+"booking information is displayed, make sure new field ids correspond with "
+"the old ones."
+msgstr ""
+"<strong>Viktig:</strong> Når du redigerer dette skjemaet, for å sørge for at "
+"din gamle booking informasjon vises, sørg for at nye felt-IDer "
+"korresponderer med de gamle."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:811
+msgid "Default Value"
+msgstr "Standardverdi"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:811
+msgid "No attendee form selected. Choose a form, or create a new one above."
+msgstr ""
+"Du har ikke valgt deltakerskjema. Velg et skjema, eller lag en ny ovenfor."
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:48
+#: add-ons/gateways/gateways.php:377 add-ons/user-fields.php:144
+#: add-ons/user-fields.php:210 emp-install.php:148
+msgid "Email"
+msgstr "E-post"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:49 add-ons/gateways/gateways.php:48
+#: emp-install.php:149 emp-install.php:160
+msgid "Address"
+msgstr "Adresse"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:50 add-ons/gateways/gateways.php:50
+#: emp-install.php:150 emp-install.php:162
+msgid "City"
+msgstr "By"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:51 add-ons/gateways/gateways.php:51
+#: emp-install.php:151 emp-install.php:163
+msgid "State/County"
+msgstr "Stat/Fylke"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:52 add-ons/gateways/gateways.php:52
+#: emp-install.php:152 emp-install.php:164
+msgid "Zip/Post Code"
+msgstr "Zip/postnummer"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:53 add-ons/gateways/gateways.php:53
+#: emp-install.php:153 emp-install.php:165
+msgid "Country"
+msgstr "Land"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:54 add-ons/gateways/gateways.php:54
+#: emp-install.php:154 emp-install.php:166
+msgid "Phone"
+msgstr "Telefon"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:55 add-ons/gateways/gateways.php:55
+#: emp-install.php:155 emp-install.php:167
+msgid "Fax"
+msgstr "Fax"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/bookings-form.php:56 emp-install.php:156
+msgid "Comment"
+msgstr "Kommentar"
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:387
+msgid ""
+"You can choose to use a custom booking form, or leave as is to use the "
+"default booking form."
+msgstr ""
+"Du kan velge å bruke et egendefinert bestillingsskjema, eller la være og "
+"bruke standard bestillingsskjema."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:389
+#: add-ons/bookings-form/bookings-form.php:497
+msgid "Selected Booking Form"
+msgstr "Valgt bestillingssjema"
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:434
+msgid ""
+"You must include an E-mail field type for booking forms to work. These are "
+"used to create the user account and aren't shown to logged in users."
+msgstr ""
+"Du må inkludere en e-post felttype for booking former å jobbe. Disse brukes "
+"til å opprette brukerkonto og vises ikke for påloggede brukere."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:490
+msgid "Booking Form - General Information"
+msgstr "Bestillingsskjema - Generell informasjon"
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:493
+msgid "You can customize the fields shown in your booking forms below. "
+msgstr "Du kan tilpasse feltene vist i dine booking former nedenfor. "
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:493
+msgid ""
+"It is required that you have at least an email and name field so guest users "
+"can register."
+msgstr ""
+"Det kreves at du har minst en e-post og navn feltet så gjeste brukere kan "
+"registrere seg."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:494
+#, php-format
+msgid ""
+"Registration fields are only shown to guest visitors by default. You can "
+"choose to show these fields and make them editable by logged in user in your "
+"<a href=\"%s\">PRO Booking Form Options</a>."
+msgstr ""
+"Registreringsfeltene vises bare til gjeste besøkende som standard. Du kan "
+"velge å vise disse feltene, og gjøre dem redigeres av innlogget bruker i <a "
+"href=\"%s\"> PRO Reservasjons Alternativer for skjema </a>."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:512
+msgid ""
+"You are about to make this your default booking form. All events without an "
+"existing specifically chosen booking form will use this new default form "
+"from now on."
+msgstr ""
+"Du er i ferd med å gjøre dette til ditt standard bestillingsskjema. Alle "
+"hendelser uten en eksisterende spesielt valgt bestillingsskjema vil bruke "
+"denne nye standardskjemaet fra nå av."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:514
+msgid "Are you sure you want to do this?"
+msgstr "Er du sikker på at du vil gjøre dette?"
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:525
+msgid ""
+"This is the default bookings form and will be used for any event where you "
+"have not chosen a specific form to use."
+msgstr ""
+"Dette er standard bestillinger form og vil bli brukt for enhver hendelse der "
+"du ikke har valgt et bestemt skjema som skal brukes."
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:543
+msgid "Are you sure you want to delete this form?"
+msgstr "Er du sikker på at du vil slette dette skjemaet?"
+
+# @ em-pro
+#: add-ons/bookings-form/bookings-form.php:545
+msgid ""
+"All events using this form will start using the default form automatically."
+msgstr ""
+"Alle hendelser ved hjelp av dette skjemaet vil ta i bruk standardskjemaet "
+"automatisk."
+
+# @ dbem
+#: add-ons/coupons/coupon-admin.php:40
+#, php-format
+msgid "%s is required."
+msgstr "%s er nødvendig."
+
+# @ em-pro
+#: add-ons/coupons/coupon-admin.php:70
+#, php-format
+msgid "Something went wrong saving your %s."
+msgstr "Noe gikk galt under lagringen av din %s."
+
+# @ em-pro
+#: add-ons/coupons/coupon-admin.php:70 add-ons/coupons/coupon-admin.php:74
+#: add-ons/coupons/coupon-admin.php:79 add-ons/coupons/coupon-admin.php:81
+#: add-ons/coupons/coupon-admin.php:101
+msgid "Coupon"
+msgstr "Kupong"
+
+# @ em-pro
+#: add-ons/coupons/coupon-admin.php:74 add-ons/coupons/coupon-admin.php:81
+#, php-format
+msgid "Successfully saved %s"
+msgstr "Lagret %s"
+
+# @ em-pro
+#: add-ons/coupons/coupon-admin.php:79
+#, php-format
+msgid "Something went wrong updating your %s."
+msgstr "Noe gikk galt oppdatere %s."
+
+# @ em-pro
+#: add-ons/coupons/coupon-admin.php:101
+#, php-format
+msgid "Successfully deleted %s"
+msgstr "Vellykket slettet %s"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:178
+#: add-ons/coupons/coupons-admin.php:188
+msgid "Discount"
+msgstr "Rabatt"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:55 add-ons/coupons/coupons-admin.php:175
+#: add-ons/coupons/coupons-admin.php:185
+msgid "Code"
+msgstr "Kode"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:152 add-ons/coupons/coupon.php:156
+#, php-format
+msgid "%s Off"
+msgstr "%s Off"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:36 add-ons/coupons/coupons-admin.php:90
+#: add-ons/coupons/coupons-admin.php:156 add-ons/coupons/coupons-admin.php:159
+msgid "Coupons"
+msgstr "Kuponger"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:36 add-ons/coupons/coupons-admin.php:42
+#: add-ons/coupons/coupons-admin.php:46
+msgid "show coupons"
+msgstr "Vis kuponger"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:43
+msgid "hide coupons"
+msgstr "skjule kuponger"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:58
+msgid "Coupons selected here will be applied to bookings made for this event."
+msgstr ""
+"Kuponger utvalgte her vil bli brukt på bestillinger gjort for denne "
+"hendelsen."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:70
+msgid "No coupons created yet."
+msgstr "Ingen kuponger laget ennå."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:77
+msgid "The following codes will be automatically available to this event."
+msgstr "Følgende koder vil være automatisk tilgjengelig for denne hendelsen."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:90
+msgid "Coupons Manager"
+msgstr "Kuponger ansvarlig"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:147
+msgid "Edit Coupons"
+msgstr "Rediger Kuponger"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:156
+#, php-format
+msgid "My %s"
+msgstr "My %s"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:159
+#, php-format
+msgid "All %s"
+msgstr "Alle %s"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:176 add-ons/coupons/coupons-admin.php:186
+msgid "Created By"
+msgstr "Laget av"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:177 add-ons/coupons/coupons-admin.php:187
+#: add-ons/coupons/coupons-admin.php:410
+msgid "Description"
+msgstr "Beskrivelse"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:179 add-ons/coupons/coupons-admin.php:189
+#: add-ons/coupons/coupons-admin.php:271
+msgid "Uses"
+msgstr "Bruksområder"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:211 add-ons/coupons/coupons-admin.php:276
+msgid "Unlimited"
+msgstr "Ubegrenset"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:222
+msgid "No coupons have been inserted yet!"
+msgstr "Ingen kuponger har blitt satt inn ennå!"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
+#: templates/multiple-bookings/admin.php:10
+msgid "Unauthorized Access"
+msgstr "Uautorisert tilgang"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
+#, php-format
+msgid "You do not have the rights to manage this %s."
+msgstr "Du har ikke rettigheter til å administrere denne %s."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:237 add-ons/coupons/coupons-admin.php:353
+msgid "coupon"
+msgstr "kupong"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:267
+msgid "Coupon Usage History"
+msgstr "Kupong Usage History"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:269
+#, php-format
+msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
+msgstr "Du ser detaljene i kupongen %s - <a href=\"%s\"> Rediger </a>"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:296 add-ons/coupons/coupons-admin.php:307
+msgid "Booker"
+msgstr "Booker"
+
+# @ dbem
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:297 add-ons/coupons/coupons-admin.php:308
+#: templates/multiple-bookings/cart-table.php:22
+msgid "Spaces"
+msgstr "Plasser"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:298 add-ons/coupons/coupons-admin.php:309
+msgid "Original Total Price"
+msgstr "Orginal totalpris"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:299 add-ons/coupons/coupons-admin.php:310
+msgid "Coupon Discount"
+msgstr "Kupongrabatt"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:300 add-ons/coupons/coupons-admin.php:311
+msgid "Final Price"
+msgstr "Endelig pris"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:331
+#: add-ons/gateways/gateway.offline.php:153
+#: add-ons/gateways/gateway.paypal.php:152
+msgid "Edit/View"
+msgstr "Rediger/Vis"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:342
+msgid "Your coupon hasn't been used yet!"
+msgstr "Kupongen har ikke blitt brukt ennå!"
+
+# @ dbem
+#: add-ons/coupons/coupons-admin.php:359
+msgid "required"
+msgstr "påkrevd"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:363
+msgid "Edit Coupon"
+msgstr "Edit kupong"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:373
+msgid "Coupon Availability"
+msgstr "Kupong Tilgjengelighet"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:376
+msgid "Only on specific events that I own"
+msgstr "Bare på spesifikke hendelser som jeg eier"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:377
+msgid "All my events"
+msgstr "Alle mine hendelser"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:379
+msgid "All events on this site"
+msgstr "Alle hendelser på dette nettstedet"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:383
+msgid ""
+"Choose whether to allow this coupon to be used only on events you choose, "
+"all your events or all events on this site."
+msgstr ""
+"Velg om du vil tillate denne kupongen skal kun brukes på arrangementer du "
+"velger, alle dine hendelser eller alle hendelser på dette nettstedet."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:387
+msgid ""
+"This coupon will be available for all bookings made and discount is applied "
+"to the total price before checking out."
+msgstr ""
+"Denne kupongen vil være tilgjengelig for alle bestillinger gjort og rabatten "
+"er brukt til den totale prisen før du sjekker ut."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:390
+msgid "Registered Users Only?"
+msgstr "Bare registrerte brukere?"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:393
+msgid "If checked, only logged in users will be able to use this coupon."
+msgstr ""
+"Hvis det er merket, vil kun innloggede brukere kunne bruke denne kupongen."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:397 add-ons/coupons/coupons.php:369
+#: add-ons/coupons/coupons.php:526 add-ons/coupons/coupons.php:528
+msgid "Coupon Code"
+msgstr "Kupongkode"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:400
+msgid "This is the code you give to users for them to use when booking."
+msgstr "Dette er koden du gi til brukerne for dem å bruke når du bestiller."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:416
+msgid "Total Coupons"
+msgstr "Totalt antall kuponger"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:419
+msgid "If set, this coupon will only be valid that many times."
+msgstr "Hvis satt, vil denne kupongen bare være gyldig at mange ganger."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:424
+msgid "Start Date"
+msgstr "Startdato"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:429
+msgid "Coupons will only be valid from this date onwards."
+msgstr "Kuponger vil bare være gyldig fra og med denne datoen."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:433
+msgid "End Date"
+msgstr "Sluttdato"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:438
+msgid "Coupons will not be valid after this date."
+msgstr "Kuponger vil ikke være gyldig etter denne datoen."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:443
+msgid "Discount Type"
+msgstr "Rabattype"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:446
+msgid "Percentage"
+msgstr "Prosentvis"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:447
+msgid "Fixed Amount"
+msgstr "Fast beløp"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:453
+msgid "Apply Before/After Tax"
+msgstr "Påfør før / etter skatt"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:456
+msgid "Before"
+msgstr "Før"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:457
+msgid "After"
+msgstr "Etter"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:460
+msgid ""
+"Choose whether to apply this discount before or after tax has been added, if "
+"applicable."
+msgstr ""
+"Velg om du vil bruke denne rabatten før eller etter skatt er lagt til, hvis "
+"det er aktuelt."
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:464
+msgid "Discount Amount"
+msgstr "Rabatt Beløp"
+
+# @ em-pro
+#: add-ons/coupons/coupons-admin.php:467
+msgid "Enter a number here only, decimals accepted."
+msgstr "Skriv inn et nummer her bare, desimaler akseptert."
+
+# @ default
+#: add-ons/coupons/coupons-admin.php:473 add-ons/gateways/gateway.php:477
+msgid "Save Changes"
+msgstr "Lagre endringer"
+
+# @ em-pro
+#: add-ons/coupons/coupons.php:173 add-ons/coupons/coupons.php:420
+msgid "Coupon Not Found"
+msgstr "Kupong Not Found"
+
+# @ em-pro
+#: add-ons/coupons/coupons.php:184 add-ons/coupons/coupons.php:429
+msgid "Coupon Invalid"
+msgstr "Kupong Ugyldig"
+
+# @ em-pro
+#: add-ons/coupons/coupons.php:229
+msgid "Invalid coupon code provided"
+msgstr "Ugyldig kupongkode gitt"
+
+# @ em-pro
+#: add-ons/coupons/coupons.php:387
+msgid "Apply Discount"
+msgstr "Legg til rabatt"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:56
+msgid "Also Send Event Owner Emails To:"
+msgstr "Også Send begivenhet eier e-post til:"
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:58
+msgid ""
+"For multiple emails, seperate by commas (e.g. email1@test.com,email2@test."
+"com,etc.)"
+msgstr ""
+"For flere e-poster, skille med komma (f.eks email1@test.com, email2@test."
+"com, etc.)"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:74
+msgid "Enabled"
+msgstr "Aktivert"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:75
+msgid "Disabled"
+msgstr "Funksjonshemmede"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:80
+msgid "Subject"
+msgstr "Subject"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:152
+msgid "Default or Free Booking Emails"
+msgstr "Standard eller gratis booking e-post"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:155
+#: add-ons/emails/custom-emails-admin.php:323
+msgid "Event Owner Emails"
+msgstr "Hendelses eier e-post"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:156
+msgid ""
+"These emails get sent to the event owners when a person has made a booking."
+msgstr ""
+"Disse e-post blir sendt til hendelses eiere når en person har gjort en "
+"reservasjon."
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:158
+#: add-ons/emails/custom-emails-admin.php:167
+#: add-ons/emails/custom-emails-admin.php:326
+#: add-ons/emails/custom-emails-admin.php:335
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:153
+msgid "Pending booking email"
+msgstr "Ventende bestilling e-post"
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:159
+#: add-ons/emails/custom-emails-admin.php:168
+#: add-ons/emails/custom-emails-admin.php:327
+#: add-ons/emails/custom-emails-admin.php:336
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:145
+msgid "Confirmed booking email"
+msgstr "Bekreftet bestilling e-post"
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:160
+#: add-ons/emails/custom-emails-admin.php:170
+#: add-ons/emails/custom-emails-admin.php:328
+#: add-ons/emails/custom-emails-admin.php:338
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:169
+msgid "Booking cancelled"
+msgstr "Booking kansellert"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:164
+#: add-ons/emails/custom-emails-admin.php:332
+msgid "Attendee Emails"
+msgstr "Deltaker e-post"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:165
+msgid ""
+"These emails will be sent to the person who booked a place at your event."
+msgstr ""
+"Disse e-postene vil bli sendt til den personen som har bestilt et sted på "
+"ditt arrangement."
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:169
+#: add-ons/emails/custom-emails-admin.php:337
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:161
+msgid "Rejected booking email"
+msgstr "Avvist booking e-post"
+
+# @ em-pro
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:249
+#: add-ons/emails/custom-emails-admin.php:250
+#: add-ons/emails/custom-emails-admin.php:456
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:119
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
+msgid "Booking Email Templates"
+msgstr "Bestilling e-post maler"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:250
+#: add-ons/emails/custom-emails-admin.php:260
+#: add-ons/emails/custom-emails-admin.php:456
+#, php-format
+msgid ""
+"Below you can modify the emails that are sent when bookings are made. This "
+"will override the default emails located in your %s settings page."
+msgstr ""
+"Nedenfor kan du endre e-postmeldinger som sendes når bestilling er gjort. "
+"Dette vil overstyre standard e-poster som ligger i din %s side innstillinger."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:251
+msgid ""
+"Additionally, you can also override these emails at an event level when "
+"editing an event. Should you choose not to, any overriden emails on this "
+"page will be considered the default email for this gateway."
+msgstr ""
+"I tillegg kan du også overstyre disse e-postene på et arrangement nivå når "
+"du redigerer en hendelse. Skulle du velge å ikke, vil eventuelle overstyrt e-"
+"post på denne siden bli vurdert standard e-post for denne gateway."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:252
+#: add-ons/emails/custom-emails-admin.php:261
+msgid ""
+"Note that some gateways do not automatically send pending or confirmed "
+"emails, in these cases they may only apply to when event admins manually "
+"change the status of a booking resulting in an automated email getting sent."
+msgstr ""
+"Merk at noen gatewayer ikke automatisk sende ventende eller bekreftet e-"
+"post, i disse tilfellene kan de kun gjelder når hendelses admins manuelt "
+"endre status for en bestilling som resulterer i en automatisert e bli sendt."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:253
+#: add-ons/emails/custom-emails-admin.php:262
+#: add-ons/emails/custom-emails-admin.php:460
+msgid ""
+"Click on the title texts with a plus (+) next to them to reveal further "
+"options, and the minus (-) sign to hide them."
+msgstr ""
+"Klikk på tittelen tekster med et plusstegn (+) ved siden av dem til å "
+"avsløre flere alternativer, og minustegn (-) for å skjule dem."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:255
+#: add-ons/gateways/gateway.paypal.php:452
+msgid "Important:"
+msgstr "Viktig:"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:255
+msgid ""
+"You are in Multiple Booking Mode. These emails will only be used when "
+"individually modifying bookings which trigger these individual event booking "
+"emails."
+msgstr ""
+"Du er i Booking Mode Multiple. Disse e-postene vil kun bli brukt når "
+"individuelt endre bestillinger som utløser disse individuelle Event Booking "
+"e-poster."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:259
+#: add-ons/emails/custom-emails-admin.php:260
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:117
+msgid "Multiple Booking Email Templates"
+msgstr "Flere Reservasjons e-post maler"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:307
+#: add-ons/emails/custom-emails-admin.php:492
+msgid ""
+"An invalid admin email was supplied for your custom emails and was not saved "
+"in your settings."
+msgstr ""
+"En ugyldig admin e-post ble levert for den tilpassede e-post og ble ikke "
+"lagret i innstillingene."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:320
+#, php-format
+msgid "%s Gateway Emails"
+msgstr "%s Gateway e-post"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:324
+msgid ""
+"These emails get sent to the event owners when a person has made a booking "
+"using this specific gateway."
+msgstr ""
+"Disse e-post blir sendt til hendelses eiere når en person har gjort en "
+"reservasjon ved å bruke denne spesifikke gateway."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:333
+msgid ""
+"These emails will be sent to the person who booked a place at your event and "
+"selected this specific gateway."
+msgstr ""
+"Disse e-postene vil bli sendt til den personen som har bestilt et sted på "
+"ditt arrangement og valgte denne spesifikke gateway."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:345
+#: add-ons/emails/custom-emails-admin.php:346 add-ons/gateways/gateways.php:70
+msgid "Awaiting Offline Payment"
+msgstr "Venter offline betalings"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:438
+msgid "Custom Automated Emails"
+msgstr "Custom Automatiserte e-post"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:453
+#, php-format
+msgid ""
+"Since %s is enabled, these emails will only be sent when individual bookings "
+"are modified afterwards, such as changing the status of the booking "
+"individually or resending an email."
+msgstr ""
+"Siden %s er aktivert, vil disse e-postene kun sendes når individuelle "
+"bestillinger er endret etterpå, for eksempel endring av status for booking "
+"individuelt eller sending på nytt en e-post."
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:453
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
+msgid "Multiple Bookings Mode"
+msgstr "Av flere rom Mode"
+
+# @ em-pro
+#: add-ons/emails/custom-emails-admin.php:458
+#, php-format
+msgid ""
+"You can also create default emails for specific gateways in your individual "
+"%s settings page."
+msgstr ""
+"Du kan også opprette standard e-poster for spesifikke gatewayer i din "
+"individuelle %s side innstillinger."
+
+# @ dbem
+#: add-ons/emails/custom-emails-admin.php:458
+msgid "Gateway Settings"
+msgstr "Gateway-innstillinger"
+
+# @ dbem
+#: add-ons/emails/emails-admin.php:21 add-ons/emails/emails-admin.php:68
+#: add-ons/gateways/gateways-admin.php:17
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:43
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:117 emp-forms.php:31
+#: emp-updates.php:83
+msgid "Click to toggle"
+msgstr "Klikk for å skifte"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:21 add-ons/emails/emails-admin.php:32
+msgid "Event Email Reminders"
+msgstr "Event Epost påminnelser"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:26
+msgid ""
+"Events Manager can send people that booked a place at your events a reminder "
+"email before it starts."
+msgstr ""
+"Hendelser Manager kan sende folk som har bestilt et sted på hendelsene en "
+"påminnelse e-post før den starter."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:27
+#, php-format
+msgid ""
+"We use <a href=\"%s\">WP Cron</a> for scheduling checks for future events, "
+"which relies on site visits to trigger these tasks to run. If you have low "
+"levels of site traffic, this may not happen frequently enough, so you may "
+"want to consider forcing WP-Cron to run every few minutes. For more "
+"information, <a href=\"%s\">read this tutorial</a> on setting up WP Cron."
+msgstr ""
+"Vi bruker <a href=\"%s\"> WP Cron </a> for å planlegge sjekker for "
+"fremtidige hendelser, som er avhengig av besøk for å utløse disse oppgavene "
+"skal kjøres. Hvis du har lave nivåer av trafikk på siden, kan dette ikke "
+"skje ofte nok, så det kan være lurt å vurdere å tvinge WP-Cron å kjøre noen "
+"få minutter. For mer informasjon, <a href=\"%s\"> les denne opplæringen </a> "
+"på å sette opp WP Cron."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:29
+msgid ""
+"<strong>Important!</strong>, you should use SMTP as your email setup if you "
+"are sending automated emails in this way for optimal performance. Other "
+"methods are not suited to sending mass emails."
+msgstr ""
+"<strong> Viktig! </strong>, bør du bruke SMTP som din e-postoppsett hvis du "
+"sender automatisert e-post på denne måten for optimal ytelse. Andre metoder "
+"er ikke egnet til å sende masse e-poster."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:32 add-ons/emails/emails-admin.php:75
+#, php-format
+msgctxt "Enable a feature in settings page"
+msgid "Enable %s?"
+msgstr "Aktiver %s ?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:33
+msgid "Days before reminder"
+msgstr "Dager før påminnelse"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:33
+msgid ""
+"You can choose to send people attending your event x days before the event "
+"starts. Minimum is one day."
+msgstr ""
+"Du kan velge å sende folk å delta på deres event x dager før arrangementet "
+"starter. Minimum er en dag."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:34
+msgid "Attach ical invite?"
+msgstr "Fest ical invitere?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:34
+msgid ""
+"If using SMTP in your email settings. You can automatically attach an ical "
+"file which some email clients (e.g. gmail) will render as an invitation they "
+"can add to their calendar."
+msgstr ""
+"Hvis du bruker SMTP i e-postinnstillingene dine. Du kan automatisk legge en "
+"iCal-fil som noen e-postklienter (f.eks gmail) vil gjengi som en invitasjon "
+"de kan legge til sin kalender."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:38
+msgid "WP Cron Time"
+msgstr "WP Cron Tid"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:41
+msgid ""
+"Every day Events Manager automatically checks upcoming events in order to "
+"generate emails. You can choose at what time of day to run this check, if "
+"your site has a lot of traffic, it may help having this run at times of "
+"lower server loads."
+msgstr ""
+"Hver dag Hendelser Manager sjekker automatisk kommende hendelser for å "
+"generere e-post. Du kan velge på hvilken tid på dagen til å kjøre denne "
+"kontrollen, hvis området har mye trafikk, kan det hjelpe å ha dette kjøre på "
+"tider med lavere belastning på serveren."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:45
+msgid "Reminder subject"
+msgstr "Påminnelse emnet"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:46
+msgid "Approved email"
+msgstr "Godkjent epost"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:68 add-ons/emails/emails-admin.php:75
+msgid "Custom Booking Email Templates"
+msgstr "Custom Reservasjons e-post maler"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:72
+msgid ""
+"You can customize the email templates sent when users make a booking for one "
+"of your events."
+msgstr ""
+"Du kan tilpasse e-post maler som sendes når brukere gjør en bestilling for "
+"en av hendelsene."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:78
+msgid "Event Emails"
+msgstr "Event e-post"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:80
+msgid "Allow custom emails for events?"
+msgstr "Tillat tilpassede eposter for hendelser?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:80
+msgid ""
+"Allow custom booking email templates to be configured for individual events."
+msgstr ""
+"Tillat tilpasset bestilling E-post maler kan konfigureres for "
+"enkelthendelser."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:80 add-ons/emails/emails-admin.php:81
+#, php-format
+msgid ""
+"Users with the %s user capability will be able to do this when adding/"
+"editing events."
+msgstr ""
+"Brukere med %s bruker evne vil være i stand til å gjøre dette når du legger "
+"til / redigerer hendelser."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:81
+msgid "Allow custom admin email addresses for events?"
+msgstr "Tillat tilpasset admin e-postadresser for hendelser?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:81
+msgid "Allow adding custom email addresses to be addded to individual events."
+msgstr ""
+"Tillat legge til egendefinerte e-postadresser for å bli med viten og til "
+"enkelthendelser."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:83
+msgid "Gateway Emails"
+msgstr "Gateway e-post"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:85
+msgid "Allow custom emails for gateways?"
+msgstr "Tillat tilpassede eposter for gatewayer?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:85
+#, php-format
+msgid ""
+"Allow administrators of this blog to configure custom booking email "
+"templates inside each %s settings page."
+msgstr ""
+"Tillat administratorer av denne bloggen til å konfigurere egendefinerte "
+"reservasjons e-post maler inni hver %s side innstillinger."
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:85 add-ons/emails/emails-admin.php:86
+#: add-ons/gateways/gateways-admin.php:32
+msgid "Payment Gateways"
+msgstr "Betalingsløsninger"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:86
+msgid "Allow custom admin email addresses for gateways?"
+msgstr "Tillat tilpasset admin e-postadresser for gatewayer?"
+
+# @ em-pro
+#: add-ons/emails/emails-admin.php:86
+#, php-format
+msgid ""
+"Allow administrators of this blog to add additional admin email addresses "
+"for gateways inside each %s settings page."
+msgstr ""
+"Tillat administratorer av denne bloggen for å legge til flere admin e-"
+"postadresser for gatewayer inne hver %s side innstillinger."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:167
+msgid "Refunded"
+msgstr "Refundert"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:178
+msgid "Voided"
+msgstr "Annullert"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:207
+msgid "Credit Card Number"
+msgstr "Kredittkortnummer"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:211
+msgid "Expiry Date"
+msgstr "Utløpsdato"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:230
+msgid "CCV"
+msgstr "CCV"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:356
+#: add-ons/gateways/gateway.offline.php:396
+#: add-ons/gateways/gateway.paypal.php:428
+msgid "Success Message"
+msgstr "Suksess Message"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:359
+msgid ""
+"The message that is shown to a user when a booking is successful and payment "
+"has been taken."
+msgstr ""
+"Meldingen som vises til en bruker når en bestilling er vellykket og betaling "
+"har blitt tatt."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:363
+#: add-ons/gateways/gateway.paypal.php:435
+msgid "Success Free Message"
+msgstr "Suksess Gratis Melding"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:366
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be charged."
+msgstr ""
+"Hvis noen tilfeller hvis du tillater en gratis billett (f.eks lønn på gate) "
+"samt betalte billetter, vil denne meldingen vises og brukeren vil ikke bli "
+"belastet."
+
+# @ dbem
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:371
+#: add-ons/gateways/gateway.authorize.aim.php:414
+#: add-ons/gateways/gateway.paypal.php:451 add-ons/gateways/gateway.php:434
+#, php-format
+msgid "%s Options"
+msgstr "%s Alternativer"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:372
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions "
+"on setting up Authorize.net with Events Manager."
+msgstr ""
+"Vennligst besøk <a href=\"%s\"> dokumentasjonen </a> for ytterligere "
+"instruksjoner om hvordan du setter opp Authorize.net med Event Manager."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:376
+msgid "Mode"
+msgstr "Modus"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:380
+msgid "Sandbox"
+msgstr "Sandkasse"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:381
+msgid "Live"
+msgstr "Direkte"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:384
+#, php-format
+msgid ""
+"Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if "
+"you would like to test this gateway out. Alternatively, you can use your "
+"real account in test mode, which you can set on your Authorize.net control "
+"panel."
+msgstr ""
+"Vennligst besøk <a href=\"%s\"> Authorize.net </a> for å sette opp en "
+"sandkasse-konto hvis du ønsker å teste dette gateway ut. Alternativt kan du "
+"bruke din ekte konto i testmodus, der du kan sette på din Authorize.net "
+"kontrollpanelet."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:388
+msgid "API Login ID"
+msgstr "API Login ID"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:392
+msgid "Transaction key"
+msgstr "Transaksjonsnøkkel"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:396
+msgid "Payment Notifications"
+msgstr "Betalings Påminnelser"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:397
+msgid ""
+"If you would like to receive notifications from Authorize.net and handle "
+"refunds or voided transactions automatically, you need to enable Silent Post "
+"URL and provide an MD5 Hash in your merchant interface."
+msgstr ""
+"Hvis du ønsker å motta meldinger fra Authorize.net og håndtere refusjon "
+"eller annullert transaksjoner automatisk, du må aktivere Silent Post URL og "
+"gi en MD5 Hash i din kjøpmann grensesnitt."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:398
+#, php-format
+msgid "Your return url is %s."
+msgstr "Din avkastning url er %s ."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:398
+msgid "You can use this as your Silent Post URL."
+msgstr "Du kan bruke dette som URL Silent Post."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:401
+msgid "Security: MD5 Hash"
+msgstr "Sikkerhet: MD5 Hash"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:404
+msgid ""
+"This string of text needs to match that in your merchant interface settings."
+msgstr ""
+"Denne tekststreng må matche det i innstillingene dine kjøpmann grensesnitt."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:408
+msgid "User Login ID"
+msgstr "Bruker Login ID"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:411
+msgid "This is the username you use to log into your merchant interface."
+msgstr ""
+"Dette er brukernavnet du bruker til å logge deg på selgergrensesnittet."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:414
+msgid "Advanced"
+msgstr "Avansert"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:416
+msgid "Email Customer (on success)"
+msgstr "E-post Kunde (på suksess)"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:426
+msgid "Customer Receipt Email Header"
+msgstr "Kundemottak Epost Header"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:430
+msgid "Customer Receipt Email Footer"
+msgstr "Kundemottak Epost Footer"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:434
+#: add-ons/gateways/gateway.paypal.php:535
+msgid "Manually approve completed transactions?"
+msgstr "Manuelt godkjenne førte transaksjoner?"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:437
+#: add-ons/gateways/gateway.paypal.php:538
+msgid ""
+"By default, when someone pays for a booking, it gets automatically approved "
+"once the payment is confirmed. If you would like to manually verify and "
+"approve bookings, tick this box."
+msgstr ""
+"Som standard, når noen betaler for en reservasjon, det blir automatisk "
+"godkjent når betalingen er bekreftet. Hvis du ønsker å kontrollere og "
+"godkjenne bestillinger manuelt Merk denne boksen."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:438
+#: add-ons/gateways/gateway.paypal.php:539
+#, php-format
+msgid ""
+"Approvals must also be required for all bookings in your <a href=\"%s"
+"\">settings</a> for this to work properly."
+msgstr ""
+"Godkjenninger må også være obligatorisk for alle reservasjoner i din <a href="
+"\"%s\"> innstillinger </a> for at dette skal fungere skikkelig."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:48
+msgid "Payment has been registered."
+msgstr "Innbetalingen er registrert."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:52
+msgid "Booking is now fully paid and confirmed."
+msgstr "Booking er nå fullt betalt og bekreftet."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:59
+msgid ""
+"Please enter a valid payment amount. Numbers only, use negative number to "
+"credit a booking."
+msgstr ""
+"Vennligst skriv inn et gyldig betalingsbeløp. Nummere, bruke negative tall "
+"for å kreditere en bestilling."
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:71
+msgid ""
+"Be aware that by approving a booking awaiting payment, a full payment "
+"transaction will be registered against this booking, meaning that it will be "
+"considered as paid."
+msgstr ""
+"Vær oppmerksom på at ved å godkjenne en bestilling avventer betaling, vil en "
+"full betaling transaksjonen bli registrert mot denne bestillingen, noe som "
+"betyr at det vil bli ansett som betalt."
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:150
+#: add-ons/gateways/gateway.paypal.php:150
+msgid "Approve"
+msgstr "Godkjenne"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:151
+msgid "Reject"
+msgstr "Avvis"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:162
+msgid "Add Booking"
+msgstr "Legg Booking"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:170
+msgid "add booking"
+msgstr "legge booking"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:180
+#: add-ons/gateways/gateway.offline.php:205
+msgid "Add Offline Payment"
+msgstr "Legg offline betalings"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:188
+#: add-ons/gateways/gateways.transactions.php:95
+msgid "Amount"
+msgstr "Beløp"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:191
+msgid ""
+"Please enter a valid payment amount (e.g. 10.00). Use negative numbers to "
+"credit a booking."
+msgstr ""
+"Vennligst skriv inn et gyldig betalingsbeløp (f.eks 10,00). Bruk negative "
+"tall for å kreditere en bestilling."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:195
+msgid "Comments"
+msgstr "Kommentarer"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:237
+#, php-format
+msgid "Go back to &quot;%s&quot; bookings"
+msgstr "Gå tilbake til &quot;%s&quot; bestillinger"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:242
+#, php-format
+msgid "Add Booking For &quot;%s&quot;"
+msgstr "Legg bestilling for &quot;%s&quot;"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:297
+#: add-ons/gateways/gateway.offline.php:300
+msgid "Manual booking."
+msgstr "Manuell booking."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:306
+msgid "Add another booking"
+msgstr "Legg til en annen booking"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:353
+msgid "Select a user, or enter a new one below."
+msgstr "Velg en bruker, eller angi et nytt nedenfor."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:370
+msgid "Amount Paid"
+msgstr "Beløp betalt"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:372
+msgid "Fully Paid"
+msgstr "Fullt innbetalt"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:373
+msgid ""
+"If you check this as fully paid, and leave the amount paid blank, it will be "
+"assumed the full payment has been made."
+msgstr ""
+"Hvis du sjekker dette som fullt innbetalt, og la det betalte beløpet tomt, "
+"vil det antas at full betaling er gjort."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:399
+msgid ""
+"The message that is shown to a user when a booking with offline payments is "
+"successful."
+msgstr ""
+"Meldingen som vises til en bruker når en bestilling med offline betalinger "
+"er vellykket."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:23
+msgid "Awaiting PayPal Payment"
+msgstr "Venter PayPal Payment"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:80
+msgid ""
+"To finalize your booking, please click the following button to proceed to "
+"PayPal."
+msgstr ""
+"For å sluttføre din bestilling, kan du klikke følgende-knappen for å gå "
+"videre til PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:122
+msgid "Resume Payment"
+msgstr "Gjenoppta Betaling"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:386
+msgid "Unknown"
+msgstr "Ukjent"
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:388
+msgid "Unprocessed payment needs refund"
+msgstr "Ubehandlet betalingen må tilbakebetaling"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:431
+msgid ""
+"The message that is shown to a user when a booking is successful whilst "
+"being redirected to PayPal for payment."
+msgstr ""
+"Meldingen som vises til en bruker når en bestilling er vellykket mens blir "
+"omdirigert til PayPal for betaling."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:438
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be redirected to "
+"PayPal."
+msgstr ""
+"Hvis noen tilfeller hvis du tillater en gratis billett (f.eks lønn på gate) "
+"samt betalte billetter, vil denne meldingen vises og brukeren vil ikke bli "
+"omdirigert til PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:442
+msgid "Thank You Message"
+msgstr "Takk melding"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:445
+msgid ""
+"If you choose to return users to the default Events Manager thank you page "
+"after a user has paid on PayPal, you can customize the thank you message "
+"here."
+msgstr ""
+"Hvis du velger å returnere brukere til standard hendelser Manager takk side "
+"etter at brukeren har betalt på PayPal, kan du tilpasse takk melding her."
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:452
+msgid ""
+"In order to connect PayPal with your site, you need to enable IPN on your "
+"account."
+msgstr ""
+"For å koble til PayPal med nettstedet ditt, du må aktivere IPN på kontoen "
+"din."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:452
+#, php-format
+msgid "Your return url is %s"
+msgstr "Din avkastning url er %s"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:453
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr ""
+"Vennligst besøk <a href=\"%s\"> dokumentasjonen </a> for ytterligere "
+"instruksjoner."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:457
+msgid "PayPal Email"
+msgstr "PayPal Email"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:463
+msgid "Paypal Currency"
+msgstr "Paypal Valuta"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:464
+#, php-format
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr "Velg valuta i <a href=\"%s\"> Innstillinger </ a>."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:468
+msgid "PayPal Language"
+msgstr "PayPal Språk"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:486
+msgid ""
+"PayPal allows you to select a default language users will see. This is also "
+"determined by PayPal which detects the locale of the users browser. The "
+"default would be US."
+msgstr ""
+"PayPal lar deg velge et standardspråk brukere vil se. Dette er også bestemt "
+"av PayPal som oppdager landinformasjonen for brukerne leseren. Standard "
+"ville være USA."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:490
+msgid "PayPal Mode"
+msgstr "PayPal-modus"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:493
+msgid "Live Site"
+msgstr "Live-nettstedet"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:494
+msgid "Test Mode (Sandbox)"
+msgstr "Test Mode (Sandkasse)"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:500
+msgid "Return URL"
+msgstr "Return URL"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:503
+msgid ""
+"Once a payment is completed, users will be offered a link to this URL which "
+"confirms to the user that a payment is made. If you would to customize the "
+"thank you page, create a new page and add the link here. For automatic "
+"redirect, you need to turn auto-return on in your PayPal settings."
+msgstr ""
+"Når en betaling er fullført, vil brukerne bli tilbudt en lenke til denne "
+"nettadressen som bekrefter brukeren at en betaling er gjort. Hvis du ønsker "
+"å tilpasse de takke deg, lage en ny side og legge linken her. For automatisk "
+"viderekobling, må du deaktivere automatisk avkastning på i din PayPal-"
+"innstillingene."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:507
+msgid "Cancel URL"
+msgstr "Avbryt URL"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:510
+msgid ""
+"Whilst paying on PayPal, if a user cancels, they will be redirected to this "
+"page."
+msgstr ""
+"Mens betale på PayPal, hvis en bruker avbryter, vil de bli omdirigert til "
+"denne siden."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:514
+msgid "PayPal Page Logo"
+msgstr "PayPal Page Logo"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:517
+msgid ""
+"Add your logo to the PayPal payment page. It's highly recommended you link "
+"to a https:// address."
+msgstr ""
+"Legg din logo til PayPal betalingssiden. Det er sterkt anbefalt at du kobler "
+"til en https:// adresse."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:521
+msgid "Border Color"
+msgstr "Border Color"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:524
+msgid ""
+"Provide a hex value color to change the color from the default blue to "
+"another color (e.g. #CCAAAA)."
+msgstr ""
+"Gi en hex verdi farge for å endre fargen fra standard blå til en annen farge "
+"(f.eks # CCAAAA)."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:528
+msgid "Delete Bookings Pending Payment"
+msgstr "Slett Bestilling Venter Betaling"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:530
+msgid "minutes"
+msgstr "minutter"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:531
+msgid ""
+"Once a booking is started and the user is taken to PayPal, Events Manager "
+"stores a booking record in the database to identify the incoming payment. "
+"These spaces may be considered reserved if you enable <em>Reserved "
+"unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+"like these bookings to expire after x minutes, please enter a value above "
+"(note that bookings will be deleted, and any late payments will need to be "
+"refunded manually via PayPal)."
+msgstr ""
+"Når en bestilling er startet og brukeren blir tatt til PayPal, lagrer "
+"hendelser Manager en bestilling rekord i databasen for å identifisere "
+"inngående betaling. Disse plassene kan vurderes reservert hvis du aktiverer "
+"<em> Reserverte ubekreftede mellomrom? </em> i dine Hendelser> Innstillinger "
+"side. Hvis du ønsker disse bestillinger utløper etter x minutter, må du angi "
+"en verdi ovenfor (merk at bestillinger vil bli slettet, og eventuelle sen "
+"betaling må bli refundert manuelt via PayPal)."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:417
+msgid "Gateway updated."
+msgstr "Gateway oppdatert."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:418
+msgid "Gateway not updated."
+msgstr "Gateway ikke oppdatert."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:422
+#, php-format
+msgid "Edit &quot;%s&quot; settings"
+msgstr "Rediger &quot;%s&quot; innstillinger"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:426
+msgid "Back to gateways"
+msgstr "Tilbake til trafikknutepunkter"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:438
+msgid "Gateway Title"
+msgstr "Gateway Tittel"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:442 add-ons/gateways/gateway.php:452
+#, php-format
+msgid ""
+"Only if you have not enabled quick pay buttons in your <a href=\"%s"
+"\">gateway settings</a>."
+msgstr ""
+"Bare hvis du ikke har aktivert Quick Pay knapper i <a href=\"%s\"> gateway-"
+"innstillinger </a>."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:443
+msgid ""
+"The user will see this as the text option when choosing a payment method."
+msgstr ""
+"Brukeren vil se dette som teksten alternativ når du velger betalingsmåte."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:448
+msgid "Booking Form Information"
+msgstr "Booking Form Informasjon"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:453
+msgid ""
+"If a user chooses to pay with this gateway, or it is selected by default, "
+"this message will be shown just below the selection."
+msgstr ""
+"Hvis en bruker velger å betale med denne gateway, eller det er valgt som "
+"standard, vil denne meldingen bli vist like under valget."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:461
+msgid "Quick Pay Buttons"
+msgstr "Quick Pay Knapper"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:462
+#, php-format
+msgid ""
+"If you have chosen to only use quick pay buttons in your <a href=\"%s"
+"\">gateway settings</a>, these settings below will be used."
+msgstr ""
+"Hvis du har valgt å kun bruke Quick Pay knapper i <a href=\"%s\"> gateway-"
+"innstillinger </a>, disse innstillingene nedenfor brukes."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:466
+msgid "Payment Button"
+msgstr "Betaling Button"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:469
+#, php-format
+msgid ""
+"Choose the button text. To use an image instead, enter the full url starting "
+"with %s or %s."
+msgstr ""
+"Velg knappen teksten. For å bruke et bilde i stedet, skrive inn hele url "
+"starter med %s eller %s ."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:17
+msgid "Payment Gateway Options"
+msgstr "Betaling Gateway Alternativer"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:21
+msgid "Enable Quick Pay Buttons?"
+msgstr "Aktiver Quick Pay knapper?"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:21
+#, php-format
+msgid ""
+"Only works with gateways that do not require additional payment information "
+"to be submitted (e.g. PayPal and Offline payments). If enabled, the default "
+"booking form submit button is not used, and each gateway will have a button "
+"(or image, see <a href=\"%s\">individual gateway settings</a>) which if "
+"clicked on will submit a booking for that gateway."
+msgstr ""
+"Fungerer bare med gatewayer som ikke krever tilleggsinformasjon betaling "
+"skal sendes (f.eks PayPal og Frakoblet betalinger). Hvis aktivert, standard "
+"bestillingsskjema send-knappen brukes ikke, og hver gateway vil ha en knapp "
+"(eller image, se <a href=\"%s\"> individuelle gateway-innstillinger </a>) "
+"som hvis klikket på vil sende inn en bestilling for at gateway."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:22
+msgid "Gateway Label"
+msgstr "Gateway Etikett"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:22
+msgid ""
+"If you are not using quick pay buttons a drop-down menu will be used, with "
+"this label."
+msgstr ""
+"Hvis du ikke bruker Quick Pay knapper en drop-down menyen vil bli brukt, med "
+"denne etiketten."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:55
+msgid "Gateway activated."
+msgstr "Gateway aktivert."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:56
+msgid "Gateway not activated."
+msgstr "Gateway ikke aktivert."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:57
+msgid "Gateway deactivated."
+msgstr "Gateway deaktivert."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:58
+msgid "Gateway not deactivated."
+msgstr "Gateway ikke deaktiveres."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:59
+msgid "Gateway activation toggled."
+msgstr "Gateway aktivering slås."
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:63
+msgid "Edit Gateways"
+msgstr "Edit Gateways"
+
+# @ default
+#: add-ons/gateways/gateways-admin.php:71
+msgid "Bulk Actions"
+msgstr "Massehandlinger"
+
+# @ default
+#: add-ons/gateways/gateways-admin.php:72
+msgid "Toggle activation"
+msgstr "Toggle aktivering"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:74
+msgid "Apply"
+msgstr "Påfør"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:83
+msgid "Gateway Name"
+msgstr "Gateway Navn"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:84
+#: add-ons/gateways/gateways-admin.php:151
+msgid "Active"
+msgstr "Aktiv"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways-admin.php:85
+#: add-ons/gateways/gateways.transactions.php:51
+msgid "Transactions"
+msgstr "Transaksjoner"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:133
+msgid ""
+"This gateway cannot be activated because it does not support multiple "
+"bookings mode."
+msgstr ""
+"Denne portalen kan ikke aktiveres fordi den ikke støtter flere bestillinger "
+"modus."
+
+# @ default
+#: add-ons/gateways/gateways-admin.php:136
+msgid "Settings"
+msgstr "Innstillinger"
+
+# @ default
+#: add-ons/gateways/gateways-admin.php:139
+msgid "Deactivate"
+msgstr "Deaktiver"
+
+# @ default
+#: add-ons/gateways/gateways-admin.php:142
+msgid "Activate"
+msgstr "Aktiver"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:153
+msgid "Inactive"
+msgstr "Inaktive"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:158
+msgid "View transactions"
+msgstr "Vis transaksjoner"
+
+# @ em-pro
+#: add-ons/gateways/gateways-admin.php:167
+msgid "No Payment gateways were found for this install."
+msgstr "Ingen Betalingsløsninger ble funnet for dette installere."
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways.php:49 emp-install.php:161
+msgid "Address Line 2"
+msgstr "Adresse Linje 2"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways.php:56 emp-install.php:168
+msgid "Company"
+msgstr "Selskapet"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:62
+msgid ""
+"All transactional history associated with this booking will also be deleted."
+msgstr ""
+"All transaksjonshistorie knyttet til denne bestilling vil også bli slettet."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:63
+msgid ""
+"Are you sure you want to delete? This may make your transaction history out "
+"of sync with your payment gateway provider."
+msgstr ""
+"Er du sikker på at du vil slette? Dette kan gjøre transaksjonen historie ut "
+"av sync med betalingen gateway leverandør."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:69
+msgid "Awaiting Online Payment"
+msgstr "Venter Betaling"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:149
+msgid ""
+"Choice of payment method not recognized. If you are seeing this error and "
+"selecting a method of payment, we apologize for the inconvenience. Please "
+"contact us and we'll help you make a booking as soon as possible."
+msgstr ""
+"Valg av betalingsmåte ikke gjenkjent. Hvis du ser denne feilen og velge "
+"betalingsmåte, vi beklager det inntrufne. Ta kontakt med oss ​​og vi vil "
+"hjelpe deg å gjøre en bestilling så snart som mulig."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:293
+msgid "Gateway Used"
+msgstr "Gateway Brukt"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:369
+msgid "Common User Fields for Gateways"
+msgstr "Felles brukerfelt for Gateways"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:372
+msgid ""
+"In many cases, customer address information is required by gateways for "
+"verification. This section connects your custom fields to commonly used "
+"customer information fields."
+msgstr ""
+"I mange tilfeller er kundens adresse informasjon som kreves av gateways for "
+"verifisering. Denne delen kobler dine egendefinerte felt til vanlig kunde "
+"informasjonsfeltene."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:373
+msgid ""
+"After creating user fields above, you should link them up in here so some "
+"gateways can make use of them when processing payments."
+msgstr ""
+"Når du har opprettet brukerfelt ovenfor, bør du koble dem opp i her så noen "
+"gatewayer kan gjøre bruk av dem ved behandling av betalinger."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:376
+msgid "Name (first/last)"
+msgstr "Navn (første / siste)"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:376
+msgid ""
+"Generated accordingly from user first/last name or full name field. If a "
+"name field isn't provided in your booking form, the username will be used "
+"instead."
+msgstr ""
+"Generert tilsvar fra brukeren først / etternavn eller felt med fullt navn. "
+"Hvis et feltnavn ikke er oppgitt i bestillingsskjemaet, vil brukernavnet bli "
+"brukt i stedet."
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:377
+msgid "Uses the WordPress account email associated with the user."
+msgstr "Bruker WordPress konto epost knyttet til brukeren."
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways.php:383 emp-forms.php:423 emp-forms.php:599
+msgid "none selected"
+msgstr "ikke spesifisert"
+
+# @ em-pro
+#: add-ons/gateways/gateways.php:396 emp-forms.php:1234
+msgid "Save Form"
+msgstr "Lagre Form"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:93
+msgid "User"
+msgstr "Bruker"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:94
+msgid "Date"
+msgstr "Dato"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:96
+msgid "Transaction id"
+msgstr "Transaksjons id"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:97
+msgid "Gateway"
+msgstr "Gateway"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:98
+#: templates/multiple-bookings/admin.php:46
+#: templates/multiple-bookings/admin.php:56
+msgid "Status"
+msgstr "Status"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:99
+msgid "Notes"
+msgstr "Merknader"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:125
+#, php-format
+msgid "%s Rows"
+msgstr "%s Rader"
+
+# @ default
+#: add-ons/gateways/gateways.transactions.php:141
+msgid "Filter"
+msgstr "Filter"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:143
+msgid "Displaying Event"
+msgstr "Viser begivenhet"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:145
+msgid "Displaying User"
+msgstr "Viser Bruker"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:234
+#: add-ons/gateways/gateways.transactions.php:243
+#: add-ons/gateways/gateways.transactions.php:252
+msgid "None yet"
+msgstr "Ingen så langt"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:277
+msgid "No Transactions"
+msgstr "Ingen Transaksjoner"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:379
+#: add-ons/gateways/gateways.transactions.php:381
+msgid "Transaction ID"
+msgstr "Transaksjons ID"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:404
+msgid "Transaction deleted"
+msgstr "Transaksjons slettet"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:408
+msgid "Transaction could not be deleted"
+msgstr "Transaksjonen kan ikke slettes"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-booking.php:89
+msgid ""
+"There was an error validating your bookings, please see the errors below:"
+msgstr ""
+"Det var en feil å validere dine bestillinger, vennligst se feilene nedenfor:"
+
+# @ default
+#: add-ons/multiple-bookings/multiple-booking.php:108
+#, php-format
+msgid ""
+"Unfortunately, your booking for %s was removed from your cart as there are "
+"not enough spaces anymore."
+msgstr ""
+"Dessverre, din bestilling for %s ble fjernet fra handlekurven din, så er det "
+"ikke nok plasser lenger."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-booking.php:245
+#: add-ons/multiple-bookings/multiple-booking.php:249
+msgid "Multiple Events"
+msgstr "Flere hendelser"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:18
+msgid "Cart"
+msgstr "Handlekurv"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:18
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:16
+#: add-ons/multiple-bookings/multiple-bookings.php:357
+msgid "Checkout"
+msgstr "Kassen"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:19
+#, php-format
+msgid ""
+"This page corresponds to the <strong>Events Manager</strong> %s page. Its "
+"content will be overriden by Events Manager, although if you include the "
+"word CONTENTS (exactly in capitals) and surround it with other text, only "
+"CONTENTS will be overwritten."
+msgstr ""
+"Denne siden tilsvarer <strong> Events Manager </strong> %s side. Innholdet "
+"vil bli overstyrt av hendelser Manager, men hvis du tar med ordet INNHOLD "
+"(akkurat i store bokstaver) og omslutter den med annen tekst, vil bare "
+"INNHOLD bli overskrevet."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:28
+msgid ""
+"Since you are in Multiple Booking Mode, these emails will only be sent in "
+"these specific circumstances :"
+msgstr ""
+"Siden du er i Booking Mode Multiple, vil disse e-postene bare sendes i disse "
+"konkrete omstendigheter:"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:30
+#, php-format
+msgid ""
+"You have enabled the option to email event owners in the %s section below."
+msgstr "Du har aktivert muligheten for å sende hendelses eiere i %s nedenfor."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:31
+msgid ""
+"When modifications are made to individual bookings which would normally "
+"trigger an email to be sent to the attendee."
+msgstr ""
+"Når er gjort modifikasjoner til individuelle bestillinger som normalt ville "
+"utløse en e-post skal sendes til deltakeren."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:48
+msgid ""
+"Multiple Bookings Mode enables your visitors to make bookings follow a flow "
+"similar to that of a shopping cart, meaning users can book multiple events "
+"and pay for them in one go."
+msgstr ""
+"Flere bestillinger Mode gjør at de besøkende til å gjøre bestillinger følge "
+"en flyt lik som en handlevogn, som betyr at brukeren kan bestille flere "
+"hendelser og betale for dem på en gang."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:49
+#, php-format
+msgid "More about %s."
+msgstr "Mer om %s ."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:53
+msgid "Enable Muliple Bookings Mode?"
+msgstr "Aktiver muliple Bestilling Mode?"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:57
+msgid "Checkout Page"
+msgstr "Kassa Page"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:63
+msgid ""
+"This page will be where the user reviews their bookings, enters additional "
+"information (such as user registration info) and proceeds with payment."
+msgstr ""
+"Denne siden vil være der brukeranmeldelser sine bestillinger, går "
+"ytterligere informasjon (for eksempel brukerregistrering info), og "
+"fortsetter med betaling."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:64
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:80
+#, php-format
+msgid ""
+"Please <a href=\"%s\">add a new page</a> and assign it here. This is "
+"required for Multiple Bookings Mode to work."
+msgstr ""
+"Vennligst <a href=\"%s\"> legge til en ny side </a> og tilordne den her. "
+"Dette er nødvendig for flere bookinger Mode for å jobbe."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:70
+msgid "Redirect To Checkout on Booking?"
+msgstr "Omdirigere til kassen på Booking?"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:70
+msgid ""
+"It set to yes, when a booking has been added to the cart, the user will be "
+"redirected to the checkout page. Whilst redirecting the confirmation message "
+"below will also be shown, you may also want to modify that too let them know "
+"they are being redirected."
+msgstr ""
+"Det satt til ja, når en bestilling er lagt til handlevognen, vil brukeren "
+"bli omdirigert til kassen siden. Mens omdirigere bekreftelsesmeldingen "
+"nedenfor vil også bli vist, kan du også ønsker å endre det også la dem vite "
+"at de blir omdirigert."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:71
+msgid "Checkout Page Booking Form"
+msgstr "Kassen Page Booking Form"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:71
+msgid ""
+"This form will be shown on the checkout page, which should include user "
+"fields you may want when registering new users. Any non-user fields will be "
+"added as supplementary information to every booking, if you have identical "
+"Field IDs on the individual event booking form, that field value will be "
+"saved to the individual booking instead."
+msgstr ""
+"Dette skjemaet vil bli vist på kassa siden, som skal omfatte brukerfelt du "
+"kanskje vil ved registrering av nye brukere. Eventuelle ikke-brukerfelt vil "
+"bli lagt til som tilleggsinformasjon til hver bestilling, hvis du har "
+"identiske Felt IDer på det enkelte arrangement bestillingsskjema, vil at "
+"feltverdi lagres på den enkelte booking stedet."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:74
+msgid "Cart Page"
+msgstr "Kurven Page"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:79
+msgid ""
+"This page will display the events the user has chosen to book and allow them "
+"to edit their bookings before checkout."
+msgstr ""
+"Denne siden vil vise hendelsene brukeren har valgt å bestille og tillate dem "
+"å redigere sine bestillinger i kassen."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:85
+msgid "Successfully Added Message"
+msgstr "Vellykket lagt melding"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:85
+msgid "A booking was successfull added to the bookings cart."
+msgstr "En bestilling ble vellykket lagt til bestillinger kurven."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:86
+msgid "Loading Cart Contents"
+msgstr "Laster Handlevogn"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:86
+msgid ""
+"If caching plugins are used, cart contents are loaded after a page load and "
+"this text is shown whilst loading."
+msgstr ""
+"Hvis caching plugins brukes, er Handlevogn lastet etter en last side og "
+"denne teksten er vist mens lasting."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:87
+msgid "Event Already Booked"
+msgstr "Begivenhet allerede booket"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:87
+msgid ""
+"This event has already been added to the cart and cannot be added twice."
+msgstr ""
+"Denne hendelsen har allerede blitt lagt til i handlekurven og kan ikke "
+"legges til to ganger."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:88
+msgid "No Bookings"
+msgstr "Ingen Bestilling"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:88
+msgid "User has not booked any events yet, cart is empty."
+msgstr "Bruker har ikke booket noen hendelser ennå, er vognen tom."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:89
+msgid "Empty Cart Warning"
+msgstr "Tom Handlevogn Advarsel"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:89
+msgid "Warning after the \"empty cart\" button is clicked."
+msgstr "Advarsel etter \"tøm handlevogn\"-knappen klikkes."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:90
+msgid "Checkout Form Button"
+msgstr "Kassen Form Button"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:90
+msgid "The text shown in the checkout page form."
+msgstr "Teksten vises i kassen siders skjema."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:113
+msgid "Booking Related Placeholders"
+msgstr "Booking Relatert plassholdere"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:114
+#, php-format
+msgid "This accepts %s placeholders."
+msgstr "Dette aksepterer %s plassholdere."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:119
+#, php-format
+msgid ""
+"When users make a booking in Multiple Bookings Mode or cancels their "
+"booking, these emails get sent to the attendee and administrator emails you "
+"assign in the %s section above."
+msgstr ""
+"Når brukerne gjør en bestilling i flere rom Mode eller avbryter sin "
+"bestilling, får disse e-postene sendt til deltakeren og administrator e-"
+"postene du tilordner i %s avsnittet ovenfor."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:120
+msgid ""
+"When administrators modify a set of multiple bookings rather than individual "
+"events, these templates will be used to notify the attendee."
+msgstr ""
+"Når administratorer endre et sett av flere bestillinger snarere enn "
+"enkelthendelser, vil disse malene brukes til å varsle deltakeren."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:123
+msgid "You can disable this email by leaving the subject blank."
+msgstr "Du kan deaktivere denne e-posten ved å forlate faget blank."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
+msgid "Email event owners?"
+msgstr "Epost hendelses eiere?"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:124
+#, php-format
+msgid ""
+"If enabled, additional emails will be sent to administrators and event "
+"owners for EVERY event booked based on the above %s settings."
+msgstr ""
+"Hvis aktivert, vil flere e-poster sendes til administratorer og event eiere "
+"for hvert arrangement booket basert på ovennevnte %s innstillinger."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:126
+msgid "Event Admin/Owner Emails"
+msgstr "Hendelses Admin / eier e-post"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:128
+msgid "Contact person booking confirmed"
+msgstr "Kontaktperson booking bekreftet"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:129
+msgid ""
+"An email will be sent to the event contact when a booking is first made."
+msgstr ""
+"En e-post vil bli sendt til hendelsen kontakt når en bestilling er først "
+"gjort."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:132
+msgid "Contact person email subject"
+msgstr "Kontaktperson e-postemne"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:133
+msgid "Contact person email"
+msgstr "Kontaktperson e-post"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:136
+msgid "Contact person booking cancelled"
+msgstr "Kontaktperson booking kansellert"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:137
+msgid ""
+"An email will be sent to the event contact if someone cancels their booking."
+msgstr ""
+"En e-post vil bli sendt til hendelsen kontakt hvis noen avbestiller booking."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:140
+msgid "Contact person cancellation subject"
+msgstr "Kontaktperson avbestillings emnet"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:141
+msgid "Contact person cancellation email"
+msgstr "Kontaktperson kansellering e-post"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:143
+msgid "Booked User Emails"
+msgstr "Booket Bruker Emails"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:146
+msgid ""
+"This is sent when a person's booking is confirmed. This will be sent "
+"automatically if approvals are required and the booking is approved. If "
+"approvals are disabled, this is sent out when a user first submits their "
+"booking."
+msgstr ""
+"Dette sendes når en persons bestillingen er bekreftet. Dette vil bli sendt "
+"automatisk hvis godkjenninger er nødvendig, og bestillingen er godkjent. "
+"Hvis godkjenninger er deaktivert, er dette sendes ut når en bruker først "
+"sender inn sin bestilling."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:149
+msgid "Booking confirmed email subject"
+msgstr "Booking bekreftet e-postemne"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:150
+msgid "Booking confirmed email"
+msgstr "Booking bekreftet epost"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:154
+msgid ""
+"This will be sent to the person when they first submit their booking. Not "
+"relevant if bookings don't require approval."
+msgstr ""
+"Dette vil bli sendt til den personen når de først sende inn sin bestilling. "
+"Ikke relevant hvis bestillinger ikke krever godkjenning."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:157
+msgid "Booking pending email subject"
+msgstr "Booking venter på e-faget"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:158
+msgid "Booking pending email"
+msgstr "Booking påvente epost"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:162
+msgid ""
+"This will be sent automatically when a booking is rejected. Not relevant if "
+"bookings don't require approval."
+msgstr ""
+"Dette vil bli sendt automatisk når en bestilling er avvist. Ikke relevant "
+"hvis bestillinger ikke krever godkjenning."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:165
+msgid "Booking rejected email subject"
+msgstr "Booking avviste e-postemne"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:166
+msgid "Booking rejected email"
+msgstr "Booking avvist epost"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:170
+msgid "This will be sent when a user cancels their booking."
+msgstr "Dette vil bli sendt når en bruker kansellerer booking."
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:173
+msgid "Booking cancelled email subject"
+msgstr "Booking kansellert e-postemne"
+
+# @ dbem
+#: add-ons/multiple-bookings/multiple-bookings-admin.php:174
+msgid "Booking cancelled email"
+msgstr "Booking kansellert epost"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:13
+#: add-ons/multiple-bookings/multiple-bookings.php:354
+msgid "Event Bookings Cart"
+msgstr "Hendelses Bestilling Handlekurv"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:15
+#: add-ons/multiple-bookings/multiple-bookings.php:356
+msgid "Loading..."
+msgstr "Loading ..."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:17
+#: add-ons/multiple-bookings/multiple-bookings.php:358
+msgid "View Cart"
+msgstr "Se handlevogn"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:18
+#: add-ons/multiple-bookings/multiple-bookings.php:359
+msgid "No events booked yet"
+msgstr "Ingen hendelser booket ennå"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:20
+msgid ""
+"Display a shopping cart widget for currently booked events to check out."
+msgstr ""
+"Vise en handlevogn widget for øyeblikket booket arrangementer til å sjekke "
+"ut."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:56
+msgid "List item format"
+msgstr "Listeelement format"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:60
+msgid "Loading text"
+msgstr "Laster tekst"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings-widget.php:64
+msgid "No bookings text"
+msgstr "Ingen bestillinger tekst"
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings.php:137
+msgid ""
+"Sorry for the inconvenience, but we are having technical issues adding your "
+"bookings, please contact an administrator about this issue."
+msgstr ""
+"Beklager det inntrufne, men vi har tekniske problemer å legge til dine "
+"bestillinger, kontakt en administrator om dette problemet."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings.php:175
+msgid "Could not remove booking due to an unexpected error."
+msgstr "Kunne ikke fjerne booking på grunn av en uventet feil."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings.php:441
+#, php-format
+msgid ""
+"This single booking is part of a larger booking made by this person at once. "
+"<a href=\"%s\">View Main Booking</a>."
+msgstr ""
+"Denne singelen booking er en del av en større bestilling gjort av denne "
+"personen på en gang. <a href=\"%s\"> Se hovedbestilling </a>."
+
+# @ em-pro
+#: add-ons/multiple-bookings/multiple-bookings.php:445
+msgid ""
+"This booking contains a set of bookings made by this person. To edit "
+"particular bookings click on the relevant links below."
+msgstr ""
+"Denne reservasjonen inneholder et sett av bestillinger gjort med denne "
+"personen. Slik redigerer spesielle bestillinger klikke på de aktuelle "
+"linkene nedenfor."
+
+# @ em-pro
+#: add-ons/user-fields.php:217 add-ons/user-fields.php:219
+msgid "n/a"
+msgstr "n/a"
+
+# @ dbem
+#: add-ons/user-fields.php:249
+msgid "Further Information"
+msgstr "Ytterligere informasjon"
+
+# @ em-pro
+#: add-ons/user-fields.php:334
+msgid "User Fields"
+msgstr "Bruker Fields"
+
+# @ em-pro
+#: add-ons/user-fields.php:337
+#, php-format
+msgid ""
+"Registration fields are only shown to guest visitors. If you add new fields "
+"here and save, they will then be available as custom registrations in your "
+"bookings editor, and this information will be accessible and editable on "
+"each user <a href=\"%s\">profile page</a>."
+msgstr ""
+"Registreringsfeltene vises bare til gjeste besøkende. Hvis du legger til nye "
+"felt her og spare, vil de da være tilgjengelig som tilpassede registreringer "
+"i din bestilling redaktør, og denne informasjonen vil være tilgjengelig og "
+"redigeres på hver bruker <a href=\"%s\"> profilside </a> ."
+
+# @ em-pro
+#: add-ons/user-fields.php:338
+msgid ""
+"<strong>Important:</strong> When editing this form, to make sure your "
+"current user information is displayed, do not change their field names."
+msgstr ""
+"<strong> Viktig: </strong> Når du redigerer dette skjemaet, for å sørge for "
+"at din nåværende brukerinformasjon vises, endrer ikke sine feltnavn."
+
+# @ dbem
+#: emp-admin.php:18
+msgid "Logging"
+msgstr "Logging"
+
+# @ em-pro
+#: emp-admin.php:20
+msgid "Enable Logging?"
+msgstr "Aktiver Logging?"
+
+# @ em-pro
+#: emp-admin.php:20
+#, php-format
+msgid ""
+"If enabled, a folder called %s will be created. Please ensure that your wp-"
+"contents folder is writable by the server."
+msgstr ""
+"Hvis aktivert, en mappe som heter %s vil bli opprettet. Sørg for at din wp-"
+"innhold mappen er skrivbar for tjeneren."
+
+# @ default
+#: emp-admin.php:29
+msgid ""
+"Could not create a log directory, please make sure your wp-content is "
+"writeable.em-pro"
+msgstr ""
+"Kunne ikke opprette en log-katalog, må du sørge for at din wp-content er "
+"writeable.em-pro"
+
+# @ em-pro
+#: emp-forms.php:11 emp-forms.php:19
+msgid "Forms Editor"
+msgstr "Skjemaer Editor"
+
+# @ em-pro
+#: emp-forms.php:20
+msgid ""
+"On this page you can create/edit various forms used within Events Manager "
+"Pro."
+msgstr ""
+"På denne siden kan du opprette / redigere ulike former brukes innen "
+"hendelser Manager Pro."
+
+# @ em-pro
+#: emp-forms.php:31
+msgid "PRO Booking Form Options"
+msgstr "PRO Booking Alternativer for skjema"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid "Show profile fields to logged in users?"
+msgstr "Vis profilfelter til påloggede brukere?"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid ""
+"When logged in, users usually don't see their profile fields, with this "
+"enabled, users will be able to update their profile fields alongside their "
+"booking. This is particularly useful if the user is missing key information. "
+"Note that this does not include usernames, name, passwords and emails, these "
+"must be modified from their user profile page."
+msgstr ""
+"Når du er logget inn, brukere vanligvis ikke ser sine profilfelter, med "
+"denne aktivert, vil brukerne kunne oppdatere sine profilfelter sammen med "
+"sin bestilling. Dette er spesielt nyttig hvis brukeren mangler viktig "
+"informasjon. Merk at dette ikke inkluderer brukernavn, navn, passord og e-"
+"poster, må disse endres fra deres brukerprofilside."
+
+# @ em-pro
+#: emp-forms.php:36
+msgid "Make profile fields editable?"
+msgstr "Gjør profilfelter redigerbar?"
+
+# @ em-pro
+#: emp-forms.php:36
+msgid ""
+"If profile fields are set to show to logged in users, you can also choose "
+"whether or not to make these fields editable or just for viewing reference."
+msgstr ""
+"Hvis profil felt er satt til å vise til påloggede brukere, kan du også velge "
+"om du vil gjøre disse feltene redigeres eller bare for visning referanse."
+
+# @ em-pro
+#: emp-forms.php:615
+msgid "You must also add an end date."
+msgstr "Du må også legge til en sluttdato."
+
+# @ dbem
+#: emp-forms.php:619 emp-forms.php:632
+msgid ""
+"Dates must have correct formatting. Please use the date picker provided."
+msgstr "Datoer må ha riktig formatering. Bruk datovelgeren gitt."
+
+# @ dbem
+#: emp-forms.php:625
+msgid "Please provide a later end date."
+msgstr "Vennligst gi en senere sluttdato."
+
+# @ em-pro
+#: emp-forms.php:638 emp-forms.php:1004
+msgid "You must provide a start date."
+msgstr "Du må gi en startdato."
+
+# @ em-pro
+#: emp-forms.php:656 emp-forms.php:1060
+msgid "You must provide an end time."
+msgstr "Du må oppgi en sluttid."
+
+# @ em-pro
+#: emp-forms.php:660 emp-forms.php:666 emp-forms.php:1050
+msgid ""
+"Please use the time picker provided to select the appropriate time format."
+msgstr "Bruk tidsvelgeren forutsatt å velge riktig tidsformat."
+
+# @ em-pro
+#: emp-forms.php:672 emp-forms.php:1070
+msgid "You must provide a start time."
+msgstr "Du må gi en starttid."
+
+# @ dbem
+#: emp-forms.php:710
+msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
+msgstr "<strong> FEIL </strong>: Epost-adressen er ikke korrekt."
+
+# @ em-pro
+#: emp-forms.php:809
+msgid "Label"
+msgstr "Etikett"
+
+# @ em-pro
+#: emp-forms.php:810
+msgid "Field ID"
+msgstr "Felt-ID"
+
+# @ em-pro
+#: emp-forms.php:810
+msgid ""
+"DO NOT change these values if you want to keep your field settings "
+"associated with previous booking fields."
+msgstr ""
+"IKKE endre disse verdiene hvis du vil beholde innstillingene dine felt "
+"forbundet med forrige bestilling felt."
+
+# @ em-pro
+#: emp-forms.php:811
+msgid "Type"
+msgstr "Type"
+
+# @ em-pro
+#: emp-forms.php:812
+msgid "Required"
+msgstr "Obligatorisk"
+
+# @ em-pro
+#: emp-forms.php:822
+msgid "Select Type"
+msgstr "Velg type"
+
+# @ em-pro
+#: emp-forms.php:824
+msgid "Customizable Fields"
+msgstr "Tilpass Fields"
+
+# @ em-pro
+#: emp-forms.php:842
+msgid "Registration Fields"
+msgstr "Registrering Fields"
+
+# @ em-pro
+#: emp-forms.php:850
+msgid "Custom Registration Fields"
+msgstr "Custom registreringsfeltene"
+
+# @ em-pro
+#: emp-forms.php:865 templates/multiple-bookings/cart-table.php:38
+msgid "remove"
+msgstr "fjerne"
+
+# @ em-pro
+#: emp-forms.php:865 emp-forms.php:1253 emp-forms.php:1256 emp-forms.php:1320
+msgid "options"
+msgstr "alternativer"
+
+# @ em-pro
+#: emp-forms.php:871 emp-forms.php:1079
+msgid "Options"
+msgstr "Alternativer"
+
+# @ em-pro
+#: emp-forms.php:874 emp-forms.php:1082
+msgid "Available options, one per line."
+msgstr "Tilgjengelige alternativer, ett per linje."
+
+# @ em-pro
+#: emp-forms.php:878
+msgid "Use Default?"
+msgstr "Bruk Standard?"
+
+# @ em-pro
+#: emp-forms.php:882
+msgid "If checked, the first value above will be used."
+msgstr "Hvis det er merket, vil den første verdien ovenfor brukes."
+
+# @ em-pro
+#: emp-forms.php:886
+msgid "Default Text"
+msgstr "Standard Tekst"
+
+# @ em-pro
+#: emp-forms.php:888
+msgid "Select ..."
+msgstr "Velg ..."
+
+# @ em-pro
+#: emp-forms.php:889
+msgid "Shown when a default value isn't selected, selected by default."
+msgstr "Vises når en standardverdi ikke er valgt, er valgt som standard."
+
+# @ em-pro
+#: emp-forms.php:893 emp-forms.php:935 emp-forms.php:961 emp-forms.php:1027
+#: emp-forms.php:1086 emp-forms.php:1114 emp-forms.php:1135 emp-forms.php:1165
+msgid "Tip Text"
+msgstr "Tips Tekst"
+
+# @ em-pro
+#: emp-forms.php:896 emp-forms.php:938 emp-forms.php:964 emp-forms.php:1030
+#: emp-forms.php:1089 emp-forms.php:1117 emp-forms.php:1138 emp-forms.php:1168
+msgid ""
+"Will appear next to your field label as a question mark with a popup tip "
+"bubble."
+msgstr ""
+"Vises ved siden av feltet etiketten som et spørsmålstegn med en popup tips "
+"boble."
+
+# @ em-pro
+#: emp-forms.php:900 emp-forms.php:925 emp-forms.php:1093 emp-forms.php:1121
+#: emp-forms.php:1149 emp-forms.php:1179 emp-forms.php:1212
+msgid "Error Message"
+msgstr "Feilmelding"
+
+# @ em-pro
+#: emp-forms.php:904 emp-forms.php:929 emp-forms.php:1097
+msgid "This error will show if a value isn't chosen."
+msgstr "Denne feilen vil vise om en verdi ikke er valgt."
+
+# @ em-pro
+#: emp-forms.php:905 emp-forms.php:930 emp-forms.php:974 emp-forms.php:984
+#: emp-forms.php:994 emp-forms.php:1004 emp-forms.php:1040 emp-forms.php:1050
+#: emp-forms.php:1060 emp-forms.php:1070 emp-forms.php:1098 emp-forms.php:1126
+#: emp-forms.php:1154 emp-forms.php:1184 emp-forms.php:1217
+msgid "Default:"
+msgstr "Standard:"
+
+# @ em-pro
+#: emp-forms.php:914
+msgid "Content"
+msgstr "Innhold"
+
+# @ em-pro
+#: emp-forms.php:916
+msgid ""
+"This html will be displayed on your form, the label for this field is used "
+"only for reference purposes."
+msgstr ""
+"Dette html vil bli vist på skjemaet, er etiketten for dette feltet kun "
+"brukes som referanse."
+
+# @ em-pro
+#: emp-forms.php:946
+msgid "Date Range?"
+msgstr "Date Range?"
+
+# @ em-pro
+#: emp-forms.php:950
+msgid "If selected, this field will also have an end-date."
+msgstr "Hvis dette er valgt, vil dette feltet også ha en sluttdato."
+
+# @ em-pro
+#: emp-forms.php:954 emp-forms.php:1020
+msgid "Separator"
+msgstr "Separator"
+
+# @ em-pro
+#: emp-forms.php:957 emp-forms.php:1023
+msgid ""
+"This text will appear between the two date fields if this is a date range."
+msgstr ""
+"Denne teksten vil vises mellom de to datofeltene hvis dette er et "
+"datointervall."
+
+# @ em-pro
+#: emp-forms.php:968 emp-forms.php:1033
+msgid "Error Messages"
+msgstr "Feilmeldinger"
+
+# @ em-pro
+#: emp-forms.php:969 emp-forms.php:1035
+msgid "Field Required"
+msgstr "Feltet Påkrevd"
+
+# @ em-pro
+#: emp-forms.php:973 emp-forms.php:1039
+msgid "This error will show this field is required and no value is entered."
+msgstr ""
+"Denne feilen vil vise dette feltet er nødvendig, og ingen verdi er oppgitt."
+
+# @ em-pro
+#: emp-forms.php:979 emp-forms.php:1045
+msgid "Incorrect Formatting"
+msgstr "Feil formatering"
+
+# @ em-pro
+#: emp-forms.php:983
+msgid "This error will show if an incorrect date format is used."
+msgstr "Denne feilen vil vise om feil datoformat blir brukt."
+
+# @ em-pro
+#: emp-forms.php:984
+msgid ""
+"Please use the date picker provided to select the appropriate date format."
+msgstr "Bruk datovelgeren forutsatt å velge riktig datoformat."
+
+# @ em-pro
+#: emp-forms.php:989
+msgid "End date required"
+msgstr "Sluttdato nødvendig"
+
+# @ em-pro
+#: emp-forms.php:993
+msgid ""
+"This error will show if the field is a date-range and no end date is "
+"selected."
+msgstr ""
+"Denne feilen vil vise om feltet er en dato-range og ingen sluttdato er valgt."
+
+# @ em-pro
+#: emp-forms.php:994
+msgid "You must provide an end date."
+msgstr "Du må oppgi en sluttdato."
+
+# @ em-pro
+#: emp-forms.php:999
+msgid "Start date required"
+msgstr "Startdato nødvendig"
+
+# @ em-pro
+#: emp-forms.php:1003
+msgid ""
+"This error will show if the field is a date-range and no start date is "
+"selected."
+msgstr ""
+"Denne feilen vil vise om feltet er en dato-range og ingen startdato er valgt."
+
+# @ em-pro
+#: emp-forms.php:1012
+msgid "Time Range?"
+msgstr "Tidsperiode?"
+
+# @ em-pro
+#: emp-forms.php:1016
+msgid "If selected, this field will also have an end-time."
+msgstr "Hvis dette er valgt, vil dette feltet også ha en slutt-tid."
+
+# @ em-pro
+#: emp-forms.php:1049
+msgid "This error will show if an incorrect time format is used."
+msgstr "Denne feilen vil vise om feil tid formatet benyttes."
+
+# @ em-pro
+#: emp-forms.php:1055
+msgid "End time required"
+msgstr "Slutt tiden som kreves"
+
+# @ em-pro
+#: emp-forms.php:1059
+msgid ""
+"This error will show if the field is a time-range and no end time is "
+"selected."
+msgstr ""
+"Denne feilen vil vise om feltet er en tid-range og ingen ende tid er valgt."
+
+# @ em-pro
+#: emp-forms.php:1065
+msgid "Start time required"
+msgstr "Starttid nødvendig"
+
+# @ em-pro
+#: emp-forms.php:1069
+msgid ""
+"This error will show if the field is a time-range and no start time is "
+"selected."
+msgstr ""
+"Denne feilen vil vise om feltet er en tid-range og noen starttid er valgt."
+
+# @ em-pro
+#: emp-forms.php:1107
+msgid "Checked by default?"
+msgstr "Merket av som standard?"
+
+# @ em-pro
+#: emp-forms.php:1125
+msgid "This error will show if this box is not checked."
+msgstr "Denne feilen vil vise om denne boksen ikke er merket."
+
+# @ em-pro
+#: emp-forms.php:1142 emp-forms.php:1172
+msgid "Regex"
+msgstr "Regex"
+
+# @ em-pro
+#: emp-forms.php:1145 emp-forms.php:1175
+msgid ""
+"By adding a regex expression, you can limit the possible values a user can "
+"input, for example the following only allows numbers: "
+msgstr ""
+"Ved å legge en regex uttrykk, kan du begrense de mulige verdier en bruker "
+"kan inngang, for eksempel følgende kun tillater tall: "
+
+# @ em-pro
+#: emp-forms.php:1153 emp-forms.php:1183
+msgid "If the regex above does not match this error will be displayed."
+msgstr "Hvis regex ovenfor samsvarer ikke denne feilen vil bli vist."
+
+# @ em-pro
+#: emp-forms.php:1198
+msgid "Public Key"
+msgstr "Public Key"
+
+# @ em-pro
+#: emp-forms.php:1201 emp-forms.php:1208
+#, php-format
+msgid "Required, get your keys <a href=\"%s\">here</a>"
+msgstr "Nødvendig, få nøklene <a href=\"%s\"> her </a>"
+
+# @ em-pro
+#: emp-forms.php:1205
+msgid "Private Key"
+msgstr "Private Key"
+
+# @ em-pro
+#: emp-forms.php:1216
+msgid "This error will show if the captcha is not correct."
+msgstr "Denne feilen vil vise om captcha er ikke riktig."
+
+# @ em-pro
+#: emp-forms.php:1233
+msgid "Add booking field"
+msgstr "Legg booking felt"
+
+# @ em-pro
+#: emp-forms.php:1300
+msgid "hide options"
+msgstr "skjule alternativer"
+
+# @ em-pro
+#: emp-install.php:158
+#, php-format
+msgid "Please fill in the field: %s"
+msgstr "Vennligst fyll ut feltet: %s"
+
+# @ em-pro
+#: emp-install.php:178
+msgid "Pay With"
+msgstr "Betal med"
+
+# @ em-pro
+#: emp-install.php:180
+msgid "PayPal"
+msgstr "PayPal"
+
+# @ em-pro
+#: emp-install.php:182
+msgid ""
+"Please wait whilst you are redirected to PayPal to proceed with payment."
+msgstr ""
+"Vennligst vent mens du blir omdirigert til PayPal for å gå videre med "
+"betalingen."
+
+# @ dbem
+#: emp-install.php:183 emp-install.php:188 emp-install.php:192
+msgid "Booking successful."
+msgstr "Booking vellykket."
+
+# @ em-pro
+#: emp-install.php:185
+msgid ""
+"Thank you for your payment. Your transaction has been completed, and a "
+"receipt for your purchase has been emailed to you along with a separate "
+"email containing account details to access your booking information on this "
+"site. You may log into your account at www.paypal.com to view details of "
+"this transaction."
+msgstr ""
+"Takk for din betaling. Transaksjonen er gjennomført, og en kvittering for "
+"kjøpet er sendt til deg sammen med en egen e-post med kontodetaljene for å "
+"få tilgang til booking informasjon på dette nettstedet. Du kan logge deg på "
+"kontoen din på www.paypal.com å vise detaljer om denne transaksjonen."
+
+# @ em-pro
+#: emp-install.php:187 emp-install.php:189
+msgid "Pay Offline"
+msgstr "Betal Offline"
+
+# @ em-pro
+#: emp-install.php:191
+msgid "Credit Card"
+msgstr "Kredittkort"
+
+# @ em-pro
+#: emp-install.php:193
+msgid "Booking successful. You have not been charged for this booking."
+msgstr "Booking vellykket. Du har ikke blitt belastet for denne bestillingen."
+
+# @ em-pro
+#: emp-install.php:197
+msgid "Reminder"
+msgstr "Påminnelse"
+
+# @ dbem
+#: emp-install.php:199
+msgid ""
+"Dear #_BOOKINGNAME, <br />This is a reminder about your #_BOOKINGSPACES "
+"space/spaces reserved for #_EVENTNAME.<br />When : #_EVENTDATES @ "
+"#_EVENTTIMES<br />Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br />We look "
+"forward to seeing you there!<br />Yours faithfully,<br />#_CONTACTNAME"
+msgstr ""
+"Kjære # _BOOKINGNAME, <br /> Dette er en påminnelse om dine # _BOOKINGSPACES "
+"plass / plasser reservert for # _EVENTNAME <br /> Når: # _EVENTDATES @ # "
+"_EVENTTIMES <br /> Hvor:. # _LOCATIONNAME - # _LOCATIONFULLLINE <br /> Vi "
+"ser frem til å se deg der! <br /> Med vennlig hilsen, <br /> # _CONTACTNAME"
+
+# @ em-pro
+#: emp-install.php:211
+msgid "Your booking was added to your shopping cart."
+msgstr "Din bestilling ble lagt til i handlekurven."
+
+# @ em-pro
+#: emp-install.php:212
+msgid ""
+"You have already booked a spot at this eventin your cart, please modify or "
+"delete your current booking."
+msgstr ""
+"Du har allerede bestilt en plass på dette eventin handlekurven, kan du endre "
+"eller slette ditt nåværende booking."
+
+# @ em-pro
+#: emp-install.php:213
+msgid "You have not booked any events yet. Your cart is empty."
+msgstr "Du har ikke bestilt noen hendelser ennå. Handlekurven er tom."
+
+# @ em-pro
+#: emp-install.php:214
+msgid "Loading Cart Contents..."
+msgstr "Laster Handlevogn ..."
+
+# @ em-pro
+#: emp-install.php:215
+msgid "Are you sure you want to empty your cart?"
+msgstr "Er du sikker på at du vil tømme handlekurven din?"
+
+# @ em_pro
+#: emp-install.php:216
+msgid "Place Order"
+msgstr "Bestill"
+
+# @ em-pro
+#: emp-install.php:218
+msgid "New Booking"
+msgstr "Ny bestilling"
+
+# @ dbem
+#: emp-install.php:219
+msgid ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) has made a booking: <br />#_BOOKINGSUMMARY"
+msgstr ""
+"# _BOOKINGNAME (# _BOOKINGEMAIL) Har gjort en reservasjon: <br /> # "
+"_BOOKINGSUMMARY"
+
+# @ em-pro
+#: emp-install.php:222 emp-install.php:238
+msgid "Booking Cancelled"
+msgstr "Bestilling avbrutt"
+
+# @ dbem
+#: emp-install.php:223
+msgid ""
+"#_BOOKINGNAME (#_BOOKINGEMAIL) has cancelled a booking: <br /"
+">#_BOOKINGSUMMARY"
+msgstr ""
+"# _BOOKINGNAME (# _BOOKINGEMAIL) Har avlyst en bestilling: <br /> # "
+"_BOOKINGSUMMARY"
+
+# @ em-pro
+#: emp-install.php:226
+msgid "Booking Confirmed"
+msgstr "Bestilling bekreftet"
+
+# @ dbem
+#: emp-install.php:227
+msgid ""
+"Dear #_BOOKINGNAME, <br />Your booking has been confirmed. <br />Below is a "
+"summary of your booking: <br />#_BOOKINGSUMMARY <br />We look forward to "
+"seeing you there!"
+msgstr ""
+"Kjære # _BOOKINGNAME, <br /> Din bestilling er bekreftet. <br /> Nedenfor er "
+"en oppsummering av din bestilling: <br /> # _BOOKINGSUMMARY <br /> Vi ser "
+"frem til å se deg der!"
+
+# @ em-pro
+#: emp-install.php:230
+msgid "Booking Pending"
+msgstr "Booking Venter"
+
+# @ dbem
+#: emp-install.php:231
+msgid ""
+"Dear #_BOOKINGNAME, <br />Your booking is currently pending approval by our "
+"administrators. Once approved you will receive another confirmation email. "
+"<br />Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
+msgstr ""
+"Kjære # _BOOKINGNAME, <br /> Din bestilling er for tiden venter på "
+"godkjenning av våre administratorer. Når du er godkjent vil du motta en e-"
+"postbekreftelse. <br /> Nedenfor er en oppsummering av din bestilling: <br /"
+"> # _BOOKINGSUMMARY"
+
+# @ em-pro
+#: emp-install.php:234
+msgid "Booking Rejected"
+msgstr "Bestilling avvist"
+
+# @ dbem
+#: emp-install.php:235
+msgid ""
+"Dear #_BOOKINGNAME, <br />Your requested booking has been rejected. <br /"
+">Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
+msgstr ""
+"Kjære # _BOOKINGNAME, <br /> Din bedt booking har blitt avvist. <br /> "
+"Nedenfor er en oppsummering av din bestilling: <br /> # _BOOKINGSUMMARY"
+
+# @ dbem
+#: emp-install.php:239
+msgid ""
+"Dear #_BOOKINGNAME, <br />Your requested booking has been cancelled. <br /"
+">Below is a summary of your booking: <br />#_BOOKINGSUMMARY"
+msgstr ""
+"Kjære # _BOOKINGNAME, <br /> Din bedt booking har blitt kansellert. <br /> "
+"Nedenfor er en oppsummering av din bestilling: <br /> # _BOOKINGSUMMARY"
+
+# @ em-pro
+#: emp-updates.php:32
+#, php-format
+msgid "Please enter a valid API key in your <a href=\"%s\">settings page</a>."
+msgstr ""
+"Vennligst skriv inn en gyldig API-nøkkel i <a href=\"%s\"> innstillingsside "
+"</a>."
+
+# @ em-pro
+#: emp-updates.php:41
+#, php-format
+msgid ""
+"To access automatic updates, you must update your <a href=\"%s\">Membership "
+"Key</a> for Events Mananager Pro <a href=\"#pro-api\">here</a>. Only admins "
+"see this message."
+msgstr ""
+"For å få tilgang til automatiske oppdateringer, må du oppdatere din <a href="
+"\"%s\"> Medlemskap Key </a> for Events Mananager Pro <a href=\"#pro-api\"> "
+"her </a>. Bare admins kan se denne meldingen."
+
+# @ em-pro
+#: emp-updates.php:48
+#, php-format
+msgid ""
+"Dev Mode active: Just a friendly reminder that you have added %s to your wp-"
+"config.php file. Only admins see this message, and it will go away when you "
+"remove that line."
+msgstr ""
+"Dev modus aktiv: Bare en vennlig påminnelse om at du har lagt til %s til din "
+"wp-config.php filen. Bare admins ser denne meldingen, og det vil gå bort når "
+"du fjerner den linjen."
+
+# @ em-pro
+#: emp-updates.php:83
+msgid "Pro Membership Key"
+msgstr "Pro Medlemskap Key"
+
+# @ em-pro
+#: emp-updates.php:87
+msgid "Pro Member Key"
+msgstr "Pro Medlem Key"
+
+# @ em-pro
+#: emp-updates.php:87
+#, php-format
+msgid ""
+"Insert your Pro Member Key to access automatic updates you can get your "
+"membership key from <a href=\"%s\">here</a>."
+msgstr ""
+"Sett din Pro Medlem Key for å få tilgang automatiske oppdateringer du kan få "
+"ditt medlemskap nøkkel fra <a href=\"%s\"> her </a>."
+
+# @ em-pro
+#: events-manager-pro.php:243
+msgid ""
+"Please make sure you install Events Manager as well. You can search and "
+"install this plugin from your plugin installer or download it <a href="
+"\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
+msgstr ""
+"Vennligst sørg for at du har installert hendelser Manager også. Du kan søke "
+"etter og installere denne plugin fra plugin installatør eller laste det <a "
+"href=\"http://wordpress.org/extend/plugins/events-manager/\"> her </a>."
+
+# @ em-pro
+#: events-manager-pro.php:243 events-manager-pro.php:249
+msgid "Only admins see this message."
+msgstr "Bare admins se denne meldingen."
+
+# @ em-pro
+#: events-manager-pro.php:249
+msgid ""
+"Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/"
+"events-manager/\">latest version</a> of Events Manager installed, as this "
+"may prevent Pro from functioning properly."
+msgstr ""
+"Vennligst sørg for at du har den <a href=\"http://wordpress.org/extend/"
+"plugins/events-manager/\"> nyeste versjonen </a> av hendelser Manager "
+"installert, da dette kan hindre Pro fungerer som den skal ."
+
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:30
+msgid "edit booking"
+msgstr "rediger bestilling"
+
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:35
+#: templates/multiple-bookings/admin-cart-table.php:38
+#: templates/multiple-bookings/cart-table.php:43
+#: templates/multiple-bookings/cart-table.php:46
+msgid "details"
+msgstr "detaljer"
+
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:47
+#: templates/multiple-bookings/cart-table.php:55
+msgid "Booking Information"
+msgstr "Finn dato"
+
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:99
+#: templates/multiple-bookings/cart-table.php:107
+#: templates/placeholders/bookingsummary-multiple.php:42
+msgid "Sub Total"
+msgstr "Sub Total"
+
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:112
+#: templates/multiple-bookings/cart-table.php:120
+#: templates/placeholders/bookingsummary-multiple.php:55
+msgid "Taxes"
+msgstr "Skatter"
+
+# @ dbem
+# @ em-pro
+#: templates/multiple-bookings/admin-cart-table.php:125
+#: templates/multiple-bookings/cart-table.php:133
+#: templates/placeholders/bookingsummary-multiple.php:68
+msgid "Total Price"
+msgstr "Totalpris"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:10
+msgid "You do not have the rights to manage this event."
+msgstr "Du har ikke rettigheter til å håndtere denne hendelsen."
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:18
+msgid "Edit Booking"
+msgstr "Edit Booking"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:26
+msgid "Personal Details"
+msgstr "Personlige detaljer"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:35
+msgid "Booking Details"
+msgstr "Reservasjons Detaljer"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:48
+msgid "Change"
+msgstr "Endring"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:49
+msgid "Resend Email"
+msgstr "Sende e-post"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:63
+msgid "Send Email"
+msgstr "Send e-post"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:64
+#: templates/multiple-bookings/admin.php:87
+msgid "Submit Changes"
+msgstr "Send inn endringer"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:65
+#: templates/multiple-bookings/admin.php:88
+msgid "Cancel"
+msgstr "Avbryt"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:70
+msgid ""
+"<strong>Warning:</strong> Status changes made here will be applied to all "
+"the bookings below."
+msgstr ""
+"<strong> Advarsel: </strong> Status endringer her vil bli brukt på alle "
+"bestillinger under."
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:71
+msgid ""
+"<strong>Notes:</strong> Ticket availability not taken into account when "
+"approving new bookings (i.e. you can overbook)."
+msgstr ""
+"<strong> Merknader: </strong> Billett tilgjengeligheten ikke er tatt hensyn "
+"til ved godkjenning av nye bestillinger (dvs. at du kan overbook)."
+
+# @ em-pro
+#: templates/multiple-bookings/admin.php:79
+msgid ""
+"You are editing the information supplied no the checkout form. To edit "
+"information about a specific booking, including the data entered in that "
+"booking form, click the edit link on your bookings above."
+msgstr ""
+"Du redigerer informasjonen som følger ingen kassen skjema. For å redigere "
+"informasjon om en bestemt bestilling, herunder opplysninger som er "
+"registrert i at bestillingsskjema, klikk på koblingen rediger på dine "
+"bestillinger ovenfor."
+
+# @ em-pro
+#: templates/multiple-bookings/admin.php:84
+msgid "Modify Booking Information"
+msgstr "Endre Booking Informasjon"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:124
+msgid "Booking Notes"
+msgstr "Bestilling Merknader"
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:127
+msgid ""
+"You can add private notes below for internal reference that only event "
+"managers will see."
+msgstr ""
+"Du kan legge til private notater under for intern referanse som bare "
+"hendelse ledere vil se."
+
+# @ dbem
+#: templates/multiple-bookings/admin.php:132
+msgid "wrote"
+msgstr "skrev"
+
+# @ dbem
+#: templates/multiple-bookings/cart-table.php:23
+msgid "Price"
+msgstr "Pris"
+
+# @ em-pro
+#: templates/multiple-bookings/cart-table.php:35
+msgid "edit"
+msgstr "edit"
+
+# @ em-pro
+#: templates/multiple-bookings/page-cart.php:20
+msgid "Empty Cart"
+msgstr "Tom Handlevogn"
+
+# @ em-pro
+#: templates/multiple-bookings/page-cart.php:21
+msgid "Proceed to Checkout"
+msgstr "Fortsett til kassen"
+
+# @ em-pro
+#: templates/multiple-bookings/widget.php:22
+msgid "Total"
+msgstr "Total"
+
+# @ em-pro
+#: templates/multiple-bookings/widget.php:22
+#, php-format
+msgid "%d Spaces"
+msgstr "%d Spaces"
+
+# @ em-pro
+#: templates/placeholders/bookingattendees.php:12
+msgid "Ticket"
+msgstr "Billett"
+
+# @ em-pro
+#: templates/placeholders/bookingsummary-multiple.php:46
+msgid "Discounts Before Taxes"
+msgstr "Rabatter før skatt"
+
+# @ em-pro
+#: templates/placeholders/bookingsummary-multiple.php:60
+msgid "Discounts (After Taxes)"
+msgstr "Rabatter (etter skatt)"
