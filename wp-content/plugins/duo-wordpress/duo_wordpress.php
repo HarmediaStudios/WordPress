@@ -3,7 +3,7 @@
 Plugin Name: Duo Two-Factor Authentication
 Plugin URI: http://wordpress.org/extend/plugins/duo-wordpress/
 Description: This plugin enables Duo two-factor authentication for WordPress logins.
-Version: 1.8.1
+Version: 2.2
 Author: Duo Security
 Author URI: http://www.duosecurity.com
 License: GPL2
@@ -26,19 +26,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-    require_once("duo_web/duo_web.php");
+    require_once('duo_web/duo_web.php');
+    $DuoAuthCookieName = 'duo_wordpress_auth_cookie';
+    $DuoSecAuthCookieName = 'duo_secure_wordpress_auth_cookie';
+    $DuoDebug = false;
 
     function duo_sign_request($user, $redirect) {
         $ikey = duo_get_option('duo_ikey');
         $skey = duo_get_option('duo_skey');
         $host = duo_get_option('duo_host');
-       
+        $akey = duo_get_akey();
+
         $username = $user->user_login;
-
         $duo_time = duo_get_time();
-        $request_sig = Duo::signRequest($ikey, $skey, $username, $duo_time);
 
-        $exptime = $duo_time + 3600; // let the duo login form expire within 1 hour
+        $request_sig = Duo::signRequest($ikey, $skey, $akey, $username, $duo_time);
+        duo_debug_log("Displaying iFrame. Username: $username cookie domain: " . COOKIE_DOMAIN . " redirect_to_url: $redirect ikey: $ikey host: $host duo_time: $duo_time");
+        duo_debug_log("Duo request signature: $request_sig");
 
 ?>
     <html>
@@ -84,7 +88,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         </head>
 
         <body class="login" >
-            <script src="<?php echo plugins_url('duo_web/Duo-Web-v1.bundled.min.js', __FILE__); ?>"></script>
+            <script src="<?php echo plugins_url('duo_web/Duo-Web-v1.bundled.min.js?v=2', __FILE__); ?>"></script>
             <script>
             Duo.init({
                 'host': <?php echo "'" . $host . "'"; ?>,
@@ -98,9 +102,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             </h1>
             <iframe id="duo_iframe" frameborder="0" allowtransparency="true"></iframe>
             <form method="POST" style="display:none;" id="duo_form">
-                <input type="hidden" name="u" value="<?php echo esc_attr($username); ?>"/>
-                <input type="hidden" name="exptime" value="<?php echo esc_attr($exptime); ?>"/>
-                <input type="hidden" name="uhash" value="<?php echo esc_attr(wp_hash($username.$exptime)); ?>"/>
+                <input type="hidden" name="rememberme" value="<?php echo esc_attr($_POST['rememberme'])?>"/>
                 <?php
                 if (isset($_REQUEST['interim-login'])){
                     echo '<input type="hidden" name="interim-login" value="1"/>';
@@ -121,6 +123,67 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         $wp_roles = isset($wp_roles) ? $wp_roles : new WP_Roles();
         return $wp_roles;
     }
+
+    function duo_auth_enabled(){
+        if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) { 
+            duo_debug_log('Found an XMLRPC request. XMLRPC is allowed for this site. Skipping second factor');
+            return false; //allows the XML-RPC protocol for remote publishing
+        }
+
+        if (duo_get_option('duo_ikey', '') == '' || duo_get_option('duo_skey', '') == '' ||
+            duo_get_option('duo_host', '') == '') {
+            return false;
+        }
+        return true;
+    }
+
+    function duo_role_require_mfa($user){
+        $wp_roles = duo_get_roles();
+        foreach ($wp_roles->get_names() as $k=>$r) {
+            $all_roles[$k] = $r;
+        }
+
+        $duo_roles = duo_get_option('duo_roles', $all_roles); 
+
+        /*
+         * WordPress < 3.3 does not include the roles by default
+         * Create a User object to get roles info
+         * Don't use get_user_by()
+         */
+        if (!isset($user->roles)){
+            $user = new WP_User(0, $user->user_login);
+        }
+
+        /*
+         * Mainly a workaround for multisite login:
+         * if a user logs in to a site different from the one 
+         * they are a member of, login will work however
+         * it appears as if the user has no roles during authentication
+         * "fail closed" in this case and require duo auth
+         */
+        if(empty($user->roles)) {
+            return true;
+        }
+
+        foreach ($user->roles as $role) {
+            if (array_key_exists($role, $duo_roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function duo_start_second_factor($user, $redirect_to=NULL){
+        if (!$redirect_to){
+            // Some custom themes do not provide the redirect_to value
+            // Admin page is a good default
+            $redirect_to = isset( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : admin_url();
+        }
+
+        wp_logout();
+        duo_sign_request($user, $redirect_to);
+        exit();
+    }
     
     function duo_authenticate_user($user="", $username="", $password="") {
         // play nicely with other plugins if they have higher priority than us
@@ -128,30 +191,33 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             return $user;
         }
 
-        if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) 
-            return; //allows the XML-RPC protocol for remote publishing
-
-        if (duo_get_option("duo_ikey", "") == "" || duo_get_option("duo_skey", "") == "" || duo_get_option("duo_host", "") == "") {
+        if (! duo_auth_enabled()){
+            duo_debug_log('Duo not enabled, skipping 2FA.');
             return;
         }
 
         if (isset($_POST['sig_response'])) {
             // secondary auth
             remove_action('authenticate', 'wp_authenticate_username_password', 20);
-
-            $sig = wp_hash($_POST['u'] . $_POST['exptime']);
-            $expire = intval($_POST['exptime']);
+            $akey = duo_get_akey();
 
             $duo_time = duo_get_time();
-            if (wp_hash($_POST['uhash']) == wp_hash($sig) && $duo_time < $expire) {
+            $username = Duo::verifyResponse(duo_get_option('duo_ikey'),
+                                            duo_get_option('duo_skey'),
+                                            $akey,
+                                            $_POST['sig_response'],
+                                            $duo_time);
+            if ($username) {
                 // Don't use get_user_by(). It doesn't return a WP_User object if wordpress version < 3.3
-                $user = new WP_User(0, $_POST['u']);
+                $user = new WP_User(0, $username);
 
-                if ($user->user_login == Duo::verifyResponse(duo_get_option('duo_skey'), $_POST['sig_response'], $duo_time)) {
-                    return $user;
-                }
+                duo_set_cookie($user);
+
+                duo_debug_log("Second factor successful for user: $username");
+                return $user;
             } else {
-                $user = new WP_Error('Duo authentication_failed', __('<strong>ERROR</strong>: Failed or expired two factor authentication'));
+                $user = new WP_Error('Duo authentication_failed',
+                                     __('<strong>ERROR</strong>: Failed or expired two factor authentication'));
                 return $user;
             }
         }
@@ -161,37 +227,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             // Don't use get_user_by(). It doesn't return a WP_User object if wordpress version < 3.3
             $user = new WP_User(0, $username);
             if (!$user) {
+                error_log("Failed to retrieve WP user $username");
                 return;
             }
-
-            $wp_roles = duo_get_roles();
-            foreach ($wp_roles->get_names() as $k=>$r) {
-                $all_roles[$k] = $r;
-            }
-
-            $duo_roles = duo_get_option('duo_roles', $all_roles); 
-            $duo_auth = false;
-
-            /*
-             * Mainly a workaround for multisite login:
-             * if a user logs in to a site different from the one 
-             * they are a member of, login will work however
-             * it appears as if the user has no roles during authentication
-             * "fail closed" in this case and require duo auth
-             */
-            if(empty($user->roles)) {
-                $duo_auth = true;
-            }
-
-            if (!empty($user->roles) && is_array($user->roles)) {
-                foreach ($user->roles as $role) {
-                    if (array_key_exists($role, $duo_roles)) {
-                        $duo_auth = true;
-                    }
-                }
-            }
-
-            if (!$duo_auth) {
+            if(!duo_role_require_mfa($user)){
+                duo_debug_log("Skipping 2FA for user: $username with roles: " . print_r($user->roles, true));
                 return;
             }
 
@@ -201,17 +241,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 // on error, return said error (and skip the remaining plugin chain)
                 return $user;
             } else {
-                // Some custom themes do not provide the redirect_to value
-                // Admin page is a good default
-                $admin_url = is_multisite() ? network_admin_url() : admin_url();
-                $redirect_to = isset( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : $admin_url;
-                duo_sign_request($user, $redirect_to);
-                exit();
+                duo_debug_log("Primary auth succeeded, starting second factor for $username");
+                duo_start_second_factor($user);
             }
         }
+        duo_debug_log('Starting primary authentication');
     }
 
     function duo_settings_page() {
+        duo_debug_log('Displaying duo setting page');
 ?>
     <div class="wrap">
         <h2>Duo Two-Factor Authentication</h2>
@@ -261,8 +299,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             <input id="duo_roles" name='duo_roles[<?php echo $key; ?>]' type='checkbox' value='<?php echo $role; ?>'  <?php if(in_array($role, $selected)) echo 'checked'; ?> /> <?php echo $role; ?> <br />
 <?php
         }
-
-
     }
 
     function duo_roles_validate($options) {
@@ -285,7 +321,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     function duo_settings_text() {
         echo "<p>See the <a target='_blank' href='https://www.duosecurity.com/docs/wordpress'>Duo for WordPress guide</a> to enable Duo two-factor authentication for your WordPress logins.</p>";
-        echo "<p>You can retrieve your integration key, secret key, and API hostname by logging in to the Duo administrative interface.</p>";
+        echo '<p>You can retrieve your integration key, secret key, and API hostname by logging in to the Duo administrative interface.</p>';
+        echo '<p>Note: After enabling the plugin, you will be immediately prompted for second factor authentication.</p>';
     }
 
     function duo_ikey_validate($ikey) {
@@ -359,7 +396,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
             register_setting('duo_settings', 'duo_roles', 'duo_roles_validate');
             register_setting('duo_settings', 'duo_xmlrpc', 'duo_xmlrpc_validate');
         }
-
     }
 
     function duo_mu_options() {
@@ -453,25 +489,28 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     }
 
     function duo_get_time_fopen($duo_url, $cert_file){
-        $context = stream_context_create(
-            array(
-                'http'=>array(
-                    "method" => "GET"
-                ),
-                'ssl'=>array(
-                    'allow_self_signed'=>false,
-                    'verify_peer'=>true,
-                    'cafile'=>$cert_file
-                )
-            )
+        $settings = array(
+                        'http'=>array(
+                            'method' => 'GET'
+                        ),
+                        'ssl'=>array(
+                            'allow_self_signed'=>false,
+                            'verify_peer'=>true,
+                            'cafile'=>$cert_file
+                        )
         );
 
+        if ( defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT')) {
+            $settings['http']['proxy'] = 'tcp://' . WP_PROXY_HOST . ':' . WP_PROXY_PORT;
+        }
+
+        $context = stream_context_create($settings);
         $response = json_decode(file_get_contents($duo_url, false, $context), true);
         if (!$response){
             return NULL;
         }
         $time = (int)$response['response']['time'];
-        
+
         return $time;
     }
 
@@ -483,6 +522,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         curl_setopt($ch, CURLOPT_CAINFO, $cert_file);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+        if ( defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT')) {
+            curl_setopt( $ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP );
+            curl_setopt( $ch, CURLOPT_PROXY, WP_PROXY_HOST );
+            curl_setopt( $ch, CURLOPT_PROXYPORT, WP_PROXY_PORT );
+        }
+
         $response =json_decode(curl_exec($ch), true);
         curl_close ($ch);
         if (!$response){
@@ -517,6 +563,167 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
         }
     }
 
+    function duo_set_cookie($user){
+
+        global $DuoAuthCookieName;
+        global $DuoSecAuthCookieName;
+        $ikey_b64 = base64_encode(duo_get_option('duo_ikey'));
+        $username_b64 = base64_encode($user->user_login);
+        $expire = strtotime('+48 hours');
+        //Create http cookie
+        $val = base64_encode(sprintf("%s|%s|%s|%s", $DuoAuthCookieName, $username_b64, $ikey_b64, $expire)); 
+        $sig = duo_hash_hmac($val);
+        $cookie = sprintf("%s|%s", $val, $sig);
+        setcookie($DuoAuthCookieName, $cookie, 0, COOKIEPATH, COOKIE_DOMAIN, false, true);
+        if (COOKIEPATH != SITECOOKIEPATH){
+            setcookie($DuoAuthCookieName, $cookie, 0, SITECOOKIEPATH, COOKIE_DOMAIN, false, true);
+        }
+
+        if (is_ssl()){
+            //Create https cookie
+            $sec_val = base64_encode(sprintf("%s|%s|%s|%s", $DuoSecAuthCookieName, $username_b64, $ikey_b64, $expire)); 
+            $sec_sig = duo_hash_hmac($sec_val);
+            $sec_cookie = sprintf("%s|%s", $sec_val, $sec_sig);
+            setcookie($DuoSecAuthCookieName, $sec_cookie, 0, COOKIEPATH, COOKIE_DOMAIN, true, true);
+            if (COOKIEPATH != SITECOOKIEPATH){
+                setcookie($DuoSecAuthCookieName, $sec_cookie, 0, SITECOOKIEPATH, COOKIE_DOMAIN, true, true);
+            }
+        }
+
+        duo_debug_log("Set Duo cookie for user: $user->user_login path: " . COOKIEPATH . " network path: " . SITECOOKIEPATH . " on domain: " . COOKIE_DOMAIN . " set SSL: " . is_ssl());
+    }
+
+    function duo_unset_cookie(){
+        global $DuoAuthCookieName;
+        global $DuoSecAuthCookieName;
+        setcookie($DuoAuthCookieName, '', strtotime('-1 day'), COOKIEPATH, COOKIE_DOMAIN);
+        setcookie($DuoAuthCookieName, '', strtotime('-1 day'), SITECOOKIEPATH, COOKIE_DOMAIN);
+        setcookie($DuoSecAuthCookieName, '', strtotime('-1 day'), COOKIEPATH, COOKIE_DOMAIN);
+        setcookie($DuoSecAuthCookieName, '', strtotime('-1 day'), SITECOOKIEPATH, COOKIE_DOMAIN);
+        duo_debug_log("Unset Duo cookie for path: " . COOKIEPATH . " network path: " . SITECOOKIEPATH . " on domain: " . COOKIE_DOMAIN);
+    }
+
+    function duo_verify_sig($cookie, $u_sig){
+        $sig = duo_hash_hmac($cookie);
+        if (duo_hash_hmac($sig) === duo_hash_hmac($u_sig)) {
+            return true;
+        }
+        return false;
+    }
+
+    function duo_verify_cookie($user){
+    /*
+        Return true if Duo cookie is valid, false otherwise
+        If using SSL, or secure cookie is set, only accept secure cookie
+    */
+        global $DuoAuthCookieName;
+        global $DuoSecAuthCookieName;
+
+        if (is_ssl() || isset($_COOKIE[$DuoSecAuthCookieName])){
+            $duo_auth_cookie_name = $DuoSecAuthCookieName;
+        }
+        else {
+            $duo_auth_cookie_name = $DuoAuthCookieName;
+        }
+
+        if(!isset($_COOKIE[$duo_auth_cookie_name])){
+            error_log("Duo cookie with name: $duo_auth_cookie_name not found. Start two factor authentication. SSL: " . is_ssl());
+            return false;
+        }
+
+        $cookie_list = explode('|', $_COOKIE[$duo_auth_cookie_name]);
+        if (count($cookie_list) !== 2){
+            error_log('Invalid Duo cookie');
+            return false;
+        }
+        list($u_cookie_b64, $u_sig) = $cookie_list;
+        if (!duo_verify_sig($u_cookie_b64, $u_sig)){
+            error_log('Duo cookie signature mismatch');
+            return false;
+        }
+
+        $cookie_content = explode('|', base64_decode($u_cookie_b64));
+        if (count($cookie_content) !== 4){
+            error_log('Invalid field count in Duo cookie');
+            return false;
+        }
+        list($cookie_name, $cookie_username_b64, $cookie_ikey_b64, $expire) = $cookie_content;
+        // Check cookie values
+        if ($cookie_name !== $duo_auth_cookie_name ||
+            base64_decode($cookie_username_b64) !== $user->user_login ||
+            base64_decode($cookie_ikey_b64) !== duo_get_option('duo_ikey')){
+            error_log('Invalid Duo cookie content');
+            return false;
+        }
+
+        $expire = intval($expire);
+        if ($expire < strtotime('now')){
+            error_log('Duo cookie expired');
+            return false;
+        }
+        return true;
+    }
+
+    function duo_get_uri(){
+        // Workaround for IIS which may not set REQUEST_URI, or QUERY parameters
+        if (!isset($_SERVER['REQUEST_URI']) ||
+            (!empty($_SERVER['QUERY_STRING']) && !strpos($_SERVER['REQUEST_URI'], '?', 0))) {
+            $current_uri = substr($_SERVER['PHP_SELF'],1);
+            if (isset($_SERVER['QUERY_STRING']) AND $_SERVER['QUERY_STRING'] != '') {
+                $current_uri .= '?'.$_SERVER['QUERY_STRING'];
+            }
+            return $current_uri;
+        }
+        else {
+            return $_SERVER['REQUEST_URI'];
+        }
+    }
+
+    function duo_verify_auth(){
+    /*
+        Verify the user is authenticated with Duo. Start 2FA otherwise
+    */
+        if (! duo_auth_enabled()){
+            duo_debug_log('Duo not enabled, skip cookie check.');
+            return;
+        }
+
+        if(is_user_logged_in()){
+            $user = wp_get_current_user();
+            duo_debug_log("Verifying second factor for user: $user->user_login URL: " .  duo_get_uri() . ' path: ' . COOKIEPATH . ' network path: ' . SITECOOKIEPATH . 'cookie domain: ' . COOKIE_DOMAIN . ' is SSL: ' . is_ssl());
+            if (duo_role_require_mfa($user) and !duo_verify_cookie($user)){
+                duo_debug_log("Duo cookie invalid for user: $user->user_login");
+                duo_start_second_factor($user, duo_get_uri());
+            }
+            duo_debug_log("User $user->user_login allowed");
+        }
+    }
+
+    function duo_get_akey(){
+        // Get an application specific secret key.
+        // If wp_salt() is not long enough, append a random secret to it
+        $akey = duo_get_option('duo_akey', '');
+        $akey .= wp_salt();
+        if (strlen($akey) < 40) {
+            duo_debug_log('WordPress secret key is less than 40 chars. Creating new akey.');
+            $akey = wp_generate_password(40, true, true);
+            update_site_option('duo_akey', $akey);
+            $akey .= wp_salt();
+        }
+        return $akey;
+    }
+
+    function duo_debug_log($message) {
+        global $DuoDebug;
+        if ($DuoDebug) {
+            error_log('Duo debug: ' . $message);
+        }
+    }
+
+    function duo_hash_hmac($data){
+        return hash_hmac('sha1', $data, duo_get_akey());
+    }
+
     /*-------------XML-RPC Features-----------------*/
     
     if(duo_get_option('duo_xmlrpc', 'off') == 'off') {
@@ -525,8 +732,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     /*-------------Register WordPress Hooks-------------*/
 
+    if (!is_multisite()) {
+        add_filter('plugin_action_links', 'duo_add_link', 10, 2 );
+    }
+
+    add_action('init', 'duo_verify_auth', 10);
+
+    add_action('clear_auth_cookie', 'duo_unset_cookie', 10);
+
     add_filter('authenticate', 'duo_authenticate_user', 10, 3);
-    add_filter('plugin_action_links', 'duo_add_link', 10, 2 );
     
     //add single-site submenu option
     add_action('admin_menu', 'duo_add_page');
