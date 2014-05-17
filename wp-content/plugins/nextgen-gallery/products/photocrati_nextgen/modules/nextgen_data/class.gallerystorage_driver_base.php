@@ -462,6 +462,38 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 		return $this->object->copy_images($images, $gallery, $db, TRUE);
 	}
 
+    function is_image_file()
+    {
+        $retval = FALSE;
+
+        if ((isset($_FILES['file']) && $_FILES['file']['error'] == 0)) {
+            $file_info = $_FILES['file'];
+
+            if (isset($file_info['type'])) {
+                $type = strtolower($file_info['type']);
+                error_log("Attempted to upload {$type}.");
+                $valid_types = array(
+                    'image/gif',
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/pjpeg',
+                    'image/png',
+                );
+                $valid_regex = '/\.(jpg|jpeg|gif|png)$/';
+
+                // Is this a valid type?
+                if (in_array($type, $valid_types)) $retval = TRUE;
+
+                // Is this a valid extension?
+                else if (strpos($type, 'octem-stream') !== FALSE && preg_match($valid_regex, $type)) {
+                    $retval = TRUE;
+                }
+            }
+        }
+
+        return $retval;
+    }
+
 
     function is_zip()
     {
@@ -492,7 +524,7 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
     function upload_zip($gallery_id)
     {
         $memory_limit = intval(ini_get('memory_limit'));
-        if ($memory_limit < 256) @ini_set('memory_limit', '256M');
+        if (!extension_loaded('suhosin') && $memory_limit < 256) @ini_set('memory_limit', '256M');
 
         $retval = FALSE;
 
@@ -549,7 +581,7 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
             $this->object->delete_directory($dest_path);
         }
 
-        @ini_set('memory_limit', $memory_limit.'M');
+        if (!extension_loaded('suhosin')) @ini_set('memory_limit', $memory_limit.'M');
 
         return $retval;
     }
@@ -579,7 +611,7 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 	{
         $settings = C_NextGen_Settings::get_instance();
         $memory_limit = intval(ini_get('memory_limit'));
-        if ($memory_limit < 256) @ini_set('memory_limit', '256M');
+        if (!extension_loaded('suhosin') && $memory_limit < 256) @ini_set('memory_limit', '256M');
 
 		$retval		= NULL;
 		if (($gallery_id = $this->object->_get_gallery_id($gallery))) {
@@ -698,7 +730,7 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 		}
 		else throw new E_EntityNotFoundException();
 
-        @ini_set('memory_limit', $memory_limit.'M');
+        if (!extension_loaded('suhosin')) @ini_set('memory_limit', $memory_limit.'M');
 
 		return $retval;
 	}
@@ -1271,18 +1303,20 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 			{
 				$destpath = $clone_path;
 				$thumbnail = new C_NggLegacy_Thumbnail($image_path, true);
+                if (!$thumbnail->error) {
+                    if ($crop) {
+                        $crop_area = $result['crop_area'];
+                        $crop_x = $crop_area['x'];
+                        $crop_y = $crop_area['y'];
+                        $crop_width = $crop_area['width'];
+                        $crop_height = $crop_area['height'];
 
-				if ($crop) {
-					$crop_area = $result['crop_area'];
-					$crop_x = $crop_area['x'];
-					$crop_y = $crop_area['y'];
-					$crop_width = $crop_area['width'];
-					$crop_height = $crop_area['height'];
+                        $thumbnail->crop($crop_x, $crop_y, $crop_width, $crop_height);
+                    }
 
-					$thumbnail->crop($crop_x, $crop_y, $crop_width, $crop_height);
-				}
-
-				$thumbnail->resize($width, $height);
+                    $thumbnail->resize($width, $height);
+                }
+                else $thumbnail = NULL;
 			}
 
 			// We successfully generated the thumbnail
@@ -1392,6 +1426,15 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 				}
 
 				$thumbnail->save($destpath, $quality);
+
+                // IF the original contained IPTC metadata we should attempt to copy it
+                if (isset($detailed_size['APP13']) && function_exists('iptcembed'))
+                {
+                    $metadata = @iptcembed($detailed_size['APP13'], $destpath);
+                    $fp = @fopen($destpath, 'wb');
+                    @fwrite($fp, $metadata);
+                    @fclose($fp);
+                }
 			}
 		}
 
