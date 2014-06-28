@@ -3,47 +3,42 @@ if (DISQUS_DEBUG) {
     echo "<p><strong>Disqus Debug</strong> thread_id: ".get_post_meta($post->ID, 'dsq_thread_id', true)."</p>";
 }
 ?>
-<div class='big-box'>
-    <div class='big-box-top'>
-        <div class='big-box-content' id="disqus_comments">
-            <div id="disqus_thread">
-                <?php if (!get_option('disqus_disable_ssr') && have_comments()): ?>
-                    <?php
-                    // if (is_file(TEMPLATEPATH . '/comments.php')) {
-                    //     include(TEMPLATEPATH . '/comments.php');
-                    // }
-                    ?>
-                    <div id="dsq-content">
 
-                <?php if (get_comment_pages_count() > 1 && get_option('page_comments')): // Are there comments to navigate through? ?>
-                        <div class="navigation">
-                            <div class="nav-previous"><?php previous_comments_link(dsq_i( '<span class="meta-nav">&larr;</span> Older Comments')); ?></div>
-                            <div class="nav-next"><?php next_comments_link(dsq_i('Newer Comments <span class="meta-nav">&rarr;</span>')); ?></div>
-                        </div> <!-- .navigation -->
-                <?php endif; // check for comment navigation ?>
+<div id="disqus_thread">
+    <?php if (!get_option('disqus_disable_ssr') && have_comments()): ?>
+        <?php
+        // if (is_file(TEMPLATEPATH . '/comments.php')) {
+        //     include(TEMPLATEPATH . '/comments.php');
+        // }
+        ?>
+        <div id="dsq-content">
 
-                        <ul id="dsq-comments">
-                            <?php
-                                /* Loop through and list the comments. Tell wp_list_comments()
-                                 * to use dsq_comment() to format the comments.
-                                 */
-                                wp_list_comments(array('callback' => 'dsq_comment'));
-                            ?>
-                        </ul>
+<?php if (get_comment_pages_count() > 1 && get_option('page_comments')): // Are there comments to navigate through? ?>
+            <div class="navigation">
+                <div class="nav-previous"><?php previous_comments_link(dsq_i( '<span class="meta-nav">&larr;</span> Older Comments')); ?></div>
+                <div class="nav-next"><?php next_comments_link(dsq_i('Newer Comments <span class="meta-nav">&rarr;</span>')); ?></div>
+            </div> <!-- .navigation -->
+<?php endif; // check for comment navigation ?>
 
-                <?php if (get_comment_pages_count() > 1 && get_option('page_comments')): // Are there comments to navigate through? ?>
-                        <div class="navigation">
-                            <div class="nav-previous"><?php previous_comments_link(dsq_i( '<span class="meta-nav">&larr;</span> Older Comments')); ?></div>
-                            <div class="nav-next"><?php next_comments_link(dsq_i( 'Newer Comments <span class="meta-nav">&rarr;</span>')); ?></div>
-                        </div><!-- .navigation -->
-                <?php endif; // check for comment navigation ?>
+            <ul id="dsq-comments">
+                <?php
+                    /* Loop through and list the comments. Tell wp_list_comments()
+                     * to use dsq_comment() to format the comments.
+                     */
+                    wp_list_comments(array('callback' => 'dsq_comment'));
+                ?>
+            </ul>
 
-                    </div>
+<?php if (get_comment_pages_count() > 1 && get_option('page_comments')): // Are there comments to navigate through? ?>
+            <div class="navigation">
+                <div class="nav-previous"><?php previous_comments_link(dsq_i( '<span class="meta-nav">&larr;</span> Older Comments')); ?></div>
+                <div class="nav-next"><?php next_comments_link(dsq_i( 'Newer Comments <span class="meta-nav">&rarr;</span>')); ?></div>
+            </div><!-- .navigation -->
+<?php endif; // check for comment navigation ?>
 
-                <?php endif; ?>
-            </div>
         </div>
-    </div>
+
+    <?php endif; ?>
 </div>
 
 <script type="text/javascript">
@@ -54,12 +49,12 @@ if (DISQUS_DEBUG) {
     var disqus_domain = '<?php echo DISQUS_DOMAIN; ?>';
     var disqus_shortname = '<?php echo strtolower(get_option('disqus_forum_url')); ?>';
     var disqus_title = <?php echo cf_json_encode(dsq_title_for_post($post)); ?>;
-    <?php if (false && get_option('disqus_developer')): ?>
-        var disqus_developer = 1;
-    <?php endif; ?>
     var disqus_config = function () {
         var config = this; // Access to the config object
         config.language = '<?php echo esc_js(apply_filters('disqus_language_filter', '')) ?>';
+
+        /* Add the ability to add javascript callbacks */
+        <?php do_action( 'disqus_config' ); ?>
 
         /*
            All currently supported events:
@@ -104,7 +99,7 @@ if (DISQUS_DEBUG) {
         'trackbacks': [
 <?php
     $count = 0;
-    foreach ($comments as $comment) {
+    foreach ((array)$comments as $comment) {
         $comment_type = get_comment_type();
         if ( $comment_type != 'comment' ) {
             if( $count ) { echo ','; }
@@ -132,7 +127,7 @@ if (DISQUS_DEBUG) {
 (function() {
     var dsq = document.createElement('script'); dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.' + '<?php echo DISQUS_DOMAIN; ?>' + '/embed.js?pname=wordpress&pver=<?php echo DISQUS_VERSION; ?>';
+    dsq.src = '//' + disqus_shortname + '.' + '<?php echo DISQUS_DOMAIN; ?>' + '/' + 'embed' + '.js' + '?pname=wordpress&pver=<?php echo DISQUS_VERSION; ?>';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();
 /* ]]> */
