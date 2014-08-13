@@ -4,6 +4,14 @@ http://www.khairul-syahir.com
 
 CHANGELOG
 
+Version 1.9.3
+	* Fixed styling in the theme's options page to be compatible with WP 3.8
+	* Fixed several PHP notices (http://forum.graphene-theme.com/graphene-support/php-notices-in-errorlog)
+	* Apply user selected Block Button colour to input[type="submit"] and button[type="submit"].
+	* Added <ins> tag to the allowed tags in code. Fixes some <ins> attributes being removed from Adsense code
+	* Fixed infinite scroll not working for search results
+	* Fixed XSS vulnerability (thanks to Otto for the notification)
+
 Version 1.9.2
 	* Added simple validation to make sure a settings file is selected for theme options import
 	* Added graphene_homepage_pane_image filter hook

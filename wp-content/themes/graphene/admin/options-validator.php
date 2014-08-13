@@ -13,8 +13,8 @@ function graphene_settings_validator( $input ){
 	if ( !isset( $_POST['graphene_uninstall'] ) ) {
 		global $graphene_defaults, $allowedposttags;
 		
-		// Add <script> tag to the allowed tags in code
-		$allowedposttags = array_merge( $allowedposttags, array( 'script' => array( 'type' => array(), 'src' => array() ) ) );
+		// Add <script> and <ins> tags to the allowed tags in code
+		$allowedposttags = array_merge( $allowedposttags, array( 'script' => array( 'type' => array(), 'src' => array() ), 'ins' => array( 'class'=>array(), 'id'=>array(), 'style'=>array(), 'title'=>array(), 'data-ad-client'=>array(), 'data-ad-slot'=>array(), 'alt'=>array() ) ) );
 		
 		if (isset( $_POST['graphene_general'] ) ) {
 		

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Graphene 1.0 theme for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 22:53+0800\n"
+"POT-Creation-Date: 2013-08-24 12:12+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Arvanitis <gbarin35@gmail.com>\n"
 "Language-Team: \n"
@@ -183,8 +183,8 @@ msgstr "En son yazıları"
 
 #: loop-author.php:55 loop-author.php:85 loop-children.php:45
 #: loop-children.php:54 loop-post-formats.php:36 loop.php:63 loop.php:128
-#: includes/theme-panes.php:79 includes/theme-panes.php:91
-#: includes/theme-panes.php:106
+#: includes/theme-panes.php:79 includes/theme-panes.php:92
+#: includes/theme-panes.php:107
 #, php-format
 msgid "Permalink to %s"
 msgstr "%s kalıcı bağlantısı"
@@ -314,12 +314,20 @@ msgstr "Yazar hakkında"
 msgid "Read the rest of this entry &raquo;"
 msgstr "Bu girişin kalanını oku &raquo;"
 
-#: search-404.php:14
+#. translators: %1$s is the number of results found, %2$s is the search term
+#: search-404.php:17 search.php:18
+#, php-format
+msgid "Found %1$s search result for keyword: %2$s"
+msgid_plural "Found %1$s search results for keyword: %2$s"
+msgstr[0] "Anahtar kelime için %1$s arama sonucu bulundu: %2$s"
+msgstr[1] "Anahtar kelime için %1$s arama sonucu bulundu: %2$s"
+
+#: search-404.php:26
 msgid "Suggested results"
 msgstr "Önerilen sonuçlar"
 
 #. translators: %1$s is the search term, %2$s is the number of results found
-#: search-404.php:19
+#: search-404.php:31
 #, php-format
 msgid ""
 "I've done a courtesy search for the term %1$s for you and found a total of "
@@ -334,7 +342,7 @@ msgstr[1] ""
 "İzninizle, sizin için %1$s terimine uyan arama yaptım ve toplam %2$s sonuç "
 "buldum. Bakarsanız, aşağıdaki listede aradığınızı bulabilirsiniz."
 
-#: search-404.php:40
+#: search-404.php:52
 msgid ""
 "<strong>Sorry, couldn't find anything.</strong> Try searching for "
 "alternative terms using the search form above."
@@ -342,31 +350,23 @@ msgstr ""
 "<strong>Üzgünüm, hiçbir şey bulunamadı.</strong> Yukarıdaki arama formunu "
 "kullanarak alternatif terimleri aramayı deneyin."
 
-#. translators: %1$s is the number of results found, %2$s is the search term
-#: search.php:12
-#, php-format
-msgid "Found %1$s search result for keyword: %2$s"
-msgid_plural "Found %1$s search results for keyword: %2$s"
-msgstr[0] "Anahtar kelime için %1$s arama sonucu bulundu: %2$s"
-msgstr[1] "Anahtar kelime için %1$s arama sonucu bulundu: %2$s"
-
 #: searchform.php:3 searchform.php:4
 msgid "Search"
 msgstr "Arama"
 
-#: sidebar-two.php:28 includes/theme-setup.php:301
+#: sidebar-two.php:28 includes/theme-setup.php:305
 msgid "Front Page Sidebar Two Widget Area"
 msgstr "Ön Sayfa Yan menü İkinci Bileşen Alanı"
 
-#: sidebar-two.php:30 includes/theme-setup.php:266
+#: sidebar-two.php:30 includes/theme-setup.php:270
 msgid "Sidebar Two Widget Area"
 msgstr "Yan menü İkinci Bileşen Alanı"
 
-#: sidebar.php:28 includes/theme-setup.php:292
+#: sidebar.php:28 includes/theme-setup.php:296
 msgid "Front Page Sidebar Widget Area"
 msgstr "Ön Sayfa Yan Menü Bileşen Alanı"
 
-#: sidebar.php:30 includes/theme-setup.php:257
+#: sidebar.php:30 includes/theme-setup.php:261
 msgid "Sidebar Widget Area"
 msgstr "Yan Menü Bileşen Alanı"
 
@@ -1576,8 +1576,8 @@ msgid "Text style:"
 msgstr "Metin stili:"
 
 #: admin/options-display.php:455
-msgid "Text colour:"
-msgstr "Metin rengi:"
+msgid "Text decoration:"
+msgstr "Metin süslemesi:"
 
 #: admin/options-display.php:460
 msgid "Header Text"
@@ -1644,11 +1644,11 @@ msgid "Link Text"
 msgstr "Metin Bağlantısı"
 
 #: admin/options-display.php:553
-msgid "Text decoration (normal state )"
+msgid "Text decoration (normal state)"
 msgstr "Metin süslemesi (normal)"
 
 #: admin/options-display.php:559
-msgid "Text decoration (hover state )"
+msgid "Text decoration (hover state)"
 msgstr "Metin süslemesi (vurgulu)"
 
 #: admin/options-display.php:575
@@ -2470,30 +2470,38 @@ msgid "You are deleting this preset:"
 msgstr "Bu ön tanımlıyı silmek üzeresiniz:"
 
 #: admin/options-init.php:137
+msgid "Please select the exported Graphene colour presets file to import."
+msgstr "Dışa aktarmak için lütfen Graphene ön tanımlı renkler dosyasını seçin."
+
+#: admin/options-init.php:138
 msgid "Oops, nothing found."
 msgstr "Üzgünüz, hiçbir şey bulunamadı."
 
-#: admin/options-init.php:172
+#: admin/options-init.php:140
+msgid "Please select the exported Graphene options file to import."
+msgstr "Dışa aktarmak için lütfen Graphene seçenekler dosyasını seçin."
+
+#: admin/options-init.php:174
 msgid "Toggle all options boxes"
 msgstr "Tüm seçenek kutularına geçiş"
 
-#: admin/options-init.php:231
+#: admin/options-init.php:233
 msgid "Template preview not found."
 msgstr "Şablon ön izleme bulunamadı."
 
-#: admin/options-init.php:234
+#: admin/options-init.php:236
 msgid "default"
 msgstr "varsayılan"
 
-#: admin/options-init.php:293 admin/options-init.php:297
+#: admin/options-init.php:295 admin/options-init.php:299
 msgid "Theme default"
 msgstr "Tema varsayılanı"
 
-#: admin/options-init.php:334
+#: admin/options-init.php:336
 msgid "Learn more about this feature set"
 msgstr "Bu özellik seti hakkında daha fazlasını öğren"
 
-#: admin/options-init.php:335
+#: admin/options-init.php:337
 msgid "Documentation"
 msgstr "Belgelendirme"
 
@@ -3021,36 +3029,36 @@ msgstr "WP Yönetici > Görünüm > Bileşenler"
 msgid "This notice will not be displayed to your site's visitors."
 msgstr "Bu not site ziyaretçilerince görüntülenmeyecektir."
 
-#: includes/theme-loop.php:86
+#: includes/theme-loop.php:85
 msgid "Continue reading &raquo;"
 msgstr "Devamını oku &raquo;"
 
-#: includes/theme-loop.php:153
+#: includes/theme-loop.php:152
 msgid "Older posts &laquo;"
 msgstr "Eski yazılar &laquo;"
 
-#: includes/theme-loop.php:154
+#: includes/theme-loop.php:153
 msgid "&raquo; Newer posts"
 msgstr "&raquo; Yeni yazılar"
 
-#: includes/theme-loop.php:156
+#: includes/theme-loop.php:155
 msgid "Next page &raquo;"
 msgstr "Sonraki sayfaya &raquo;"
 
-#: includes/theme-loop.php:157
+#: includes/theme-loop.php:156
 msgid "&laquo; Previous page"
 msgstr "&laquo; Önceki sayfa"
 
-#: includes/theme-loop.php:163
+#: includes/theme-loop.php:162
 msgid "Fetch more items"
 msgstr "Daha fazla madde getir"
 
-#: includes/theme-loop.php:476 includes/theme-loop.php:477
+#: includes/theme-loop.php:474 includes/theme-loop.php:475
 #, php-format
 msgid "Print this %s"
 msgstr "Bu %s bas"
 
-#: includes/theme-loop.php:517
+#: includes/theme-loop.php:515
 #, php-format
 msgid "Return to %s"
 msgstr "%s'e dön"
@@ -3059,7 +3067,7 @@ msgstr "%s'e dön"
 msgid "Home"
 msgstr "Ana sayfa"
 
-#: includes/theme-panes.php:106
+#: includes/theme-panes.php:107
 msgid "Read more"
 msgstr "Devamını oku"
 
@@ -3085,23 +3093,23 @@ msgstr[1] "Kalan %2$s den %1$s daha üst seviye yorum getiriliyor ..."
 msgid "No more comments to fetch"
 msgstr "Getirilecek daha fazla yorum yok"
 
-#: includes/theme-setup.php:111
+#: includes/theme-setup.php:115
 msgid "Header Menu"
 msgstr "Başlık Menüsü"
 
-#: includes/theme-setup.php:112
+#: includes/theme-setup.php:116
 msgid "Secondary Menu"
 msgstr "İkinci Menü"
 
-#: includes/theme-setup.php:113
+#: includes/theme-setup.php:117
 msgid "Footer Menu"
 msgstr "Taban Menüsü"
 
-#: includes/theme-setup.php:164
+#: includes/theme-setup.php:168
 msgid "Header image by Syahir Hakim"
 msgstr "Syahir Hakim'in başlık resmi"
 
-#: includes/theme-setup.php:168
+#: includes/theme-setup.php:172
 msgid ""
 "This is the default Graphene theme header image, cropped from image by "
 "Quantin Houyoux at sxc.hu"
@@ -3109,30 +3117,30 @@ msgstr ""
 "Bu sxc.hu de Quantin Houyoux tarafından kırpılmış resim, varsayılan Graphene "
 "tema başlık resmidir"
 
-#: includes/theme-setup.php:172 includes/theme-setup.php:176
-#: includes/theme-setup.php:180 includes/theme-setup.php:184
-#: includes/theme-setup.php:188
+#: includes/theme-setup.php:176 includes/theme-setup.php:180
+#: includes/theme-setup.php:184 includes/theme-setup.php:188
+#: includes/theme-setup.php:192
 msgid "Header image cropped from image by Ilco at sxc.hu"
 msgstr "Başlık resmi sxc.hu da Ilco tarafından kırpılmıştır"
 
-#: includes/theme-setup.php:259
+#: includes/theme-setup.php:263
 msgid ""
 "The first sidebar widget area (will always be displayed on the right hand "
 "side)."
 msgstr "İlk yan menü bileşen alanı (daima saağ yan kenarda görüntülenecektir)."
 
-#: includes/theme-setup.php:268
+#: includes/theme-setup.php:272
 msgid ""
 "The second sidebar widget area (will always be displayed on the left hand "
 "side)."
 msgstr ""
 "İkinci yan menü bileşen alanı (daima sol yan kenarda görüntülenecektir)."
 
-#: includes/theme-setup.php:275
+#: includes/theme-setup.php:279
 msgid "Footer Widget Area"
 msgstr "Taban Bileşen Alanı"
 
-#: includes/theme-setup.php:277
+#: includes/theme-setup.php:281
 msgid ""
 "The footer widget area. Leave empty to disable. Set the number of columns to "
 "display at the theme's Display Options page."
@@ -3140,21 +3148,21 @@ msgstr ""
 "Taban bileşen alanı. Devre dışı için boş bırak. Görünüm Seçenekleri "
 "sayfasında görüntülenecek sütunların sayısını ayarla."
 
-#: includes/theme-setup.php:294
+#: includes/theme-setup.php:298
 msgid ""
 "The first sidebar widget area that will only be displayed on the front page."
 msgstr "İlk yan menü bileşen alanı sadece ön sayfada görüntülenecektir."
 
-#: includes/theme-setup.php:303
+#: includes/theme-setup.php:307
 msgid ""
 "The second sidebar widget area that will only be displayed on the front page."
 msgstr "İkinci yan menü bileşen alanı sadece ön sayfada görüntülenecektir."
 
-#: includes/theme-setup.php:312
+#: includes/theme-setup.php:316
 msgid "Front Page Footer Widget Area"
 msgstr "Ön Sayfa Taban Bileşen Alanı"
 
-#: includes/theme-setup.php:314
+#: includes/theme-setup.php:318
 msgid ""
 "The footer widget area that will only be displayed on the front page. Leave "
 "empty to disable. Set the number of columns to display at the theme's "
@@ -3164,15 +3172,15 @@ msgstr ""
 "için boş bırakın. Temanın Görünüm Seçenekleri sayfasında görüntülenecek "
 "sütun sayısını ayarlayın."
 
-#: includes/theme-setup.php:324
+#: includes/theme-setup.php:328
 msgid "Header Widget Area"
 msgstr "Başlık Bileşen Alanı"
 
-#: includes/theme-setup.php:326
+#: includes/theme-setup.php:330
 msgid "The header widget area."
 msgstr "Başlık bileşen alanı."
 
-#: includes/theme-setup.php:343
+#: includes/theme-setup.php:347
 #, php-format
 msgid ""
 "Dynamically added widget area. This widget area is attached to the %s action "
@@ -3204,6 +3212,9 @@ msgstr "Önemli ileti bloku ekle"
 #: js/mce-l10n.php:15
 msgid "Add a pullquote"
 msgstr "Tanıtım ekle"
+
+#~ msgid "Text colour:"
+#~ msgstr "Metin rengi:"
 
 #~ msgid "1 comment"
 #~ msgstr "1 yorum"

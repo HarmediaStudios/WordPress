@@ -5,6 +5,7 @@ if ( ! function_exists( 'graphene_get_header_image' ) ) :
 */
 function graphene_get_header_image( $post_id = NULL ){
 	global $graphene_settings, $post;
+	if ( ! isset( $post ) ) return;
 	$header_img = '';
 	
 	if ( ! $post_id ) $post_id = $post->ID;

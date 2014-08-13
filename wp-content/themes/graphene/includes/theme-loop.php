@@ -152,8 +152,8 @@ function graphene_posts_nav(){
 				<p class="previous"><?php next_posts_link( __( 'Older posts &laquo;', 'graphene' ) ) ?></p>
 				<p class="next-post"><?php previous_posts_link( __( '&raquo; Newer posts', 'graphene' ) ) ?></p>
 			<?php else : ?>
-				<p class="next-post"><?php next_posts_link( __( 'Next page &raquo;', 'graphene' ) ) ?></p>
-				<p class="previous"><?php previous_posts_link( __( '&laquo; Previous page', 'graphene' ) ) ?></p>
+				<p class="previous"><?php next_posts_link( __( 'Next page &raquo;', 'graphene' ) ) ?></p>
+				<p class="next-post"><?php previous_posts_link( __( '&laquo; Previous page', 'graphene' ) ) ?></p>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -279,7 +279,6 @@ function graphene_get_post_image( $post_id = NULL, $size = 'thumbnail', $context
 							'order'				=> 'ASC',
 							'numberposts'		=> 1,
 								 ), ARRAY_A );
-	
 	$html = '';
 	
 	/* Returns generic image if there is no image to show */
@@ -519,14 +518,15 @@ function graphene_parent_return_link( $post = '' ){
 endif;
 
 
+if ( ! function_exists( 'graphene_tax_description' ) ) :
 /**
  * Display the term description in a taxonomy archive page
- */
- if ( ! function_exists( 'graphene_tax_description' ) ) :
+ */ 
 function graphene_tax_description(){
 	global $wp_query;
 	if ( $wp_query->queried_object ){
 		$term = $wp_query->queried_object;
+		$tax = $term->taxonomy;
 	} else {
 		$tax = $wp_query->tax_query->queries[0]['taxonomy'];
 		$term = $wp_query->tax_query->queries[0]['terms'][0];

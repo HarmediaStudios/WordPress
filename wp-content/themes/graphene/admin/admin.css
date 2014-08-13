@@ -88,13 +88,16 @@ table.graphene-code-example th {
 .code {
 	font: normal 12px "Courier New", Courier, monospace;
 }
+.CodeMirror {
+	font-size: 12px;
+	line-height: auto;
+}
 .select-multiple {
 	height: 200px !important;
 	overflow: scroll;
 }
 .options-tab {
 	border-bottom: 1px solid #ccc;
-	height: 27px;
 	margin-bottom: 20px !important;
 	padding-left: 5px !important;
 }
@@ -728,7 +731,7 @@ tr.new-social-media-name, tr.social-media-custom-name{
 	text-decoration: none;
 	font-weight: normal;
 	font-size: 12px;
-	padding-top: 5px;
+	margin-left: 10px;
 }
 .toggle-options-wrapper {
 	float: left;
@@ -756,6 +759,12 @@ tr.new-social-media-name, tr.social-media-custom-name{
 }
 .head-wrap .graphene-docs-link {
 	position: absolute;
-	left: 7px;
-	top: 5px;
+	top: 0;
+	height: 100%;
+	line-height: 28px;
+	width: 30px;
+	text-align: center;
+}
+.head-wrap .graphene-docs-link img {
+	vertical-align: middle;
 }

@@ -193,7 +193,8 @@ if ( ! function_exists( 'graphene_should_show_comments' ) ) :
  */
 function graphene_should_show_comments() {
     global $graphene_settings, $post;
-    
+    if ( ! isset( $post ) ) return;
+	
 	if ( $graphene_settings['comments_setting'] == 'disabled_completely' )
         return false;
     

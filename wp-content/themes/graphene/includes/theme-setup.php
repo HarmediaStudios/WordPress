@@ -92,8 +92,7 @@ function graphene_setup() {
 	if ( ! $graphene_settings['disable_editor_style'] ){
 		global $content_width;
 		add_editor_style( array( 
-			'editor-style.css', 
-			'admin/editor.css.php', 
+			'editor-style.css',
 			'http://fonts.googleapis.com/css?family=Pontano+Sans' 
 		) );
 	}

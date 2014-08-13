@@ -399,7 +399,7 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 		// Block button
 		$colours = array(
 						'bg_button|bg_button_label|bg_button_label_textshadow' 
-							=> '.block-button, .block-button:visited, .Button, .button, #commentform #submit, .wpsc_buy_button {
+							=> '.block-button, .block-button:visited, .Button, .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button {
 									background: %4$s;
 									background: -moz-linear-gradient(%1$s,%4$s);
 									background: -webkit-linear-gradient(%1$s,%4$s);
@@ -410,7 +410,7 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 									text-shadow: 0 -1px 1px %3$s;
 									color: %2$s;
 								}
-								.block-button:hover, .button:hover, #commentform #submit:hover,.wpsc_buy_button:hover {
+								.block-button:hover, .button:hover, input[type="submit"]:hover, button[type="submit"]:hover, #commentform #submit:hover,.wpsc_buy_button:hover {
 									background: %4$s;
 									background: -moz-linear-gradient(%1$s,%5$s);
 									background: -webkit-linear-gradient(%1$s,%5$s);
@@ -420,7 +420,7 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 									color: %2$s;
 								}',
 						'bg_button_box_shadow' 
-							=> '.block-button, .block-button:visited, .Button, .button, #commentform #submit, .wpsc_buy_button {
+							=> '.block-button, .block-button:visited, .Button, .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button {
 									-moz-box-shadow: 0 1px 2px %1$s;
 									-webkit-box-shadow: 0 1px 2px %1$s;
 									box-shadow: 0 1px 2px %1$s;

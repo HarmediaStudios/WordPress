@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Graphene 1.9.1 theme for WordPress\n"
+"Project-Id-Version: Graphene 1.9.2 theme for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-24 12:12+0800\n"
-"PO-Revision-Date: 2013-09-04 07:44+0100\n"
+"PO-Revision-Date: 2014-02-12 13:28+0100\n"
 "Last-Translator: Tor-Bjorn Fjellner <bounce@fjellner.com>\n"
 "Language-Team: Tor-Björn Fjellner, Gary Ward <tobi3.se>\n"
 "Language: sv_SE\n"
@@ -886,7 +886,7 @@ msgid ""
 "Graphene theme users through the %s."
 msgstr ""
 "När du har fått till en bra kombination, dela gärna med dig till andra "
-"anävndare av temat Graphene genom %s."
+"användare av temat Graphene genom %s."
 
 #: admin/options-colours.php:10 admin/options.php:131
 msgid "Support Forum"
@@ -951,14 +951,14 @@ msgstr "Förhandsvisning av översta listen"
 #: admin/options-colours.php:177 admin/options-colours.php:270
 #: admin/options-colours.php:293
 msgid "Top background"
-msgstr "Bakgrund för övre list"
+msgstr "Bakgrund i överkant"
 
 #: admin/options-colours.php:61 admin/options-colours.php:97
 #: admin/options-colours.php:121 admin/options-colours.php:155
 #: admin/options-colours.php:178 admin/options-colours.php:271
 #: admin/options-colours.php:294
 msgid "Bottom background"
-msgstr "Bakgrund för nederdel"
+msgstr "Bakgrund i nederkant"
 
 #: admin/options-colours.php:62 admin/options-colours.php:98
 msgid "Bottom border"
@@ -1044,7 +1044,7 @@ msgstr "Bakgrund"
 
 #: admin/options-colours.php:219
 msgid "Top border"
-msgstr "Översta listen"
+msgstr "Överkant"
 
 #: admin/options-colours.php:236
 msgid "Active and hover state"
@@ -1224,15 +1224,15 @@ msgstr "Kantlinje för kommentarstrådar"
 
 #: admin/options-colours.php:518
 msgid "Author comments background"
-msgstr "Bakgrund för kommentarsförfattare"
+msgstr "Bakgrund för författarens kommentarer"
 
 #: admin/options-colours.php:519
 msgid "Author comments top border"
-msgstr "Övre kantlinje för kommentarsförfattare"
+msgstr "Övre kantlinje för författarens kommentarer"
 
 #: admin/options-colours.php:520
 msgid "Author comments text"
-msgstr "Text för kommentarsförfattare"
+msgstr "Text för författarens kommentarer"
 
 #: admin/options-colours.php:521
 msgid "Comment form background"

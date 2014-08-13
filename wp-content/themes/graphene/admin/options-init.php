@@ -168,7 +168,7 @@ if ( ! function_exists( 'graphene_options_tabs' ) ) :
 			endif;
 		endforeach;
 		
-		echo '<h3 class="options-tab">';
+		echo '<h3 class="options-tab clearfix">';
 		foreach ( $links as $link )
 			echo $link;
 		echo '<a class="toggle-all" href="#">' . __( 'Toggle all options boxes', 'graphene' ) . '</a>';
@@ -311,16 +311,20 @@ add_action( 'edit_page_form', 'graphene_page_template_visualizer' ); // only wor
 /**
  * Add content width parameter to the WordPress editor
  */
-function graphene_editor_width( $mce_css ){
+function graphene_editor_width(){
 	global $content_width, $graphene_settings;
 	$content_width = graphene_get_content_width();
-	
-	if ( ! $graphene_settings['disable_editor_style'] )
-		$mce_css = str_replace( 'admin/editor.css.php', add_query_arg( 'content_width', $content_width, 'admin/editor.css.php' ), $mce_css );
-	
-	return $mce_css;
+	?>
+    <script type="text/javascript">
+		jQuery(document).ready(function($) {
+			setTimeout( function(){
+				$('#content_ifr').contents().find('#tinymce').css( 'width', '<?php echo $content_width; ?>' );
+			}, 1000 );
+		});
+	</script>
+    <?php
 }
-add_filter( 'mce_css', 'graphene_editor_width' );
+add_action( 'after_wp_tiny_mce', 'graphene_editor_width' );
 
 
 if ( ! function_exists( 'graphene_docs_link' ) ) :
