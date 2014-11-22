@@ -3,7 +3,7 @@
 Plugin Name: NK Google Analytics
 Plugin URI: http://www.marodok.com/nk-google-analytics/
 Description: Add <a href="http://www.google.com/analytics/">Google Analytics</a> javascript code on all pages.
-Version: 1.3.3
+Version: 1.3.7
 Author: Manfred Rodríguez
 Author URI: http://www.marodok.com
 */
@@ -17,7 +17,11 @@ if (!defined('WP_PLUGIN_URL'))
 if (!defined('WP_PLUGIN_DIR'))
       define('WP_PLUGIN_DIR', WP_CONTENT_DIR.'/plugins');
 
-function is_login_page() {
+
+/*
+    Functions
+*/
+function nk_is_login_page() {
     return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
 }
 
@@ -74,8 +78,11 @@ function admin_init_NKgoogleanalytics() {
   register_setting('NKgoogleanalytics', 'nkweb_code_in_head');
 }
 
-function admin_menu_NKgoogleanalytics() {
-  add_options_page('NK Google Analytics', 'NK Google Analytics', 'manage_options', 'NKgoogleanalytics', 'options_page_NKgoogleanalytics');
+function admin_menu_NKgoogleanalytics() { 
+  //add_menu_page('NK Google Analytics settings', 'NK Google Analytics', 'administrator', 'NKgoogleanalytics','options_page_NKgoogleanalytics');
+  //add_submenu_page( 'NKgoogleanalytics' ,  'Plugins by SumoMe', 'Plugins by SumoMe' , 'administrator', 'NKgoogleanalytics-sumome', 'sumome_contents' );
+  add_options_page('NK Google Analytics', 'NK Google Analytics', 'manage_options', 'NKgoogleanalytics', 'options_page_NKgoogleanalytics'); 
+  add_options_page('Plugins by SumoMe', 'Plugins by SumoMe', 'manage_options', 'plugins-by-sumome', 'sumome_contents'); 
 }
 
 function options_page_NKgoogleanalytics() {
@@ -154,7 +161,7 @@ function NKgoogleanalytics() {
           $tk .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ \n";
           $tk .= "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), \n";
           $tk .= "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) \n";
-          $tk .= "})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); \n";
+          $tk .= "})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); \n";
 
           $tk .= "ga('create', '" . $nkweb_id. "', '" . $Domain . "'); \n";
           if($Display_Advertising=="true"){
@@ -172,16 +179,45 @@ function NKgoogleanalytics() {
     echo $tk;
   }
 }
+
+
+if(!function_exists('sumome_contents')){
+  function sumome_contents(){
+    ?>
+  <div class="wrap">
+    <h2>Plugins by SumoMe</h2>
+    <div class="postbox">
+      <h3 class="hndle" style="padding: 7px;  font-size: 15px;"><span>Plugins to help your blog:</span></h3>
+      <div class="inside">
+        <style>.has_ifr iframe{vertical-align: bottom;}</style>
+        <div class="row has_ifr">
+          <h4><a target="_blank" href="http://sumome.com/app/share/?src=nkga">Share</a> - Get more traffic to your site with these super easy to setup share buttons!</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/image-sharer/?src=nkga">Image Sharer</a>- Get your images shared way more often</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/highlighter/?src=nkga">Highlighter</a>- Increase your content sharing significantly</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/list-builder/?src=nkga">List Builder</a>- Double your daily email list growth </h4>
+          <h4><a target="_blank" href="http://sumome.com/app/scroll-box/?src=nkga">Scroll Box</a> - Ask for an email address at the right time</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/heat-maps/?src=nkga">Heat Maps</a>- See where your website visitors are clicking (or not)</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/content-analytics/?src=nkga">Content Analytics</a>-  Find out what content your readers are reading on your site - and where they stop</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/smart-bar/?src=nkga">Smart Bar</a> - An easy and non-intrusive way to ask people to join your email list</h4>
+          <h4><a target="_blank" href="http://sumome.com/app/leads/?src=nkga">Leads</a>- Offer free incentives to increase your daily email signups </h4>
+          <h4><a target="_blank" href="http://sumome.com/app/contact-form/?src=nkga">Contact Form</a>- Make it easy for customers to talk to you</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row"></div>
+  </div>    
+    <?php
+  }
+}
+/*
+    Start process
+*/
 register_activation_hook(__FILE__, 'activate_NKgoogleanalytics');
 register_deactivation_hook(__FILE__, 'deactive_NKgoogleanalytics');
 
 if (is_admin()) {
   add_action('admin_init', 'admin_init_NKgoogleanalytics');
   add_action('admin_menu', 'admin_menu_NKgoogleanalytics');
-}
-
-if(!function_exists('wp_get_current_user')) {
-    include(ABSPATH . "wp-includes/pluggable.php");
 }
 
 if(get_option('nkweb_code_in_head')=="true"){
@@ -197,6 +233,6 @@ if (!is_admin()) {
 if(get_option('nkweb_track_login_and_register')=="true"){
   add_action( 'login_head', 'NKgoogleanalytics');
 }
-if(is_login_page() && get_option('nkweb_track_login_and_register')=="true"){
+if(nk_is_login_page() && get_option('nkweb_track_login_and_register')=="true"){
   add_action( 'login_head', 'NKgoogleanalytics'); 
 }

@@ -150,7 +150,7 @@ if($error != ""){
 </table>
 <input type="hidden" name="action" value="update" />
 <p class="submit">
-	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+	<input type="submit" class="button-primary" value="<?php _e('Save changes') ?>" />
 </p>
 </form>
 </div>
@@ -162,8 +162,10 @@ Remember, if you don't have an Google Analytics ID, you need to go to <a href="h
 </p>
 <br>
 <br>
+<p>
 I am very glad that you like this plugin, i will appreciate a lot if you want to make a donation. Thank you.
-
+</p>
+<br>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="CUC2VE9F3LADU">
@@ -174,7 +176,7 @@ I am very glad that you like this plugin, i will appreciate a lot if you want to
 <br>
 <br>
 <br>
-<a target="_blank" href="http://www.wordpress.org/support/view/plugin-reviews/nk-google-analytics">
+<a target="_blank" href="http://www.wordpress.org/support/view/plugin-reviews/nk-google-analytics#postform">
 Thank you for review this plugin, with your help I can improve it
 </a>
 
