@@ -131,17 +131,17 @@ function rpgc_cart_fields( ) {
 		$rpw_note_check		= ( $rpw_note <> NULL ? $rpw_note : __('Note', WPR_CORE_TEXT_DOMAIN )  );
 ?>
 
-		<div>
-			<div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
-			<?php  do_action( 'rpgc_before_product_fields' ); ?>
-			<input type="hidden" id="rpgc_description" name="rpgc_description" value="<?php _e('Generated from the website.', WPR_CORE_TEXT_DOMAIN ); ?>" />
-			<input name="rpgc_to" id="rpgc_to" class="input-text" placeholder="<?php echo $rpw_to_check; ?>" style="margin-bottom:5px;">
-			<input type="email" name="rpgc_to_email" id="rpgc_to_email" class="input-text" placeholder="<?php echo $rpw_toEmail_check; ?>" style="margin-bottom:5px;">
-			<textarea class="input-text" id="rpgc_note" name="rpgc_note" rows="2" placeholder="<?php echo $rpw_note_check; ?>" style="margin-bottom:5px;"></textarea>
-			<?php  do_action( 'rpgc_after_product_fields' ); ?>
-		</div>
+                <div id="rpgc_container">
+                        <div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
+                        <?php  do_action( 'rpgc_before_product_fields' ); ?>
+                        <input type="hidden" id="rpgc_description" name="rpgc_description" value="<?php _e('Generated from the website.', WPR_CORE_TEXT_DOMAIN ); ?>" />
+                        <div><input name="rpgc_to" id="rpgc_to" class="input-text" placeholder="<?php echo $rpw_to_check; ?>" style="margin-bottom:5px;"></div>
+                        <div><input type="email" name="rpgc_to_email" id="rpgc_to_email" class="input-text" placeholder="<?php echo $rpw_toEmail_check; ?>" style="margin-bottom:5px;"></div>
+                        <div><textarea class="input-text" id="rpgc_note" name="rpgc_note" rows="2" placeholder="<?php echo $rpw_note_check; ?>" style="margin-bottom:5px;"></textarea></div>
+                        <?php  do_action( 'rpgc_after_product_fields' ); ?>
+                </div>
+                <div style="clear:both;"></div>
 		<?php
-
 		echo '
 	          <script>
 	          	jQuery( document ).ready( function( $ ){ $( ".quantity" ).hide( ); });
