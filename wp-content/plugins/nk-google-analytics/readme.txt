@@ -3,14 +3,16 @@ Contributors: marodok
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CUC2VE9F3LADU
 Tags: google analytics, javascript, google, tracking, analytics, tracking code, display advertising, remarketing analytics, universal analytics
 Requires at least: 3
-Tested up to: 4.0
-Stable tag: 1.3.5
+Tested up to: 4.0.1
+Stable tag: 1.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 NK Google Analytics for Wordpress adds necessary javascript to enable Google Analytics tracking on your website.
 
 == Description ==
+
+[**Get even more sharing tools at SumoMe.com**](http://www.marodok.com/link-manager.php?to=sumome)
 
 Need Google Analytics on your website? NK Google Analytics adds the required javascript to track your website, it supports <b>Classic</b>, <b>Universal</b> and <b>Remarketing</b> Google Analytics tracking code. 
 
@@ -21,6 +23,7 @@ For more information about Display Advertising
 [Support Display Advertising](https://support.google.com/analytics/answer/2444872?hl=en&utm_id=ad)
 
 NK Google Analytics its simple, just add your Google Analytics ID and click "Save changes"
+
 
 
 <h4>Features</h4>
@@ -37,6 +40,8 @@ NK Google Analytics its simple, just add your Google Analytics ID and click "Sav
 
 NK Google Analytics enables Google Analytics on all pages.
 
+
+[**Feel free to test these tools to grow your website traffic**](http://www.marodok.com/link-manager.php?to=sumome)
 
 == Installation ==
 
@@ -102,6 +107,20 @@ This option can "turn off" the plugin, if is set to "on" the plugin will print t
 2. NK Google Analytics settings page.
 
 == Changelog ==
+
+= 1.3.9 = 
+* Minor code fix (https://wordpress.org/support/topic/n-between-body-and-script-tag) 
+
+= 1.3.8 = 
+* Minor code fixes
+
+= 1.3.7 = 
+* Changes in menu
+* Fixed HTTPS (https://wordpress.org/support/topic/ssl-option-load-scripts-from-secure-url)
+
+= 1.3.6 = 
+* Changes in menu
+* Added links for sumome
 
 = 1.3.5 = 
 * Corrected a conflict with plugin "wpMandrill"
