@@ -129,19 +129,19 @@ function rpgc_cart_fields( ) {
 		$rpw_to_check 		= ( $rpw_to <> NULL ? $rpw_to : __('To', WPR_CORE_TEXT_DOMAIN ) );
 		$rpw_toEmail_check 	= ( $rpw_toEmail <> NULL ? $rpw_toEmail : __('To Email', WPR_CORE_TEXT_DOMAIN )  );
 		$rpw_note_check		= ( $rpw_note <> NULL ? $rpw_note : __('Note', WPR_CORE_TEXT_DOMAIN )  );
-?>
+		?>
 
-                <div id="rpgc_container">
-                        <div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
-                        <?php  do_action( 'rpgc_before_product_fields' ); ?>
-                        <input type="hidden" id="rpgc_description" name="rpgc_description" value="<?php _e('Generated from the website.', WPR_CORE_TEXT_DOMAIN ); ?>" />
-                        <div><input name="rpgc_to" id="rpgc_to" class="input-text" placeholder="<?php echo $rpw_to_check; ?>" style="margin-bottom:5px;"></div>
-                        <div><input type="email" name="rpgc_to_email" id="rpgc_to_email" class="input-text" placeholder="<?php echo $rpw_toEmail_check; ?>" style="margin-bottom:5px;"></div>
-                        <div><textarea class="input-text" id="rpgc_note" name="rpgc_note" rows="2" placeholder="<?php echo $rpw_note_check; ?>" style="margin-bottom:5px;"></textarea></div>
-                        <?php  do_action( 'rpgc_after_product_fields' ); ?>
-                </div>
-                <div style="clear:both;"></div>
+		<div>
+			<div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
+			<?php  do_action( 'rpgc_before_product_fields' ); ?>
+			<input type="hidden" id="rpgc_description" name="rpgc_description" value="<?php _e('Generated from the website.', WPR_CORE_TEXT_DOMAIN ); ?>" />
+			<input name="rpgc_to" id="rpgc_to" class="input-text" placeholder="<?php echo $rpw_to_check; ?>" style="margin-bottom:5px;">
+			<input type="email" name="rpgc_to_email" id="rpgc_to_email" class="input-text" placeholder="<?php echo $rpw_toEmail_check; ?>" style="margin-bottom:5px;">
+			<textarea class="input-text" id="rpgc_note" name="rpgc_note" rows="2" placeholder="<?php echo $rpw_note_check; ?>" style="margin-bottom:5px;"></textarea>
+			<?php  do_action( 'rpgc_after_product_fields' ); ?>
+		</div>
 		<?php
+
 		echo '
 	          <script>
 	          	jQuery( document ).ready( function( $ ){ $( ".quantity" ).hide( ); });
@@ -151,12 +151,7 @@ function rpgc_cart_fields( ) {
 }
 add_action( 'woocommerce_before_add_to_cart_button', 'rpgc_cart_fields' ); //woocommerce_before_add_to_cart_button
 
-function giftcard_is_purchasable( $is_purchasable, $object ) {
 
-    // this is a field added using 'Advance Custom Fields' plugin 
-	$is_giftcard = get_post_meta( $object->id, '_giftcard', true );
-	
-    if( $is_giftcard )
-        return true;
-}
-//add_filter('woocommerce_is_purchasable', 'giftcard_is_purchasable', 10, 2);
+
+
+
