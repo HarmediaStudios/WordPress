@@ -10,11 +10,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function rpgc_cart_form() {
-	global $woocommerce;
-	
+
 	if( get_option( 'woocommerce_enable_giftcard_cartpage' ) == 'yes' ){
 		do_action( 'wpr_before_cart_form' );
-	?>
+		
+		?>
 		<div class="giftcard" style="float: left;">
 			<label for="giftcard_code" style="display: none;"><?php _e( 'Giftcard', WPR_CORE_TEXT_DOMAIN ); ?>:</label>
 			<input type="text" name="giftcard_code" class="input-text" id="giftcard_code" value="" placeholder="<?php _e( 'Gift Card', WPR_CORE_TEXT_DOMAIN ); ?>" />
@@ -27,6 +27,16 @@ function rpgc_cart_form() {
 }
 add_action( 'woocommerce_proceed_to_checkout', 'rpgc_cart_form', -10 );
 
+
+function apply_cart_giftcard( ) {
+	if ( isset( $_POST['giftcard_code'] ) ) 
+		woocommerce_apply_giftcard( $_POST['giftcard_code'] );
+	
+	WC()->cart->calculate_totals();
+
+}
+add_action ( 'woocommerce_before_cart', 'apply_cart_giftcard' );
+
 if ( ! function_exists( 'rpgc_checkout_form' ) ) {
 
 	/**
@@ -36,7 +46,6 @@ if ( ! function_exists( 'rpgc_checkout_form' ) ) {
 	 * @return void
 	 */
 	function rpgc_checkout_form() {
-		global $woocommerce;
 
 		if( get_option( 'woocommerce_enable_giftcard_checkoutpage' ) == 'yes' ){
 
@@ -118,6 +127,8 @@ function rpgc_cart_fields( ) {
 	global $post;
 
 	$is_giftcard = get_post_meta( $post->ID, '_giftcard', true );
+	$is_required_field_giftcard = get_option( 'woocommerce_enable_giftcard_info_requirements' );
+
 	if ( $is_giftcard == 'yes' ) {
 
 		do_action( 'rpgc_before_all_giftcard_fields', $post );
@@ -132,7 +143,12 @@ function rpgc_cart_fields( ) {
 		?>
 
 		<div>
-			<div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
+			<?php if ( $is_required_field_giftcard == "yes" ) { ?>
+				<div class="rpw_product_message"><?php _e('All fields below are required', WPR_CORE_TEXT_DOMAIN ); ?></div>
+			<?php } else { ?>
+				<div class="rpw_product_message"><?php _e('All fields below are optional', WPR_CORE_TEXT_DOMAIN ); ?></div>
+			<?php } ?>
+
 			<?php  do_action( 'rpgc_before_product_fields' ); ?>
 			<input type="hidden" id="rpgc_description" name="rpgc_description" value="<?php _e('Generated from the website.', WPR_CORE_TEXT_DOMAIN ); ?>" />
 			<input name="rpgc_to" id="rpgc_to" class="input-text" placeholder="<?php echo $rpw_to_check; ?>" style="margin-bottom:5px;">
