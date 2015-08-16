@@ -5,10 +5,10 @@ if ( ! function_exists( 'graphene_get_header_image' ) ) :
 */
 function graphene_get_header_image( $post_id = NULL ){
 	global $graphene_settings, $post;
-	if ( ! isset( $post ) ) return;
+	
 	$header_img = '';
 	
-	if ( ! $post_id ) $post_id = $post->ID;
+	if ( ! $post_id && isset( $post ) ) $post_id = $post->ID;
 	if ( ! $post_id ) $header_img = get_header_image();
 	
 	if ( ! $header_img && is_singular() && has_post_thumbnail( $post_id ) ) {
@@ -136,7 +136,7 @@ function graphene_determine_social_medium_title( $social_medium ) {
         return esc_attr( $social_medium['title'] );
     } else {
         /* translators: %1$s is the website's name, %2$s is the social media name */
-        return sprintf( esc_attr__( 'Visit %1$s\'s %2$s page', 'graphene' ), get_bloginfo( 'name' ), ucfirst( $social_profile['type'] ) );
+        return sprintf( esc_attr__( 'Visit %1$s\'s %2$s page', 'graphene' ), get_bloginfo( 'name' ), ucfirst( $social_medium['type'] ) );
     }
 }
 
@@ -300,7 +300,7 @@ function graphene_sidebar_notice( $sidebar_name = '' ){
 	$html = '<p>';
 	$html .= sprintf( __( 'You haven\'t placed any widget into this widget area. Go to %1$s and place some widgets in the widget area called %2$s.', 'graphene' ), '<em>' . __( 'WP Admin > Appearance > Widgets', 'graphene' ) . '</em>', '<strong>' . $sidebar_name . '</strong>' ) . '</p>';
 	$html .= '<p>' . __( "This notice will not be displayed to your site's visitors.", 'graphene' ) . '</p>';
-	echo warning_block_shortcode_handler( array(), apply_filters( 'graphene_sidebar_notice', $html, $sidebar_name ) );
+	echo '<div class="warning_block message-block alert alert-warning" role="alert">' . apply_filters( 'graphene_sidebar_notice', $html, $sidebar_name ) . '</div>';
 }
 
 
