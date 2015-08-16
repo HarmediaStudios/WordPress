@@ -159,6 +159,8 @@ class ClefUtils {
     }
 
     public static function exchange_oauth_code_for_info($code, $settings=null, $app_id=false, $app_secret=false) {
+        ClefUtils::verify_state();
+
         if ($settings) {
             if (!$app_id) $app_id = $settings->get( 'clef_settings_app_id' );
             if (!$app_secret) $app_secret = $settings->get( 'clef_settings_app_secret' );
@@ -238,5 +240,31 @@ class ClefUtils {
         return $custom_roles;
     }
 
+    public static function initialize_state($override = false) {
+        if (!$override && isset($_COOKIE['_clef_state']) && $_COOKIE['_clef_state']) return;
+
+        $state = wp_generate_password(24, false);
+        @setcookie('_clef_state', $state, (time() + 60 * 60 * 24), '/', '', is_ssl(), true);
+        $_COOKIE['_clef_state'] = $state;
+
+        return $state;
+    }
+
+    public static function get_state() {
+        if (!isset($$_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) ClefUtils::initialize_state();
+        return $_COOKIE['_clef_state'];
+    }
+
+    public static function verify_state() {
+        $request_state = ClefUtils::isset_GET('state') ? ClefUtils::isset_GET('state') : ClefUtils::isset_POST('state');
+        $correct_state = ClefUtils::get_state();
+
+        if ($request_state && $correct_state && $correct_state == $request_state) {
+            ClefUtils::initialize_state(true);
+            return true;
+        } else {
+            throw new ClefStateException('The state parameter is not verified. This may be due to this page being cached by another WordPress plugin. Please refresh your page and try again');
+        }
+    }
 }
 ?>
