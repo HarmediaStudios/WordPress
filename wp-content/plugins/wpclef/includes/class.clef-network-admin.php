@@ -10,6 +10,9 @@ class ClefNetworkAdmin extends ClefAdmin {
 
         if (is_network_admin()) {
             $this->initialize_hooks();
+
+            require_once(CLEF_PATH . "/includes/lib/ajax-settings/ajax-settings.php");
+            $this->ajax_settings = AjaxSettings::start();
         }
 
         global $clef_ajax;
@@ -18,8 +21,6 @@ class ClefNetworkAdmin extends ClefAdmin {
             array($this, 'ajax_multisite_options'),
             array( 'capability' => 'manage_network_options')
         );
-        require_once(CLEF_PATH . "/includes/lib/ajax-settings/ajax-settings.php");
-        $this->ajax_settings = AjaxSettings::start();
     }
 
     public function initialize_hooks() {
@@ -70,7 +71,11 @@ class ClefNetworkAdmin extends ClefAdmin {
     }
 
     public function ajax_multisite_options() {
-        $settings = json_decode(file_get_contents( "php://input" ), true);
+        global $HTTP_RAW_POST_DATA;
+        if (!isset($HTTP_RAW_POST_DATA)) {
+            $HTTP_RAW_POST_DATA = file_get_contents( "php://input" );
+        }
+        $settings = json_decode($HTTP_RAW_POST_DATA, true);
 
         if (isset($settings['allow_override'])) {
             update_site_option(ClefInternalSettings::MS_ALLOW_OVERRIDE_OPTION, (bool) $settings['allow_override']);

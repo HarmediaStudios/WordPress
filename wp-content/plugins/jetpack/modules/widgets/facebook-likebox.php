@@ -68,13 +68,20 @@ class WPCOM_Widget_Facebook_LikeBox extends WP_Widget {
 			$like_args['locale'] = $locale;
 
 		$like_args = urlencode_deep( $like_args );
-		$like_url  = add_query_arg( $like_args,  sprintf( '%swww.facebook.com/plugins/likebox.php', ( is_ssl() ) ? 'https://' : 'http://' ) );
+		$like_url  = add_query_arg(
+			$like_args,
+			set_url_scheme( 'http://www.facebook.com/plugins/likebox.php' )
+		);
 
 		echo $before_widget;
 
 		if ( ! empty( $title ) ) :
 			echo $before_title;
-			?><a href="<?php echo esc_url( $page_url ); ?>"><?php echo esc_html( $title ); ?></a><?php
+
+			$likebox_widget_title = '<a href="' . esc_url( $page_url ) . '">' . esc_html( $title ) . '</a>';
+
+			echo apply_filters( 'jetpack_facebook_likebox_title', $likebox_widget_title, $title, $page_url );
+
 			echo $after_title;
 		endif;
 

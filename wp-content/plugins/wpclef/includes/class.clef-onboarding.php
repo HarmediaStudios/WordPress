@@ -2,6 +2,7 @@
 
 class ClefOnboarding {
     const ONBOARDING_KEY = "onboarding_data";
+    const FIRST_LOGIN_KEY = "has_logged_in";
     const LOGINS = 'clef_logins';
 
     private static $instance = null;
@@ -11,6 +12,7 @@ class ClefOnboarding {
     private function __construct($settings) {
         $this->settings = $settings;
         add_action('clef_login', array($this, 'mark_login_for_user_id'));
+        add_action('clef_login', array($this, 'do_first_login_action'));
     }
 
     public function get_data() {
@@ -56,6 +58,13 @@ class ClefOnboarding {
         return get_user_meta($user_id, self::LOGINS, true);
     }
 
+    public function do_first_login_action() {
+        if (!$this->get_key(self::FIRST_LOGIN_KEY)) {
+            $this->set_key(self::FIRST_LOGIN_KEY, true);
+            do_action('clef_onboarding_first_login');
+        }
+    }
+
     public function had_clef_before_onboarding() {
         return version_compare($this->settings->get("installed_at"), "1.9", "<");
     }
@@ -68,6 +77,15 @@ class ClefOnboarding {
         if (!empty($global_login_count) && current_user_can('manage_options')) {
             $this->increment_logins_for_user_id(get_current_user_id(), $global_login_count);
         }
+    }
+
+    /**
+    * Set FIRST_LOGIN true for users who are upgrading — we don't want
+    * to disable passwords for all of our previous users before the 2.2.9.1
+    * update.
+    */
+    public function set_first_login_true() {
+        $this->set_key(self::FIRST_LOGIN_KEY, true);
     }
 
     public static function start($settings) {

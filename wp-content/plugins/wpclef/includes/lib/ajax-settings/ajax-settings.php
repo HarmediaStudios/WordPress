@@ -13,10 +13,10 @@ class AjaxSettings {
 
 
         add_action('admin_enqueue_scripts', array($this, "enqueue_scripts"));
-        $this->enqueue_styles();
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
 
         add_action(
-            'wp_ajax_ajax_settings_save_' . $this->name(), 
+            'wp_ajax_ajax_settings_save_' . $this->name(),
             array($this, 'handle_settings_save')
         );
     }
@@ -46,7 +46,17 @@ class AjaxSettings {
     }
 
     function handle_settings_save() {
-        $settings = json_decode(file_get_contents( "php://input" ), true);
+        global $HTTP_RAW_POST_DATA;
+        if (!isset($HTTP_RAW_POST_DATA)) {
+            $HTTP_RAW_POST_DATA = file_get_contents( "php://input" );
+        }
+
+        // strip off any leading characters before json starts and then parse
+        $stripped = preg_replace('/^.*?{/', '{', $HTTP_RAW_POST_DATA);
+        $settings = json_decode($stripped, true);
+
+        if (!$settings) wp_die(__('Settings could not be parsed — this may be caused by a plugin conflict.', 'clef'));
+
         $option_page = $settings['option_page'];
         $is_network_wide = isset($_REQUEST['network_wide']) && $_REQUEST['network_wide'];
 
@@ -79,7 +89,7 @@ class AjaxSettings {
                     $nested_key = $output[2];
                     $to_be_saved[$nested_key] = $value;
                 }
-            } 
+            }
         }
 
         $to_be_saved = apply_filters('ajax_settings_pre_save', $to_be_saved);

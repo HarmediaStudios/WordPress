@@ -18,6 +18,8 @@ var gulp = require('gulp'),
     lr = require('tiny-lr'),
     filter = require('gulp-filter'),
     plumber = require('gulp-plumber'),
+    runSequence = require('run-sequence'),
+    zip = require('gulp-zip'),
     server = lr();
 
 var pkg = require('./package.json');
@@ -54,11 +56,17 @@ gulp.task('coffee', function() {
         'assets/src/coffee/settings/connect.coffee',
         'assets/src/coffee/settings/pro.coffee'
     ]), 'settings.js');
+    build(gulp.src([
+        'assets/src/coffee/settings/utils.coffee',
+        'assets/src/coffee/settings/tutorial.coffee',
+        'assets/src/coffee/settings/connect.coffee'
+        ]), 'connect.js'
+    )
 
     function build(strm, output) {
         strm = strm
             .pipe(plumber())
-            .pipe(coffeelint({ 
+            .pipe(coffeelint({
                 "indentation": {
                     "name": "indentation",
                     "value": 4,
@@ -90,13 +98,34 @@ gulp.task('images', function() {
         .pipe(notify({message: "Images minified."}));
 });
 
+gulp.task('build', function() {
+    runSequence(
+        ['images', 'sass', 'coffee'],
+        function() {
+            gulp.src(
+                [
+                    'templates/**',
+                    'languages/**',
+                    'includes/**',
+                    'assets/**',
+                    'clef-require.php',
+                    'wpclef.php'
+                ],
+                { base: './' }
+            ).pipe(gulp.dest('build/wpclef/'))
+            .pipe(zip('wpclef.zip'))
+            .pipe(gulp.dest('build/'));
+        }
+    );
+})
+
 gulp.task('watch', function() {
     server.listen(35729, function(err) {
         if (err) {
             gutil.log(err);
         }
     });
-    
+
     gulp.watch('assets/src/**/*.scss', ['sass']);
     gulp.watch('assets/src/**/*.coffee', ['coffee']);
     gulp.watch('assets/src/img/**/*', ['images']);

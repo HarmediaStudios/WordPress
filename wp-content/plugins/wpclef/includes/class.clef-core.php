@@ -15,7 +15,7 @@ class ClefCore {
         require_once(CLEF_PATH . 'includes/class.clef-utils.php');
         require_once(CLEF_PATH . 'includes/class.clef-translation.php');
 
-        $this->initialize_session();
+        require_once(CLEF_PATH . 'includes/class.clef-session.php');
 
         // Site options
         require_once(CLEF_PATH . 'includes/class.clef-internal-settings.php');
@@ -28,6 +28,9 @@ class ClefCore {
         // Onboarding settings
         require_once(CLEF_PATH . 'includes/class.clef-onboarding.php');
         $onboarding = ClefOnboarding::start($settings);
+
+        require_once(CLEF_PATH. 'includes/class.clef-user-settings.php');
+        $user_settings = ClefUserSettings::start($settings);
 
         // Clef login functions
         require_once(CLEF_PATH . 'includes/class.clef-login.php');
@@ -56,7 +59,7 @@ class ClefCore {
         require_once(CLEF_PATH . 'includes/class.clef-setup.php');
 
         $this->settings = $settings;
-        $this->badge = $badge; 
+        $this->badge = $badge;
         $this->onboarding = $onboarding;
 
         // Register public hooks
@@ -89,10 +92,15 @@ class ClefCore {
 
         if ($previous_version) {
 
+            if (version_compare($previous_version, '2.2.9.1', '<')) {
+                $this->onboarding->set_first_login_true();
+            }
+
             if (version_compare($previous_version, '2.1', '<')) {
                 if (!session_id()) @session_start();
                 if (isset($_SESSION['logged_in_at'])) {
-                    $this->session->set('logged_in_at', $_SESSION['logged_in_at']);
+                    $session = ClefSession::start();
+                    $session->set('logged_in_at', $_SESSION['logged_in_at']);
                 }
             }
 
@@ -120,8 +128,11 @@ class ClefCore {
                     "clef_password_settings_override_key" => "clef_override_settings_key"
                 );
             }
+
         } else {
             $this->settings->set('installed_at', $version);
+            $this->settings->set('clef_form_settings_embed_clef', 1);
+            $this->settings->set_saved_affiliates();
         }
 
         if ($settings_changes) {
@@ -137,18 +148,12 @@ class ClefCore {
         $this->settings->set("version", $version);
     }
 
-    public function initialize_session() {
-        // Clef logout hook functions
-        require_once(CLEF_PATH . 'includes/class.clef-session.php');
-        $this->session = ClefSession::start();
-    }
-
     public static function manage_wp_fix() {
         if (isset($_REQUEST['action']) && preg_match('/ajax_settings/', $_REQUEST['action']) && function_exists('mmb_authenticate')) {
             remove_action('plugins_loaded', 'mmb_authenticate', 1);
         }
     }
-    
+
     public static function start() {
         if (!isset(self::$instance) || self::$instance === null) {
             self::$instance = new self;
@@ -156,5 +161,3 @@ class ClefCore {
         return self::$instance;
     }
 }
-
-?>

@@ -62,7 +62,8 @@
       e.preventDefault();
       data = {
         _wpnonce: this.opts.nonces.inviteUsers,
-        roles: $("select[name='invite-users-role']").val()
+        roles: $("select[name='invite-users-role']").val(),
+        networkAdmin: this.opts.isNetworkSettings
       };
       failure = (function(_this) {
         return function(msg) {
@@ -190,10 +191,15 @@
       }
     },
     handleMessages: function(e) {
-      if (!e.originalEvent.origin.indexOf(this.opts.clefBase >= 0)) {
+      var data;
+      if (!(e.originalEvent.origin.indexOf(this.opts.clefBase) >= 0)) {
         return;
       }
-      return e.originalEvent.data;
+      data = e.originalEvent.data;
+      if (typeof data === "string") {
+        data = JSON.parse(data);
+      }
+      return data;
     },
     connectClefAccount: function(data, cb) {
       var connectData, failure;
@@ -251,41 +257,52 @@
     remove: function() {
       return this.$el.remove();
     },
+    find: function(query) {
+      return this.$el.find(query);
+    },
     isLogin: function() {
       return this.$el.find('iframe.setup').length;
+    },
+    isSync: function() {
+      return this.$el.hasClass('sync') && this.$el.find('iframe').length;
     }
   });
   SetupTutorialView = TutorialView.extend({
     connectClefAction: ajaxurl + "?action=connect_clef_account_clef_id",
-    iframePath: '/iframes/application/create/v1',
+    iframePath: '/iframes/application/create/v2',
     initialize: function(opts) {
       opts.slideFilterSelector = '.setup';
       this.inviter = new InviteUsersView(_.extend({
         el: this.$el.find('.invite-users-container')
       }, opts));
       this.listenTo(this.inviter, "invited", this.usersInvited);
-      return this.constructor.__super__.initialize.call(this, opts);
+      this.constructor.__super__.initialize.call(this, opts);
+      return this.on('next', this.shouldLoadIFrame);
     },
     render: function() {
-      if (this.userIsLoggedIn) {
-        if (!this.currentSub.$el.hasClass('sync')) {
-          this.$el.addClass('no-sync');
-        } else {
-          this.$el.addClass('user');
-        }
-      }
-      this.loadIFrame();
       this.inviter.render();
       return this.constructor.__super__.render.call(this);
     },
-    loadIFrame: function() {
-      var src;
+    shouldLoadIFrame: function() {
+      if (this.currentSub.isSync()) {
+        return this.loadIFrame((function(_this) {
+          return function() {
+            _this.currentSub.find('.spinner-container').hide();
+            return _this.iframe.fadeIn();
+          };
+        })(this));
+      }
+    },
+    loadIFrame: function(cb) {
+      var affiliates, src;
       if (this.iframe) {
         return;
       }
       this.iframe = this.$el.find("iframe.setup");
-      src = "" + this.opts.clefBase + this.iframePath + "?source=" + (encodeURIComponent(this.opts.setup.source)) + "&domain=" + (encodeURIComponent(this.opts.setup.siteDomain)) + "&logout_hook=" + (encodeURIComponent(this.opts.setup.logoutHook)) + "&name=" + (encodeURIComponent(this.opts.setup.siteName));
-      return this.iframe.attr('src', src);
+      affiliates = encodeURIComponent(this.opts.setup.affiliates.join(','));
+      src = "" + this.opts.clefBase + this.iframePath + "?source=" + (encodeURIComponent(this.opts.setup.source)) + "&domain=" + (encodeURIComponent(this.opts.setup.siteDomain)) + "&logout_hook=" + (encodeURIComponent(this.opts.setup.logoutHook)) + "&name=" + (encodeURIComponent(this.opts.setup.siteName)) + "&affiliates=" + affiliates;
+      this.iframe.attr('src', src);
+      return this.iframe.on('load', cb);
     },
     handleMessages: function(data) {
       data = this.constructor.__super__.handleMessages.call(this, data);
@@ -306,9 +323,6 @@
             });
           };
         })(this));
-      } else if (data.type === "user") {
-        this.userIsLoggedIn = true;
-        return this.render();
       } else if (data.type === "error") {
         return this.showMessage({
           message: _.template(clefTranslations.messages.error.create)({
@@ -578,6 +592,9 @@
     passwordsFullyDisabled: function() {
       return !!parseInt(this.cget('clef_password_settings_force'));
     },
+    loginIsEmbedded: function() {
+      return !!parseInt(this.cget('clef_form_settings_embed_clef'));
+    },
     overrideIsSet: function() {
       return !!this.overrideKey();
     },
@@ -625,7 +642,8 @@
       return this.toggleForm();
     },
     toggleForm: function(e) {
-      return this.$el.toggleClass('only-clef', this.model.passwordsFullyDisabled());
+      this.$el.toggleClass('only-clef', this.model.passwordsFullyDisabled());
+      return this.$el.toggleClass('embed-clef', this.model.loginIsEmbedded());
     }
   });
   this.AppView = AppView;
@@ -762,10 +780,10 @@ var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; 
       'change input, change textarea': 'render',
       'keyup textarea': 'render'
     },
-    preview: _.template($('#clef-customization-template').html()),
     initialize: function(opts, model) {
       this.opts = opts;
       this.model = model;
+      return this.preview = _.template($('#clef-customization-template').html());
     },
     render: function() {
       this.$el.find('#custom-login-view').html(this.preview({

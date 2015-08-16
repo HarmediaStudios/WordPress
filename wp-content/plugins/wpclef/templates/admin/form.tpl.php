@@ -17,7 +17,7 @@
         <div class="settings-section">
             <div class="password-settings">
                 <div class="inputs-container">
-                    <h3>Disable passwords</h3>
+                    <h3><?php _e("Disable passwords", "clef"); ?> <a class="setting-info" href="http://support.getclef.com/article/60-recommended-password-settings-for-clef-wordpress-plugin" target="clef">Learn more about these settings</a></h3>
                     <div class="input-container">
                         <label for="disable_passwords"><?php _e("Disable passwords for Clef users", "clef"); ?></label>
                         <?php $form->getSection('clef_password_settings')->getField('disable_passwords')->render(); ?>
@@ -26,6 +26,17 @@
                         <label for=""><?php _e("Disable passwords for all users with privileges greater than or equal to ", "clef"); ?></label>
                         <?php $form->getSection('clef_password_settings')->getField('disable_certain_passwords')->render(); ?>
                     </div>
+                    <?php if (property_exists($form->getSection('clef_password_settings'), 'custom_roles')) { ?>
+                    <div class="input-container custom-roles">
+                        <label class="title"><?php _e("Disable passwords for custom roles"); ?></label>
+                        <?php foreach($form->getSection('clef_password_settings')->custom_roles as $role => $role_obj) { ?>
+                            <div class="custom-role">
+                                <label for=""><?php echo $role_obj['name'] ?></label>
+                                <?php $form->getSection('clef_password_settings')->getField('disable_passwords_custom_role_' . $role)->render(); ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php }?>
                     <div class="input-container">
                         <label for=""><?php _e("Disable passwords for all users and hide the password login form.", "clef"); ?></label>
                         <?php $form->getSection('clef_password_settings')->getField('force')->render(); ?>
@@ -34,13 +45,18 @@
                         <label for=""><?php _e("Allow passwords for API (necessary for things like the WordPress mobile app)", "clef"); ?></label>
                         <?php $form->getSection('clef_password_settings')->getField('xml_allowed')->render(); ?>
                     </div>
+                    <h3><?php _e("Form style", "clef"); ?></h3>
+                    <div class="input-container">
+                        <label for=""><?php _e("Show Clef wave as primary login option", "clef"); ?></label>
+                        <?php $form->getSection('clef_form_settings')->getField('embed_clef')->render(); ?>
+                    </div>
                 </div>
                 <div id="login-form-view" class="login"></div>
             </div>
         </div>
         <div class="override-settings settings-section">
            <div class="inputs-container">
-                <h3><?php _e("Override settings", "clef"); ?></h3> 
+                <h3><?php _e("Override URL", "clef"); ?> <a class="setting-info" href="http://support.getclef.com/article/11-creating-a-secret-url-where-you-can-log-into-your-wordpress-site-with-a-password" target="clef">Learn more about this setting</a></h3>
                 <p><?php _e("You have disabled passwords for some (or all) users. In case of emergency, you can create a special link where passwords can still be used. This is a good safety precaution.", "clef"); ?></p>
                 <div class="input-container">
                     <label for=""><?php echo wp_login_url() ?>?override=</label>
@@ -49,7 +65,7 @@
                 </div>
                <?php
                	$opts = get_option( 'wpclef' );
-               	$css_hide = !empty( $opts['clef_override_settings_key'] ) ? '' : ' hidden'; 
+               	$css_hide = !empty( $opts['clef_override_settings_key'] ) ? '' : ' hidden';
                	$url = !empty( $opts['clef_override_settings_key'] ) ? esc_url( wp_login_url() . '?override=' . $opts['clef_override_settings_key'] ) : '#error';
                ?>
                <div class="override-buttons<?php echo $css_hide; ?>">
@@ -64,7 +80,7 @@
         </div>
         <div class="support-settings settings-section">
             <div class="inputs-container">
-               <h3><?php _e("Support Clef", "clef"); ?></h3> 
+               <h3><?php _e("Support Clef", "clef"); ?></h3>
                <p><?php _e("Clef is, and will always be, free for you and your users. We'd really appreciate it if you'd support us (and show visitors they are browsing a secure site) by adding a link to Clef in your site footer!", "clef"); ?></p>
                 <div class="input-container">
                     <label for=""><?php _e("Support Clef in your footer", "clef"); ?></label>
@@ -81,7 +97,7 @@
             </div>
             <div class="preview-container hide-if-no-js">
                <div class="ftr-preview">
-                   <h4><?php _e("Preview of your support", "clef"); ?></h4> 
+                   <h4><?php _e("Preview of your support", "clef"); ?></h4>
                    <a href="https://bit.ly/wordpress-login-clef" class="clef-badge pretty" ><?php _e("WordPress Login Protected by Clef", "clef"); ?></a>
                    <span class="hide-if-js">
 	                   <br /><?php _e( 'or', 'clef' ); ?><br />
@@ -105,7 +121,7 @@
                     <?php $form->getSection('clef_settings')->getField('app_secret')->render(); ?>
                 </div>
                 <div class="input-container">
-                    <label for=""><?php _e("Allow visitors to your site to register with Clef"); ?></label>
+                    <label for=""><?php _e("Allow visitors to your site to register with Clef", "clef"); ?></label>
                     <?php $form->getSection('clef_settings')->getField('register')->render(); ?>
                 </div>
             </div>
@@ -126,12 +142,18 @@
             <label for="user_pass"><?php _e("Password"); ?><br>
             <input type="text" id="user_pass" class="ajax-ignore input" value="" size="20"></label>
         </p>
-        <div style="position: relative">
-            <div style="border-bottom: 1px solid #EEE; width: 90%; margin: 0 5%; z-index: 1; top: 50%; position: absolute;"></div>
-            <h2 style="color: #666; margin: 0 auto 20px auto; padding: 3px 0; text-align:center; background: white; width: 20%; position:relative; z-index: 2;"><?php _e("or", "clef"); ?></h2>
+        <div class="or-container">
+            <div style="position: relative">
+                <div style="border-bottom: 1px solid #EEE; width: 90%; margin: 0 5%; z-index: 1; top: 50%; position: absolute;"></div>
+                <h2 style="color: #666; margin: 0 auto 20px auto; padding: 3px 0; text-align:center; background: white; width: 20%; position:relative; z-index: 2;"><?php _e("or", "clef"); ?></h2>
+            </div>
         </div>
         <div class="clef-button" >
             <img src="<?php echo CLEF_URL ?>assets/dist/img/button.png" alt="clef button">
+        </div>
+        <div class="clef-overlay">
+            <img src="<?php echo CLEF_URL ?>assets/dist/img/overlay.png" alt="clef overlay">
+            <div class="close-overlay overlay-text"><?php _e('log in with a password', "clef"); ?></div>
         </div>
         <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" class="ajax-ignore" id="rememberme" value="forever"> <?php _e("Remember Me"); ?></label></p>
         <p class="submit">
