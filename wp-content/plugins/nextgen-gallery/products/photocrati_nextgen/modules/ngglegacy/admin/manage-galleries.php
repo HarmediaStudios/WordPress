@@ -163,7 +163,6 @@ function nggallery_manage_gallery_main() {
 	//-->
 	</script>
 	<div class="wrap">
-		<?php //include('templates/social_media_buttons.php'); ?>
 		<?php screen_icon( 'nextgen-gallery' ); ?>
 		<h2><?php echo _n( 'Manage Galleries', 'Manage Galleries', 2, 'nggallery'); ?></h2>
 		<form class="search-form" action="" method="get">
@@ -202,7 +201,7 @@ function nggallery_manage_gallery_main() {
         <?php $ngg->manage_page->pagination( 'top', $_GET['paged'], $total_number_of_galleries, $items_per_page  ); ?>
 
 		</div>
-		<table class="wp-list-table widefat fixed" cellspacing="0">
+		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
 			<tr>
 <?php $wp_list_table->print_column_headers(true); ?>
@@ -260,10 +259,10 @@ if($gallerylist) {
         			<td class="title column-title">
         				<?php if (nggAdmin::can_manage_this_gallery($gallery->author)) { ?>
         					<a href="<?php echo wp_nonce_url( $ngg->manage_page->base_page . '&amp;mode=edit&amp;gid=' . $gid, 'ngg_editgallery')?>" class='edit' title="<?php _e('Edit'); ?>" >
-        						<?php echo esc_html( nggGallery::i18n($name) ); ?>
+        						<?php echo esc_html( M_I18N::translate($name) ); ?>
         					</a>
         				<?php } else { ?>
-        					<?php echo esc_html( nggGallery::i18n($gallery->title) ); ?>
+        					<?php echo esc_html( M_I18N::translate($gallery->title) ); ?>
         				<?php } ?>
                         <div class="row-actions"></div>
         			</td>
@@ -271,7 +270,7 @@ if($gallerylist) {
     			break;
     			case 'description' :
     			    ?>
-					<td <?php echo $attributes ?>><?php echo esc_html( nggGallery::i18n($gallery->galdesc) ); ?>&nbsp;</td>
+					<td <?php echo $attributes ?>><?php echo esc_html( M_I18N::translate($gallery->galdesc) ); ?>&nbsp;</td>
 					<?php
     			break;
     			case 'author' :
@@ -288,7 +287,7 @@ if($gallerylist) {
 					$gallery->counter = count(
 						$image_mapper->select($image_mapper->get_primary_key_column())->
 							where(array("galleryid = %d", $gallery->{$gallery->id_field}))->
-							run_query(FALSE, TRUE)
+							run_query(FALSE, FALSE, TRUE)
 					);
 
     			    ?>
@@ -419,7 +418,8 @@ class _NGG_Galleries_List_Table extends WP_List_Table {
 	var $_screen;
 	var $_columns;
 
-	function _NGG_Galleries_List_Table( $screen ) {
+	function __construct($screen)
+	{
 		if ( is_string( $screen ) )
 			$screen = convert_to_screen( $screen );
 
