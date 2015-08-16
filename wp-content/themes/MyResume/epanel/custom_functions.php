@@ -1770,7 +1770,7 @@ function et_gf_enqueue_fonts( $et_gf_font_names ) {
 		);
 
 		$et_gf_font_name_slug = strtolower( str_replace( ' ', '-', $et_gf_font_name ) );
-		wp_enqueue_style( 'et-gf-' . $et_gf_font_name_slug, add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
+		wp_enqueue_style( 'et-gf-' . $et_gf_font_name_slug, esc_url( add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ) ), array(), null );
 	}
 }
 endif;
