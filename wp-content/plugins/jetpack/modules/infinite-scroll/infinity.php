@@ -68,7 +68,8 @@ class The_Neverending_Home_Page {
 				'render'          => false, // optional function, otherwise the `content` template part will be used
 				'footer'          => true, // boolean to enable or disable the infinite footer | string to provide an html id to derive footer width from
 				'footer_callback' => false, // function to be called to render the IS footer, in place of the default
-				'posts_per_page'  => false // int | false to set based on IS type
+				'posts_per_page'  => false, // int | false to set based on IS type
+				'click_handle'    => true, // boolean to enable or disable rendering the click handler div. If type is click and this is false, page must include its own trigger with the HTML ID `infinite-handle`.
 			);
 
 			// Validate settings passed through add_theme_support()
@@ -143,6 +144,13 @@ class The_Neverending_Home_Page {
 
 								break;
 
+							case 'click_handle' :
+								if ( is_bool( $value ) ) {
+									$settings[ $key ] = $value;
+								}
+
+								break;
+
 							default:
 								continue;
 
@@ -210,6 +218,11 @@ class The_Neverending_Home_Page {
 			// Backwards compatibility for posts_per_page setting
 			elseif ( false === $settings['posts_per_page'] )
 				$settings['posts_per_page'] = 7;
+
+			// Force display of the click handler and attendant bits when the type isn't `click`
+			if ( 'click' !== $settings['type'] ) {
+				$settings['click_handle'] = true;
+			}
 
 			// Store final settings in a class static to avoid reparsing
 			self::$settings = apply_filters( 'infinite_scroll_settings', $settings );
@@ -281,7 +294,7 @@ class The_Neverending_Home_Page {
 	 * for the infinite_scroll setting.
 	 */
 	function infinite_setting_html() {
-		$notice = '<em>' . __( "We've disabled this option for you since you have footer widgets in Appearance &rarr; Widgets, or because your theme does not support infinite scroll.", 'jetpack' ) . '</em>';
+		$notice = '<em>' . __( 'We&rsquo;ve changed this option to a click-to-scroll version for you since you have footer widgets in Appearance &rarr; Widgets, or your theme uses click-to-scroll as the default behavior.', 'jetpack' ) . '</em>';
 
 		// If the blog has footer widgets, show a notice instead of the checkbox
 		if ( self::get_settings()->footer_widgets || 'click' == self::get_settings()->requested_type ) {
@@ -317,16 +330,16 @@ class The_Neverending_Home_Page {
 		add_filter( 'body_class', array( $this, 'body_class' ) );
 
 		// Add our scripts.
-		wp_enqueue_script( 'the-neverending-homepage', plugins_url( 'infinity.js', __FILE__ ), array( 'jquery' ), '20131015', true );
+		wp_enqueue_script( 'the-neverending-homepage', plugins_url( 'infinity.js', __FILE__ ), array( 'jquery' ), 20141016, true );
 
 		// Add our default styles.
-		wp_enqueue_style( 'the-neverending-homepage', plugins_url( 'infinity.css', __FILE__ ), array(), '20120612' );
+		wp_enqueue_style( 'the-neverending-homepage', plugins_url( 'infinity.css', __FILE__ ), array(), '20140422' );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_spinner_scripts' ) );
 
 		add_action( 'wp_footer', array( $this, 'action_wp_footer_settings' ), 2 );
 
-		add_action( 'wp_footer', array( $this, 'action_wp_footer' ), 99999999 );
+		add_action( 'wp_footer', array( $this, 'action_wp_footer' ), 21 ); // Core prints footer scripts at priority 20, so we just need to be one later than that
 
 		add_filter( 'infinite_scroll_results', array( $this, 'filter_infinite_scroll_results' ), 10, 3 );
 	}
@@ -342,12 +355,106 @@ class The_Neverending_Home_Page {
 	 * Adds an 'infinite-scroll' class to the body.
 	 */
 	function body_class( $classes ) {
-		$classes[] = 'infinite-scroll';
+		// Do not add infinity-scroll class if disabled through the Reading page
+		$disabled = '' === get_option( self::$option_name_enabled ) ? true : false;
+		if ( ! $disabled || 'click' == self::get_settings()->type ) {
+			$classes[] = 'infinite-scroll';
 
-		if ( 'scroll' == self::get_settings()->type )
-			$classes[] = 'neverending';
+			if ( 'scroll' == self::get_settings()->type )
+				$classes[] = 'neverending';
+		}
 
 		return $classes;
+	}
+
+	/**
+	 * In case IS is activated on search page, we have to exclude initially loaded posts which match the keyword by title, not the content as they are displayed before content-matching ones
+	 *
+	 * @uses self::wp_query
+	 * @uses self::get_last_post_date
+	 * @uses self::has_only_title_matching_posts
+	 * @return array
+	 */
+	function get_excluded_posts() {
+
+		$excluded_posts = array();
+		//loop through posts returned by wp_query call
+		foreach( self::wp_query()->get_posts() as $post ) {
+
+			$orderby = isset( self::wp_query()->query_vars['orderby'] ) ? self::wp_query()->query_vars['orderby'] : '';
+			$post_date = ( ! empty( $post->post_date ) ? $post->post_date : false );
+			if ( 'modified' === $orderby || false === $post_date ) {
+				$post_date = $post->post_modified;
+			}
+
+			//in case all posts initially displayed match the keyword by title we add em all to excluded posts array
+			//else, we add only posts which are older than last_post_date param as newer are natually excluded by last_post_date condition in the SQL query
+			if ( self::has_only_title_matching_posts() || $post_date <= self::get_last_post_date() ) {
+				array_push( $excluded_posts, $post->ID );
+			}
+		}
+		return $excluded_posts;
+	}
+
+	/**
+	 * In case IS is active on search, we have to exclude posts matched by title rather than by post_content in order to prevent dupes on next pages
+	 *
+	 * @uses self::wp_query
+	 * @uses self::get_excluded_posts
+	 * @return array
+	 */
+	function get_query_vars() {
+
+		$query_vars = self::wp_query()->query_vars;
+		//applies to search page only
+		if ( true === self::wp_query()->is_search() ) {
+			//set post__not_in array in query_vars in case it does not exists
+			if ( false === isset( $query_vars['post__not_in'] ) ) {
+				$query_vars['post__not_in'] = array();
+			}
+			//get excluded posts
+			$excluded = self::get_excluded_posts();
+			//merge them with other post__not_in posts (eg.: sticky posts)
+			$query_vars['post__not_in'] = array_merge( $query_vars['post__not_in'], $excluded );
+		}
+		return $query_vars;
+	}
+
+	/**
+	 * This function checks whether all posts returned by initial wp_query match the keyword by title
+	 * The code used in this function is borrowed from WP_Query class where it is used to construct like conditions for keywords
+	 *
+	 * @uses self::wp_query
+	 * @return bool
+	 */
+	function has_only_title_matching_posts() {
+
+		//apply following logic for search page results only
+		if ( false === self::wp_query()->is_search() ) {
+			return false;
+		}
+
+		//grab the last posts in the stack as if the last one is title-matching the rest is title-matching as well
+		$post = end( self::wp_query()->posts );
+
+		//code inspired by WP_Query class
+		if ( preg_match_all( '/".*?("|$)|((?<=[\t ",+])|^)[^\t ",+]+/', self::wp_query()->get( 's' ), $matches ) ) {
+			$search_terms = self::wp_query()->parse_search_terms( $matches[0] );
+			// if the search string has only short terms or stopwords, or is 10+ terms long, match it as sentence
+			if ( empty( $search_terms ) || count( $search_terms ) > 9 ) {
+				$search_terms = array( self::wp_query()->get( 's' ) );
+			}
+		} else {
+			$search_terms = array( self::wp_query()->get( 's' ) );
+		}
+
+		//actual testing. As search query combines multiple keywords with AND, it's enough to check if any of the keywords is present in the title
+		$term = current( $search_terms );
+		if ( ! empty( $term ) && false !== strpos( $post->post_title, $term ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -357,6 +464,7 @@ class The_Neverending_Home_Page {
 	 * false if the posts are not ordered by date.
 	 *
 	 * @uses self::got_infinity
+	 * @uses self::has_only_title_matching_posts
 	 * @uses self::wp_query
 	 * @return string 'Y-m-d H:i:s' or false
 	 */
@@ -364,15 +472,25 @@ class The_Neverending_Home_Page {
 		if ( self::got_infinity() )
 			return;
 
+		if ( ! self::wp_query()->have_posts() ) {
+			return null;
+		}
+
+		//In case there are only title-matching posts in the initial WP_Query result, we don't want to use the last_post_date param yet
+		if ( true === self::has_only_title_matching_posts() ) {
+			return false;
+		}
+
 		$post = end( self::wp_query()->posts );
 		$orderby = isset( self::wp_query()->query_vars['orderby'] ) ?
 			self::wp_query()->query_vars['orderby'] : '';
+		$post_date = ( ! empty( $post->post_date ) ? $post->post_date : false );
 		switch ( $orderby ) {
 			case 'modified':
 				return $post->post_modified;
 			case 'date':
 			case '':
-				return $post->post_date;
+				return $post_date;
 			default:
 				return false;
 		}
@@ -390,7 +508,9 @@ class The_Neverending_Home_Page {
 		if ( empty( $query ) )
 			$query = self::wp_query();
 
-		switch ( $query->query_vars['orderby'] ) {
+		$orderby = isset( $query->query_vars['orderby'] ) ? $query->query_vars['orderby'] : '';
+
+		switch ( $orderby ) {
 			case 'modified':
 				return 'post_modified';
 			case 'date':
@@ -421,12 +541,12 @@ class The_Neverending_Home_Page {
 			if ( false == $sort_field )
 				return $where;
 
-			$last_post_date = $_GET['last_post_date'];
+			$last_post_date = $_REQUEST['last_post_date'];
 			// Sanitize timestamp
 			if ( empty( $last_post_date ) || !preg_match( '|\d{4}\-\d{2}\-\d{2}|', $last_post_date ) )
 				return $where;
 
-			$operator = 'ASC' == $_GET['query_args']['order'] ? '>' : '<';
+			$operator = 'ASC' == $_REQUEST['query_args']['order'] ? '>' : '<';
 
 			// Construct the date query using our timestamp
 			$clause = $wpdb->prepare( " AND {$wpdb->posts}.{$sort_field} {$operator} %s", $last_post_date );
@@ -464,11 +584,11 @@ class The_Neverending_Home_Page {
 	 * Returns the Ajax url
 	 *
 	 * @global $wp
-	 * @uses home_url, is_ssl, add_query_arg, apply_filters
+	 * @uses home_url, add_query_arg, apply_filters
 	 * @return string
 	 */
 	function ajax_url() {
-		$base_url = home_url( '/', is_ssl() ? 'https' : 'http' );
+		$base_url = set_url_scheme( home_url( '/' ) );
 
 		$ajaxurl = add_query_arg( array( 'infinity' => 'scrolling' ), $base_url );
 
@@ -483,7 +603,10 @@ class The_Neverending_Home_Page {
 		if ( ! self::got_infinity() )
 			return false;
 
-		define( 'DOING_AJAX', true );
+		// This should already be defined below, but make sure.
+		if ( ! defined( 'DOING_AJAX' ) ) {
+			define( 'DOING_AJAX', true );
+		}
 
 		@header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
 		send_nosniff_header();
@@ -506,12 +629,38 @@ class The_Neverending_Home_Page {
 	 * Prints the relevant infinite scroll settings in JS.
 	 *
 	 * @global $wp_rewrite
-	 * @uses self::get_settings, esc_js, esc_url_raw, self::has_wrapper, __, apply_filters, do_action
+	 * @uses self::get_settings, esc_js, esc_url_raw, self::has_wrapper, __, apply_filters, do_action, self::get_query_vars
 	 * @action wp_footer
 	 * @return string
 	 */
 	function action_wp_footer_settings() {
 		global $wp_rewrite;
+		global $currentday;
+
+		// Default click handle text
+		$click_handle_text = __( 'Older posts', 'jetpack' );
+
+		// If a single CPT is displayed, use its plural name instead of "posts"
+		// Could be empty (posts) or an array of multiple post types.
+		// In the latter two cases cases, the default text is used, leaving the `infinite_scroll_js_settings` filter for further customization.
+		$post_type = self::wp_query()->get( 'post_type' );
+		if ( is_string( $post_type ) && ! empty( $post_type ) ) {
+			$post_type = get_post_type_object( $post_type );
+
+			if ( is_object( $post_type ) && ! is_wp_error( $post_type ) ) {
+				if ( isset( $post_type->labels->name ) ) {
+					$cpt_text = $post_type->labels->name;
+				} elseif ( isset( $post_type->label ) ) {
+					$cpt_text = $post_type->label;
+				}
+
+				if ( isset( $cpt_text ) ) {
+					$click_handle_text = sprintf( __( 'Older %s', 'jetpack' ), $cpt_text );
+					unset( $cpt_text );
+				}
+			}
+		}
+		unset( $post_type );
 
 		// Base JS settings
 		$js_settings = array(
@@ -521,8 +670,10 @@ class The_Neverending_Home_Page {
 			'wrapper'          => self::has_wrapper(),
 			'wrapper_class'    => is_string( self::get_settings()->wrapper ) ? esc_js( self::get_settings()->wrapper ) : 'infinite-wrap',
 			'footer'           => is_string( self::get_settings()->footer ) ? esc_js( self::get_settings()->footer ) : self::get_settings()->footer,
-			'text'             => esc_js( __( 'Older posts', 'jetpack' ) ),
+			'click_handle'     => esc_js( self::get_settings()->click_handle ),
+			'text'             => esc_js( $click_handle_text ),
 			'totop'            => esc_js( __( 'Scroll back to top', 'jetpack' ) ),
+			'currentday'       => $currentday,
 			'order'            => 'DESC',
 			'scripts'          => array(),
 			'styles'           => array(),
@@ -534,13 +685,13 @@ class The_Neverending_Home_Page {
 				'use_trailing_slashes' => $wp_rewrite->use_trailing_slashes,
 				'parameters'           => self::get_request_parameters(),
 			),
-			'query_args'      => self::wp_query()->query_vars,
+			'query_args'      => self::get_query_vars(),
 			'last_post_date'  => self::get_last_post_date(),
 		);
 
 		// Optional order param
-		if ( isset( $_GET['order'] ) ) {
-			$order = strtoupper( $_GET['order'] );
+		if ( isset( $_REQUEST['order'] ) ) {
+			$order = strtoupper( $_REQUEST['order'] );
 
 			if ( in_array( $order, array( 'ASC', 'DESC' ) ) )
 				$js_settings['order'] = $order;
@@ -590,8 +741,8 @@ class The_Neverending_Home_Page {
 
 			$path = user_trailingslashit( $path );
 		} else {
-			// Clean up raw $_GET input
-			$path = array_map( 'sanitize_text_field', $_GET );
+			// Clean up raw $_REQUEST input
+			$path = array_map( 'sanitize_text_field', $_REQUEST );
 			$path = array_filter( $path );
 
 			$path['paged'] = '%d';
@@ -652,7 +803,7 @@ class The_Neverending_Home_Page {
 			return $results;
 
 		// Parse and sanitize the script handles already output
-		$initial_scripts = isset( $_GET['scripts'] ) && is_array( $_GET['scripts'] ) ? array_map( 'sanitize_text_field', $_GET['scripts'] ) : false;
+		$initial_scripts = isset( $_REQUEST['scripts'] ) && is_array( $_REQUEST['scripts'] ) ? array_map( 'sanitize_text_field', $_REQUEST['scripts'] ) : false;
 
 		if ( is_array( $initial_scripts ) ) {
 			global $wp_scripts;
@@ -711,7 +862,7 @@ class The_Neverending_Home_Page {
 			unset( $results['scripts' ] );
 
 		// Parse and sanitize the style handles already output
-		$initial_styles = isset( $_GET['styles'] ) && is_array( $_GET['styles'] ) ? array_map( 'sanitize_text_field', $_GET['styles'] ) : false;
+		$initial_styles = isset( $_REQUEST['styles'] ) && is_array( $_REQUEST['styles'] ) ? array_map( 'sanitize_text_field', $_REQUEST['styles'] ) : false;
 
 		if ( is_array( $initial_styles ) ) {
 			global $wp_styles;
@@ -808,13 +959,25 @@ class The_Neverending_Home_Page {
 	 * @return string or null
 	 */
 	function query() {
-		if ( ! isset( $_GET['page'] ) || ! current_theme_supports( 'infinite-scroll' ) )
+		if ( ! isset( $_REQUEST['page'] ) || ! current_theme_supports( 'infinite-scroll' ) )
 			die;
 
-		$page = (int) $_GET['page'];
+		$page = (int) $_REQUEST['page'];
+
+		// Sanitize and set $previousday. Expected format: dd.mm.yy
+		if ( preg_match( '/^\d{2}\.\d{2}\.\d{2}$/', $_REQUEST['currentday'] ) ) {
+			global $previousday;
+			$previousday = $_REQUEST['currentday'];
+		}
 
 		$sticky = get_option( 'sticky_posts' );
 		$post__not_in = self::wp_query()->get( 'post__not_in' );
+
+		//we have to take post__not_in args into consideration here not only sticky posts
+		if ( true === isset( $_REQUEST['query_args']['post__not_in'] ) ) {
+			$post__not_in = array_merge( $post__not_in, array_map( 'intval', (array) $_REQUEST['query_args']['post__not_in'] ) );
+		}
+
 		if ( ! empty( $post__not_in ) )
 			$sticky = array_unique( array_merge( $sticky, $post__not_in ) );
 
@@ -822,7 +985,7 @@ class The_Neverending_Home_Page {
 		if ( current_user_can( 'read_private_posts' ) )
 			array_push( $post_status, 'private' );
 
-		$order = in_array( $_GET['order'], array( 'ASC', 'DESC' ) ) ? $_GET['order'] : 'DESC';
+		$order = in_array( $_REQUEST['order'], array( 'ASC', 'DESC' ) ) ? $_REQUEST['order'] : 'DESC';
 
 		$query_args = array_merge( self::wp_query()->query_vars, array(
 			'paged'          => $page,
@@ -831,6 +994,11 @@ class The_Neverending_Home_Page {
 			'post__not_in'   => ( array ) $sticky,
 			'order'          => $order
 		) );
+
+		// 4.0 ?s= compatibility, see https://core.trac.wordpress.org/ticket/11330#comment:50
+		if ( empty( $query_args['s'] ) && ! isset( self::wp_query()->query['s'] ) ) {
+			unset( $query_args['s'] );
+		}
 
 		// By default, don't query for a specific page of a paged post object.
 		// This argument can come from merging self::wp_query() into $query_args above.
@@ -890,7 +1058,9 @@ class The_Neverending_Home_Page {
 			ob_end_clean();
 
 			if ( 'success' == $results['type'] ) {
+				global $currentday;
 				$results['lastbatch'] = self::is_last_batch();
+				$results['currentday'] = $currentday;
 			}
 
 			// Loop through posts to capture sharing data for new posts loaded via Infinite Scroll
@@ -910,7 +1080,7 @@ class The_Neverending_Home_Page {
 			$results['type'] = 'empty';
 		}
 
-		echo json_encode( apply_filters( 'infinite_scroll_results', $results, $query_args, self::wp_query() ) );
+		echo wp_json_encode( apply_filters( 'infinite_scroll_results', $results, $query_args, self::wp_query() ) );
 		die;
 	}
 
@@ -972,8 +1142,8 @@ class The_Neverending_Home_Page {
 			'suppress_filters' => false,
 		) );
 
-		if ( is_array( $_GET[ 'query_args' ] ) ) {
-			foreach ( $_GET[ 'query_args' ] as $var => $value ) {
+		if ( is_array( $_REQUEST[ 'query_args' ] ) ) {
+			foreach ( $_REQUEST[ 'query_args' ] as $var => $value ) {
 				if ( in_array( $var, $allowed_vars ) && ! empty( $value ) )
 					$query_args[ $var ] = $value;
 			}
@@ -1005,6 +1175,10 @@ class The_Neverending_Home_Page {
 	 */
 	public static function archive_supports_infinity() {
 		$supported = current_theme_supports( 'infinite-scroll' ) && ( is_home() || is_archive() || is_search() );
+		// Disable infinite scroll in customizer previews
+		if ( isset( $_REQUEST[ 'wp_customize' ] ) && 'on' === $_REQUEST[ 'wp_customize' ] ) {
+			return false;
+		}
 
 		return (bool) apply_filters( 'infinite_scroll_archive_supported', $supported, self::get_settings() );
 	}
@@ -1046,7 +1220,7 @@ class The_Neverending_Home_Page {
 		<div id="infinite-footer">
 			<div class="container">
 				<div class="blog-info">
-					<a id="infinity-blog-title" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+					<a id="infinity-blog-title" href="<?php echo home_url( '/' ); ?>" rel="home">
 						<?php bloginfo( 'name' ); ?>
 					</a>
 				</div>
@@ -1110,8 +1284,166 @@ function the_neverending_home_page_theme_support() {
 add_action( 'after_setup_theme', 'the_neverending_home_page_theme_support', 5 );
 
 /**
- * Don't load the admin bar when doing the AJAX response.
+ * Early accommodation of the Infinite Scroll AJAX request
  */
 if ( The_Neverending_Home_Page::got_infinity() ) {
+	/**
+	 * If we're sure this is an AJAX request (i.e. the HTTP_X_REQUESTED_WITH header says so),
+	 * indicate it as early as possible for actions like init
+	 */
+	if ( ! defined( 'DOING_AJAX' ) &&
+		isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+		strtoupper( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'XMLHTTPREQUEST'
+	) {
+		define( 'DOING_AJAX', true );
+	}
+
+	// Don't load the admin bar when doing the AJAX response.
 	show_admin_bar( false );
 }
+
+/**
+ * Include the wp_json_encode functions for pre-wordpress-4.1
+ */
+
+if ( ! function_exists( 'wp_json_encode' ) ) :
+	/**
+	 * Encode a variable into JSON, with some sanity checks.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param mixed $data    Variable (usually an array or object) to encode as JSON.
+	 * @param int   $options Optional. Options to be passed to json_encode(). Default 0.
+	 * @param int   $depth   Optional. Maximum depth to walk through $data. Must be
+	 *                       greater than 0. Default 512.
+	 * @return bool|string The JSON encoded string, or false if it cannot be encoded.
+	 */
+	function wp_json_encode( $data, $options = 0, $depth = 512 ) {
+		/*
+		 * json_encode() has had extra params added over the years.
+		 * $options was added in 5.3, and $depth in 5.5.
+		 * We need to make sure we call it with the correct arguments.
+		 */
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			$args = array( $data, $options, $depth );
+		} elseif ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
+			$args = array( $data, $options );
+		} else {
+			$args = array( $data );
+		}
+
+		$json = call_user_func_array( 'json_encode', $args );
+
+		// If json_encode() was successful, no need to do more sanity checking.
+		// ... unless we're in an old version of PHP, and json_encode() returned
+		// a string containing 'null'. Then we need to do more sanity checking.
+		if ( false !== $json && ( version_compare( PHP_VERSION, '5.5', '>=' ) || false === strpos( $json, 'null' ) ) )  {
+			return $json;
+		}
+
+		try {
+			$args[0] = _wp_json_sanity_check( $data, $depth );
+		} catch ( Exception $e ) {
+			return false;
+		}
+
+		return call_user_func_array( 'json_encode', $args );
+	}
+endif;
+
+if ( ! function_exists( '_wp_json_sanity_check' ) ) :
+	/**
+	 * Perform sanity checks on data that shall be encoded to JSON.
+	 *
+	 * @see wp_json_encode()
+	 *
+	 * @since 4.1.0
+	 * @access private
+	 * @internal
+	 *
+	 * @param mixed $data  Variable (usually an array or object) to encode as JSON.
+	 * @param int   $depth Maximum depth to walk through $data. Must be greater than 0.
+	 * @return mixed The sanitized data that shall be encoded to JSON.
+	 */
+	function _wp_json_sanity_check( $data, $depth ) {
+		if ( $depth < 0 ) {
+			throw new Exception( 'Reached depth limit' );
+		}
+
+		if ( is_array( $data ) ) {
+			$output = array();
+			foreach ( $data as $id => $el ) {
+				// Don't forget to sanitize the ID!
+				if ( is_string( $id ) ) {
+					$clean_id = _wp_json_convert_string( $id );
+				} else {
+					$clean_id = $id;
+				}
+
+				// Check the element type, so that we're only recursing if we really have to.
+				if ( is_array( $el ) || is_object( $el ) ) {
+					$output[ $clean_id ] = _wp_json_sanity_check( $el, $depth - 1 );
+				} elseif ( is_string( $el ) ) {
+					$output[ $clean_id ] = _wp_json_convert_string( $el );
+				} else {
+					$output[ $clean_id ] = $el;
+				}
+			}
+		} elseif ( is_object( $data ) ) {
+			$output = new stdClass;
+			foreach ( $data as $id => $el ) {
+				if ( is_string( $id ) ) {
+					$clean_id = _wp_json_convert_string( $id );
+				} else {
+					$clean_id = $id;
+				}
+
+				if ( is_array( $el ) || is_object( $el ) ) {
+					$output->$clean_id = _wp_json_sanity_check( $el, $depth - 1 );
+				} elseif ( is_string( $el ) ) {
+					$output->$clean_id = _wp_json_convert_string( $el );
+				} else {
+					$output->$clean_id = $el;
+				}
+			}
+		} elseif ( is_string( $data ) ) {
+			return _wp_json_convert_string( $data );
+		} else {
+			return $data;
+		}
+
+		return $output;
+	}
+endif;
+
+if ( ! function_exists( '_wp_json_convert_string' ) ) :
+	/**
+	 * Convert a string to UTF-8, so that it can be safely encoded to JSON.
+	 *
+	 * @see _wp_json_sanity_check()
+	 *
+	 * @since 4.1.0
+	 * @access private
+	 * @internal
+	 *
+	 * @param string $string The string which is to be converted.
+	 * @return string The checked string.
+	 */
+	function _wp_json_convert_string( $string ) {
+		static $use_mb = null;
+		if ( is_null( $use_mb ) ) {
+			$use_mb = function_exists( 'mb_convert_encoding' );
+		}
+
+		if ( $use_mb ) {
+			$encoding = mb_detect_encoding( $string, mb_detect_order(), true );
+			if ( $encoding ) {
+				return mb_convert_encoding( $string, 'UTF-8', $encoding );
+			} else {
+				return mb_convert_encoding( $string, 'UTF-8', 'UTF-8' );
+			}
+		} else {
+			return wp_check_invalid_utf8( $string, true );
+		}
+	}
+endif;

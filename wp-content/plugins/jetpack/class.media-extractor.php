@@ -23,8 +23,8 @@ class Jetpack_Media_Meta_Extractor {
 		'vimeo',
 		'hulu',
 		'ted',
-		'audio',
 		'wpvideo',
+		'audio',
 	);
 
 	/**
@@ -82,14 +82,14 @@ class Jetpack_Media_Meta_Extractor {
 	static public function extract_from_content( $content, $what_to_extract = self::ALL, $already_extracted = array() ) {
 		$stripped_content = self::get_stripped_content( $content );
 
-		// Maybe start wtih some previously extracted things (e.g. images from extract()
+		// Maybe start with some previously extracted things (e.g. images from extract()
 		$extracted = $already_extracted;
 
 		// Embedded media objects will have already been converted to shortcodes by pre_kses hooks on save.
 
  		if ( self::IMAGES & $what_to_extract ) {
-			// Should've called extract( $blog_id, $post_id ) if you want images
-			return new WP_Error( 'media-extraction-error', "IMAGES extraction not supported in extract_from_content()" );
+			$images = Jetpack_Media_Meta_Extractor::extract_images_from_content( $stripped_content, array() );
+			$extracted = array_merge( $extracted, $images );
 		}
 
 		// ----------------------------------- MENTIONS ------------------------------
@@ -106,12 +106,14 @@ class Jetpack_Media_Meta_Extractor {
 		}
 
 		// ----------------------------------- HASHTAGS ------------------------------
-/* Some hosts may not compile with --enable-unicode-properties and kick a warning
-	Warning: preg_match_all() [function.preg-match-all]: Compilation failed: support for \P, \p, and \X has not been compiled
-		if ( self::HASHTAGS & $what_to_extract ) {
+		/** Some hosts may not compile with --enable-unicode-properties and kick a warning:
+		  *   Warning: preg_match_all() [function.preg-match-all]: Compilation failed: support for \P, \p, and \X has not been compiled
+		  * Therefore, we only run this code block on wpcom, not in Jetpack.
+		 */
+		if ( ( defined( 'IS_WPCOM' ) && IS_WPCOM ) && ( self::HASHTAGS & $what_to_extract ) ) {
 			//This regex does not exactly match Twitter's
 			// if there are problems/complaints we should implement this:
-			//   https://github.com/twitter/twitter-text-java/blob/master/src/com/twitter/Regex.java
+			//   https://github.com/twitter/twitter-text/blob/master/java/src/com/twitter/Regex.java
 			if ( preg_match_all( '/(?:^|\s)#(\w*\p{L}+\w*)/u', $stripped_content, $matches ) ) {
 				$hashtags = array_values( array_unique( $matches[1] ) ); //array_unique() retains the keys!
 				$hashtags = array_map( 'strtolower', $hashtags );
@@ -121,7 +123,7 @@ class Jetpack_Media_Meta_Extractor {
 				$extracted['has']['hashtag'] = count( $hashtags );
 			}
 		}
-*/
+
 		// ----------------------------------- SHORTCODES ------------------------------
 
 		// Always look for shortcodes.
@@ -206,6 +208,14 @@ class Jetpack_Media_Meta_Extractor {
 				foreach ( $matches[1] as $link_raw ) {
 					$url = parse_url( $link_raw );
 
+					// Data URI links
+					if ( isset( $url['scheme'] ) && 'data' === $url['scheme'] )
+						continue;
+
+					// Remove large (and likely invalid) links
+					if ( 4096 < strlen( $link_raw ) )
+						continue;
+
 					// Build a simple form of the URL so we can compare it to ones we found in IMAGES or SHORTCODES and exclude those
 					$simple_url = $url['scheme'] . '://' . $url['host'] . ( ! empty( $url['path'] ) ? $url['path'] : '' );
 					if ( isset( $extracted['image']['url'] ) ) {
@@ -250,8 +260,8 @@ class Jetpack_Media_Meta_Extractor {
 			}
 
 			$link_count = count( $links );
-			$extracted['link'] = $links;
 			if ( $link_count ) {
+				$extracted[ 'link' ] = $links;
 				if ( !isset( $extracted['has'] ) )
 					$extracted['has'] = array();
 				$extracted['has']['link'] = $link_count;
@@ -334,6 +344,12 @@ class Jetpack_Media_Meta_Extractor {
 		$image_booleans = array();
 		$image_booleans['gallery'] = 0;
 
+		$from_featured_image = Jetpack_PostImages::from_thumbnail( $post->ID, $args['width'], $args['height'] );
+		if ( !empty( $from_featured_image ) ) {
+			$srcs = wp_list_pluck( $from_featured_image, 'src' );
+			$image_list = array_merge( $image_list, $srcs );
+		}
+
 		$from_slideshow = Jetpack_PostImages::from_slideshow( $post->ID, $args['width'], $args['height'] );
 		if ( !empty( $from_slideshow ) ) {
 			$srcs = wp_list_pluck( $from_slideshow, 'src' );
@@ -350,6 +366,15 @@ class Jetpack_Media_Meta_Extractor {
 		// @todo Can we check width/height of these efficiently?  Could maybe use query args at least, before we strip them out
 		$image_list = Jetpack_Media_Meta_Extractor::get_images_from_html( $post->post_content, $image_list );
 
+		return Jetpack_Media_Meta_Extractor::build_image_struct( $image_list );
+	}
+
+	public static function extract_images_from_content( $content, $image_list ) {
+		$image_list = Jetpack_Media_Meta_Extractor::get_images_from_html( $content, $image_list );
+		return Jetpack_Media_Meta_Extractor::build_image_struct( $image_list );
+	}
+
+	public static function build_image_struct( $image_list ) {
 		if ( ! empty( $image_list ) ) {
 			$retval = array( 'image' => array() );
 			$unique_imgs = array_unique( $image_list );
@@ -377,10 +402,25 @@ class Jetpack_Media_Meta_Extractor {
 		if ( !empty( $from_html ) ) {
 			$srcs = wp_list_pluck( $from_html, 'src' );
 			foreach( $srcs as $image_url ) {
-				$src = parse_url( $image_url );
-				$queryless = $src['scheme'] . '://' . $src['host'] . $src['path']; // strip off any query strings
-				if ( !in_array( $queryless, $image_list ) )
+				if ( ( $src = parse_url( $image_url ) ) && isset( $src['scheme'], $src['host'], $src['path'] ) ) {
+					// Rebuild the URL without the query string
+					$queryless = $src['scheme'] . '://' . $src['host'] . $src['path'];
+				} elseif ( $length = strpos( $image_url, '?' ) ) {
+					// If parse_url() didn't work, strip off the query string the old fashioned way
+					$queryless = substr( $image_url, 0, $length );
+				} else {
+					// Failing that, there was no spoon! Err ... query string!
+					$queryless = $image_url;
+				}
+
+				// Discard URLs that are longer then 4KB, these are likely data URIs or malformed HTML.
+				if ( 4096 < strlen( $queryless ) ) {
+					continue;
+				}
+
+				if ( ! in_array( $queryless, $image_list ) ) {
 					$image_list[] = $queryless;
+				}
 			}
 		}
 		return $image_list;
@@ -394,5 +434,3 @@ class Jetpack_Media_Meta_Extractor {
 		return $clean_content;
 	}
 }
-
-?>

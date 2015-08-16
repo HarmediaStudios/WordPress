@@ -1,0 +1,9 @@
+<wpml-config>
+	<admin-texts>
+		<key name="memoir_date_format"/>
+		<key name="memoir_comment_date_format"/>
+		<key name="memoir_seo_home_titletext"/>
+		<key name="memoir_seo_home_descriptiontext"/>
+		<key name="memoir_seo_home_keywordstext"/>
+	</admin-texts>
+</wpml-config>

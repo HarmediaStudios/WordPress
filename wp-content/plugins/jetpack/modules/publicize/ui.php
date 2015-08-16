@@ -60,20 +60,31 @@ class Publicize_UI {
 			array( 'jquery', 'thickbox' ),
 			'20121019'
 		);
+		if( is_rtl() ) {
+			wp_enqueue_style( 'publicize', plugins_url( 'assets/rtl/publicize-rtl.css', __FILE__ ), array(), '20120925' );
+		} else {
+			wp_enqueue_style( 'publicize', plugins_url( 'assets/publicize.css', __FILE__ ), array(), '20120925' );
+		}
 
-		wp_enqueue_style(
-			'publicize',
-			plugins_url( 'assets/publicize.css', __FILE__ ),
-			array(),
-			'20120925'
-		);
 
 		add_thickbox();
 	}
 
 	public static function connected_notice( $service_name ) { ?>
 		<div class='updated'>
-			<p><?php printf( __( 'You have successfully connected your blog with your %s account.', 'jetpack' ), Publicize::get_service_label( $service_name ) ); ?></p>
+			<p><?php
+
+			if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+				$platform =  __( 'WordPress.com', 'jetpack' );
+			} else {
+				$platform = __( 'Jetpack', 'jetpack' );
+			}
+
+			printf(
+				__( 'You have successfully connected your %1$s account with %2$s.', '1: Service Name (Facebook, Twitter, ...), 2. WordPress.com or Jetpack', 'jetpack' ),
+				Publicize::get_service_label( $service_name ),
+				$platform
+			); ?></p>
 		</div><?php
 	}
 
@@ -118,10 +129,10 @@ class Publicize_UI {
 		  		$services = $this->publicize->get_services( 'all' );
 		  		$total_num_of_services = count ( $services );
 		  		$service_num = 0;?>
-		  		
+
 		  		<div class='left'>
-		  		
-		  		<?php 
+
+		  		<?php
 		  		foreach ( $services as $name => $service ) :
 		  			$connect_url = $this->publicize->connect_url( $name );
 		  			if ( $service_num == ( round ( ( $total_num_of_services / 2 ), 0 ) ) )
@@ -162,11 +173,9 @@ class Publicize_UI {
 										<?php endif; ?>
 
 										<li class="publicize-connection" data-connection-id="<?php echo esc_attr( $id ); ?>">
+											<?php esc_html_e( 'Connected as:', 'jetpack' ); ?>
 											<?php
 											if ( !empty( $profile_link ) ) : ?>
-
-											</style>
-												<?php echo esc_html( __( 'Connected as: ') ); ?>
 												<a class="publicize-profile-link" href="<?php echo esc_url( $profile_link ); ?>" target="_top">
 													<?php echo esc_html( $connection_display ); ?>
 												</a><?php
@@ -196,8 +205,8 @@ class Publicize_UI {
 				  					?>
 				  				</ul>
 				  			<?php endif; ?>
-				  			
-				  			
+
+
 
 				  			<?php
 				  				 $connections = $this->publicize->get_connections( $name );
@@ -206,7 +215,7 @@ class Publicize_UI {
 			  					<?php } else { ?>
 									<a id="<?php echo esc_attr( $name ); ?>" class="publicize-add-connection button add-new" href="<?php echo esc_url( $connect_url ); ?>" target="_top"><?php echo esc_html( __( 'Add New', 'jetpack' ) ); ?></a>
 			  					<?php } ?>
-			  					
+
 
 							<?php
 							$help = apply_filters( 'publicize_help_text_' . $name, false );
@@ -370,7 +379,13 @@ jQuery( function($) {
 		authClick = true;
 		$(this).after( '<img src="images/loading.gif" class="alignleft" style="margin: 0 .5em" />' );
 		$.ajaxSetup( { async: false } );
-		autosave();
+
+		if ( window.wp && window.wp.autosave ) {
+			window.wp.autosave.server.triggerSave();
+		} else {
+			autosave();
+		}
+
 		return true;
 	} );
 
@@ -548,7 +563,11 @@ jQuery( function($) {
 
 							// Should we be skipping this one?
 							$skip = (
-								get_post_meta( $post->ID, $this->publicize->POST_SKIP . $unique_id, true )
+								(
+									in_array( $post->post_status, array( 'publish', 'draft', 'future' ) )
+									&&
+									get_post_meta( $post->ID, $this->publicize->POST_SKIP . $unique_id, true )
+								)
 								||
 								(
 									is_array( $connection )
@@ -671,10 +690,10 @@ jQuery( function($) {
 			endif;
 			?>
 
-			<span id="publicize-defaults"><strong><?php echo join( '</strong>, <strong>', array_map( 'esc_html', $active ) ); ?></strong></span>
+			<span id="publicize-defaults"><strong><?php echo join( '</strong>, <strong>', array_map( 'esc_html', $active ) ); ?></strong></span><br />
 
 			<?php if ( 0 < count( $services ) ) : ?>
-				<a href="#" id="publicize-form-edit"><?php _e( 'Edit', 'jetpack' ); ?></a>&nbsp;<a href="<?php echo admin_url( 'options-general.php?page=sharing' ); ?>" target="_blank"><?php _e( 'Settings', 'jetpack' ); ?></a><br />
+				<a href="#" id="publicize-form-edit"><?php _e( 'Edit Details', 'jetpack' ); ?></a>&nbsp;<a href="<?php echo admin_url( 'options-general.php?page=sharing' ); ?>" target="_blank"><?php _e( 'Settings', 'jetpack' ); ?></a><br />
 			<?php else : ?>
 				<a href="#" id="publicize-disconnected-form-show"><?php _e( 'Show', 'jetpack' ); ?></a><br />
 			<?php endif; ?>

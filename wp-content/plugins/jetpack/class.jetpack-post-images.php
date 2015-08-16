@@ -21,8 +21,9 @@ class Jetpack_PostImages {
 		if ( !empty( $post->post_password ) )
 			return $images;
 
-		if ( false === strpos( $post->post_content, '[slideshow' ) )
+		if ( false === has_shortcode( $post->post_content, 'slideshow' ) ) {
 			return false; // no slideshow - bail
+		}
 
 		$permalink = get_permalink( $post->ID );
 
@@ -87,8 +88,9 @@ class Jetpack_PostImages {
 		if ( !empty( $post->post_password ) )
 			return $images;
 
-		if ( false === strpos( $post->post_content, '[gallery' ) )
+		if ( false === has_shortcode( $post->post_content, 'gallery' ) ) {
 			return false; // no gallery - bail
+		}
 
 		$permalink = get_permalink( $post->ID );
 
@@ -192,13 +194,19 @@ class Jetpack_PostImages {
 		* We can load up all the images found in the HTML source and then
 		* compare URLs to see if an image is attached AND inserted.
 		*/
-		$html_images = array();
 		$html_images = self::from_html( $post_id );
 		$inserted_images = array();
 
 		foreach( $html_images as $html_image ) {
 			$src = parse_url( $html_image['src'] );
-			$inserted_images[] = $src['scheme'] . '://' . $src['host'] . $src['path']; // strip off any query strings
+			// strip off any query strings from src
+			if( ! empty( $src['scheme'] ) && ! empty( $src['host'] ) ) {
+				$inserted_images[] = $src['scheme'] . '://' . $src['host'] . $src['path'];
+			} elseif( ! empty( $src['host'] ) ) {
+				$inserted_images[] = set_url_scheme( 'http://' . $src['host'] . $src['path'] );
+			} else {
+				$inserted_images[] = site_url( '/' ) . $src['path'];
+			}
 		}
 		foreach( $images as $i => $image ) {
 			if ( !in_array( $image['src'], $inserted_images ) )
@@ -235,16 +243,22 @@ class Jetpack_PostImages {
 			if ( !isset( $meta['height'] ) || $meta['height'] < $height )
 				return $images;
 
-			$url = wp_get_attachment_url( $thumb );
-			if ( stristr( $url, '?' ) )
-				$url = substr( $url, 0, strpos( $url, '?' ) );
+			$too_big = ( ( ! empty( $meta['width'] ) && $meta['width'] > 1200 ) || ( ! empty( $meta['height'] ) && $meta['height'] > 1200 ) );
+
+			if ( $too_big ) {
+				$img_src = wp_get_attachment_image_src( $thumb, array( 1200, 1200 ) );
+			} else {
+				$img_src = wp_get_attachment_image_src( $thumb, 'full' );
+			}
+
+			$url = $img_src[0];
 
 			$images = array( array( // Other methods below all return an array of arrays
 				'type'       => 'image',
 				'from'       => 'thumbnail',
 				'src'        => $url,
-				'src_width'  => $meta['width'],
-				'src_height' => $meta['height'],
+				'src_width'  => $img_src[1],
+				'src_height' => $img_src[2],
 				'href'       => get_permalink( $thumb ),
 			) );
 		}
@@ -272,7 +286,7 @@ class Jetpack_PostImages {
 		if ( !$html )
 			return $images;
 
-		preg_match_all( '!<img.*src="([^"]+)".*/?>!iUs', $html, $matches );
+		preg_match_all( '!<img.*src=[\'"]([^"]+)[\'"].*/?>!iUs', $html, $matches );
 		if ( !empty( $matches[1] ) ) {
 			foreach ( $matches[1] as $match ) {
 				if ( stristr( $match, '/smilies/' ) )
@@ -296,18 +310,22 @@ class Jetpack_PostImages {
 	 * @return Array containing details of the image, or empty array if none.
 	 */
 	static function from_blavatar( $post_id, $size = 96 ) {
-		if ( !function_exists( 'blavatar_domain' ) || !function_exists( 'blavatar_exists' ) || !function_exists( 'blavatar_url' ) ) {
-			return array();
-		}
 
 		$permalink = get_permalink( $post_id );
-		$domain = blavatar_domain( $permalink );
 
-		if ( !blavatar_exists( $domain ) ) {
+		if ( function_exists( 'blavatar_domain' ) && function_exists( 'blavatar_exists' ) && function_exists( 'blavatar_url' ) ) {
+			$domain = blavatar_domain( $permalink );
+
+			if ( ! blavatar_exists( $domain ) ) {
+				return array();
+			}
+
+			$url = blavatar_url( $domain, 'img', $size );
+		} elseif ( function_exists( 'jetpack_has_site_icon' ) && jetpack_has_site_icon() ) {
+			$url = jetpack_site_icon_url( null, $size, $default = false );
+		} else {
 			return array();
 		}
-
-		$url = blavatar_url( $domain, 'img', $size );
 
 		return array( array(
 			'type'       => 'image',
@@ -329,8 +347,8 @@ class Jetpack_PostImages {
 		$post = get_post( $post_id );
 		$permalink = get_permalink( $post_id );
 
-		if ( function_exists( 'get_avatar_url' ) ) {
-			$url = get_avatar_url( $post->post_author, $size, $default, true );
+		if ( function_exists( 'wpcom_get_avatar_url' ) ) {
+			$url = wpcom_get_avatar_url( $post->post_author, $size, $default, true );
 			if ( $url && is_array( $url ) ) {
 				$url = $url[0];
 			}
@@ -448,5 +466,42 @@ class Jetpack_PostImages {
 		}
 
 		return apply_filters( 'jetpack_images_get_images', $media, $post_id, $args );
+	}
+
+	/**
+	 * Takes an image URL and pixel dimensions then returns a URL for the
+	 * resized and croped image.
+	 *
+	 * @param  string $src
+	 * @param  int    $dimension
+	 * @return string            Transformed image URL
+	 */
+	static function fit_image_url( $src, $width, $height ) {
+		$width = (int) $width;
+		$height = (int) $height;
+
+		// Umm...
+		if ( $width < 1 || $height < 1 ) {
+			return $src;
+		}
+
+		// See if we should bypass WordPress.com SaaS resizing
+		if ( has_filter( 'jetpack_images_fit_image_url_override' ) ) {
+			return apply_filters( 'jetpack_images_fit_image_url_override', $src, $width, $height );
+		}
+
+		// If WPCOM hosted image use native transformations
+		$img_host = parse_url( $src, PHP_URL_HOST );
+		if ( '.files.wordpress.com' == substr( $img_host, -20 ) ) {
+			return add_query_arg( array( 'w' => $width, 'h' => $height, 'crop' => 1 ), $src );
+		}
+
+		// Use Photon magic
+		if( function_exists( 'jetpack_photon_url' ) ) {
+			return jetpack_photon_url( $src, array( 'resize' => "$width,$height" ) );
+		}
+
+		// Arg... no way to resize image using WordPress.com infrastructure!
+		return $src;
 	}
 }
