@@ -1,3 +1,37 @@
+version 2.8 ( updated 04-23-2015 )
+- Added minor security hardening
+	* epanel/custom_functions.php
+- Bumped version number
+	* style.css
+
+version 2.7 ( updated 02-25-2014 )
+- Fixed the issue with slashes added to Name, Subject and Message fields in the contact form
+	* page-contact.php
+- Fixed the issue with resizing of images that have the x symbol between width and height values in the filename
+- Fixed the issue with .jpeg images and uppercase extensions in cached files
+- The theme doesn't strip slashes from custom css now, when saving the option to the database
+- Removed buzz shortcode ( Google retired Buzz )
+- Fixed ePanel SEO home options not appearing on static front page
+- Better compatibility with WordPress SEO and All In One SEO Pack plugins. ePanel SEO is disabled if these plugins are active now.
+	* epanel/core_functions.php
+	* epanel/custom_functions.php
+	* epanel/shortcodes/shortcodes.php
+- Fixed documentation link in ePanel
+	* includes/functions/installation.php
+- Fixed default gallery images links
+- Fixed homepage issues when WordPress is not installed in the root directory
+	* functions.php
+- Fixed the issue with Gallery page template images resizing
+	* epanel/post_thumbnails_gleam.php
+- Bumped version number
+	* style.css
+
+version 2.6 ( updated 12-23-2013 )
+- Now you can update Elegant Themes in the Dashboard: https://www.elegantthemes.com/members-area/documentation.html#updater
+	* epanel/custom_functions.php
+- Bumped version number
+	* style.css
+
 version 2.5 ( updated 09-13-2013 )
 - Fixed Tabs shortcode layout issues with the slide effect
 	* epanel/shortcodes/css/shortcodes.css

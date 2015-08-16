@@ -32,15 +32,19 @@ class Jetpack_XMLRPC_Server {
 				'jetpack.getPosts'          => array( $this, 'get_posts' ),
 				'jetpack.getComment'        => array( $this, 'get_comment' ),
 				'jetpack.getComments'       => array( $this, 'get_comments' ),
+				'jetpack.disconnectBlog'    => array( $this, 'disconnect_blog' ),
+				'jetpack.unlinkUser'        => array( $this, 'unlink_user' ),
 			) );
 
 			if ( isset( $core_methods['metaWeblog.editPost'] ) ) {
 				$jetpack_methods['metaWeblog.newMediaObject'] = $core_methods['metaWeblog.newMediaObject'];
 				$jetpack_methods['jetpack.updateAttachmentParent'] = array( $this, 'update_attachment_parent' );
 			}
+
+			$jetpack_methods = apply_filters( 'jetpack_xmlrpc_methods', $jetpack_methods, $core_methods, $user );
 		}
 
-		return apply_filters( 'jetpack_xmlrpc_methods', $jetpack_methods, $core_methods, $user );
+		return apply_filters( 'jetpack_xmlrpc_unauthenticated_methods', $jetpack_methods, $core_methods );
 	}
 
 	/**
@@ -107,6 +111,7 @@ class Jetpack_XMLRPC_Server {
 	 * @return WP_User|IXR_Error
 	 */
 	function login() {
+		Jetpack::init()->require_jetpack_authentication();
 		$user = wp_authenticate( 'username', 'password' );
 		if ( is_wp_error( $user ) ) {
 			if ( 'authentication_failed' == $user->get_error_code() ) { // Generic error could mean most anything.
@@ -199,6 +204,27 @@ class Jetpack_XMLRPC_Server {
 		}
 
 		return $user_id;
+	}
+
+	/**
+	* Disconnect this blog from the connected wordpress.com account
+	* @return boolean
+	*/
+	function disconnect_blog() {
+		Jetpack::log( 'disconnect' );
+		Jetpack::disconnect();
+
+		return true;
+	}
+
+	/**
+	 * Unlink a user from WordPress.com
+	 *
+	 * This will fail if called by the Master User.
+	 */
+	function unlink_user() {
+		Jetpack::log( 'unlink' );
+		return Jetpack::unlink_user();
 	}
 
 	/**
@@ -298,6 +324,7 @@ class Jetpack_XMLRPC_Server {
 		$post_body    = is_null( $json_api_args[2] ) ? null : (string) $json_api_args[2];
 		$my_id        = (int) $json_api_args[3];
 		$user_details = (array) $json_api_args[4];
+		$locale       = (string) $json_api_args[5];
 
 		if ( !$verify_api_user_args ) {
 			$user_id = 0;
@@ -327,6 +354,27 @@ class Jetpack_XMLRPC_Server {
 		error_log( "-- end json api via jetpack debugging -- " );
 		*/
 
+		if ( 'en' !== $locale ) {
+			// .org mo files are named slightly different from .com, and all we have is this the locale -- try to guess them.
+			$new_locale = $locale;
+			if ( strpos( $locale, '-' ) !== false ) {
+				$pieces = explode( '-', $locale );
+				$new_locale = $locale_pieces[0];
+				$new_locale .= ( ! empty( $locale_pieces[1] ) ) ? '_' . strtoupper( $locale_pieces[1] ) : '';
+			} else {
+				// .com might pass 'fr' because thats what our language files are named as, where core seems
+				// to do fr_FR - so try that if we don't think we can load the file.
+				if ( ! file_exists( WP_LANG_DIR . '/' . $locale . '.mo' ) ) {
+					$new_locale =  $locale . '_' . strtoupper( $locale );
+				}
+			}
+
+			if ( file_exists( WP_LANG_DIR . '/' . $new_locale . '.mo' ) ) {
+				unload_textdomain( 'default' );
+				load_textdomain( 'default', WP_LANG_DIR . '/' . $new_locale . '.mo' );
+			}
+		}
+
 		$old_user = wp_get_current_user();
 		wp_set_current_user( $user_id );
 
@@ -341,10 +389,10 @@ class Jetpack_XMLRPC_Server {
 		// needed?
 		require_once ABSPATH . 'wp-admin/includes/admin.php';
 
-		require_once dirname( __FILE__ ) . '/class.json-api.php';
+		require_once JETPACK__PLUGIN_DIR . 'class.json-api.php';
 		$api = WPCOM_JSON_API::init( $method, $url, $post_body );
 		$api->token_details['user'] = $user_details;
-		require_once dirname( __FILE__ ) . '/class.json-api-endpoints.php';
+		require_once JETPACK__PLUGIN_DIR . 'class.json-api-endpoints.php';
 
 		$display_errors = ini_set( 'display_errors', 0 );
 		ob_start();

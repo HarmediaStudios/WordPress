@@ -2,12 +2,13 @@
 
 /**
  * Module Name: Shortcode Embeds
- * Module Description: Easily embed videos and more from sites like YouTube, Vimeo, and SlideShare.
- * Sort Order: 11
+ * Module Description: Embed content from YouTube, Vimeo, SlideShare, and more, no coding necessary.
+ * Sort Order: 3
  * First Introduced: 1.1
  * Major Changes In: 1.2
  * Requires Connection: No
  * Auto Activate: Yes
+ * Module Tags: Photos and Videos, Social, Writing, Appearance
  */
 
 /**
@@ -45,11 +46,19 @@ function jetpack_load_shortcodes() {
 		$shortcode_includes[] = $file;
 	}
 
+/**
+ * This filter allows other plugins to override which shortcodes Jetpack loads.
+ *
+ * @since 2.2.1
+ *
+ * @param array $shortcode_includes An array of which shortcodes to include.
+ */
 	$shortcode_includes = apply_filters( 'jetpack_shortcodes_to_include', $shortcode_includes );
 
 	foreach ( $shortcode_includes as $include ) {
-                if ( version_compare( $wp_version, '3.6-z', '>=' ) && stristr( $include, 'audio.php' ) )
+		if ( version_compare( $wp_version, '3.6-z', '>=' ) && stristr( $include, 'audio.php' ) ) {
 			continue;
+		}
 
 		include $include;
 	}
@@ -65,6 +74,22 @@ if ( version_compare( $wp_version, '3.6-z', '>=' ) ) {
 			$out['src'] = $atts[0];
 
 		return $out;
+	}
+
+	function jetpack_shortcode_get_audio_id( $atts ) {
+		if ( isset( $atts[ 0 ] ) )
+			return $atts[ 0 ];
+		else
+			return 0;
+	}
+}
+
+if ( ! function_exists( 'jetpack_shortcode_get_wpvideo_id' ) ) {
+	function jetpack_shortcode_get_wpvideo_id( $atts ) {
+		if ( isset( $atts[ 0 ] ) )
+			return $atts[ 0 ];
+		else
+			return 0;
 	}
 }
 

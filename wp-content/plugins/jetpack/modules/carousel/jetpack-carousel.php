@@ -20,6 +20,8 @@ class Jetpack_Carousel {
 
 	var $first_run = true;
 
+	var $in_gallery = false;
+
 	var $in_jetpack = true;
 
 	function __construct() {
@@ -52,8 +54,9 @@ class Jetpack_Carousel {
 			// If on front-end, do the Carousel thang.
 			$this->prebuilt_widths = apply_filters( 'jp_carousel_widths', $this->prebuilt_widths );
 			add_filter( 'post_gallery', array( $this, 'enqueue_assets' ), 1000, 2 ); // load later than other callbacks hooked it
+			add_filter( 'post_gallery', array( $this, 'set_in_gallery' ), -1000 );
 			add_filter( 'gallery_style', array( $this, 'add_data_to_container' ) );
-			add_filter( 'wp_get_attachment_link', array( $this, 'add_data_to_images' ), 10, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'add_data_to_images' ), 10, 2 );
 		}
 
 		if ( $this->in_jetpack && method_exists( 'Jetpack', 'module_configuration_load' ) ) {
@@ -75,18 +78,38 @@ class Jetpack_Carousel {
 		return apply_filters( 'jp_carousel_asset_version', $version );
 	}
 
+	function display_bail_message( $output= '' ) {
+		// Displays a message on top of gallery if carousel has bailed
+		$message = '<div class="jp-carousel-msg"><p>';
+		$message .= __( 'Jetpack\'s Carousel has been disabled, because another plugin or your theme is overriding the [gallery] shortcode.', 'jetpack' );
+		$message .= '</p></div>';
+		// put before gallery output
+		$output = $message . $output;
+		return $output;
+	}
+
 	function enqueue_assets( $output ) {
 		if ( ! empty( $output ) && ! apply_filters( 'jp_carousel_force_enable', false ) ) {
 			// Bail because someone is overriding the [gallery] shortcode.
 			remove_filter( 'gallery_style', array( $this, 'add_data_to_container' ) );
-			remove_filter( 'wp_get_attachment_link', array( $this, 'add_data_to_images' ) );
+			remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'add_data_to_images' ) );
+			// Display message that carousel has bailed, if user is super_admin
+			if ( is_super_admin() ) {
+				add_filter( 'post_gallery', array( $this, 'display_bail_message' ) );
+			}
 			return $output;
 		}
 
+		/**
+		 * Fires when thumbnails are shown in Carousel.
+		 *
+		 * @since ?
+		 * @module Carousel
+		 **/
 		do_action( 'jp_carousel_thumbnails_shown' );
 
 		if ( $this->first_run ) {
-			wp_enqueue_script( 'jetpack-carousel', plugins_url( 'jetpack-carousel.js', __FILE__ ), array( 'jquery.spin' ), $this->asset_version( '20130109' ), true );
+			wp_enqueue_script( 'jetpack-carousel', plugins_url( 'jetpack-carousel.js', __FILE__ ), array( 'jquery.spin' ), $this->asset_version( '20140505' ), true );
 
 			// Note: using  home_url() instead of admin_url() for ajaxurl to be sure  to get same domain on wpcom when using mapped domains (also works on self-hosted)
 			// Also: not hardcoding path since there is no guarantee site is running on site root in self-hosted context.
@@ -98,13 +121,14 @@ class Jetpack_Carousel {
 				'widths'               => $this->prebuilt_widths,
 				'is_logged_in'         => $is_logged_in,
 				'lang'                 => strtolower( substr( get_locale(), 0, 2 ) ),
-				'ajaxurl'              => admin_url( 'admin-ajax.php', is_ssl() ? 'https' : 'http' ),
+				'ajaxurl'              => set_url_scheme( admin_url( 'admin-ajax.php' ) ),
 				'nonce'                => wp_create_nonce( 'carousel_nonce' ),
 				'display_exif'         => $this->test_1or0_option( get_option( 'carousel_display_exif' ), true ),
 				'display_geo'          => $this->test_1or0_option( get_option( 'carousel_display_geo' ), true ),
 				'background_color'     => $this->carousel_background_color_sanitize( get_option( 'carousel_background_color' ) ),
 				'comment'              => __( 'Comment', 'jetpack' ),
 				'post_comment'         => __( 'Post Comment', 'jetpack' ),
+				'write_comment'        => __( 'Write a Comment...', 'jetpack' ),
 				'loading_comments'     => __( 'Loading Comments...', 'jetpack' ),
 				'download_original'    => sprintf( __( 'View full size <span class="photo-size">%1$s<span class="photo-size-times">&times;</span>%2$s</span>', 'jetpack' ), '{0}', '{1}' ),
 				'no_comment_text'      => __( 'Please be sure to submit some text with your comment.', 'jetpack' ),
@@ -145,15 +169,25 @@ class Jetpack_Carousel {
 
 			$localize_strings = apply_filters( 'jp_carousel_localize_strings', $localize_strings );
 			wp_localize_script( 'jetpack-carousel', 'jetpackCarouselStrings', $localize_strings );
-			wp_enqueue_style( 'jetpack-carousel', plugins_url( 'jetpack-carousel.css', __FILE__ ), array(), $this->asset_version( '20120629' ) );
-			global $is_IE;
-			if( $is_IE )
-			{
-				$msie = strpos( $_SERVER['HTTP_USER_AGENT'], 'MSIE' ) + 4;
-				$version = (float) substr( $_SERVER['HTTP_USER_AGENT'], $msie, strpos( $_SERVER['HTTP_USER_AGENT'], ';', $msie ) - $msie );
-				if( $version < 9 )
-					wp_enqueue_style( 'jetpack-carousel-ie8fix', plugins_url( 'jetpack-carousel-ie8fix.css', __FILE__ ), array(), $this->asset_version( '20121024' ) );
+			if( is_rtl() ) {
+				wp_enqueue_style( 'jetpack-carousel', plugins_url( '/rtl/jetpack-carousel-rtl.css', __FILE__ ), array(), $this->asset_version( '20120629' ) );
+			} else {
+				wp_enqueue_style( 'jetpack-carousel', plugins_url( 'jetpack-carousel.css', __FILE__ ), array(), $this->asset_version( '20120629' ) );
 			}
+
+			wp_register_style( 'jetpack-carousel-ie8fix', plugins_url( 'jetpack-carousel-ie8fix.css', __FILE__ ), array(), $this->asset_version( '20121024' ) );
+			$GLOBALS['wp_styles']->add_data( 'jetpack-carousel-ie8fix', 'conditional', 'lte IE 8' );
+			wp_enqueue_style( 'jetpack-carousel-ie8fix' );
+
+			/**
+			 * Fires after carousel assets are enqueued for the first time.
+			 * Allows for adding additional assets to the carousel page.
+			 *
+			 * @since ?
+			 * @module Carousel
+			 * @param boolean $first_run
+			 * @param array $localized_strings
+			 **/
 			do_action( 'jp_carousel_enqueue_assets', $this->first_run, $localize_strings );
 
 			$this->first_run = false;
@@ -162,11 +196,19 @@ class Jetpack_Carousel {
 		return $output;
 	}
 
-	function add_data_to_images( $html, $attachment_id ) {
-		if ( $this->first_run ) // not in a gallery
-			return $html;
+	function set_in_gallery( $output ) {
+		$this->in_gallery = true;
+		return $output;
+	}
 
-		$attachment_id   = intval( $attachment_id );
+	function add_data_to_images( $attr, $attachment = null ) {
+
+		// not in a gallery?
+		if ( ! $this->in_gallery ) {
+			return $attr;
+		}
+
+		$attachment_id   = intval( $attachment->ID );
 		$orig_file       = wp_get_attachment_image_src( $attachment_id, 'full' );
 		$orig_file       = isset( $orig_file[0] ) ? $orig_file[0] : wp_get_attachment_url( $attachment_id );
 		$meta            = wp_get_attachment_metadata( $attachment_id );
@@ -174,7 +216,7 @@ class Jetpack_Carousel {
 		$img_meta        = ( ! empty( $meta['image_meta'] ) ) ? (array) $meta['image_meta'] : array();
 		$comments_opened = intval( comments_open( $attachment_id ) );
 
-		/*
+		 /*
 		 * Note: Cannot generate a filename from the width and height wp_get_attachment_image_src() returns because
 		 * it takes the $content_width global variable themes can set in consideration, therefore returning sizes
 		 * which when used to generate a filename will likely result in a 404 on the image.
@@ -209,26 +251,17 @@ class Jetpack_Carousel {
 
 		$img_meta = json_encode( array_map( 'strval', $img_meta ) );
 
-		$html = str_replace(
-			'<img ',
-			sprintf(
-				'<img data-attachment-id="%1$d" data-orig-file="%2$s" data-orig-size="%3$s" data-comments-opened="%4$s" data-image-meta="%5$s" data-image-title="%6$s" data-image-description="%7$s" data-medium-file="%8$s" data-large-file="%9$s" ',
-				$attachment_id,
-				esc_attr( $orig_file ),
-				$size,
-				$comments_opened,
-				esc_attr( $img_meta ),
-				esc_attr( $attachment_title ),
-				esc_attr( $attachment_desc ),
-				esc_attr( $medium_file ),
-				esc_attr( $large_file )
-			),
-			$html
-		);
+		$attr['data-attachment-id']     = $attachment_id;
+		$attr['data-orig-file']         = esc_attr( $orig_file );
+		$attr['data-orig-size']         = $size;
+		$attr['data-comments-opened']   = $comments_opened;
+		$attr['data-image-meta']        = esc_attr( $img_meta );
+		$attr['data-image-title']       = esc_attr( $attachment_title );
+		$attr['data-image-description'] = esc_attr( $attachment_desc );
+		$attr['data-medium-file']       = esc_attr( $medium_file );
+		$attr['data-large-file']        = esc_attr( $large_file );
 
-		$html = apply_filters( 'jp_carousel_add_data_to_images', $html, $attachment_id );
-
-		return $html;
+		return $attr;
 	}
 
 	function add_data_to_container( $html ) {
@@ -264,6 +297,15 @@ class Jetpack_Carousel {
 		if ( ! headers_sent() )
 			header('Content-type: text/javascript');
 
+		/**
+		 * Allows for the checking of privileges of the blog user before comments
+		 * are packaged as JSON and sent back from the get_attachment_comments 
+		 * AJAX endpoint
+		 *
+		 * @duplicate yes
+		 * @since ?
+		 * @module Carousel
+		 **/
 		do_action('jp_carousel_check_blog_user_privileges');
 
 		$attachment_id = ( isset( $_REQUEST['id'] ) ) ? (int) $_REQUEST['id'] : 0;
@@ -289,11 +331,14 @@ class Jetpack_Carousel {
 
 		// Can't just send the results, they contain the commenter's email address.
 		foreach ( $comments as $comment ) {
+			$avatar = get_avatar( $comment->comment_author_email, 64 );
+			if( ! $avatar )
+				$avatar = '';
 			$out[] = array(
 				'id'              => $comment->comment_ID,
 				'parent_id'       => $comment->comment_parent,
 				'author_markup'   => get_comment_author_link( $comment->comment_ID ),
-				'gravatar_markup' => get_avatar( $comment->comment_author_email, 64 ),
+				'gravatar_markup' => $avatar,
 				'date_gmt'        => $comment->comment_date_gmt,
 				'content'         => wpautop($comment->comment_content),
 			);
@@ -329,6 +374,11 @@ class Jetpack_Carousel {
 			$switched = true;
 		}
 
+		/**
+		 * @duplicate yes
+		 * @since ?
+		 * @module Carousel
+		 **/
 		do_action('jp_carousel_check_blog_user_privileges');
 
 		if ( ! comments_open( $_post_id ) )
@@ -376,6 +426,14 @@ class Jetpack_Carousel {
 
 		// Note: wp_new_comment() sanitizes and validates the values (too).
 		$comment_id = wp_new_comment( $comment_data );
+
+		/**
+		 * Fires before adding a new comment to the database via the get_attachment_comments
+		 * ajax endpoint
+		 *
+		 * @since ?
+		 * @module Carousel
+		 **/
 		do_action( 'jp_carousel_post_attachment_comment' );
 		$comment_status = wp_get_comment_status( $comment_id );
 

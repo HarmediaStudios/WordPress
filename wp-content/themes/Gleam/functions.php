@@ -64,7 +64,7 @@ function et_load_dailyjournal_scripts(){
 		wp_enqueue_script('gleam_plugin_fixes', $template_dir . '/js/gleam_plugin_fixes.js', array('jquery'), '1.0', true);
 		wp_enqueue_script('custom_script', $template_dir . '/js/custom.js', array('jquery'), '1.0', true);
 
-		$data = array( 'site_url' => trailingslashit( site_url() ), 'theme_url' => $template_dir );
+		$data = array( 'site_url' => home_url( '/' ), 'theme_url' => $template_dir );
 		if ( function_exists('qtrans_getLanguage') ) $data['qtranslate_lang'] = '?lang='.qtrans_getLanguage();
 		if ( function_exists( 'icl_object_id' ) ) $data['wpml_lang'] = '?lang=' . ICL_LANGUAGE_CODE;
 
@@ -178,3 +178,10 @@ function et_epanel_custom_colors_css(){
 	</style>
 
 <?php }
+
+function et_modify_gallery_links( $atts ) {
+	$atts['link'] = 'file';
+
+	return $atts;
+}
+add_filter( 'shortcode_atts_gallery', 'et_modify_gallery_links' );

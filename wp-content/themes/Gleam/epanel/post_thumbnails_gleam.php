@@ -6,6 +6,7 @@
 	$et_theme_image_sizes = array(
 		'678x200' 	=> 'et-loop-page-thumb',
 		'316x175' 	=> 'et-entry-thumb',
+		'195x195' 	=> 'et-gallery-template-thumb',
 	);
 
 	$et_page_templates_image_sizes = array(

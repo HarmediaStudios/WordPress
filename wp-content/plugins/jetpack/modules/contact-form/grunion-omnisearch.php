@@ -10,6 +10,12 @@ class Jetpack_Omnisearch_Grunion extends WP_List_Table {
 	function __construct() {
 		self::$instance = $this;
 		add_filter( 'omnisearch_results', array( $this, 'search'), 12, 2 );
+
+		// Push 'post_type_obj' to accepted fields for WP_List_Table (since WP 4.2)
+		global $wp_version;
+		if ( version_compare( $wp_version, '4.2-z', '>=' ) && $this->compat_fields && is_array( $this->compat_fields ) ) {
+			array_push( $this->compat_fields, 'post_type_obj' );
+		}
 	}
 
 	function search( $results, $search_term ) {
@@ -51,15 +57,26 @@ class Jetpack_Omnisearch_Grunion extends WP_List_Table {
 	}
 
 	function column_default( $post, $column_name ) {
+		// Make sure the global $post is our post.
+		$_post           = $GLOBALS['post'];
+		$GLOBALS['post'] = $post;
+		setup_postdata( $post );
+
 		switch ( $column_name ) {
 			case 'feedback_from':
 			case 'feedback_message':
 			case 'feedback_date':
 				ob_start();
 				grunion_manage_post_columns( $column_name, $post->ID );
-				return ob_get_clean();
+				$column_contents = ob_get_clean();
+				break;
 			default:
-				return '<pre>' . print_r( $post, true ) . '</pre>';
+				$column_contents = '<pre>' . print_r( $post, true ) . '</pre>';
+				break;
 		}
+
+		$GLOBALS['post'] = $_post;
+		wp_reset_postdata();
+		return $column_contents;
 	}
 }

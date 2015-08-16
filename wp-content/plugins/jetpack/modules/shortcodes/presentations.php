@@ -7,19 +7,19 @@ Version: 0.2
 Author: Automattic
 Author URI: http://automattic.com/wordpress-plugins/
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 
@@ -109,7 +109,7 @@ class Presentations {
 		}
 
 		foreach ( $GLOBALS['posts'] as $p ) {
-			if ( false !== strpos( $p->post_content, '[presentation' ) ) {
+			if ( has_shortcode( $p->post_content, 'presentation' ) ) {
 				$this->scripts_and_style_included = true;
 				break;
 			}
@@ -140,31 +140,32 @@ class Presentations {
 		$this->presentation_initialized = true;
 
 		$atts = shortcode_atts( array(
-			'duration'   => '',
-			'height'     => '',
-			'width'      => '',
-			'bgcolor'    => '',
-			'bgimg'      => '',
-			'autoplay'   => '',
+			'duration'    => '',
+			'height'      => '',
+			'width'       => '',
+			'bgcolor'     => '',
+			'bgimg'       => '',
+			'autoplay'    => '',
 
 			// Settings
-			'transition' => '',
-			'scale'      => '',
-			'rotate'     => '',
-			'fade'       => '',
-			'fadebullets'=> '',
-		), $atts );
+			'transition'  => '',
+			'scale'       => '',
+			'rotate'      => '',
+			'fade'        => '',
+			'fadebullets' => '',
+		), $atts, 'presentation' );
 
 		$this->presentation_settings = array(
-			'transition' => 'down',
-			'scale'      => 1,
-			'rotate'     => 0,
-			'fade'       => 'on',
-			'last'       => array(
-				'x'      => 0,
-				'y'      => 0,
-				'scale'  => 1,
-				'rotate' => 0,
+			'transition'  => 'down',
+			'scale'       => 1,
+			'rotate'      => 0,
+			'fade'        => 'on',
+			'fadebullets' => 0,
+			'last'        => array(
+				'x'       => 0,
+				'y'       => 0,
+				'scale'   => 1,
+				'rotate'  => 0,
 			),
 		);
 
@@ -244,7 +245,6 @@ class Presentations {
 			}
 
 			$out.= do_shortcode( $content );
-			$out.= "</section>";
 		}
 
 		$out.= "</section>";
@@ -266,7 +266,7 @@ class Presentations {
 			'fadebullets'=> '',
 			'bgcolor'    => '',
 			'bgimg'      => '',
-		), $atts );
+		), $atts, 'slide' );
 
 		// Determine positioning based on transition
 		if ( '' == trim( $atts['transition'] ) )
