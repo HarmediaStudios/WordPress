@@ -2,8 +2,8 @@
 Contributors: duosecurity
 Tags: authentication, two-factor, authenticator, login, username, password, duo, security
 Requires at least: 3.0
-Tested up to: 3.6.1
-Stable tag: 1.6.2
+Tested up to: 4.2.4
+Stable tag: 2.5
 
 Easily add Duo Security two-factor authentication to your WordPress website. Enable two-factor authentication for your admins and/or users.
 
@@ -28,21 +28,8 @@ Protect your WordPress website in minutes with Duo.
 
 == Installation ==
 
-Integrating Duo two-factor authentication with WordPress is a breeze. Follow these quick installation steps:
-
-1. Sign up for a free Duo account at [duosecurity.com](https://www.duosecurity.com) and follow the activation instructions. 
-
-2. From your Duo administrative interface, add an integration and select “WordPress” as the Integration Type. You’ll need the "Integration Key," "Secret Key," and “API hostname” values shown here when you set up the Duo plugin in WordPress.
-
-3. Also from the Duo administrative interface, you can check which user roles you'd like to require use Duo two-factor authentication.
-
-4. From your WordPress dashboard, install and activate this Duo WordPress plugin.
-
-5. In the Duo WordPress plugin settings, fill in the "Integration Key," "Secret Key," and “API hostname” with the values provided in the Duo administrative interface for the WordPress integration that you added in Step 2. 
-All done!  
-Log out of your WordPress instance. When you log back in, you'll be prompted to enroll in Duo and authenticate using Duo's two-factor service.
-
-Get [more detailed instructions](https://www.duosecurity.com/docs/wordpress) at duosecurity.com
+Integrating Duo two-factor authentication with WordPress is a breeze.
+See [our instructions](https://www.duosecurity.com/docs/wordpress) at duosecurity.com
 
 == Frequently Asked Questions ==
 
@@ -64,6 +51,57 @@ If you're interested in protecting other web applications with Duo's two-factor 
 2. The Duo Mobile application allows users to generate passcodes or use Duo Push to perform secondary authentication using their mobile device.
 
 == Changelog ==
+
+= 2.5 =
+* Duo Web V2
+* Adaptive iframe
+* Duo PHP update
+* Bug fixes
+
+= 2.4.1 =
+* Wordpress 4.1 support
+
+= 2.4 =
+* Fix an IE9 compatibility issue
+* Wordpress 4.0 support
+* Add a plugin icon
+
+= 2.3.1 =
+* Fix an issue that caused errors on some sites
+
+= 2.3 =
+* Add support for WordPress 3.9
+* Update CA cert bundle
+* Send user-agent with API requests
+
+= 2.2 =
+* Fix an issue that caused users to see 'Access Denied' when WordPress secret keys are not set correctly
+* Fix 'Access Denied' issue due to a plugin caching our old JavaScript file
+* Fix an issue that forced users to log in multiple times when going to a non-secure page from an SSL page
+* Minor fix for sites using a proxy
+
+= 2.1 =
+* Fix an issue that caused 503 errors for some users
+* Add support for proxy servers
+* Fix an issue where the "Remember Me" checkbox on the login page was being ignored
+* Use an application-specific key when signing Duo requests
+* Add debug mode which enables verbose logging
+* Remove unnecessary assets to reduce package size
+
+= 2.0 =
+* Fix an issue that allowed some users to bypass 2FA on multisite networks
+
+= 1.8.1 =
+* Fix multi-site login issue
+
+= 1.8 =
+* Add support for modal login pages in wordpress 3.8
+
+= 1.7 =
+* Fix various single-site and multi-site compatability issues with WordPress instances running 3.0 and 3.2
+* Support for WordPress 3.7.1
+* Compatability with WP-Engine WordPress hosting service
+* Fix some style issues on the settings page
 
 = 1.6.2 =
 * Fix a rare conflict with other plugins
@@ -132,6 +170,54 @@ If you're interested in protecting other web applications with Duo's two-factor 
 * Initial release!
 
 == Upgrade Notice ==
+
+= 2.4.1 =
+* Wordpress 4.1 support
+
+= 2.4 =
+* Fix an IE9 compatibility issue
+* Wordpress 4.0 support
+* Add a plugin icon
+
+= 2.3.1 =
+* Fix an issue that caused errors on some sites
+
+= 2.3 =
+* Add support for WordPress 3.9
+* Update CA cert bundle
+* Send user-agent with API requests
+
+= 2.2 =
+* Please disable the plugin before upgrading, then reactivate after upgrade is done
+* Fix an issue that caused users to see 'Access Denied'
+* Fix an issue that forced users to log in multiple times when going to a non-secure page from an SSL page
+* Minor fix for sites using a proxy
+
+= 2.1 =
+* Please disable the plugin before updating. Make sure to enable the plugin when upgrade is done
+* Fix an issue that caused 503 errors for some users
+* Add support for proxy servers
+* Fix an issue where the "Remember Me" checkbox on the login page was being ignored
+* Use an application-specific key when signing Duo requests
+* Add debug mode which enables verbose logging
+* Remove unnecessary assets to reduce package size
+
+= 2.0 =
+* Fix an issue that allowed some users to bypass 2FA on multisite networks
+* Please disable the plugin before updating
+* Notice that when enabling the plugin, you will immediately get prompted for two factor
+
+= 1.8.1 =
+* Fix multi-site login issue
+
+= 1.8 =
+* Add support for modal login pages in wordpress 3.8
+
+= 1.7 =
+* Fix various single-site and multi-site compatability issues with WordPress instances running 3.0 and 3.2
+* Support for WordPress 3.7.1
+* Compatability with WP-Engine WordPress hosting service
+* Fix some style issues on the settings page
 
 = 1.6.2 =
 * Fix a rare conflict with other plugins

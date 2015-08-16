@@ -11,6 +11,10 @@ class Jetpack_Custom_CSS {
 		// Override the edit link, the default link causes a redirect loop
 		add_filter( 'get_edit_post_link', array( __CLASS__, 'revision_post_link' ), 10, 3 );
 
+		// Overwrite the content width global variable if one is set in the custom css 
+		add_action( 'template_redirect', array( __CLASS__, 'set_content_width' ) );
+		add_action( 'admin_init', array( __CLASS__, 'set_content_width' ) );
+
 		if ( ! is_admin() )
 			add_filter( 'stylesheet_uri', array( __CLASS__, 'style_filter' ) );
 
@@ -53,7 +57,25 @@ class Jetpack_Custom_CSS {
 			// Do migration routine if necessary
 			Jetpack_Custom_CSS::upgrade();
 
+			/**
+			 * Allows additional work when migrating safecss from wp_options to wp_post.
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 **/
 			do_action( 'safecss_migrate_post' );
+		}
+
+		/**
+		 * Never embed the style in the head on wpcom.
+		 * Yes, this filter should be added to an unsynced file on wpcom, but
+		 * there is no good syntactically-correct location to put it yet.
+		 * @link https://github.com/Automattic/jetpack/commit/a1be114e9179f64d147124727a58e2cf76c7e5a1#commitcomment-7763921
+		 */
+		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+			add_filter( 'safecss_embed_style', '__return_false' );
+		} else {
+			add_filter( 'safecss_embed_style', array( 'Jetpack_Custom_CSS', 'should_we_inline_custom_css' ), 10, 2 );
 		}
 
 		add_action( 'wp_head', array( 'Jetpack_Custom_CSS', 'link_tag' ), 101 );
@@ -86,6 +108,17 @@ class Jetpack_Custom_CSS {
 				add_action( 'admin_notices', array( 'Jetpack_Custom_CSS', 'saved_message' ) );
 		}
 
+		// Prevent content filters running on CSS when restoring revisions
+		if ( isset( $_REQUEST[ 'action' ] ) && 'restore' === $_REQUEST[ 'action' ] && false !== strstr( $_SERVER[ 'REQUEST_URI' ], 'revision.php' ) ) {
+			$parent_post = get_post( wp_get_post_parent_id( intval( $_REQUEST[ 'revision' ] ) ) );
+			if ( $parent_post && ! is_wp_error( $parent_post ) && 'safecss' === $parent_post->post_type ) {
+				// Remove wp_filter_post_kses, this causes CSS escaping issues
+				remove_filter( 'content_save_pre', 'wp_filter_post_kses' );
+				remove_filter( 'content_filtered_save_pre', 'wp_filter_post_kses' );
+				remove_all_filters( 'content_save_pre' );
+			}
+		}
+
 		// Modify all internal links so that preview state persists
 		if ( Jetpack_Custom_CSS::is_preview() )
 			ob_start( array( 'Jetpack_Custom_CSS', 'buffer' ) );
@@ -98,6 +131,7 @@ class Jetpack_Custom_CSS {
 	 * @param array $args Array of arguments:
 	 *        string $css The CSS (or LESS or Sass)
 	 *        bool $is_preview Whether this CSS is preview or published
+	 *        string preprocessor Which CSS preprocessor to use
 	 *        bool $add_to_existing Whether this CSS replaces the theme's CSS or supplements it.
 	 *        int $content_width A custom $content_width to go along with this CSS.
 	 * @return int The post ID of the saved Custom CSS post.
@@ -123,6 +157,17 @@ class Jetpack_Custom_CSS {
 		remove_filter( 'content_filtered_save_pre', 'wp_filter_post_kses' );
 		remove_all_filters( 'content_save_pre' );
 
+		/**
+		 * Fires prior to saving custom css values. Necessitated because the
+		 * core WordPress save_pre filters were removed:
+		 * - content_save_pre
+		 * - content_filtered_save_pre
+		 *
+		 * @since ?
+		 * @module Custom_CSS
+		 * @see self::save() for proper $args fields
+		 * @param array $args See Jetpack_Custom_CSS::save() docblock for more
+		 **/
 		do_action( 'safecss_save_pre', $args );
 
 		$warnings = array();
@@ -162,10 +207,31 @@ class Jetpack_Custom_CSS {
 
 		// if we're not using a preprocessor
 		if ( ! $args['preprocessor'] ) {
+
+			/**
+			 * Fires before parsing the css with CSSTidy, but only if
+			 * the preprocessor is not configured for use
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 * @param csstidy The csstidy object
+			 * @param string $css
+			 * @param array $args. See self::save() docblock for proper $args fields
+			 **/
 			do_action( 'safecss_parse_pre', $csstidy, $css, $args );
 
 			$csstidy->parse( $css );
 
+			/**
+			 * Fires after parsing the css with CSSTidy, but only if 
+			 * the preprocessor is not cinfigured for use
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 * @param csstidy $csstidy  The csstidy object
+			 * @param array $warnings
+			 * @param array $args - See self::save() docblock for proper $args fields
+			 **/
 			do_action( 'safecss_parse_post', $csstidy, $warnings, $args );
 
 			$css = $csstidy->print->plain();
@@ -195,6 +261,10 @@ class Jetpack_Custom_CSS {
 			}
 
 			// Freetrial only.
+
+			/**
+			 * @todo figure out what this is
+			 **/
 			do_action( 'safecss_save_preview_post' );
 		}
 
@@ -401,6 +471,20 @@ class Jetpack_Custom_CSS {
 		return isset( $_GET['csspreview'] ) && $_GET['csspreview'] === 'true';
 	}
 
+	/**
+	 * Currently this filter function gets called on 
+	 * 'template_redirect' action and
+	 * 'admin_init' action
+	 */
+	static function set_content_width(){
+		// Don't apply this filter on the Edit CSS page
+		if ( isset( $_GET ) && isset( $_GET['page'] ) &&  'editcss' == $_GET['page'] && is_admin() ) {
+			return;
+		}
+
+		$GLOBALS['content_width'] = Jetpack::get_content_width();
+	}
+
 	/*
 	 * False when the site has the Custom Design upgrade.
 	 * Used only on WordPress.com.
@@ -416,11 +500,15 @@ class Jetpack_Custom_CSS {
 			return $default_css;
 
 		$option = ( Jetpack_Custom_CSS::is_preview() || Jetpack_Custom_CSS::is_freetrial() ) ? 'safecss_preview' : 'safecss';
+		$css = '';
 
 		if ( 'safecss' == $option ) {
-			if ( get_option( 'safecss_revision_migrated' ) ) {
+			// Don't bother checking for a migrated 'safecss' option if it never existed.
+			if ( false === get_option( 'safecss' ) || get_option( 'safecss_revision_migrated' ) ) {
 				$safecss_post = Jetpack_Custom_CSS::get_post();
-				$css = ( $compressed && $safecss_post['post_content_filtered'] ) ? $safecss_post['post_content_filtered'] : $safecss_post['post_content'];
+				if ( ! empty( $safecss_post ) ) {
+					$css = ( $compressed && $safecss_post['post_content_filtered'] ) ? $safecss_post['post_content_filtered'] : $safecss_post['post_content'];
+				}
 			} else {
 				$current_revision = Jetpack_Custom_CSS::get_current_revision();
 				if ( false === $current_revision ) {
@@ -453,7 +541,7 @@ class Jetpack_Custom_CSS {
 					apply_filters(
 						'safecss_default_css',
 						__(
-							"Welcome to Custom CSS!\n\nCSS (Cascading Style Sheets) is a kind of code that tells the browser how to render a web page. You may delete these comments and get started with your customizations.\n\nBy default, your stylesheet will be loaded after the theme stylesheets, which means that your rules can take precedence and override the theme CSS rules. Just write here what you want to change, you don't need to copy all your theme's stylesheet content.",
+							"Welcome to Custom CSS!\n\nTo learn how this works, see http://wp.me/PEmnE-Bt",
 							'jetpack'
 						)
 					)
@@ -466,10 +554,31 @@ class Jetpack_Custom_CSS {
 		return $css;
 	}
 
-	static function print_css() {
-		do_action( 'safecss_print_pre' );
+	static function replace_insecure_urls( $css ) {
+		if ( ! function_exists( '_sa_get_frontend_https_url_replacement_map' ) ) {
+			return $css;
+		}
+		list( $http_urls, $secure_urls ) = _sa_get_frontend_https_url_replacement_map();
 
-		echo Jetpack_Custom_CSS::get_css( true );
+		return str_replace( $http_urls, $secure_urls, $css );
+	}
+
+	static function print_css() {
+		
+		/**
+		 * Fires right before printing the custom CSS inside the <head> element
+		 *
+		 * @since ?
+		 * @module Custom_CSS
+		 **/
+		do_action( 'safecss_print_pre' );
+		$css = Jetpack_Custom_CSS::get_css( true );
+		echo self::replace_insecure_urls( $css );
+	}
+
+	static function should_we_inline_custom_css( $should_we, $css ) {
+		// If the CSS is less than 2,000 characters, inline it! otherwise return what was passed in.
+		return ( strlen( $css ) < 2000 ) ? true : $should_we;
 	}
 
 	static function link_tag() {
@@ -524,21 +633,36 @@ class Jetpack_Custom_CSS {
 		if ( $css == '' )
 			return;
 
-		$href = home_url( '/' );
-		$href = add_query_arg( 'custom-css', 1, $href );
-		$href = add_query_arg( 'csblog', $blog_id, $href );
-		$href = add_query_arg( 'cscache', 6, $href );
-		$href = add_query_arg( 'csrev', (int) get_option( $option . '_rev' ), $href );
+		if ( apply_filters( 'safecss_embed_style', false, $css ) ) {
 
-		$href = apply_filters( 'safecss_href', $href, $blog_id );
+			echo "\r\n" . '<style id="custom-css-css">' . Jetpack_Custom_CSS::get_css( true ) . "</style>\r\n";
 
-		if ( Jetpack_Custom_CSS::is_preview() )
-			$href = add_query_arg( 'csspreview', 'true', $href );
+		} else {
 
-		?>
-		<link rel="stylesheet" id="custom-css-css" type="text/css" href="<?php echo esc_url( $href ); ?>" />
-		<?php
+			$href = home_url( '/' );
+			$href = add_query_arg( 'custom-css', 1, $href );
+			$href = add_query_arg( 'csblog', $blog_id, $href );
+			$href = add_query_arg( 'cscache', 6, $href );
+			$href = add_query_arg( 'csrev', (int) get_option( $option . '_rev' ), $href );
 
+			$href = apply_filters( 'safecss_href', $href, $blog_id );
+
+			if ( Jetpack_Custom_CSS::is_preview() )
+				$href = add_query_arg( 'csspreview', 'true', $href );
+
+			?>
+			<link rel="stylesheet" id="custom-css-css" type="text/css" href="<?php echo esc_url( $href ); ?>" />
+			<?php
+
+		}
+
+		/**
+		 * Fires after creating the <link> in the <head> element
+		 * for the custom css stylesheet
+		 *
+		 * @since ?
+		 * @module Custom_CSS
+		 **/
 		do_action( 'safecss_link_tag_post' );
 	}
 
@@ -546,7 +670,7 @@ class Jetpack_Custom_CSS {
 		if ( Jetpack_Custom_CSS::is_freetrial() && ( ! Jetpack_Custom_CSS::is_preview() || ! current_user_can( 'switch_themes' ) ) )
 			return $current;
 		else if ( Jetpack_Custom_CSS::skip_stylesheet() )
-			return apply_filters( 'safecss_style_filter_url', plugins_url( 'custom-css/blank.css', __FILE__ ) );
+			return apply_filters( 'safecss_style_filter_url', plugins_url( 'custom-css/css/blank.css', __FILE__ ) );
 
 		return $current;
 	}
@@ -577,15 +701,16 @@ class Jetpack_Custom_CSS {
 		$message = apply_filters( 'safecss_preview_message', $message );
 
 		$preview_flag_js = "var flag = document.createElement('div');
-	flag.innerHTML = " . json_encode( $message ) . ";
-	flag.style.background = 'black';
-	flag.style.color = 'white';
-	flag.style.textAlign = 'center';
-	flag.style.fontSize = '15px';
-	flag.style.padding = '1px';
-	document.body.style.paddingTop = '32px';
-	document.body.insertBefore(flag, document.body.childNodes[0]);
-	";
+		flag.innerHTML = " . json_encode( $message ) . ";
+		flag.style.background = '#FF6600';
+		flag.style.color = 'white';
+		flag.style.textAlign = 'center';
+		flag.style.fontSize = '15px';
+		flag.style.padding = '2px';
+		flag.style.fontFamily = 'sans-serif'; 
+		document.body.style.paddingTop = '0px';
+		document.body.insertBefore(flag, document.body.childNodes[0]);
+		";
 
 		$preview_flag_js = apply_filters( 'safecss_preview_flag_js', $preview_flag_js );
 		if ( $preview_flag_js ) {
@@ -604,7 +729,6 @@ class Jetpack_Custom_CSS {
 		$title = __( 'Edit CSS', 'jetpack' );
 		$hook = add_theme_page( $title, $title, 'edit_theme_options', 'editcss', array( 'Jetpack_Custom_CSS', 'admin' ) );
 
-		add_action( "admin_head-$hook", array( 'Jetpack_Custom_CSS', 'admin_head' ) );
 		add_action( "load-revision.php", array( 'Jetpack_Custom_CSS', 'prettify_post_revisions' ) );
 		add_action( "load-$hook", array( 'Jetpack_Custom_CSS', 'update_title' ) );
 	}
@@ -647,29 +771,11 @@ class Jetpack_Custom_CSS {
 		wp_enqueue_style( 'custom-css-editor', plugins_url( 'custom-css/css/css-editor.css', __FILE__ ) );
 
 		if ( defined( 'SAFECSS_USE_ACE' ) && SAFECSS_USE_ACE ) {
-			$url = plugins_url( 'custom-css/js/', __FILE__ );
+			wp_register_style( 'jetpack-css-codemirror', plugins_url( 'custom-css/css/codemirror.css', __FILE__ ), array(), '20120905' );
+			wp_enqueue_style( 'jetpack-css-use-codemirror', plugins_url( 'custom-css/css/use-codemirror.css', __FILE__ ), array( 'jetpack-css-codemirror' ), '20120905' );
 
-			wp_enqueue_script( 'jquery.spin' );
-			wp_enqueue_script( 'safecss-ace', $url . 'ace/ace.js', array(), '20130213', true );
-			wp_enqueue_script( 'safecss-ace-css', $url . 'ace/mode-css.js', array( 'safecss-ace' ), '20130213', true );
-			wp_enqueue_script( 'safecss-ace-less', $url . 'ace/mode-less.js', array( 'safecss-ace' ), '20130213', true );
-			wp_enqueue_script( 'safecss-ace-scss', $url . 'ace/mode-scss.js', array( 'safecss-ace' ), '20130213', true );
-			wp_enqueue_script( 'safecss-ace-use', $url . 'safecss-ace.js', array( 'jquery', 'safecss-ace-css' ), '20130213', true );
-
-			wp_enqueue_style( 'custom-css-ace', plugins_url( 'custom-css/css/ace.css', __FILE__ ) );
-		}
-	}
-
-	static function admin_head() {
-		if ( defined( 'SAFECSS_USE_ACE' ) && SAFECSS_USE_ACE ) {
-			?>
-			<script type="text/javascript">
-				/*<![CDATA[*/
-				var SAFECSS_USE_ACE = true;
-				var safecssAceSrcPath = <?php echo json_encode( parse_url( plugins_url( 'custom-css/js/ace/', __FILE__ ), PHP_URL_PATH ) ); ?>;
-				/*]]>*/
-			</script>
-			<?php
+			wp_register_script( 'jetpack-css-codemirror', plugins_url( 'custom-css/js/codemirror.min.js', __FILE__ ), array(), '3.16', true );
+			wp_enqueue_script( 'jetpack-css-use-codemirror', plugins_url( 'custom-css/js/use-codemirror.js', __FILE__ ), array( 'jquery', 'underscore', 'jetpack-css-codemirror' ), '20131009', true );
 		}
 	}
 
@@ -686,37 +792,39 @@ class Jetpack_Custom_CSS {
 		if ( ! empty( $safecss_post ) && 0 < $safecss_post['ID'] && wp_get_post_revisions( $safecss_post['ID'] ) )
 			add_meta_box( 'revisionsdiv', __( 'CSS Revisions', 'jetpack' ), array( __CLASS__, 'revisions_meta_box' ), 'editcss', 'side' );
 		?>
-		<div class="wrap columns-2">
-			<?php do_action( 'custom_design_header' ); ?>
+		<div class="wrap">
+			<?php 
+			
+			/**
+			 * Fire right before the custom css page begins
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 **/
+			do_action( 'custom_design_header' ); 
+			
+			?>
 			<h2><?php _e( 'CSS Stylesheet Editor', 'jetpack' ); ?></h2>
 			<form id="safecssform" action="" method="post">
 				<?php wp_nonce_field( 'safecss' ) ?>
 				<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 				<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
 				<input type="hidden" name="action" value="save" />
-				<div id="poststuff" class="metabox-holder has-right-sidebar">
+				<div id="poststuff">
 					<p class="css-support"><?php echo apply_filters( 'safecss_intro_text', __( 'New to CSS? Start with a <a href="http://www.htmldog.com/guides/cssbeginner/">beginner tutorial</a>. Questions?
 		Ask in the <a href="http://wordpress.org/support/forum/themes-and-templates">Themes and Templates forum</a>.', 'jetpack' ) ); ?></p>
-					<div id="postbox-container-1" class="inner-sidebar">
-						<?php do_meta_boxes( 'editcss', 'side', $safecss_post ); ?>
-					</div>
-					<div id="post-body">
+					<p class="css-support"><?php echo __( 'Note: Custom CSS will be reset when changing themes.', 'jetpack' ); ?></p>
+					
+					<div id="post-body" class="metabox-holder columns-2">
 						<div id="post-body-content">
 							<div class="postarea">
-								<?php if ( defined( 'SAFECSS_USE_ACE' ) && SAFECSS_USE_ACE ) { ?>
-									<div id="safecss-container">
-										<div id="safecss-ace"></div>
-									</div>
-									<script type="text/javascript">
-										jQuery.fn.spin && jQuery("#safecss-container").spin( 'large' );
-									</script>
-									<textarea id="safecss" name="safecss" class="hide-if-js"><?php echo esc_textarea( Jetpack_Custom_CSS::get_css() ); ?></textarea>
-									<div class="clear"></div>
-								<?php } else { ?>
-									<p><textarea id="safecss" name="safecss"><?php echo str_replace('</textarea>', '&lt;/textarea&gt', Jetpack_Custom_CSS::get_css()); ?></textarea></p>
-								<?php } ?>
+								<textarea id="safecss" name="safecss"<?php if ( SAFECSS_USE_ACE ) echo ' class="hide-if-js"'; ?>><?php echo esc_textarea( Jetpack_Custom_CSS::get_css() ); ?></textarea>
+								<div class="clear"></div>
 							</div>
 						</div>
+						<div id="postbox-container-1" class="postbox-container">
+						<?php do_meta_boxes( 'editcss', 'side', $safecss_post ); ?>
+					</div>
 					</div>
 					<br class="clear" />
 				</div>
@@ -742,7 +850,7 @@ class Jetpack_Custom_CSS {
 
 		?>
 		<div class="misc-pub-section">
-			<label><?php esc_html_e( 'Content Width:', 'jetpack' ); ?></label>
+			<label><?php esc_html_e( 'Media Width:', 'jetpack' ); ?></label>
 			<span id="content-width-display" data-default-text="<?php esc_attr_e( 'Default', 'jetpack' ); ?>" data-custom-text="<?php esc_attr_e( '%s px', 'jetpack' ); ?>"><?php echo $custom_content_width ? sprintf( esc_html__( '%s px', 'jetpack' ), $custom_content_width ) : esc_html_e( 'Default', 'jetpack' ); ?></span>
 			<a class="edit-content-width hide-if-no-js" href="#content-width"><?php echo esc_html_e( 'Edit', 'jetpack' ); ?></a>
 			<div id="content-width-select" class="hide-if-js">
@@ -887,7 +995,18 @@ class Jetpack_Custom_CSS {
 						<a class="cancel-css-mode hide-if-no-js" href="#css-mode"><?php esc_html_e( 'Cancel', 'jetpack' ); ?></a>
 					</div>
 				</div>
-				<?php do_action( 'custom_css_submitbox_misc_actions' ); ?>
+				<?php 
+				
+				/**
+				 * Allows addition of elements to the submit box for custom css
+				 * on the wp-admin side
+				 *
+				 * @since ?
+				 * @module Custom_CSS
+				 **/
+				do_action( 'custom_css_submitbox_misc_actions' ); 
+				
+				?>
 			</div>
 		</div>
 		<div id="major-publishing-actions">
@@ -915,12 +1034,16 @@ class Jetpack_Custom_CSS {
 	 * @return string
 	 */
 	static function revisions_meta_box( $safecss_post ) {
-		if ( function_exists( 'wp_revisions_to_keep' ) )
-			$max_revisions = wp_revisions_to_keep( $safecss_post );
-		else
-			$max_revisions = defined( 'WP_POST_REVISIONS' ) && is_numeric( WP_POST_REVISIONS ) ? (int) WP_POST_REVISIONS : 25;
 
-		$posts_per_page = isset( $_GET['show_all_rev'] ) ? $max_revisions : 6;
+		$show_all_revisions = isset( $_GET['show_all_rev'] );
+
+		if ( function_exists( 'wp_revisions_to_keep' ) ) {
+			$max_revisions = wp_revisions_to_keep( (object) $safecss_post );
+		} else {
+			$max_revisions = defined( 'WP_POST_REVISIONS' ) && is_numeric( WP_POST_REVISIONS ) ? (int) WP_POST_REVISIONS : 25;
+		}
+
+		$posts_per_page = $show_all_revisions ? $max_revisions : 6;
 
 		$revisions = new WP_Query( array(
 			'posts_per_page' => $posts_per_page,
@@ -952,7 +1075,7 @@ class Jetpack_Custom_CSS {
 
 			?></ul><?php
 
-			if ( $revisions->found_posts > 6 ) {
+			if ( $revisions->found_posts > 6 && !$show_all_revisions ) {
 				?>
 				<br>
 				<a href="<?php echo add_query_arg( 'show_all_rev', 'true', menu_page_url( 'editcss', false ) ); ?>"><?php esc_html_e( 'Show more', 'jetpack' ); ?></a>
@@ -1068,6 +1191,10 @@ class Jetpack_Custom_CSS {
 	 */
 	static function upgrade() {
 		$css = get_option( 'safecss' );
+
+		if ( get_option( 'safecss_revision_migrated' ) ) {
+			return false;
+		}
 
 		// Check if CSS is stored in wp_options
 		if ( $css ) {
@@ -1446,7 +1573,7 @@ function custom_css_minify( $css, $preprocessor = '' ) {
 function custom_css_restore_revision( $_post_id, $_revision_id ) {
 	_deprecated_function( __FUNCTION__, '2.1', 'Jetpack_Custom_CSS::restore_revision()' );
 
-	return Jetpack_Custom_CSS::restore_revision( $_post_id, $_revision_id );;
+	return Jetpack_Custom_CSS::restore_revision( $_post_id, $_revision_id );
 }
 
 function safecss_class() {
@@ -1457,17 +1584,33 @@ function safecss_class() {
 	require_once( dirname( __FILE__ ) . '/csstidy/class.csstidy.php' );
 
 	class safecss extends csstidy_optimise {
-		function safecss( &$css ) {
+		function __construct( &$css ) {
 			return $this->csstidy_optimise( $css );
 		}
 
 		function postparse() {
+			
+			/**
+			 * Do actions after parsing the css
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 * @param safecss $obj
+			 **/
 			do_action( 'csstidy_optimize_postparse', $this );
 
 			return parent::postparse();
 		}
 
 		function subvalue() {
+
+			/**
+			 * Do action before optimizing the subvalue
+			 *
+			 * @since ?
+			 * @module Custom_CSS
+			 * @param safecss $obj
+			 **/
 			do_action( 'csstidy_optimize_subvalue', $this );
 
 			return parent::subvalue();

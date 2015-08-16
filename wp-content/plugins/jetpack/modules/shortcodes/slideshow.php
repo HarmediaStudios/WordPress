@@ -26,6 +26,13 @@ class Jetpack_Slideshow_Shortcode {
 
 		if ( $needs_scripts )
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_scripts' ), 1 );
+
+		/**
+		 * For the moment, comment out the setting for v2.8.
+		 * The remainder should work as it always has.
+		 * See: https://github.com/Automattic/jetpack/pull/85/files
+		 */
+		// add_action( 'admin_init', array( $this, 'register_settings' ), 5 );
 	}
 
 	/**
@@ -59,8 +66,49 @@ class Jetpack_Slideshow_Shortcode {
 		return $types;
 	}
 
+	function register_settings() {
+		add_settings_section( 'slideshow_section', __( 'Image Gallery Slideshow', 'jetpack' ), '__return_empty_string', 'media' );
+
+		add_settings_field( 'jetpack_slideshow_background_color', __( 'Background color', 'jetpack' ), array( $this, 'slideshow_background_color_callback' ), 'media', 'slideshow_section' );
+
+		register_setting( 'media', 'jetpack_slideshow_background_color', array( $this, 'slideshow_background_color_sanitize' ) );
+	}
+
+	function slideshow_background_color_callback() {
+		$options = array(
+			'black' => __( 'Black', 'jetpack' ),
+			'white' => __( 'White', 'jetpack' ),
+		);
+		$this->settings_select( 'jetpack_slideshow_background_color', $options );
+	}
+
+	function settings_select( $name, $values, $extra_text = '' ) {
+		if ( empty( $name ) || empty( $values ) || ! is_array( $values ) ) {
+			return;
+		}
+		$option = get_option( $name );
+		?>
+		<fieldset>
+			<select name="<?php echo esc_attr( $name ); ?>" id="<?php esc_attr( $name ); ?>">
+				<?php foreach ( $values as $key => $value ) : ?>
+					<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $option ); ?>>
+						<?php echo esc_html( $value ); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<?php if ( ! empty( $extra_text ) ) : ?>
+				<p class="description"><?php echo esc_html( $extra_text ); ?></p>
+			<?php endif; ?>
+		</fieldset>
+		<?php
+	}
+
+	function slideshow_background_color_sanitize( $value ) {
+		return ( 'white' == $value ) ? 'white' : 'black';
+	}
+
 	function shortcode_callback( $attr, $content = null ) {
-		global $post, $content_width;
+		global $post;
 
 		$attr = shortcode_atts( array(
 			'trans'     => 'fade',
@@ -69,14 +117,22 @@ class Jetpack_Slideshow_Shortcode {
 			'id'        => $post->ID,
 			'include'   => '',
 			'exclude'   => '',
-		), $attr );
+			'autostart' => true,
+			'size'      => '',
+		), $attr, 'slideshow' );
 
-		if ( 'rand' == strtolower( $attr['order'] ) )
+		if ( 'rand' == strtolower( $attr['order'] ) ) {
 			$attr['orderby'] = 'none';
+		}
 
 		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-		if ( ! $attr['orderby'] )
+		if ( ! $attr['orderby'] ) {
 			$attr['orderby'] = 'menu_order ID';
+		}
+
+		if ( ! $attr['size'] ) {
+			$attr['size'] = 'full';
+		}
 
 		// Don't restrict to the current post if include
 		$post_parent = ( empty( $attr['include'] ) ) ? intval( $attr['id'] ) : null;
@@ -93,35 +149,45 @@ class Jetpack_Slideshow_Shortcode {
 			'exclude'        => $attr['exclude'],
 		) );
 
-		if ( count( $attachments ) < 2 )
+		if ( count( $attachments ) < 1 ) {
 			return;
+		}
 
 		$gallery_instance = sprintf( "gallery-%d-%d", $attr['id'], ++$this->instance_count );
 
 		$gallery = array();
 		foreach ( $attachments as $attachment ) {
-			$attachment_image_src = wp_get_attachment_image_src( $attachment->ID, 'full' );
+			$attachment_image_src = wp_get_attachment_image_src( $attachment->ID, $attr['size'] );
 			$attachment_image_src = $attachment_image_src[0]; // [url, width, height]
+			$attachment_image_title = get_the_title( $attachment->ID );
+			$attachment_image_alt = get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true );
+			/**
+			 * Filters the Slideshow slide caption.
+			 *
+			 * @since 2.3.0
+			 *
+			 * @param string wptexturize( strip_tags( $attachment->post_excerpt ) ) Post excerpt.
+			 * @param string $attachment->ID Attachment ID.
+			 */
 			$caption = apply_filters( 'jetpack_slideshow_slide_caption', wptexturize( strip_tags( $attachment->post_excerpt ) ), $attachment->ID );
 
 			$gallery[] = (object) array(
 				'src'     => (string) esc_url_raw( $attachment_image_src ),
 				'id'      => (string) $attachment->ID,
+				'title'   => (string) esc_attr( $attachment_image_title ),
+				'alt'     => (string) esc_attr( $attachment_image_alt ),
 				'caption' => (string) $caption,
 			);
 		}
 
-		$max_width = intval( get_option( 'large_size_w' ) );
-		$max_height = 450;
-		if ( intval( $content_width ) > 0 )
-			$max_width = min( intval( $content_width ), $max_width );
+		$color = Jetpack_Options::get_option( 'slideshow_background_color', 'black' );
 
 		$js_attr = array(
-			'gallery'  => $gallery,
-			'selector' => $gallery_instance,
-			'width'    => $max_width,
-			'height'   => $max_height,
-			'trans'    => $attr['trans'] ? $attr['trans'] : 'fade',
+			'gallery'   => $gallery,
+			'selector'  => $gallery_instance,
+			'trans'     => $attr['trans'] ? $attr['trans'] : 'fade',
+			'autostart' => $attr['autostart'] ? $attr['autostart'] : 'true',
+			'color'     => $color,
 		 );
 
 		// Show a link to the gallery in feeds.
@@ -145,30 +211,42 @@ class Jetpack_Slideshow_Shortcode {
 		// Enqueue scripts
 		$this->enqueue_scripts();
 
-		if ( $attr['width'] <= 100 )
-			$attr['width'] = 450;
-
-		if ( $attr['height'] <= 100 )
-			$attr['height'] = 450;
-
-		// 40px padding
-		$attr['width'] -= 40;
-		$attr['height'] -= 40;
-
 		$output = '';
 
-		$output .= '<p class="jetpack-slideshow-noscript robots-nocontent">' . esc_html__( 'This slideshow requires JavaScript.', 'jetpack' ) . '</p>';
-		$output .= '<div id="' . esc_attr( $attr['selector'] . '-slideshow' ) . '"  class="slideshow-window jetpack-slideshow" data-width="' . esc_attr( $attr['width'] ) . '" data-height="' . esc_attr( $attr['height'] ) . '" data-trans="' . esc_attr( $attr['trans'] ) . '" data-gallery="' . esc_attr( json_encode( $attr['gallery'] ) ) . '"></div>';
-
-		$output .= "
-		<style>
-		#{$attr['selector']}-slideshow .slideshow-slide img {
-			max-height: " . intval( $attr['height'] ) ."px;
-			/* Emulate max-height in IE 6 */
-			_height: expression(this.scrollHeight >= " . intval( $attr['height'] ) . " ? '" . intval( $attr['height'] ) . "px' : 'auto');
+		if ( defined( 'JSON_HEX_AMP' ) ) {
+			// This is nice to have, but not strictly necessary since we use _wp_specialchars() below
+			$gallery = json_encode( $attr['gallery'], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT );
+		} else {
+			$gallery = json_encode( $attr['gallery'] );
 		}
-		</style>
-		";
+
+		$output .= '<p class="jetpack-slideshow-noscript robots-nocontent">' . esc_html__( 'This slideshow requires JavaScript.', 'jetpack' ) . '</p>';
+		$output .= sprintf( '<div id="%s" class="slideshow-window jetpack-slideshow slideshow-%s" data-trans="%s" data-autostart="%s" data-gallery="%s"></div>',
+			esc_attr( $attr['selector'] . '-slideshow' ),
+			esc_attr( $attr['color'] ),
+			esc_attr( $attr['trans'] ),
+			esc_attr( $attr['autostart'] ),
+			/*
+			 * The input to json_encode() above can contain '&quot;'.
+			 *
+			 * For calls to json_encode() lacking the JSON_HEX_AMP option,
+			 * that '&quot;' is left unaltered.  Running '&quot;' through esc_attr()
+			 * also leaves it unaltered since esc_attr() does not double-encode.
+			 *
+			 * This means we end up with an attribute like
+			 * `data-gallery="{&quot;foo&quot;:&quot;&quot;&quot;}"`,
+			 * which is interpreted by the browser as `{"foo":"""}`,
+			 * which cannot be JSON decoded.
+			 *
+			 * The preferred workaround is to include the JSON_HEX_AMP (and friends)
+			 * options, but these are not available until 5.3.0.
+			 * Alternatively, we can use _wp_specialchars( , , , true ) instead of
+			 * esc_attr(), which will double-encode.
+			 *
+			 * Since we can't rely on JSON_HEX_AMP, we do both.
+			 */
+			_wp_specialchars( wp_check_invalid_utf8( $gallery ), ENT_QUOTES, false, true )
+		);
 
 		return $output;
 	}
@@ -192,8 +270,20 @@ class Jetpack_Slideshow_Shortcode {
 
 		wp_enqueue_script( 'jquery-cycle',  plugins_url( '/js/jquery.cycle.js', __FILE__ ) , array( 'jquery' ), '2.9999.8', true );
 		wp_enqueue_script( 'jetpack-slideshow', plugins_url( '/js/slideshow-shortcode.js', __FILE__ ), array( 'jquery-cycle' ), '20121214.1', true );
-		wp_enqueue_style( 'jetpack-slideshow', plugins_url( '/css/slideshow-shortcode.css', __FILE__ ) );
+		if( is_rtl() ) {
+			wp_enqueue_style( 'jetpack-slideshow', plugins_url( '/css/rtl/slideshow-shortcode-rtl.css', __FILE__ ) );
+		} else {
+			wp_enqueue_style( 'jetpack-slideshow', plugins_url( '/css/slideshow-shortcode.css', __FILE__ ) );
+		}
 
+		/**
+		 * Filters the slideshow Javascript spinner.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param array $args
+		 * - string - spinner - URL of the spinner image.
+		 */
 		wp_localize_script( 'jetpack-slideshow', 'jetpackSlideshowSettings', apply_filters( 'jetpack_js_slideshow_settings', array(
 			'spinner' => plugins_url( '/img/slideshow-loader.gif', __FILE__ ),
 		) ) );

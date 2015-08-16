@@ -124,7 +124,7 @@ class Jetpack_VideoPress {
 
 		// Ask WordPress.com for a list of VideoPress blogs
 		$result = $this->query( 'jetpack.vpGetBlogs' );
-		if ( ! is_wp_error() )
+		if ( ! is_wp_error( $result ) )
 			$options['blogs'] = $result;
 
 		// If there's at least one available blog, let's use it.
@@ -261,7 +261,7 @@ class Jetpack_VideoPress {
 				<table id="menu" class="form-table">
 					<tr>
 						<th scope="row" colspan="2">
-							<p><?php _e( 'Please note that the VideoPress module requires a WordPress.com account with an active <a href="http://store.wordpress.com/premium-upgrades/videopress/" target="_blank">VideoPress subscription</a>.</p>', 'jetpack' ); ?></p>
+							<p><?php _e( 'Please note that the VideoPress module requires a WordPress.com account with an active <a href="http://store.wordpress.com/premium-upgrades/videopress/" target="_blank">VideoPress subscription</a>.', 'jetpack' ); ?></p>
 						</th>
 					</tr>
 					<tr>
@@ -473,7 +473,7 @@ class Jetpack_VideoPress {
 			'order' => 'desc',
 			'paged' => 1,
 			's' => '',
-		), (array) $args );
+		), (array) $args, 'wpvideo' );
 
 		$args['posts_per_page'] = absint( $args['posts_per_page'] );
 
@@ -516,7 +516,7 @@ class Jetpack_VideoPress {
 
 			'vp_share' => null,
 			'vp_rating' => null,
-		), $changes );
+		), $changes, 'wpvideo' );
 
 		if ( ! is_null( $changes['vp_share'] ) )
 			$changes['vp_share'] = (bool) $changes['vp_share'];

@@ -10,6 +10,12 @@ class Jetpack_Omnisearch_Posts extends WP_List_Table {
 	function __construct( $post_type = 'post' ) {
 		$this->post_type = $post_type;
 		add_filter( 'omnisearch_results', array( $this, 'search'), 10, 2 );
+
+		// Push 'post_type_obj' to accepted fields for WP_List_Table (since WP 4.2)
+		global $wp_version;
+		if ( version_compare( $wp_version, '4.2-z', '>=' ) && $this->compat_fields && is_array( $this->compat_fields ) ) {
+			array_push( $this->compat_fields, 'post_type_obj', 'posts' );
+		}
 	}
 
 	function search( $results, $search_term ) {
@@ -26,7 +32,13 @@ class Jetpack_Omnisearch_Posts extends WP_List_Table {
 
 		$num_results = apply_filters( 'omnisearch_num_results', 5 );
 
-		$this->posts = get_posts( array( 's' => $search_term, 'post_type' => $this->post_type, 'posts_per_page' => $num_results, 'post_status' => 'any' ) );
+		$this->posts = get_posts( array(
+			's'                => $search_term,
+			'post_type'        => $this->post_type,
+			'posts_per_page'   => $num_results,
+			'post_status'      => 'any',
+			'suppress_filters' => false,
+		) );
 
 		$this->prepare_items();
 
@@ -59,13 +71,16 @@ class Jetpack_Omnisearch_Posts extends WP_List_Table {
 	function column_post_title( $post ) {
 		$actions = array();
 		if ( current_user_can( $this->post_type_obj->cap->edit_post, $post ) ) {
+			$post_title = sprintf( '<a href="%s">%s</a>', esc_url( get_edit_post_link( $post->ID ) ), wptexturize( $post->post_title ) );
 			$actions['edit'] = sprintf( '<a href="%s">%s</a>', esc_url( get_edit_post_link( $post->ID ) ), esc_html( $this->post_type_obj->labels->edit_item ) );
+		} else {
+			$post_title = wptexturize( $post->post_title );
 		}
 		if ( current_user_can( $this->post_type_obj->cap->delete_post, $post ) ) {
 			$actions['delete'] = sprintf( '<a href="%s">%s</a>', esc_url( get_delete_post_link( $post->ID ) ), esc_html__('Trash', 'jetpack') );
 		}
 		$actions['view'] = sprintf( '<a href="%s">%s</a>', esc_url( get_permalink( $post->ID ) ), esc_html( $this->post_type_obj->labels->view_item ) );
-		return wptexturize( $post->post_title ) . $this->row_actions( $actions );
+		return $post_title . $this->row_actions( $actions );
 	}
 
 	function column_date( $post ) {
@@ -119,4 +134,3 @@ class Jetpack_Omnisearch_Posts extends WP_List_Table {
 		}
 	}
 }
-
