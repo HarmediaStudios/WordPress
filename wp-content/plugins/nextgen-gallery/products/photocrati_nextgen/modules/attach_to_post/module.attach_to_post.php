@@ -6,7 +6,7 @@
  }
  */
 
-define('NEXTGEN_GALLERY_ATTACH_TO_POST_SLUG', 'ngg_attach_to_post');
+define('NGG_ATTACH_TO_POST_SLUG', 'nextgen-attach_to_post');
 
 class M_Attach_To_Post extends C_Base_Module
 {
@@ -23,7 +23,7 @@ class M_Attach_To_Post extends C_Base_Module
 			'photocrati-attach_to_post',
 			'Attach To Post',
 			'Provides the "Attach to Post" interface for displaying galleries and albums',
-			'0.7',
+			'0.10',
 			'http://www.nextgen-gallery.com',
 			'Photocrati Media',
 			'http://www.photocrati.com',
@@ -31,20 +31,31 @@ class M_Attach_To_Post extends C_Base_Module
 		);
 
 		include_once('class.attach_to_post_option_handler.php');
-		C_NextGen_Settings::add_option_handler('C_Attach_To_Post_Option_Handler', array(
+		C_NextGen_Settings::get_instance()->add_option_handler('C_Attach_To_Post_Option_Handler', array(
 			'attach_to_post_url',
 			'gallery_preview_url',
 			'attach_to_post_display_tab_js_url'
 		));
+        if (is_multisite()) C_NextGen_Global_Settings::get_instance()->add_option_handler('C_Attach_To_Post_Option_Handler', array(
+            'attach_to_post_url',
+            'gallery_preview_url',
+            'attach_to_post_display_tab_js_url'
+        ));
 
 		include_once('class.attach_to_post_installer.php');
 		C_Photocrati_Installer::add_handler($this->module_id, 'C_Attach_To_Post_Installer');
 		
-		$uri = strtolower($_SERVER['REQUEST_URI']);
-		
-		if (strpos($uri, '/nextgen-attach_to_post') !== false) {
-			define('WP_ADMIN', true);
-		}
+        // Set WP_ADMIN=true for better compatibility with certain themes & plugins.
+        // Unfortunately as of 3.9 in a multisite environment this causes problems.
+        if (self::is_atp_url() && (!defined('MULTISITE') || (defined('MULTISITE') && !MULTISITE)))
+            define('WP_ADMIN', true);
+    }
+
+    // We only register our display-type settings forms when IS_ADMIN, but Wordpress 3.9 introduced a problem
+    // with doing this on multisite sub-sites. Now we register our forms when is_atp_url() is true OR is_admin()
+    static function is_atp_url()
+    {
+        return (strpos(strtolower($_SERVER['REQUEST_URI']), '/nextgen-attach_to_post') !== false) ? TRUE : FALSE;
     }
 
     /**
@@ -127,7 +138,27 @@ class M_Attach_To_Post extends C_Base_Module
 		add_action('ngg_after_new_images_added',array(&$this, 'images_added_event'));
 		add_action('ngg_page_event',			array(&$this, 'nextgen_page_event'));
         add_action('ngg_manage_tags',           array(&$this, 'manage_tags_event'));
+
+        // We use two hooks here because we need it to execute for both the post-new.php
+        // page and ATP interface
+        add_action('plugins_loaded',            array(&$this, 'fix_ie11'), 1);
+        add_action('admin_init',                array(&$this, 'fix_ie11'), PHP_INT_MAX-1);
+        add_action('admin_enqueue_scripts',     array(&$this, 'fix_ie11'), 1);
+        add_action('admin_enqueue_scripts',     array(&$this, 'fix_ie11'), PHP_INT_MAX-1);
 	}
+
+    /**
+     * WordPress sets the X-UA-Compatible header to IE=edge. Unfortunately, this causes problems with Plupload,
+     * so we have the send this header
+     */
+    function fix_ie11()
+    {
+        if ((array_search('attach_to_post', array_keys($_REQUEST)) !== FALSE OR strpos($_SERVER['REQUEST_URI'], NGG_ATTACH_TO_POST_SLUG) !== FALSE OR strpos($_SERVER['REQUEST_URI'], 'wp-admin/post.php') !== FALSE OR strpos($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') !== FALSE)) {
+            if (!headers_sent()) {
+                header('X-UA-Compatible: IE=EmulateIE10');
+            }
+        }
+    }
 
 	/**
      * Substitutes the gallery placeholder content with the gallery type frontend
@@ -136,26 +167,10 @@ class M_Attach_To_Post extends C_Base_Module
      */
     function substitute_placeholder_imgs($content)
     {
-		// Get some utilities
-		$mapper = $this->get_registry()->get_utility('I_Displayed_Gallery_Mapper');
-		$router	= $this->get_registry()->get_utility('I_Router');
-
-		// To match ATP entries we compare the stored url against a generic path
-		// We must check HTTP and HTTPS as well as permalink and non-permalink forms
-		$preview_url = parse_url($router->join_paths(
-			$router->remove_url_segment('index.php', $router->get_base_url()),
-			'/nextgen-attach_to_post/preview'
-		));
-		$preview_url = preg_quote($preview_url['host'] . $preview_url['path'], '#');
-
-		$alt_preview_url = parse_url($router->join_paths(
-			$router->remove_url_segment('index.php', $router->get_base_url()),
-			'index.php/nextgen-attach_to_post/preview'
-		));
-		$alt_preview_url = preg_quote($alt_preview_url['host'] . $alt_preview_url['path'], '#');
-
 		// The placeholder MUST have a gallery instance id
-		if (preg_match_all("#<img.*http(s)?://({$preview_url}|{$alt_preview_url})/id--(\\d+).*\\/>#mi", $content, $matches, PREG_SET_ORDER)) {
+        if (preg_match_all("#<img.*http(s)?://(.*)/" . NGG_ATTACH_TO_POST_SLUG . "/preview/id--(\\d+).*>#mi", $content, $matches, PREG_SET_ORDER))
+        {
+            $mapper = C_Displayed_Gallery_Mapper::get_instance();
 			foreach ($matches as $match) {
 				// Find the displayed gallery
 				$displayed_gallery_id = $match[3];
@@ -219,6 +234,7 @@ class M_Attach_To_Post extends C_Base_Module
             if (get_user_option('rich_editing') == 'true') {
                 add_filter('mce_buttons', array(&$this, 'add_attach_to_post_button'));
                 add_filter('mce_external_plugins', array(&$this, 'add_attach_to_post_tinymce_plugin'));
+                add_filter('wp_mce_translation', array($this, 'add_attach_to_post_tinymce_i18n'));
             }
         }
 	}
@@ -248,10 +264,29 @@ class M_Attach_To_Post extends C_Base_Module
 	 */
 	function add_attach_to_post_tinymce_plugin($plugins)
 	{
-		$router = $this->get_registry()->get_utility('I_Router');
-		$plugins[$this->attach_to_post_tinymce_plugin] = $router->get_static_url('photocrati-attach_to_post#ngg_attach_to_post_tinymce_plugin.js');
+        global $wp_version;
+        $router = $this->get_registry()->get_utility('I_Router');
+
+        if ($wp_version >= 3.9)
+            $file = $router->get_static_url('photocrati-attach_to_post#ngg_attach_to_post_tinymce_plugin.js');
+        else
+            $file = $router->get_static_url('photocrati-attach_to_post#ngg_attach_to_post_tinymce_plugin_wp38_compat.js');
+
+		$plugins[$this->attach_to_post_tinymce_plugin] = $file;
 		return $plugins;
 	}
+
+
+    /**
+     * Adds the Attach To Post TinyMCE i18n strings
+     * @param $mce_translation
+     * @return mixed
+     */
+    function add_attach_to_post_tinymce_i18n($mce_translation)
+    {
+        $mce_translation['ngg_attach_to_post.title'] = __('Attach NextGEN Gallery to Post', 'nggallery');
+        return $mce_translation;
+    }
 
 
 	/**
@@ -303,12 +338,13 @@ class M_Attach_To_Post extends C_Base_Module
 	function new_gallery_event($gallery_id)
 	{
         $gallery = $this->get_registry()->get_utility('I_Gallery_Mapper')->find($gallery_id);
-
-        $this->_get_frame_event_publisher()->add_event(array(
-			'event'		=>	'new_gallery',
-			'gallery_id'=>	intval($gallery_id),
-            'gallery_title'   =>  $gallery->title
-		));
+		if ($gallery) {
+			$this->_get_frame_event_publisher()->add_event(array(
+				'event'		=>	'new_gallery',
+				'gallery_id'=>	intval($gallery_id),
+				'gallery_title'   =>  $gallery->title
+			));
+		}
 	}
 
 	/**

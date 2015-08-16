@@ -2,14 +2,14 @@
 
 class A_WordPress_Router extends Mixin
 {
-	var $_site_url = FALSE;
-    var $_home_url = FALSE;
-
 	function initialize()
 	{
 		// Set context to path if subdirectory install
-		$parts = parse_url($this->object->get_base_url());
-		if (isset($parts['path'])) $this->object->context = $parts['path'];
+		$parts = parse_url($this->object->get_base_url(FALSE));
+		if (isset($parts['path'])) {
+            $parts = explode('/index.php', $parts['path']);
+			$this->object->context = array_shift($parts);
+		}
 
 
 		$this->object->add_post_hook(
@@ -56,40 +56,90 @@ class A_WordPress_Router extends Mixin
 		return $retval;
 	}
 
-
-	function get_base_url($site_url = FALSE)
+	function _add_index_dot_php_to_url($url)
 	{
-        $retval = NULL;
-        if ($site_url)
-        {
-            if (!$this->_site_url) {
-                $this->_site_url = site_url();
-				$pattern = get_option('permalink_structure');
-                if (!$pattern OR strpos($pattern, '/index.php') !== FALSE) {
-                    $this->_site_url = $this->object->join_paths(
-                        $this->_site_url, '/index.php'
-                    );
-                }
-            }
-            $retval = $this->_site_url;
-        }
-        else {
-            if (!$this->_home_url) {
-                $this->_home_url = home_url();
-				$pattern = get_option('permalink_structure');
-				if (!$pattern OR strpos($pattern, '/index.php') !== FALSE) {
-                    $this->_home_url = $this->object->join_paths(
-                        $this->_home_url, '/index.php'
-                    );
-                }
-            }
-            $retval = $this->_home_url;
-        }
-        
-    if ($this->object->is_https()) {
-    	$retval = preg_replace('/^http:\\/\\//i', 'https://', $retval, 1);
-    }
+		if (strpos($url, '/index.php') === FALSE) {
+			$pattern = get_option('permalink_structure');
+			if (!$pattern OR strpos($pattern, '/index.php') !== FALSE) {
+				$url = $this->object->join_paths($url, '/index.php');
+			}
+		}
 
-		return $retval;
+		return $url;
 	}
+
+
+    function get_base_url($site_url = FALSE)
+    {
+        $retval             = NULL;
+        $add_index_dot_php  = TRUE;
+
+        switch ($site_url) {
+            case $site_url === TRUE:
+            case 'site':
+                $retval = site_url();
+                break;
+            case $site_url === FALSE:
+            case 'home':
+                $retval = home_url();
+                break;
+            case 'plugins':
+            case 'plugin':
+                $retval = plugins_url();
+                $add_index_dot_php = FALSE;
+                break;
+            case 'plugins_mu':
+            case 'plugin_mu':
+                $retval = WPMU_PLUGIN_URL;
+                $retval = set_url_scheme($retval);
+                $retval = apply_filters( 'plugins_url', $retval, '', '');
+                $add_index_dot_php = FALSE;
+                break;
+            case 'templates':
+            case 'template':
+            case 'themes':
+            case 'theme':
+                $retval = get_template_directory_uri();
+                $add_index_dot_php = FALSE;
+                break;
+            case 'styles':
+            case 'style':
+            case 'stylesheets':
+            case 'stylesheet':
+                $retval = get_stylesheet_directory_uri();
+                $add_index_dot_php = FALSE;
+                break;
+            case 'content':
+                $retval = content_url();
+                $add_index_dot_php = FALSE;
+                break;
+            case 'root':
+                $retval = get_option('home');
+                if (is_ssl())
+                    $scheme = 'https';
+                else
+                    $scheme = parse_url($retval, PHP_URL_SCHEME);
+                $retval = set_url_scheme($retval, $scheme);
+                break;
+            case 'gallery':
+            case 'galleries':
+                $root_type = defined('NGG_GALLERY_ROOT_TYPE') ? NGG_GALLERY_ROOT_TYPE : 'site';
+                $add_index_dot_php = FALSE;
+                if ($root_type === 'content')
+                    $retval = content_url();
+                else
+                    $retval = site_url();
+                break;
+            default:
+                $retval = site_url();
+        }
+
+        if ($add_index_dot_php)
+            $retval = $this->_add_index_dot_php_to_url($retval);
+
+        if ($this->object->is_https())
+            $retval = preg_replace('/^http:\\/\\//i', 'https://', $retval, 1);
+
+        return $retval;
+    }
 }

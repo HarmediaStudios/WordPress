@@ -11,12 +11,13 @@ class C_NextGen_Settings_Installer
 		$this->site_settings = C_NextGen_Global_Settings::get_instance();
 
 		$this->_global_settings = array(
-			'gallerypath' => 'wp-content/blogs.dir/%BLOG_ID%/files/',
+            'gallerypath'   => implode(DIRECTORY_SEPARATOR, array('wp-content', 'uploads', 'sites', '%BLOG_ID%', 'nggallery')).DIRECTORY_SEPARATOR,
 			'wpmuCSSfile' => 'nggallery.css',
 			'wpmuStyle'   => FALSE,
 			'wpmuRoles'   => FALSE,
 			'wpmuImportFolder' => FALSE,
 			'wpmuZipUpload'    => FALSE,
+            'wpmuQuotaCheck'   => FALSE,
 			'datamapper_driver'     => 'custom_table_datamapper',
 			'gallerystorage_driver' => 'ngglegacy_gallery_storage',
 			'maximum_entity_count'  => 500,
@@ -24,7 +25,7 @@ class C_NextGen_Settings_Installer
 		);
 
 		$this->_local_settings = array(
-			'gallerypath'	 => 'wp-content/gallery/',
+			'gallerypath'	 => 'wp-content'.DIRECTORY_SEPARATOR.'gallery'.DIRECTORY_SEPARATOR,
 			'deleteImg'      => True,              // delete Images
 			'swfUpload'      => True,              // activate the batch upload
 			'usePermalinks'  => False,             // use permalinks for parameters
@@ -32,13 +33,14 @@ class C_NextGen_Settings_Installer
 			'graphicLibrary' => 'gd',              // default graphic library
 			'imageMagickDir' => '/usr/local/bin/', // default path to ImageMagick
 			'useMediaRSS'    => False,             // activate the global Media RSS file
+            'galleries_in_feeds' => FALSE,         // enables rendered gallery output in rss/atom feeds
 			'usePicLens'     => False,             // activate the PicLens Link for galleries
 
 			// Tags / categories
 			'activateTags' => 0,  // append related images
 			'appendType'   => 'tags', // look for category or tags
 			'maxImages'    => 7,      // number of images toshow
-			'relatedHeading'   => __('<h3>Related Images:</h3>', 'nggallery'), // subheading for related images
+			'relatedHeading'   => '<h3>' . __('Related Images', 'nggallery') . ':</h3>', // subheading for related images
 
 			// Thumbnail Settings
 			'thumbwidth'   => 120,  // Thumb Width
@@ -71,6 +73,7 @@ class C_NextGen_Settings_Installer
 			// Thumbnail Effect
 			'thumbEffect'  => 'fancybox', // select effect
 			'thumbCode'    => 'class="ngg-fancybox" rel="%GALLERY_NAME%"',
+			'thumbEffectContext'  => 'nextgen_images', // select effect
 
 			// Watermark settings
 			'wmPos'    => 'botRight',             // Postion

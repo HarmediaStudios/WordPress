@@ -73,7 +73,7 @@ class Mixin_Router extends Mixin
 			$retval = $this->object->construct_url_from_parts($parts);
 
 		}
-		return $retval;
+		return str_replace("\\", "/", $retval);
 	}
 
 	/**
@@ -85,9 +85,9 @@ class Mixin_Router extends Mixin
 	function get_relative_url($uri='/', $with_qs=TRUE)
 	{
 		$url = $this->object->get_url($uri, $with_qs=TRUE);
-		$retval = str_replace($this->object->get_base_url(), '', $url);
-		if (strpos($retval, '/') !== 0) $retval = '/'.$retval;
-		return $retval;
+        if ($url !== '/')
+		    $retval = str_replace($this->object->get_base_url(), '', $url);
+        return '/'.lrtim($retval, '/');
 	}
 
 
@@ -106,14 +106,13 @@ class Mixin_Router extends Mixin
 		$base_url = $this->object->remove_url_segment('/index.php', $base_url);
 
 		$path = str_replace(
-			$fs->get_document_root(),
+			$fs->get_document_root('plugins'),
 			$base_url,
 			$path
 		);
 
         // adjust for possible windows hosts
-        $path = str_replace('\\', '/', $path);
-        return $path;
+        return str_replace("\\", '/', $path);
 	}
 
 
@@ -142,7 +141,7 @@ class Mixin_Router extends Mixin
 	{
 		$protocol = $this->object->is_https()? 'https://' : 'http://';
 		$retval = "{$protocol}{$_SERVER['SERVER_NAME']}{$this->object->context}";
-		return untrailingslashit($retval);
+		return str_replace("\\", "/", rtrim($retval, "/\\"));
 	}
 
 	/**

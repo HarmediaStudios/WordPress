@@ -24,15 +24,21 @@ class nggAdmin{
 	function create_gallery($title, $defaultpath, $output = true) {
 
 		global $user_ID;
+        $fs       = C_Fs::get_instance();
+        $registry = C_Component_Registry::get_instance();
+        $storage  = $registry->get_utility('I_Gallery_Storage');
 
-		// get the current user ID
+        // get the current user ID
 		get_currentuserinfo();
 
 		//cleanup pathname
 		$name = sanitize_file_name( sanitize_title($title)  );
 		$name = apply_filters('ngg_gallery_name', $name);
-		$nggRoot = WINABSPATH . $defaultpath;
 		$txt = '';
+
+        $galleryObj = new stdClass;
+        $galleryObj->path = '';
+        $nggRoot = $storage->get_gallery_abspath($galleryObj);
 
 		// No gallery name ?
 		if ( empty($name) ) {
@@ -40,10 +46,14 @@ class nggAdmin{
 			return false;
 		}
 
+        $galleryObj = new stdClass;
+        $galleryObj->path = $fs->join_paths($defaultpath, $name);
+        $gallery_path = $storage->get_gallery_abspath($galleryObj);
+
 		// check for main folder
 		if ( !is_dir($nggRoot) ) {
 			if ( !wp_mkdir_p( $nggRoot ) ) {
-				$txt  = __('Directory', 'nggallery').' <strong>' . esc_html( $defaultpath ) . '</strong> '.__('didn\'t exist. Please create first the main gallery folder ', 'nggallery').'!<br />';
+				$txt  = __('Directory', 'nggallery').' <strong>' . esc_html( $nggRoot ) . '</strong> '.__('didn\'t exist. Please create first the main gallery folder ', 'nggallery').'!<br />';
 				$txt .= __('Check this link, if you didn\'t know how to set the permission :', 'nggallery').' <a href="http://codex.wordpress.org/Changing_File_Permissions">http://codex.wordpress.org/Changing_File_Permissions</a> ';
 				if ($output) nggGallery::show_error($txt);
 				return false;
@@ -52,43 +62,45 @@ class nggAdmin{
 
 		// check for permission settings, Safe mode limitations are not taken into account.
 		if ( !is_writeable( $nggRoot ) ) {
-			$txt  = __('Directory', 'nggallery').' <strong>' . esc_html( $defaultpath ) . '</strong> '.__('is not writeable !', 'nggallery').'<br />';
+			$txt  = __('Directory', 'nggallery').' <strong>' . esc_html( $nggRoot ) . '</strong> '.__('is not writeable !', 'nggallery').'<br />';
 			$txt .= __('Check this link, if you didn\'t know how to set the permission :', 'nggallery').' <a href="http://codex.wordpress.org/Changing_File_Permissions">http://codex.wordpress.org/Changing_File_Permissions</a> ';
 			if ($output) nggGallery::show_error($txt);
 			return false;
 		}
 
 		// 1. Check for existing folder
-		if ( is_dir(WINABSPATH . $defaultpath . $name ) && !(SAFE_MODE) ) {
+		if ( is_dir($gallery_path) && !(SAFE_MODE) ) {
 			$suffix = 1;
 			do {
 				$alt_name = substr ($name, 0, 200 - ( strlen( $suffix ) + 1 ) ) . "_$suffix";
-				$dir_check = is_dir(WINABSPATH . $defaultpath . $alt_name );
+                $galleryObj->path = $fs->join_paths($defaultpath, $alt_name);
+                $gallery_path = $storage->get_gallery_abspath($galleryObj);
+				$dir_check = is_dir($gallery_path);
 				$suffix++;
 			} while ( $dir_check );
 			$name = $alt_name;
 		}
-        // define relative path to gallery inside wp root folder
-        $nggpath = $defaultpath . $name;
+
+        $thumb_path = $fs->join_paths($gallery_path, 'thumbs');
 
 		// 2. Create new gallery folder
-		if ( !wp_mkdir_p (WINABSPATH . $nggpath) )
-		  $txt  = __('Unable to create directory ', 'nggallery') . esc_html( $nggpath ) . '!<br />';
+		if ( !wp_mkdir_p ($gallery_path) )
+		  $txt  = __('Unable to create directory ', 'nggallery') . esc_html($gallery_path) . '!<br />';
 
 		// 3. Check folder permission
-		if ( !is_writeable(WINABSPATH . $nggpath ) )
-			$txt .= __('Directory', 'nggallery').' <strong>' . esc_html( $nggpath ) . '</strong> '.__('is not writeable !', 'nggallery').'<br />';
+		if ( !is_writeable($gallery_path) )
+			$txt .= __('Directory', 'nggallery').' <strong>' . esc_html($gallery_path) . '</strong> '.__('is not writeable !', 'nggallery').'<br />';
 
 		// 4. Now create thumbnail folder inside
-		if ( !is_dir(WINABSPATH . $nggpath . '/thumbs') ) {
-			if ( !wp_mkdir_p ( WINABSPATH . $nggpath . '/thumbs') )
-				$txt .= __('Unable to create directory ', 'nggallery').' <strong>' . esc_html( $nggpath ) . '/thumbs !</strong>';
+		if ( !is_dir($thumb_path) ) {
+			if ( !wp_mkdir_p ($thumb_path) )
+				$txt .= __('Unable to create directory ', 'nggallery').' <strong>' . esc_html($thumb_path) . '/thumbs !</strong>';
 		}
 
 		if (SAFE_MODE) {
 			$help  = __('The server setting Safe-Mode is on !', 'nggallery');
-			$help .= '<br />'.__('If you have problems, please create directory', 'nggallery').' <strong>' . esc_html( $nggpath ) . '</strong> ';
-			$help .= __('and the thumbnails directory', 'nggallery').' <strong>' . esc_html( $nggpath ) . '/thumbs</strong> '.__('with permission 777 manually !', 'nggallery');
+			$help .= '<br />'.__('If you have problems, please create directory', 'nggallery').' <strong>' . esc_html($gallery_path) . '</strong> ';
+			$help .= __('and the thumbnails directory', 'nggallery').' <strong>' . esc_html($thumb_path) . '</strong> '.__('with permission 777 manually !', 'nggallery');
 			if ($output) nggGallery::show_message($help);
 		}
 
@@ -96,15 +108,15 @@ class nggAdmin{
 		if ( !empty($txt) ) {
 			if (SAFE_MODE) {
 			// for safe_mode , better delete folder, both folder must be created manually
-				@rmdir(WINABSPATH . $nggpath . '/thumbs');
-				@rmdir(WINABSPATH . $nggpath);
+				@rmdir($thumb_path);
+				@rmdir($gallery_path);
 			}
 			if ($output) nggGallery::show_error($txt);
 			return false;
 		}
 
         // now add the gallery to the database
-        $galleryID = nggdb::add_gallery($title, $nggpath, '', 0, 0, $user_ID );
+        $galleryID = nggdb::add_gallery($title, $defaultpath . $name, '', 0, 0, $user_ID );
 		// here you can inject a custom function
 		do_action('ngg_created_new_gallery', $galleryID);
 
@@ -122,109 +134,6 @@ class nggAdmin{
 			if ($output) nggGallery::show_message($message);
 		}
 		return true;
-	}
-
-	/**
-	 * nggAdmin::import_gallery()
-	 * TODO: Check permission of existing thumb folder & images
-	 *
-	 * @class nggAdmin
-	 * @param string $galleryfolder contains relative path to the gallery itself
-	 * @return void
-	 */
-	function import_gallery($galleryfolder) {
-
-		global $wpdb, $user_ID;
-
-		// get the current user ID
-		get_currentuserinfo();
-
-		$created_msg = '';
-
-		// remove trailing slash at the end, if somebody use it
-		$galleryfolder = untrailingslashit($galleryfolder);
-		$gallerypath = WINABSPATH . $galleryfolder;
-
-		if (!is_dir($gallerypath)) {
-			nggGallery::show_error(__('Directory', 'nggallery').' <strong>' . esc_html( $gallerypath ) .'</strong> '.__('doesn&#96;t exist!', 'nggallery'));
-			return ;
-		}
-
-		// read list of images
-		$new_imageslist = nggAdmin::scandir($gallerypath);
-
-		if (empty($new_imageslist)) {
-			nggGallery::show_message(__('Directory', 'nggallery').' <strong>' . esc_html( $gallerypath ) . '</strong> '.__('contains no pictures', 'nggallery'));
-			return;
-		}
-
-		// check & create thumbnail folder
-		if ( !nggGallery::get_thumbnail_folder($gallerypath) )
-			return;
-
-		// take folder name as gallery name
-		$galleryname = basename($galleryfolder);
-		$galleryname = apply_filters('ngg_gallery_name', $galleryname);
-
-		// check for existing gallery folder
-		$gallery_id = $wpdb->get_var("SELECT gid FROM $wpdb->nggallery WHERE path = '$galleryfolder' ");
-
-		if (!$gallery_id) {
-            // now add the gallery to the database
-            $gallery_id = nggdb::add_gallery( $galleryname, $galleryfolder, '', 0, 0, $user_ID );
-			if (!$gallery_id) {
-				nggGallery::show_error(__('Database error. Could not add gallery!','nggallery'));
-				return;
-			}
-            else {
-                do_action('ngg_created_new_gallery', $gallery_id);
-            }
-			$created_msg = _n( 'Gallery', 'Galleries', 1, 'nggallery' ) . ' <strong>' . esc_html( $galleryname ) . '</strong> ' . __('successfully created!','nggallery') . '<br />';
-		}
-
-		// Look for existing image list
-		$old_imageslist = $wpdb->get_col("SELECT filename FROM $wpdb->nggpictures WHERE galleryid = '$gallery_id' ");
-
-		// if no images are there, create empty array
-		if ($old_imageslist == NULL)
-			$old_imageslist = array();
-
-		// check difference
-		$new_images = array_diff($new_imageslist, $old_imageslist);
-
-		// all images must be valid files
-		foreach($new_images as $key => $picture) {
-
-            // filter function to rename/change/modify image before
-            $picture = apply_filters('ngg_pre_add_new_image', $picture, $gallery_id);
-            $new_images[$key] = $picture;
-
-			if (!@getimagesize($gallerypath . '/' . $picture) ) {
-				unset($new_images[$key]);
-				@unlink($gallerypath . '/' . $picture);
-			}
-		}
-
-		// add images to database
-		$image_ids = nggAdmin::add_Images($gallery_id, $new_images);
-        do_action('ngg_after_new_images_added', $gallery_id, $image_ids);
-
-		//add the preview image if needed
-		nggAdmin::set_gallery_preview ( $gallery_id );
-
-		// now create thumbnails
-		nggAdmin::do_ajax_operation( 'create_thumbnail' , $image_ids, __('Create new thumbnails','nggallery') );
-
-		//TODO:Message will not shown, because AJAX routine require more time, message should be passed to AJAX
-		$message  = $created_msg . count($image_ids) .__(' picture(s) successfully added','nggallery');
-		$message .= ' [<a href="' . admin_url() . 'admin.php?page=nggallery-manage-gallery&mode=edit&gid=' . $gallery_id . '" >';
-		$message .=  __('Edit gallery','nggallery');
-		$message .= '</a>]';
-
-		nggGallery::show_message($message);
-
-		return;
-
 	}
 
 	/**
@@ -578,7 +487,7 @@ class nggAdmin{
 	 * @param array|int $imagesIds
 	 * @return string result code
 	 */
-	function import_MetaData($imagesIds) {
+	static function import_MetaData($imagesIds) {
 
 		global $wpdb;
 
@@ -825,7 +734,7 @@ class nggAdmin{
 		}
 
 		// set complete folder path
-		$newfolder = WINABSPATH . $foldername;
+		$newfolder = ABSPATH . $foldername;
 
 		// check first if the traget folder exist
 		if (!is_dir($newfolder)) {
@@ -855,6 +764,113 @@ class nggAdmin{
 
 		return true;
 	}
+
+    /**
+     * nggAdmin::import_gallery()
+     * TODO: Check permission of existing thumb folder & images
+     *
+     * @class nggAdmin
+     * @param string $galleryfolder contains relative path to the gallery itself
+     * @return void
+     */
+    function import_gallery($galleryfolder, $gallery_id=NULL) {
+
+        global $wpdb, $user_ID;
+
+        // get the current user ID
+        get_currentuserinfo();
+
+        $created_msg = '';
+
+        // remove trailing slash at the end, if somebody use it
+        $galleryfolder = untrailingslashit($galleryfolder);
+
+        $fs = C_Fs::get_instance();
+
+        if (is_null($gallery_id)) {
+            $gallerypath = $fs->join_paths($fs->get_document_root('content'), $galleryfolder);
+        } else {
+            $storage = C_Component_Registry::get_instance()->get_utility('I_Gallery_Storage');
+            $gallerypath = $storage->get_gallery_abspath($gallery_id);
+        }
+
+        if (!is_dir($gallerypath)) {
+            nggGallery::show_error(__('Directory', 'nggallery').' <strong>' . esc_html( $gallerypath ) .'</strong> '.__('doesn&#96;t exist!', 'nggallery'));
+            return ;
+        }
+
+        // read list of images
+        $new_imageslist = nggAdmin::scandir($gallerypath);
+
+        if (empty($new_imageslist)) {
+            nggGallery::show_message(__('Directory', 'nggallery').' <strong>' . esc_html( $gallerypath ) . '</strong> '.__('contains no pictures', 'nggallery'));
+            return;
+        }
+
+        // take folder name as gallery name
+        $galleryname = basename($galleryfolder);
+        $galleryname = apply_filters('ngg_gallery_name', $galleryname);
+
+        // check for existing gallery folder
+        if (is_null($gallery_id))
+            $gallery_id = $wpdb->get_var("SELECT gid FROM $wpdb->nggallery WHERE path = '$galleryfolder' ");
+
+        if (!$gallery_id) {
+            // now add the gallery to the database
+            $gallery_id = nggdb::add_gallery( $galleryname, $galleryfolder, '', 0, 0, $user_ID );
+            if (!$gallery_id) {
+                nggGallery::show_error(__('Database error. Could not add gallery!','nggallery'));
+                return;
+            }
+            else {
+                do_action('ngg_created_new_gallery', $gallery_id);
+            }
+            $created_msg = _n( 'Gallery', 'Galleries', 1, 'nggallery' ) . ' <strong>' . esc_html( $galleryname ) . '</strong> ' . __('successfully created!','nggallery') . '<br />';
+        }
+
+        // Look for existing image list
+        $old_imageslist = $wpdb->get_col("SELECT filename FROM $wpdb->nggpictures WHERE galleryid = '$gallery_id' ");
+
+        // if no images are there, create empty array
+        if ($old_imageslist == NULL)
+            $old_imageslist = array();
+
+        // check difference
+        $new_images = array_diff($new_imageslist, $old_imageslist);
+
+        // all images must be valid files
+        foreach($new_images as $key => $picture) {
+
+            // filter function to rename/change/modify image before
+            $picture = apply_filters('ngg_pre_add_new_image', $picture, $gallery_id);
+            $new_images[$key] = $picture;
+
+            if (!@getimagesize($gallerypath . '/' . $picture) ) {
+                unset($new_images[$key]);
+                @unlink($gallerypath . '/' . $picture);
+            }
+        }
+
+        // add images to database
+        $image_ids = nggAdmin::add_Images($gallery_id, $new_images);
+        do_action('ngg_after_new_images_added', $gallery_id, $image_ids);
+
+        //add the preview image if needed
+        nggAdmin::set_gallery_preview ( $gallery_id );
+
+        // now create thumbnails
+        nggAdmin::do_ajax_operation( 'create_thumbnail' , $image_ids, __('Create new thumbnails','nggallery') );
+
+        //TODO:Message will not shown, because AJAX routine require more time, message should be passed to AJAX
+        $message  = $created_msg . count($image_ids) .__(' picture(s) successfully added','nggallery');
+        $message .= ' [<a href="' . admin_url() . 'admin.php?page=nggallery-manage-gallery&mode=edit&gid=' . $gallery_id . '" >';
+        $message .=  __('Edit gallery','nggallery');
+        $message .= '</a>]';
+
+        nggGallery::show_message($message);
+
+        return;
+    }
 
 	/**
 	 * Function for uploading of images via the upload form
@@ -1006,7 +1022,7 @@ class nggAdmin{
 		}
 
 		// read list of images
-		$imageslist = nggAdmin::scandir( WINABSPATH . $gallery->path );
+		$imageslist = nggAdmin::scandir( ABSPATH . $gallery->path );
 
 		// check if this filename already exist
 		$i = 0;
@@ -1014,11 +1030,11 @@ class nggAdmin{
 			$filename = $filepart['filename'] . '_' . $i++ . '.' . $filepart['extension'];
 		}
 
-		$dest_file = WINABSPATH . $gallery->path . '/' . $filename;
+		$dest_file = ABSPATH . $gallery->path . '/' . $filename;
 
 		// save temp file to gallery
 		if ( !@move_uploaded_file($_FILES["Filedata"]['tmp_name'], $dest_file) ){
-			nggAdmin::check_safemode(WINABSPATH . $gallery->path);
+			nggAdmin::check_safemode(ABSPATH . $gallery->path);
 			return __('Error, the file could not be moved to : ','nggallery'). esc_html( $dest_file );
 		}
 
@@ -1092,187 +1108,6 @@ class nggAdmin{
 
 		return true;
 
-	}
-
-	/**
-	 * Move images from one folder to another
-	 *
-	 * @class nggAdmin
-	 * @param array|int $pic_ids ID's of the images
-	 * @param int $dest_gid destination gallery
-	 * @return void
-	 */
-	function move_images($pic_ids, $dest_gid) {
-
-		$errors = '';
-		$count = 0;
-
-		if ( !is_array($pic_ids) )
-			$pic_ids = array($pic_ids);
-
-		// Get destination gallery
-		$destination  = nggdb::find_gallery( $dest_gid );
-		$dest_abspath = WINABSPATH . $destination->path;
-
-		if ( $destination == null ) {
-			nggGallery::show_error(__('The destination gallery does not exist','nggallery'));
-			return;
-		}
-
-		// Check for folder permission
-		if ( !is_writeable( $dest_abspath ) ) {
-			$message = sprintf(__('Unable to write to directory %s. Is this directory writable by the server?', 'nggallery'), esc_html( $dest_abspath ) );
-			nggGallery::show_error($message);
-			return;
-		}
-
-		// Get pictures
-		$images = nggdb::find_images_in_list($pic_ids);
-
-		foreach ($images as $image) {
-
-			$i = 0;
-			$tmp_prefix = '';
-
-			$destination_file_name = $image->filename;
-			// check if the filename already exist, then we add a copy_ prefix
-			while (file_exists( $dest_abspath . '/' . $destination_file_name)) {
-				$tmp_prefix = 'copy_' . ($i++) . '_';
-				$destination_file_name = $tmp_prefix . $image->filename;
-			}
-
-			$destination_path = $dest_abspath . '/' . $destination_file_name;
-			$destination_thumbnail = $dest_abspath . '/thumbs/thumbs_' . $destination_file_name;
-
-			// Move files
-			if ( !@rename($image->imagePath, $destination_path) ) {
-				$errors .= sprintf(__('Failed to move image %1$s to %2$s','nggallery'),
-					'<strong>' . esc_html( $image->filename ) . '</strong>', esc_html( $destination_path ) ) . '<br />';
-				continue;
-			}
-
-            // Move backup file, if possible
-            @rename($image->imagePath . '_backup', $destination_path . '_backup');
-			// Move the thumbnail, if possible
-			@rename($image->thumbPath, $destination_thumbnail);
-
-			// Change the gallery id in the database , maybe the filename
-			if ( nggdb::update_image($image->pid, $dest_gid, $destination_file_name) )
-				$count++;
-
-		}
-
-		if ( $errors != '' )
-			nggGallery::show_error($errors);
-
-		$link = '<a href="' . admin_url() . 'admin.php?page=nggallery-manage-gallery&mode=edit&gid=' . $destination->gid . '" >' . esc_html( $destination->title ) . '</a>';
-		$messages  = sprintf(__('Moved %1$s picture(s) to gallery : %2$s .','nggallery'), $count, $link);
-		nggGallery::show_message($messages);
-
-		return;
-	}
-
-	/**
-	 * Copy images to another gallery
-	 *
-	 * @class nggAdmin
-	 * @param array|int $pic_ids ID's of the images
-	 * @param int $dest_gid destination gallery
-	 * @return void
-	 */
-	function copy_images($pic_ids, $dest_gid) {
-
-        require_once(NGGALLERY_ABSPATH . '/lib/meta.php');
-
-		$errors = $messages = '';
-
-		if (!is_array($pic_ids))
-			$pic_ids = array($pic_ids);
-
-		// Get destination gallery
-		$destination = nggdb::find_gallery( $dest_gid );
-		if ( $destination == null ) {
-			nggGallery::show_error(__('The destination gallery does not exist','nggallery'));
-			return;
-		}
-
-		// Check for folder permission
-		if (!is_writeable(WINABSPATH.$destination->path)) {
-			$message = sprintf(__('Unable to write to directory %s. Is this directory writable by the server?', 'nggallery'), esc_html( WINABSPATH.$destination->path) );
-			nggGallery::show_error($message);
-			return;
-		}
-
-		// Get pictures
-		$images = nggdb::find_images_in_list($pic_ids);
-		$destination_path = WINABSPATH . $destination->path;
-
-		foreach ($images as $image) {
-			// WPMU action
-			if ( nggWPMU::check_quota() )
-				return;
-
-			$i = 0;
-			$tmp_prefix = '';
-			$destination_file_name = $image->filename;
-			while (file_exists($destination_path . '/' . $destination_file_name)) {
-				$tmp_prefix = 'copy_' . ($i++) . '_';
-				$destination_file_name = $tmp_prefix . $image->filename;
-			}
-
-			$destination_file_path = $destination_path . '/' . $destination_file_name;
-			$destination_thumb_file_path = $destination_path . '/' . $image->thumbFolder . $image->thumbPrefix . $destination_file_name;
-
-			// Copy files
-			if ( !@copy($image->imagePath, $destination_file_path) ) {
-				$errors .= sprintf(__('Failed to copy image %1$s to %2$s','nggallery'),
-					esc_html( $image->filename ), esc_html( $destination_file_path) ) . '<br />';
-				continue;
-			}
-
-            // Copy backup file, if possible
-            @copy($image->imagePath . '_backup', $destination_file_path . '_backup');
-            // Copy the thumbnail if possible
-			@copy($image->thumbPath, $destination_thumb_file_path);
-
-			// Create new database entry for the image
-			$new_pid = nggdb::insert_image( $destination->gid, $destination_file_name, $image->alttext, $image->description, $image->exclude);
-
-			if (!isset($new_pid)) {
-				$errors .= sprintf(__('Failed to copy database row for picture %s','nggallery'), $image->pid) . '<br />';
-				continue;
-			}
-
-			// Copy tags
-			nggTags::copy_tags($image->pid, $new_pid);
-
-            // Copy meta information
-            $meta = new nggMeta($image->pid);
-            nggdb::update_image_meta( $new_pid, $meta->image->meta_data);
-
-			if ( $tmp_prefix != '' ) {
-				$messages .= sprintf(__('Image %1$s (%2$s) copied as image %3$s (%4$s) &raquo; The file already existed in the destination gallery.','nggallery'),
-					 $image->pid, esc_html($image->filename), $new_pid, esc_html($destination_file_name) ) . '<br />';
-			} else {
-				$messages .= sprintf(__('Image %1$s (%2$s) copied as image %3$s (%4$s)','nggallery'),
-					 $image->pid, esc_html($image->filename), $new_pid, esc_html($destination_file_name) ) . '<br />';
-			}
-
-		}
-
-		// Finish by showing errors or success
-		if ( $errors == '' ) {
-			$link = '<a href="' . admin_url() . 'admin.php?page=nggallery-manage-gallery&mode=edit&gid=' . $destination->gid . '" >' . esc_html($destination->title) . '</a>';
-			$messages .= '<hr />' . sprintf(__('Copied %1$s picture(s) to gallery: %2$s .','nggallery'), count($images), $link);
-		}
-
-		if ( $messages != '' )
-			nggGallery::show_message($messages);
-
-		if ( $errors != '' )
-			nggGallery::show_error($errors);
-
-		return;
 	}
 
 	/**

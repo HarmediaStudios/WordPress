@@ -79,11 +79,11 @@ $preview_image		= trailingslashit( home_url() ) . 'index.php?callback=image&amp;
 <table width="98%" align="center" style="border:1px solid #DADADA">
 	<tr style="height : 360px;">
 		<td valign="middle" align="center" style="background-color:#DADADA; width : 370px;">
-			<img src="<?php echo esc_url( $preview_image ); ?>" alt="" id="imageToEdit" />	
+			<img src="<?php echo nextgen_esc_url( $preview_image ); ?>" alt="" id="imageToEdit" />	
 		</td>
 		<td>
 			<input type="radio" name="ra" value="cw" /><?php esc_html_e('90&deg; clockwise', 'nggallery'); ?><br />
-			<input type="radio" name="ra" value="ccw" /><?php esc_html_e('90&deg; anticlockwise', 'nggallery'); ?><br />
+			<input type="radio" name="ra" value="ccw" /><?php esc_html_e('90&deg; counter-clockwise', 'nggallery'); ?><br />
 			<input type="radio" name="ra" value="fv" /><?php esc_html_e('Flip vertically', 'nggallery'); ?><br />
 			<input type="radio" name="ra" value="fh" /><?php esc_html_e('Flip horizontally', 'nggallery'); ?>
 		</td>		

@@ -37,7 +37,7 @@ class A_NextGen_Basic_SinglePic_Mapper extends Mixin
 		// Iterate through each display type to be returned, and remove the
 		// SinglePic display type
 		foreach ($results as &$display_type) {
-			if (!((isset($display_type->name) && $display_type->name == NEXTGEN_BASIC_SINGLEPIC_MODULE_NAME))) {
+			if (!((isset($display_type->name) && $display_type->name == NGG_BASIC_SINGLEPIC))) {
 				$retval[] = $display_type;
 			}
 		}
@@ -58,7 +58,7 @@ class A_NextGen_Basic_SinglePic_Mapper extends Mixin
 	 */
 	function _set_singlepic_defaults($entity)
 	{
-		if ($entity->name == NEXTGEN_BASIC_SINGLEPIC_MODULE_NAME) {
+		if (isset($entity->name) && $entity->name == NGG_BASIC_SINGLEPIC) {
 			$this->object->_set_default_value($entity, 'settings', 'width', '');
 			$this->object->_set_default_value($entity, 'settings', 'height', '');
 			$this->object->_set_default_value($entity, 'settings', 'mode', '');
@@ -66,6 +66,7 @@ class A_NextGen_Basic_SinglePic_Mapper extends Mixin
 			$this->object->_set_default_value($entity, 'settings', 'display_reflection', 0);
 			$this->object->_set_default_value($entity, 'settings', 'float', '');
 			$this->object->_set_default_value($entity, 'settings', 'link', '');
+            $this->object->_set_default_value($entity, 'settings', 'link_target', '_blank');
 			$this->object->_set_default_value($entity, 'settings', 'quality', 100);
 			$this->object->_set_default_value($entity, 'settings', 'crop', 0);
             $this->object->_set_default_value($entity, 'settings', 'template', '');
